@@ -135,3 +135,97 @@
         "message": string
     }
     ```
+
+### Get User's Profile (Reviews tab showing as default)
+* Endpoint Path: /{username}
+* Endpoint method: GET
+
+* Headers:
+    * Authorization: Bearer token
+
+* Response: A list of Reviews
+* Response shape:
+    ```json
+    {
+        "username": string,
+        "avatar_url": string,
+        "reviews": [
+            {
+                "username": string,
+                "location": string,
+                "description": string,
+                "picture_url": string,
+                "date_posted": date,
+                "num_loves": number,
+            }
+        ]
+    }
+    ```
+
+### Get User's Profile (Locations as selected tab)
+* Endpoint Path: /{username}
+* Endpoint method: GET
+
+* Headers:
+    * Authorization: Bearer token
+
+* Response: A list of Locations
+* Response shape:
+    ```json
+    {
+        "username": string,
+        "avatar_url": string,
+        "locations": [
+            {
+                "username": string,
+                "location": string,
+                "description": string,
+                "picture_url": string,
+                "date_posted": date,
+                "num_loves": number,
+            }
+        ]
+    }
+    ```
+
+### Get User's Profile (Followers as selected tab)
+* Endpoint Path: /{username}
+* Endpoint method: GET
+
+* Headers:
+    * Authorization: Bearer token
+
+* Response: A list of Followers
+* Response shape:
+    ```json
+    {
+        "username": string,
+        "avatar_url": string,
+        "followers": [
+            {
+                "username": string,
+            }
+        ]
+    }
+    ```
+
+### Get User's Profile (Following as selected tab)
+* Endpoint Path: /{username}
+* Endpoint method: GET
+
+* Headers:
+    * Authorization: Bearer token
+
+* Response: A list of Following
+* Response shape:
+    ```json
+    {
+        "username": string,
+        "avatar_url": string,
+        "following": [
+            {
+                "username": string,
+            }
+        ]
+    }
+    ```
