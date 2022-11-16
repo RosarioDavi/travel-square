@@ -44,12 +44,14 @@ CREATE TABLE review(
     loved list INTEGER REFERENCES users('id') ON DELETE CASCADE
 )
 
-CREATE TABLE review(
+CREATE TABLE request(
     id INTEGER NOT NULL UNIQUE,
-    venue_id INTEGER REFERENCES venues('id') ON DELETE CASCADE,
-    review_description TEXT NOT NULL,
-    rating INTEGER,
-    pictures TEXT NOT NULL,
-    added_by INTEGER REFERENCES users('id') ON DELETE CASCADE,
-    loved list INTEGER REFERENCES users('id') ON DELETE CASCADE
+    requester INTEGER REFERENCES users('id') ON DELETE CASCADE,
+    txt TEXT NOT NULL,
+)
+
+CREATE TABLE comment(
+    request_id INTEGER REFERENCES requests('id') ON DELETE CASCADE,
+    commenter INTEGER REFERENCES users('id') ON DELETE CASCADE,
+    txt TEXT NOT NULL,
 )
