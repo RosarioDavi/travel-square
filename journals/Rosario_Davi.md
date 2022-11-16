@@ -3,3 +3,6 @@ Today the team decided to review the Fast API exploration. I reread the explorat
 
 11/15/2022
 Today we were able to present out wire frame to the class, I started off by explaining what Travel^2 is. My team filled in any question that werea sked.After was a slower start for me personally. My team worked on differnt things to try and move foward with the project. I went over some more fast api videos, specfically the one about creating models. It sure makes me wish Django was allowed to be used. Overall my team did well and progressed foward, creating a Trello workspace. 
+
+11/16/2022
+Today we started with a stand up. Sarah showed what she organized on Trello. Lena was setting up the yaml. I spoke about how I reviewed module in fast api. I also brought out how I was struggling with git merges. We went over merges as a team and believe we are on the same page with commands.

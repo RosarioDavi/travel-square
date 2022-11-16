@@ -23,3 +23,13 @@ CREATE TABLE venues (
     added_by INTEGER REFERENCES users("id") ON DELETE SET NULL,
     approved BOOLEAN NOT NULL
 );
+
+CREATE TABLE review(
+    id INTEGER NOT NULL UNIQUE,
+    venue_id INTEGER REFERENCES venues('id') ON DELETE CASCADE,
+    review_description TEXT NOT NULL,
+    rating INTEGER,
+    pictures TEXT NOT NULL,
+    added_by INTEGER REFERENCES users('id') ON DELETE CASCADE,
+    loved list INTEGER REFERENCES users('id') ON DELETE CASCADE
+)
