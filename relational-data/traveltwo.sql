@@ -43,29 +43,29 @@ CREATE TABLE reviews (
     rating INTEGER,
     pictures TEXT NOT NULL,
     added_by INTEGER REFERENCES users('id') ON DELETE CASCADE
-)
+);
 
 CREATE TABLE reviews_loved (
     id SERIAL NOT NULL UNIQUE,
     review_id INTEGER REFERENCES reviews('id') ON DELETE CASCADE,
     loved_by INTEGER REFERENCES users('id') ON DELETE CASCADE
-)
+);
 
 CREATE TABLE followings (
     id SERIAL NOT NULL UNIQUE,
     user_following INTEGER REFERENCES users('id') ON DELETE CASCADE,
     user_followed INTEGER REFERENCES users('id') ON DELETE CASCADE
-)
+);
 
-CREATE TABLE request(
+CREATE TABLE request (
     id SERIAL NOT NULL UNIQUE,
     requester INTEGER REFERENCES users('id') ON DELETE CASCADE,
     txt TEXT NOT NULL,
-)
+);
 
-CREATE TABLE comment(
+CREATE TABLE comment (
     id SERIAL NOT NULL UNIQUE,
     request_id INTEGER REFERENCES requests('id') ON DELETE CASCADE,
     commenter INTEGER REFERENCES users('id') ON DELETE CASCADE,
     txt TEXT NOT NULL,
-)
+);
