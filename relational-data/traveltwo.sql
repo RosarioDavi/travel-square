@@ -1,5 +1,9 @@
 
 
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS venues;
+DROP TABLE IF EXISTS states;
+DROP TABLE IF EXISTS categories;
 
 CREATE TABLE users (
     id SERIAL NOT NULL UNIQUE,
@@ -7,9 +11,6 @@ CREATE TABLE users (
     avatar IMAGE,
     followings INTEGER DEFAULT 0
 ),
-DROP TABLE IF EXISTS venues;
-DROP TABLE IF EXISTS states;
-DROP TABLE IF EXISTS categories;
 
 CREATE TABLE states (
     id INTEGER NOT NULL UNIQUE,
