@@ -7,12 +7,14 @@ DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS reviews_loved;
 DROP TABLE IF EXISTS followings;
+DROP TABLE IF EXISTS requests;
+DROP TABLE IF EXISTS comments;
 
 CREATE TABLE users (
     id SERIAL NOT NULL UNIQUE,
     username VARCHAR (25) NOT NULL UNIQUE,
     avatar IMAGE,
-),
+);
 
 CREATE TABLE states (
     id SERIAL NOT NULL UNIQUE,
@@ -57,13 +59,13 @@ CREATE TABLE followings (
     user_followed INTEGER REFERENCES users('id') ON DELETE CASCADE
 );
 
-CREATE TABLE request (
+CREATE TABLE requests (
     id SERIAL NOT NULL UNIQUE,
     requester INTEGER REFERENCES users('id') ON DELETE CASCADE,
     txt TEXT NOT NULL,
 );
 
-CREATE TABLE comment (
+CREATE TABLE comments (
     id SERIAL NOT NULL UNIQUE,
     request_id INTEGER REFERENCES requests('id') ON DELETE CASCADE,
     commenter INTEGER REFERENCES users('id') ON DELETE CASCADE,
