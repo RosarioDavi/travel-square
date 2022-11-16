@@ -21,5 +21,5 @@ CREATE TABLE venues (
     category_id INTEGER REFERENCES categories("id") ON DELETE CASCADE,
     description TEXT NOT NULL,
     added_by INTEGER REFERENCES users("id") ON DELETE SET NULL,
-    approved BOOLEAN NOT NULL
+    approved BOOLEAN DEFAULT false
 );
