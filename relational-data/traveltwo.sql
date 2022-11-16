@@ -55,8 +55,6 @@ CREATE TABLE followings (
     id SERIAL NOT NULL UNIQUE,
     user_following INTEGER REFERENCES users('id') ON DELETE CASCADE,
     user_followed INTEGER REFERENCES users('id') ON DELETE CASCADE
-    added_by INTEGER REFERENCES users('id') ON DELETE CASCADE,
-    loved list INTEGER REFERENCES users('id') ON DELETE CASCADE
 )
 
 CREATE TABLE request(
