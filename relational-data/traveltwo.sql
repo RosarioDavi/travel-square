@@ -1,3 +1,6 @@
+
+
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS venues;
 DROP TABLE IF EXISTS states;
 DROP TABLE IF EXISTS categories;
@@ -5,18 +8,24 @@ DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS reviews_loved;
 DROP TABLE IF EXISTS followings;
 
+CREATE TABLE users (
+    id SERIAL NOT NULL UNIQUE,
+    username VARCHAR (25) NOT NULL UNIQUE,
+    avatar IMAGE,
+),
+
 CREATE TABLE states (
-    id INTEGER NOT NULL UNIQUE,
+    id SERIAL NOT NULL UNIQUE,
     state_name VARCHAR(2) NOT NULL UNIQUE
 );
 
 CREATE TABLE categories (
-    id INTEGER NOT NULL UNIQUE,
+    id SERIAL NOT NULL UNIQUE,
     category_name VARCHAR(25) NOT NULL UNIQUE
 );
 
 CREATE TABLE venues (
-    id INTEGER NOT NULL UNIQUE,
+    id SERIAL NOT NULL UNIQUE,
     venue_name VARCHAR(100) NOT NULL,
     street TEXT NOT NULL,
     city TEXT NOT NULL,
@@ -28,7 +37,7 @@ CREATE TABLE venues (
 );
 
 CREATE TABLE reviews (
-    id INTEGER NOT NULL UNIQUE,
+    id SERIAL NOT NULL UNIQUE,
     venue_id INTEGER REFERENCES venues('id') ON DELETE CASCADE,
     review_description TEXT NOT NULL,
     rating INTEGER,
@@ -37,13 +46,28 @@ CREATE TABLE reviews (
 )
 
 CREATE TABLE reviews_loved (
-    id INTEGER NOT NULL UNIQUE,
+    id SERIAL NOT NULL UNIQUE,
     review_id INTEGER REFERENCES reviews('id') ON DELETE CASCADE,
     loved_by INTEGER REFERENCES users('id') ON DELETE CASCADE
 )
 
 CREATE TABLE followings (
-    id INTEGER NOT NULL UNIQUE,
+    id SERIAL NOT NULL UNIQUE,
     user_following INTEGER REFERENCES users('id') ON DELETE CASCADE,
     user_followed INTEGER REFERENCES users('id') ON DELETE CASCADE
+    added_by INTEGER REFERENCES users('id') ON DELETE CASCADE,
+    loved list INTEGER REFERENCES users('id') ON DELETE CASCADE
+)
+
+CREATE TABLE request(
+    id SERIAL NOT NULL UNIQUE,
+    requester INTEGER REFERENCES users('id') ON DELETE CASCADE,
+    txt TEXT NOT NULL,
+)
+
+CREATE TABLE comment(
+    id SERIAL NOT NULL UNIQUE,
+    request_id INTEGER REFERENCES requests('id') ON DELETE CASCADE,
+    commenter INTEGER REFERENCES users('id') ON DELETE CASCADE,
+    txt TEXT NOT NULL,
 )
