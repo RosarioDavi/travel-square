@@ -8,7 +8,7 @@ class DuplicateAccountError(ValueError):
 
 
 class AccountQueries(Queries):
-    DB_NAME = "library"
+    DB_NAME = "travelsquared"
     COLLECTION = "accounts"
 
     def get(self, email: str) -> Account:

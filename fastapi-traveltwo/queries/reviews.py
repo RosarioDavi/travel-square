@@ -4,7 +4,7 @@ from models import Venue, Account
 
 
 class ReviewQueries(Queries):
-    DB_NAME = "review"
+    DB_NAME = "travelsquared"
     COLLECTION = "reviews"
 
     def get(self, review: str):

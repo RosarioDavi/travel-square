@@ -2,8 +2,8 @@ from models import RequestIn, Request, RequestOut
 from typing import List
 
 class RequestQueries(Queries):
-    DB_NAME =
-    COLLECTION =
+    DB_NAME = "travelsquared"
+    COLLECTION = "requests"
 
     def create(self, request: RequestIn) -> RequestOut:
         props =
