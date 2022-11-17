@@ -1,30 +1,14 @@
 volumes:
-  postgres-data:
-    external: true
-  pg-admin:
+  mongo-data:
     external: true
 services:
-  postgres:
-    build:
-      context: ./relational-data
-      dockerfile: ./Dockerfile.dev
+  mongo:
+    image: mongo:5
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - mongo-data:/data/db
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=traveltwo
-      - POSTGRES_PASSWORD=test-databases
-    ports:
-      - 15432:5432
-  pg-admin:
-    image: dpage/pgadmin4
-    volumes:
-      - pg-admin:/var/lib/pgadmin
-    ports:
-      - 8082:80
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin1@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: password1
-      PGADMIN_DISABLE_POSTFIX: 1
+      MONGO_INITDB_ROOT_USERNAME: travelsquared
+      MONGO_INITDB_ROOT_PASSWORD: TS2022ddmbs
   fastapi-traveltwo:
     build:
       context: ./fastapi-traveltwo
@@ -34,8 +18,8 @@ services:
     volumes:
       - ./fastapi-traveltwo:/app
     environment:
-      DATABASE_URL: postgresql://traveltwo:password@postgres/traveltwo
-      WAIT_HOSTS: postgres:5432
+      DATABASE_URL: mongodb://root:password@mongo
+      WAIT_HOSTS: mongo:27017
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
