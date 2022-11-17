@@ -1,6 +1,7 @@
 from bson.objectid import ObjectId
 from typing import List
 from .client import Queries
+from models import VenueIn, VenueOut
 
 
 class VenueQueries(Queries):
