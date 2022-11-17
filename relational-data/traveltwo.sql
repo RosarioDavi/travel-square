@@ -11,25 +11,25 @@ DROP TABLE IF EXISTS requests;
 DROP TABLE IF EXISTS comments;
 
 CREATE TABLE users (
-    id SERIAL NOT NULL UNIQUE,
+    id SERIAL UNIQUE PRIMARY KEY,
     username VARCHAR (25) NOT NULL UNIQUE,
     avatar IMAGE,
 );
 
 CREATE TABLE states (
-    id SERIAL NOT NULL UNIQUE,
+    id SERIAL UNIQUE PRIMARY KEY,
     state_name VARCHAR(2) NOT NULL UNIQUE
 );
 
 CREATE TABLE categories (
-    id SERIAL NOT NULL UNIQUE,
+    id SERIAL UNIQUE PRIMARY KEY,
     category_name VARCHAR(25) NOT NULL UNIQUE
 );
 
 CREATE TABLE venues (
-    id SERIAL NOT NULL UNIQUE,
+    id SERIAL UNIQUE PRIMARY KEY,
     venue_name VARCHAR(100) NOT NULL,
-    street TEXT NOT NULL,
+    street TEXT NOT NULL UNIQUE,
     city TEXT NOT NULL,
     state_id INTEGER REFERENCES states('id') ON DELETE CASCADE,
     category_id INTEGER REFERENCES categories('id') ON DELETE CASCADE,
@@ -39,35 +39,38 @@ CREATE TABLE venues (
 );
 
 CREATE TABLE reviews (
-    id SERIAL NOT NULL UNIQUE,
+    id SERIAL UNIQUE PRIMARY KEY,
     venue_id INTEGER REFERENCES venues('id') ON DELETE CASCADE,
     review_description TEXT NOT NULL,
-    rating INTEGER,
+    rating INTEGER NOT NULL,
     pictures TEXT NOT NULL,
     added_by INTEGER REFERENCES users('id') ON DELETE CASCADE
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
 );
 
 CREATE TABLE reviews_loved (
-    id SERIAL NOT NULL UNIQUE,
+    id SERIAL UNIQUE PRIMARY KEY,
     review_id INTEGER REFERENCES reviews('id') ON DELETE CASCADE,
     loved_by INTEGER REFERENCES users('id') ON DELETE CASCADE
 );
 
 CREATE TABLE followings (
-    id SERIAL NOT NULL UNIQUE,
+    id SERIAL UNIQUE PRIMARY KEY,
     user_following INTEGER REFERENCES users('id') ON DELETE CASCADE,
     user_followed INTEGER REFERENCES users('id') ON DELETE CASCADE
 );
 
 CREATE TABLE requests (
-    id SERIAL NOT NULL UNIQUE,
+    id SERIAL UNIQUE PRIMARY KEY,
     requester INTEGER REFERENCES users('id') ON DELETE CASCADE,
     txt TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
 );
 
 CREATE TABLE comments (
-    id SERIAL NOT NULL UNIQUE,
+    id SERIAL UNIQUE PRIMARY KEY,
     request_id INTEGER REFERENCES requests('id') ON DELETE CASCADE,
     commenter INTEGER REFERENCES users('id') ON DELETE CASCADE,
     txt TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
 );
