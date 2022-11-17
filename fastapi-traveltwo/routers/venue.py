@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from models import AccountOut, VenueIn, VenueList, VenueNew
-from queries.venue import VenueQueries, VenueQueries
+from models import VenueIn, Venue, VenueOut
+from queries.venue import VenueQueries
 
 
 
@@ -14,18 +14,18 @@ not_authorized = HTTPException(
 
 @router.post("/venue", response_model= VenueOut)
 async def creare_venue(
-    venue: VenueIN,
+    venue: VenueIn,
     repo: VenueQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
 
 
 
-@router.get("/venue", response_model=VenueList)
+@router.get("/venue", response_model=Venue)
 def get_venue(repo: VenueQueries = Depends()):
-    return VenueList(venue=repo.get_all())
+    return Venue(venue=repo.get_all())
 
-@router.post("/venue/{venue.id}/new", response_model=VenueNew)
+@router.post("/venue/{venue.id}/new", response_model=Venue)
 async def create_venue(
     venue_id: str,
     repo: VenueQueries
