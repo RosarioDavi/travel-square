@@ -1,6 +1,6 @@
 from .client import Queries
 from bson.objectid import ObjectId
-from models import Venue, Account
+from models import Venue, Account, SessionOut
 
 
 class ReviewQueries(Queries):
