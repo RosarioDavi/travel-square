@@ -25,6 +25,17 @@ db.accounts.insertOne({
       'admin'
   ]
 });
+db.accounts.insertOne({
+  _id: ObjectId('633185412ec069ajasdas3432'),
+  username: 'Riley',
+  email: 'Riley@example.com',
+  password: '$2b$12$BnCFBYWNZI1dpQ3djPS5DuWszH3nc2v6nYPcz8OZpr6LPScds3432',
+  full_name: 'Riley',
+  avatar: 'www.example.com/hehe.jpeg',
+  roles: [
+      'general',
+  ]
+});
 db.accounts.createIndex(
   {email: 1},
   {unique: true},
