@@ -33,6 +33,10 @@ services:
       - ./fastapi-traveltwo:/app
     environment:
       DATABASE_URL: mongodb://travelsquared:TS2022ddmbs@mongo/admin
+      MONGOHOST: mongo
+      MONGODATABASE: travelsquared
+      MONGOUSER: travelsquared
+      MONGOPASSWORD: TS2022ddmbs
       WAIT_HOSTS: mongo:27017
   ghi:
     image: node:lts-bullseye
