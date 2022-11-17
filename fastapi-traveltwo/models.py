@@ -122,3 +122,19 @@ class Request(RequestIn):
 class RequestOut(RequestIn):
     id: str
     created_at: str
+
+
+class CommentIn(BaseModel):
+    request_id: str
+    commenter_id: str
+    text: str
+
+
+class Comment(CommentIn):
+    id: PydanticObjectId
+    created_at: datetime.datetime.utcnow()
+
+
+class CommentOut(RequestIn):
+    id: str
+    created_at: str

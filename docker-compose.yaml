@@ -32,7 +32,7 @@ services:
     volumes:
       - ./fastapi-traveltwo:/app
     environment:
-      DATABASE_URL: mongodb://travelsquared:TS2022ddmbs@mongo/admin
+      DATABASE_URL: mongodb://travelsquared:TS2022ddmbs@mongo
       WAIT_HOSTS: mongo:27017
   ghi:
     image: node:lts-bullseye
