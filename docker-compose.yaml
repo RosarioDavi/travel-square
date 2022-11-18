@@ -11,9 +11,8 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
-        POSTGRES_MULTIPLE_DATABASES= travelsquared
-        POSTGRES_USER= travelsquared
-        POSTGRES_PASSWORD= TS2022RDBMS
+      - POSTGRES_MULTIPLE_DATABASES= travelsquared
+      - POSTGRES_PASSWORD=test-databases
     ports:
       - 15432:5432
 
@@ -37,7 +36,7 @@ services:
     volumes:
       - ./fastapi-traveltwo:/app
     environment:
-      DATABASE_URL: postgresql://travelsquared:TS2022RDBMS@postgres/travelsquared
+      DATABASE_URL: postgresql://travelsquared:password@postgres/travelsquared
       WAIT_HOSTS: postgres:5432
 
   ghi:
