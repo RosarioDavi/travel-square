@@ -37,7 +37,7 @@ services:
     volumes:
       - ./fastapi-traveltwo:/app
     environment:
-      DATABASE_URL: postgresql://travelsquared:TS2022RDBMS@postgres/db-name
+      DATABASE_URL: postgresql://travelsquared:TS2022RDBMS@postgres/travelsquared
       WAIT_HOSTS: postgres:5432
 
   ghi:
