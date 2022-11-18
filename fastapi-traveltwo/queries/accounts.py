@@ -8,17 +8,17 @@ class DuplicateAccountError(ValueError):
 
 
 class AccountQueries(Queries):
-    DB_NAME = "library"
+    DB_NAME = "travelsquared"
     COLLECTION = "accounts"
 
-    def get(self, email: str) -> Account:
-        props = self.collection.find_one({"email": email})
+    def get(self, username: str) -> Account:
+        props = self.collection.find_one({"username": username})
         if not props:
             return None
         props["id"] = str(props["_id"])
         return Account(**props)
 
-    def create(self, info: AccountIn, hashed_password: str, roles=["patron"]) -> Account:
+    def create(self, info: AccountIn, hashed_password: str, roles=["general"]) -> Account:
         props = info.dict()
         props["password"] = hashed_password
         props["roles"] = roles

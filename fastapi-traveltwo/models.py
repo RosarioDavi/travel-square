@@ -25,6 +25,7 @@ class SessionOut(BaseModel):
 
 
 class AccountIn(BaseModel):
+    username: str
     email: str
     password: str
     full_name: str

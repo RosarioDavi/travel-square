@@ -22,15 +22,19 @@ from models import (
     AccountOut,
 )
 
+
 class AccountForm(BaseModel):
     username: str
     password: str
 
+
 class AccountToken(Token):
     account: AccountOut
 
+
 class HttpError(BaseModel):
     detail: str
+
 
 router = APIRouter()
 
@@ -70,7 +74,7 @@ async def create_account(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials",
         )
-    form = AccountForm(username=info.email, password=info.password)
+    form = AccountForm(username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
 
@@ -81,7 +85,7 @@ async def delete_session(
     account: dict = Depends(authenticator.get_current_account_data),
     repo: SessionQueries = Depends(),
 ) -> bool:
-    if "librarian" not in account["roles"]:
+    if "admin" not in account["roles"]:
         raise not_authorized
     repo.delete_sessions(account_id)
     return True

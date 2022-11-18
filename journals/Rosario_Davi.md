@@ -1,3 +1,7 @@
+11/17/2022
+Today we started to code. I was in charge of working on the venue.py in queries and in routers. I was using the mongo-api-examples and following the books.py examples. I was having issues merging and comitting to git, I reached out to the seirs and the solution took about an hour to resolve. I was able to commit my venue.py to main. 
+
+
 11/16/2022
 Today we started with a stand up. Sarah showed what she organized on Trello. Lena was setting up the yaml. I spoke about how I reviewed module in fast api. I also brought out how I was struggling with git merges. We went over merges as a team and believe we are on the same page with commands. Once stand up was dome we whiteboarded out some models before we started to code and then moved onto some code. We were able to add some tables into traveltwo.sql. I worked on the review table and pushed that up to main. 
 
