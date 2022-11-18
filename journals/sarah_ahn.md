@@ -1,3 +1,8 @@
+11/17/22
+- the team moved forward with MongoDB, and we split up the queries and routers files. We spent the day filling out our files while Muhammad set up models.py
+- I'm still getting more familiarized with Mongo and Postres, but I think I'm getting the hang of git in a group setting
+- Muhammad mentioned that we may need to go back to Postres so we will visit that tomorrow
+
 11/16/22
 - reviewed the Trello workspace with the team, and everyone agreed to use it for project management
 - the team chose to use Postres but after further discussion we may go with MongoDB. We will consult an instructor tomorrow regarding this
