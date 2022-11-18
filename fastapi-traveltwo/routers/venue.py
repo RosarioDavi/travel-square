@@ -25,11 +25,16 @@ async def creare_venue(
 def get_venue(repo: VenueQueries = Depends()):
     return Venue(venue=repo.get_all())
 
-@router.post("/venue/{venue.id}/new", response_model=Venue)
-async def create_venue(
-    venue_id: str,
-    repo: VenueQueries
+@router.delete("/venue/{book_id}", response_model=bool)
+async def remove_load(
+    book_id: str,
+    repo: VenueQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-
+    account = VenueOut(**account_data)
+    if "patron" not in account.roles:
+        raise not_authorized
+    await socket_manager.broadcast_refetch()
+    repo.delete(book_id=book_id, account_id=account.id)
+    return True
 
