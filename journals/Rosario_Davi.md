@@ -1,5 +1,5 @@
 11/18/2022
-Today the team decided to switch from mongodb to postgress. This decission was made because we realized it would be easier to move foward in sql then mongo. After converting everything and making sure docker containers were running, we split some code up the same as we did yesterday. I was in charge of recoding venues queries and routers. I went back to the fastAPI videos to code along and follow. I was able to complete the venue.py routers. Currently still working on queries.
+Today the team decided to switch from mongodb to postgress. This decission was made because we realized it would be easier to move foward in sql then mongo. After converting everything and making sure docker containers were running, we split some code up the same as we did yesterday. I was in charge of recoding venues queries and routers. I went back to the fastAPI videos to code along and follow. I was able to complete the venue.py routers. Currently still working on queries. Was able to complete venue queries. 
 
 
 11/17/2022
