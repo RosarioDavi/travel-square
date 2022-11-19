@@ -1,3 +1,8 @@
+11/18/22
+- the team discussed using Postgres instead of MongoDB due to MongoDB potentially being unable to handle the relationships between our models
+- we have divided the work to complete queries and routers files, and I've been assigned the reviews. I struggled for a while to get the port 8000 docker container to work, and it turns out that I had been using the wrong git command
+- I plan to review the FastAPI videos again to gain a better understanding
+
 11/17/22
 - the team moved forward with MongoDB, and we split up the queries and routers files. We spent the day filling out our files while Muhammad set up models.py
 - I'm still getting more familiarized with Mongo and Postres, but I think I'm getting the hang of git in a group setting
