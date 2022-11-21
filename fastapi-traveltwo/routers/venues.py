@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Depends, Response, Optional
+from fastapi import APIRouter, Depends, Response
+from typing import Optional
 from typing import Union
-from queries.venue import VenueIn, VenueRepository, VenueOut, Error
+from queries.venues import VenueIn, VenueRepository, VenueOut, Error
 
 
 router  = APIRouter()
