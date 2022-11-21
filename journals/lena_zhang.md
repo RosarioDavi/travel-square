@@ -1,3 +1,6 @@
+November 18, 2022
+Today the team decided that we will be using Postgres. We worked on reverting the models, docker yaml files and the databases back to the previous working ones we had with Postgres. After some issues with the yaml file, we fixed and tested to make sure that the docker was running. We all split up the work on creating the queries and routers file for the different models. I am currently working on the requests queries file.
+
 November 17, 2022
 Today we have decided that we are going to use MONGODB as our database. We fixed the yaml file to update it with the MONGODB database and recreated the models.py. During this time, our group split up on starting the queries and routers for the models. I started working on the accounts model as it was similar to the library one given to us in class since we wanted to differentiate different roles and responsibilities. Afterwards, I worked on queries and routers files for comments and requests. I was still adjusting and learning MongoDB so there were many parts of the code I still didn't completely understand. However, upon discussion, our group is most likely going to revert our database back to PostgreSQL.
 
