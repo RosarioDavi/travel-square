@@ -19,6 +19,18 @@ class RequestOut(BaseModel):
     txt: str
     created_at: date
 
+class CommentIn(BaseModel):
+    request_id: int
+    commenter: int
+    txt: str
+
+class CommentOut(BaseModel):
+    id: int
+    request_id: int
+    commenter: int
+    txt: str
+    created_at: date
+
 class RequestQueries:
     def get_all(self) -> Union[Error, List[RequestOut]]:
         try:
@@ -113,6 +125,22 @@ class RequestQueries:
             print(e)
             return {"message": "Could not update that request"}
 
+    def delete(self, requests_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        DELETE FROM requests
+                        WHERE id = %s
+                        """,
+                        [requests_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
+
     def requests_in_to_out(self, id: int, request: RequestIn):
             old_data = request.dict()
             return RequestOut(id=id, **old_data)
@@ -123,4 +151,135 @@ class RequestQueries:
             requester=record[1],
             txt=record[2],
             created_at=record[3],
+        )
+
+
+class CommentQueries:
+    def get_all(self) -> Union[Error, List[CommentOut]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT id, requester_id, commenter, txt, created_at
+                        FROM comments
+                        ORDER BY created_at;
+                        """
+                    )
+
+                    return [
+                        CommentOut(
+                            id=record[0],
+                            requester_id=record[1],
+                            commenter=record[2],
+                            txt = record[3],
+                            created_at = record[4]
+                        )
+                        for record in cur
+                    ]
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get all comments"}
+
+    def get_one(self, comments_id: int) -> Optional[CommentOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        SELECT id
+                             , requester_id
+                             , commenter
+                             , txt
+                             , created_at
+                        FROM requests
+                        WHERE id = %s
+                        """,
+                        [comments_id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_comments_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that Comment"}
+
+    def create(self, comments: CommentIn) -> Union[CommentOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        INSERT INTO requests
+                            (requester_id, commenter, txt)
+                        VALUES
+                            (%s, %s, %s)
+                        RETURNING id;
+                        """,
+                        [
+                            comments.requester,
+                            comments.commenter,
+                            comments.txt
+                        ]
+                    )
+                    id = result.fetchone()[0]
+                    return self.comments_in_to_out(id, comments)
+        except Exception:
+            return {"message": "Could not create new comment"}
+
+    def update(self, comments_id: int, comments: CommentIn) -> Union[CommentOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        UPDATE comments
+                        SET txt = %s
+                        , created_at = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            comments.id,
+                            comments.request_id,
+                            comments.commenter,
+                            comments.txt,
+                            comments.created_at
+
+                        ]
+                    )
+                    return self.comments_in_to_out(comments_id, comments)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update that request"}
+
+    def delete(self, comments_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        DELETE FROM comments
+                        WHERE id = %s
+                        """,
+                        [comments_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
+
+
+
+    def comments_in_to_out(self, id: int, comment: CommentIn):
+            old_data = comment.dict()
+            return CommentOut(id=id, **old_data)
+
+    def record_to_comments_out(self, record):
+        return CommentOut(
+            id=record[0],
+            requester_id=record[1],
+            commenter=record[2],
+            txt=record[3],
+            created_at=record[4],
         )
