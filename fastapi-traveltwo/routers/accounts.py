@@ -41,19 +41,18 @@ not_authorized = HTTPException(
     headers={"WWW-Authenticate": "Bearer"},
 )
 
-@router.get("/api/accounts", response_model=list[AccountOut])
+@router.get("/api/accounts/", response_model=list[AccountOut])
 def get_all_accounts(repo: AccountQueries = Depends()):
     return {
         "users": repo.get_all_accounts()
     }
-
 
 @router.get("/api/accounts/{username}", response_model=Optional[AccountOut])
 def get_one_account(
     username: str,
     response: Response,
     repo: AccountQueries = Depends(),
-) -> bool:
+):
     account = repo.get_one_account(username)
     if account is None:
         response.status_code = 404
@@ -61,21 +60,7 @@ def get_one_account(
         "user": account
     }
 
-
-@router.get("/token", response_model=AccountToken | None)
-async def get_token(
-    request: Request,
-    account: dict = Depends(authenticator.try_get_current_account_data)
-) -> AccountToken | None:
-    if account and authenticator.cookie_name in request.cookies:
-        return {
-            "access_token": request.cookies[authenticator.cookie_name],
-            "type": "Bearer",
-            "account": account,
-        }
-
-
-@router.post("/api/accounts", response_model=AccountToken | HttpError)
+@router.post("/api/accounts/", response_model=AccountToken | HttpError)
 async def create_account(
     info: AccountIn,
     request: Request,
@@ -83,8 +68,10 @@ async def create_account(
     repo: AccountQueries = Depends(),
 ):
     hashed_password = authenticator.hash_password(info.password)
+    avatar = ''
+    is_admin = False
     try:
-        account = repo.create_account(info, hashed_password)
+        account = repo.create_account(info, hashed_password, avatar, is_admin)
     except DuplicateAccountError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -92,12 +79,34 @@ async def create_account(
         )
     form = AccountForm(
         username=info.username,
-        full_name=info.full_name,
-        password=info.password,
-        avatar=info.avatar
+        password=info.password
         )
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
+
+@router.delete("/api/accounts/{account_id}", response_model=AccountOut)
+def delete_account(
+    account_id: int,
+    repo: AccountQueries = Depends()
+):
+    repo.delete_account(account_id)
+    return True
+
+
+
+# @router.get("/token", response_model=AccountToken | None)
+# async def get_token(
+#     request: Request,
+#     account: dict = Depends(authenticator.try_get_current_account_data)
+# ) -> AccountToken | None:
+#     if account and authenticator.cookie_name in request.cookies:
+#         return {
+#             "access_token": request.cookies[authenticator.cookie_name],
+#             "type": "Bearer",
+#             "account": account,
+#         }
+
+
 
 
 # @router.delete("/api/sessions/{account_id}", response_model=bool)
