@@ -27,7 +27,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: TS2022RDBMS
       PGADMIN_DISABLE_POSTFIX: 1
 
-  travelsquared:
+  travel-squared:
     build:
       context: ./fastapi-traveltwo
       dockerfile: ./Dockerfile.dev
