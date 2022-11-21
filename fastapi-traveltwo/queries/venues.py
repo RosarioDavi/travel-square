@@ -3,7 +3,7 @@ from typing import List, Optional, Union
 from psycopg_pool import ConnectionPool
 import os
 
-pool = ConectionPool(conninfo=os.environ["DATABASE_URL"])
+pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
 class Error(BaseModel):
     message:str
@@ -34,6 +34,14 @@ class VenueRepository:
         with pool.conection() as conn:
             with conn.cursor() as db:
                 result= db.execute(
+                    """
+                    INSERT INTO venues
+                        (name, street, city, state_id, description, added_by, approved)
+                    VALUES
+                        (%s, %s, %s, %s)
+                    RETURNING id;
+                    """,
+
                     [
                         venue.name,
                         venue.street,
