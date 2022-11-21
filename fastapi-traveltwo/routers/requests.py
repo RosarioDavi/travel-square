@@ -5,6 +5,9 @@ from queries.requests import (
     RequestIn,
     RequestQueries,
     RequestOut,
+    CommentIn,
+    CommentOut,
+    CommentQueries
 )
 
 
@@ -57,3 +60,49 @@ def get_one_request(
     if requests is None:
         response.status_code = 404
     return requests
+
+
+@router.post("/comments", response_model=Union[CommentOut, Error])
+def create_comments(
+    comments: CommentIn,
+    response: Response,
+    repo: CommentQueries = Depends(),
+):
+    response.status_code = 400
+    return repo.create(comments)
+
+
+@router.get("/comments", response_model=Union[List[CommentOut], Error])
+def get_all(
+    repo: CommentQueries = Depends(),
+):
+    return repo.get_all()
+
+
+@router.put("/comments/{comments_id}", response_model=Union[CommentOut, Error])
+def update_comment(
+    comments_id: int,
+    comment: CommentIn,
+    repo: CommentQueries = Depends(),
+) -> Union[Error, CommentOut]:
+    return repo.update(comments_id, comment)
+
+
+@router.delete("/comments/{comments_id}", response_model=bool)
+def delete_comment(
+    comments_id: int,
+    repo: CommentQueries = Depends(),
+) -> bool:
+    return repo.delete(comments_id)
+
+
+@router.get("/comments/{comments_id}", response_model=Optional[CommentOut])
+def get_one_comment(
+    comments_id: int,
+    response: Response,
+    repo: CommentQueries = Depends(),
+) -> CommentOut:
+    comments = repo.get_one(comments_id)
+    if comments is None:
+        response.status_code = 404
+    return comments
