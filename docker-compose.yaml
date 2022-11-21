@@ -38,6 +38,7 @@ services:
     environment:
       DATABASE_URL: postgresql://travelsquared:password@postgres/travelsquared
       WAIT_HOSTS: postgres:5432
+      SIGNING_KEY: 234kla0a1245b7587606efdcdf97db285d034d8loll01981a529f01531owdf245d3ab7de1fc6cfd297a28762440124da4a328217b8ce63aba077bf2172e8cedb
 
   ghi:
     image: node:lts-bullseye
