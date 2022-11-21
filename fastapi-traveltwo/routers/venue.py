@@ -1,40 +1,46 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from models import VenueIn, Venue, VenueOut
-from queries.venue import VenueQueries
+from fastapi import APIRouter, Depends, Response, Optional
+from typing import Union
+from queries.venue import VenueIn, VenueRepository, VenueOut, Error
 
 
+router  = APIRouter()
 
-router = APIRouter()
+@router.post("/venues", response_model=Union[VenueOut, Error])
+def create_venues(
+    venue: VenueIn, 
+    repo: VenueRepository = Depends()
+):   
+    Response.status_code = 400
+    return repo.create(venue)
 
-not_authorized = HTTPException(
-    status_code = status.HTTP_401_UNAUTHORIZED,
-    detail="Invalid authentication credentials",
-    headers={"WWW-Authenticate": "Bearer"},
-)
+@router.get("/venues", response_model=Union[VenueOut, Error])
+def get_all(
+    repo: VenueRepository = Depends(),
+):
+    return repo.get_all()
 
-@router.post("/venue", response_model= VenueOut)
-async def creare_venue(
+@router.put("/venues/{venue_id}", response_model=Union[VenueOut, Error])
+def update_venue(
+    venue_id: int,
     venue: VenueIn,
-    repo: VenueQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
+    repo: VenueRepository = Depends(),
+) -> Union[Error, VenueOut]:
+    return repo.update(venue_id, venue)
 
+@router.delete("/venues/{venue_id}", response_model=bool)
+def delete_venue(
+    venue_id: int,
+    repo: VenueRepository = Depends(),
+) -> bool:
+    return repo.delete(venue_id)
 
-
-@router.get("/venue", response_model=Venue)
-def get_venue(repo: VenueQueries = Depends()):
-    return Venue(venue=repo.get_all())
-
-@router.delete("/venue/{book_id}", response_model=bool)
-async def remove_load(
-    book_id: str,
-    repo: VenueQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    account = VenueOut(**account_data)
-    if "patron" not in account.roles:
-        raise not_authorized
-    await socket_manager.broadcast_refetch()
-    repo.delete(book_id=book_id, account_id=account.id)
-    return True
-
+@router.get("/venues/{venue_id}", response_model=Optional[VenueOut])
+def get_one_venue(
+    venue_id: int,
+    response: Response,
+    repo: VenueRepository = Depends(),
+) -> VenueOut:
+    venue = repo.get_one(venue_id)
+    if venue is None:
+        response.status_code = 404
+    return venue

@@ -1,7 +1,19 @@
+from pydantic import BaseModel
+from typing import List
+
 from .client import Queries
 from typing import List
 from bson.objectid import ObjectId
 from models import Venue, Account, SessionOut
+
+
+class ReviewIn(BaseModel):
+    venue_id: str
+    text: str
+    rating: str
+    pictures: List[str]
+    added_by: str
+
 
 
 class ReviewQueries(Queries):
