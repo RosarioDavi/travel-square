@@ -9,26 +9,20 @@ class DuplicateAccountError(ValueError):
     pass
 
 
-class Account(BaseModel):
-    id: int
+class AccountIn(BaseModel):
     username: str
     full_name: str
-    hashed_password: str
-    avatar: str | None
+    email: str
+    password: str
 
 
 class AccountOut(BaseModel):
     id: int
     username: str
     full_name: str
+    email: str
     avatar: str | None
-
-
-class AccountIn(BaseModel):
-    username: str
-    full_name: str
-    password: str
-    avatar: str | None
+    is_admin: bool
 
 
 class AccountQueries:
@@ -37,7 +31,7 @@ class AccountQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT id, username, full_name, avatar
+                    SELECT id, username, full_name, avatar, is_admin
                     FROM accounts
                     ORDER BY username;
                 """
@@ -57,7 +51,7 @@ class AccountQueries:
             with conn.cursor() as cur:
                 result = cur.execute(
                     """
-                    SELECT id, username, full_name, avatar
+                    SELECT id, username, full_name, avatar, is_admin
                     FROM accounts
                     WHERE username = %s;
                 """,
@@ -70,28 +64,31 @@ class AccountQueries:
                     id=record[0],
                     username=record[1],
                     full_name=record[2],
-                    avatar=record[3]
+                    avatar=record[3],
+                    is_admin=record[4]
                 )
 
-    def create_account(self, account: AccountIn, hashed_password: str) -> Account:
+    def create_account(self, account: AccountIn, hashed_password: str, avatar: str, is_admin: bool) -> AccountOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 result = cur.execute(
                     """
-                    INSERT INTO accounts (username, full_name, hashed_password, avatar)
-                    VALUES (%s, %s, %s, %s)
+                    INSERT INTO accounts (username, full_name, hashed_password)
+                    VALUES (%s, %s, %s)
                     RETURNING id;
                     """,
-                    [account.username, account.full_name, hashed_password, account.avatar]
+                    [account.username, account.full_name, hashed_password]
                 )
 
                 id = result.fetchone()[0]
-                return Account(
+                return AccountOut(
                     id=id,
                     username=account.username,
                     full_name=account.full_name,
+                    email=account.email,
                     hashed_password=hashed_password,
-                    avatar=account.avatar
+                    avatar=avatar,
+                    is_admin=is_admin
                 )
 
     def delete_account(self, account_id):

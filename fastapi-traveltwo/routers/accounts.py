@@ -20,12 +20,11 @@ from queries.accounts import (
     DuplicateAccountError
 )
 
+router = APIRouter()
 
 class AccountForm(BaseModel):
     username: str
-    full_name: str
     password: str
-    avatar: str
 
 
 class AccountToken(Token):
@@ -36,9 +35,6 @@ class HttpError(BaseModel):
     detail: str
 
 
-router = APIRouter()
-
-
 not_authorized = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
     detail="Invalid authentication credentials",
@@ -47,7 +43,9 @@ not_authorized = HTTPException(
 
 @router.get("/api/accounts", response_model=list[AccountOut])
 def get_all_accounts(repo: AccountQueries = Depends()):
-    return repo.get_all_accounts()
+    return {
+        "users": repo.get_all_accounts()
+    }
 
 
 @router.get("/api/accounts/{username}", response_model=Optional[AccountOut])
@@ -59,7 +57,9 @@ def get_one_account(
     account = repo.get_one_account(username)
     if account is None:
         response.status_code = 404
-    return account
+    return {
+        "user": account
+    }
 
 
 @router.get("/token", response_model=AccountToken | None)
