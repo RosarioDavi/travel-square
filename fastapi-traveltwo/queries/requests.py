@@ -9,13 +9,14 @@ class Error(BaseModel):
 
 
 class RequestIn(BaseModel):
-    requester: str
+    requester: int
     txt: str
+    created_at: date
 
 
 class RequestOut(BaseModel):
     id: int
-    requester: str
+    requester: int
     txt: str
     created_at: date
 
@@ -76,6 +77,7 @@ class RequestQueries:
                     if record is None:
                         return None
                     return self.record_to_requests_out(record)
+                    print(record)
         except Exception as e:
             print(e)
             return {"message": "Could not get that Request"}
@@ -87,19 +89,23 @@ class RequestQueries:
                     result = cur.execute(
                         """
                         INSERT INTO requests
-                            (requester, txt)
+                            (requester, txt, created_at)
                         VALUES
-                            (%s, %s)
+                            (%s, %s, %s)
                         RETURNING id;
                         """,
                         [
                             requests.requester,
-                            requests.txt
+                            requests.txt,
+                            requests.created_at
                         ]
                     )
                     id = result.fetchone()[0]
+                    print(self.requests_in_to_out)
                     return self.requests_in_to_out(id, requests)
-        except Exception:
+
+        except Exception as e:
+            print(e)
             return {"message": "Could not create new requests"}
 
 
@@ -113,11 +119,14 @@ class RequestQueries:
                         UPDATE requests
                         SET requester = %s
                           , txt = %s
+                          , created_at = %s
                         WHERE id = %s
                         """,
                         [
                             requests.requester,
                             requests.txt,
+                            requests.created_at,
+                            requests_id,
                         ]
                     )
                     return self.requests_in_to_out(requests_id, requests)
