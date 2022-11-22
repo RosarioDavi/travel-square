@@ -19,10 +19,10 @@ router = APIRouter()
 @router.post("/requests", response_model=Union[RequestOut, Error])
 def create_requests(
     requests: RequestIn,
-    response: Response,
+    # response: Response,
     repo: RequestQueries = Depends(),
 ):
-    response.status_code = 400
+    # response.status_code = 400
     return repo.create(requests)
 
 
@@ -53,22 +53,19 @@ def delete_request(
 @router.get("/requests/{requests_id}", response_model=Optional[RequestOut])
 def get_one_request(
     requests_id: int,
-    response: Response,
     repo: RequestQueries = Depends(),
 ) -> RequestOut:
     requests = repo.get_one(requests_id)
-    if requests is None:
-        response.status_code = 404
+    # if requests is None:
+    #     response.status_code = 404
     return requests
 
 
 @router.post("/comments", response_model=Union[CommentOut, Error])
 def create_comments(
     comments: CommentIn,
-    response: Response,
     repo: CommentQueries = Depends(),
 ):
-    response.status_code = 400
     return repo.create(comments)
 
 
