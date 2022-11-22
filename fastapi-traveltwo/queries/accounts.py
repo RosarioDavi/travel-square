@@ -21,75 +21,120 @@ class AccountOut(BaseModel):
     username: str
     full_name: str
     email: str
+    hashed_password: str
     avatar: str | None
     is_admin: bool
 
 
+class AccountOutWithPassword(BaseModel):
+    id: int
+    username: str
+    full_name: str
+    email: str
+    avatar: str | None
+    is_admin: bool
+
+
+class AccountsOut(BaseModel):
+    accounts: list[AccountOut]
+
+
 class AccountQueries:
-    def get_all_accounts(self) -> list[AccountOut]:
+    def get_all_accounts(self) -> AccountsOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT id, username, full_name, avatar, is_admin
+                    SELECT id, username, full_name, email, hashed_password, avatar, is_admin
                     FROM accounts
                     ORDER BY username;
                 """
                 )
-
                 results = []
                 for row in cur.fetchall():
                     record = {}
                     for i, column in enumerate(cur.description):
                         record[column.name] = row[i]
                     results.append(record)
-
                 return results
+
+    # def search_accounts(self, keyword: str) -> AccountsOut:
+    #     with pool.connection() as conn:
+    #         with conn.cursor() as cur:
+    #             cur.execute(
+    #                 """
+    #                 SELECT *
+    #                 FROM accounts
+    #                 WHERE username LIKE %s
+    #                 ORDER BY username;
+    #                 """,
+    #                 [keyword],
+    #             )
+    #             results = []
+    #             for row in cur.fetchall():
+    #                 record = {}
+    #                 for i, column in enumerate(cur.description):
+    #                     record[column.name] = row[i]
+    #                 results.append(record)
+    #             return results
+
+    def get(self, id: int) -> AccountOut:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT id, username, full_name, email, hashed_password, avatar, is_admin
+                    FROM accounts
+                    WHERE id = %s
+                    """,
+                    [id],
+                )
+                record = None
+                row = cur.fetchone()
+                if row is not None:
+                    record = {}
+                    for i, column in enumerate(cur.description):
+                        record[column.name] = row[i]
+                return record
 
     def get_one_account(self, username: str) -> AccountOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
-                result = cur.execute(
+                cur.execute(
                     """
-                    SELECT id, username, full_name, avatar, is_admin
+                    SELECT id, username, full_name, email, hashed_password, avatar, is_admin
                     FROM accounts
                     WHERE username = %s;
                 """,
                     [username],
                 )
-                record = result.fetchone()
-                if record is None:
-                    return None
-                return AccountOut(
-                    id=record[0],
-                    username=record[1],
-                    full_name=record[2],
-                    avatar=record[3],
-                    is_admin=record[4]
-                )
+                record = None
+                row = cur.fetchone()
+                if row is not None:
+                    record = {}
+                    for i, column in enumerate(cur.description):
+                        record[column.name] = row[i]
+                return record
+
 
     def create_account(self, account: AccountIn, hashed_password: str, avatar: str, is_admin: bool) -> AccountOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
-                result = cur.execute(
+                cur.execute(
                     """
-                    INSERT INTO accounts (username, full_name, hashed_password)
-                    VALUES (%s, %s, %s)
-                    RETURNING id;
+                    INSERT INTO accounts (username, full_name, email, hashed_password, avatar, is_admin)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                    RETURNING id, username, full_name, email, hashed_password, avatar, is_admin;
                     """,
-                    [account.username, account.full_name, hashed_password]
+                    [account.username, account.full_name, account.email, hashed_password, avatar, is_admin]
                 )
-
-                id = result.fetchone()[0]
-                return AccountOut(
-                    id=id,
-                    username=account.username,
-                    full_name=account.full_name,
-                    email=account.email,
-                    hashed_password=hashed_password,
-                    avatar=avatar,
-                    is_admin=is_admin
-                )
+                record = None
+                row = cur.fetchone()
+                if row is not None:
+                    record = {}
+                    for i, column in enumerate(cur.description):
+                        record[column.name] = row[i]
+                return record
 
     def delete_account(self, account_id):
         with pool.connection() as conn:
