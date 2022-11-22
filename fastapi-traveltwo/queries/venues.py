@@ -154,14 +154,27 @@ class VenueRepository:
             print(e)
             return {"message": "Could not update that venue"}
 
-    def get_all(self) -> list[VenueOut]:
+    def get_all(self):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT *
-                    FROM venues
-                    ORDER BY venue_name;
+                    SELECT v.id,
+                            v.venue_name,
+                            v.num_and_street,
+                            v.city,
+                            v.state,
+                            v.zip,
+                            c.category_name,
+                            v.description_text,
+                            a.username AS added_by_user,
+                            v.approved
+                    FROM venues v
+                    INNER JOIN categories c
+                        ON (c.id = v.category_id)
+                    INNER JOIN accounts a
+                        ON (a.id = v.added_by)
+                    ORDER BY venue_name
                     """
                 )
                 try:
