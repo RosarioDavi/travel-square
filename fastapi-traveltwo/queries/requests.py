@@ -170,7 +170,7 @@ class CommentQueries:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        SELECT id, requester_id, commenter, txt, created_at
+                        SELECT id, request_id, commenter, txt, created_at
                         FROM comments
                         ORDER BY created_at;
                         """
@@ -179,7 +179,7 @@ class CommentQueries:
                     return [
                         CommentOut(
                             id=record[0],
-                            requester_id=record[1],
+                            request_id=record[1],
                             commenter=record[2],
                             txt = record[3],
                             created_at = record[4]
@@ -197,7 +197,7 @@ class CommentQueries:
                     result = cur.execute(
                         """
                         SELECT id
-                             , requester_id
+                             , request_id
                              , commenter
                              , txt
                              , created_at
@@ -221,15 +221,16 @@ class CommentQueries:
                     result = cur.execute(
                         """
                         INSERT INTO requests
-                            (requester_id, commenter, txt)
+                            (request_id, commenter, txt, created_at)
                         VALUES
-                            (%s, %s, %s)
+                            (%s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
-                            comments.requester,
+                            comments.request_id,
                             comments.commenter,
-                            comments.txt
+                            comments.txt,
+                            comments.created_at
                         ]
                     )
                     id = result.fetchone()[0]
@@ -287,7 +288,7 @@ class CommentQueries:
     def record_to_comments_out(self, record):
         return CommentOut(
             id=record[0],
-            requester_id=record[1],
+            request_id=record[1],
             commenter=record[2],
             txt=record[3],
             created_at=record[4],
