@@ -20,7 +20,7 @@ def get_all_categories(
     return repo.get_all_categories()
 
 
-@router.post("/venues", response_model=VenueOut)
+@router.post("/api/venues/", response_model=VenueOut)
 def create_venues(
     venue: VenueIn,
     request: Request,
@@ -30,7 +30,7 @@ def create_venues(
     approved = False
     return repo.create(venue, approved)
 
-@router.get("/venues",)
+@router.get("/api/venues/",)
 def get_all(
     repo: VenueRepository = Depends(),
 ):
