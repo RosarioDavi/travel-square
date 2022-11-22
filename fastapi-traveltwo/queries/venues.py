@@ -161,7 +161,7 @@ class VenueRepository:
             print(e)
             return {"message": "Could not update that venue"}
 
-    def get_all(self):
+    def get_all_with_names(self):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
