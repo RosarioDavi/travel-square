@@ -1,3 +1,6 @@
+November 21, 2022
+Today I worked on: the requests queries and models. Once I was done with the requests queries and routers, I was ready to test the endpoints. For my request endpoints it was associated with a specific account so I waited on Muhammad to finish them. In the meantime, I started on the comments queries and routers. Once the accounts endpoints worked successfully, I was able to test out my requests. At first I had issues with the "created_at" dates in RequestIn and RequestOut since it was automatically defaulted. After I fixed that I struggled with a 400 error on creating a request. Even though creating the request worked and the RequestOut was just how it should have been I was constantly getting a response = 400. After a long struggle I realized that it was because the response.status. code was set to 400. After a long night, I tested out all my requests endpoints and it all works!
+
 November 18, 2022
 Today the team decided that we will be using Postgres. We worked on reverting the models, docker yaml files and the databases back to the previous working ones we had with Postgres. After some issues with the yaml file, we fixed and tested to make sure that the docker was running. We all split up the work on creating the queries and routers file for the different models. I am currently working on the requests queries file.
 
