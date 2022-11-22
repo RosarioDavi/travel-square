@@ -34,9 +34,9 @@ def create_venues(
 def get_all(
     repo: VenueRepository = Depends(),
 ):
-    return repo.get_all()
+    return repo.get_all_with_names()
 
-@router.put("/venues/{venue_id}", response_model=Union[VenueOut, Error])
+@router.put("/api/venues/{venue_id}", response_model=Union[VenueOut, Error])
 def update_venue(
     venue_id: int,
     venue: VenueIn,
@@ -44,14 +44,14 @@ def update_venue(
 ) -> Union[Error, VenueOut]:
     return repo.update(venue_id, venue)
 
-@router.delete("/venues/{venue_id}", response_model=bool)
+@router.delete("/api/venues/{venue_id}", response_model=bool)
 def delete_venue(
     venue_id: int,
     repo: VenueRepository = Depends(),
 ) -> bool:
     return repo.delete(venue_id)
 
-@router.get("/venues/{venue_id}", response_model=Optional[VenueOut])
+@router.get("/api/venues/{venue_id}", response_model=Optional[VenueOut])
 def get_one_venue(
     venue_id: int,
     response: Response,

@@ -154,7 +154,7 @@ class VenueRepository:
             print(e)
             return {"message": "Could not update that venue"}
 
-    def get_all(self):
+    def get_all_with_names(self):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -212,9 +212,9 @@ class VenueRepository:
     #         except Exception:
     #             return {"message": "Create did not work"}
 
-    # def venue_in_to_out(self, id: int, venue: VenueIn):
-    #     old_data = venue.dict()
-    #     return VenueOut(id=id, **old_data)
+    def venue_in_to_out(self, id: int, venue: VenueIn):
+        old_data = venue.dict()
+        return VenueOut(id=id, **old_data)
 
     # def record_to_venue_out(self, record):
     #     return VenueOut(
