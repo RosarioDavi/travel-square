@@ -24,6 +24,7 @@ class CommentIn(BaseModel):
     request_id: int
     commenter: int
     txt: str
+    created_at: date
 
 class CommentOut(BaseModel):
     id: int
@@ -77,7 +78,6 @@ class RequestQueries:
                     if record is None:
                         return None
                     return self.record_to_requests_out(record)
-                    print(record)
         except Exception as e:
             print(e)
             return {"message": "Could not get that Request"}
@@ -101,7 +101,6 @@ class RequestQueries:
                         ]
                     )
                     id = result.fetchone()[0]
-                    print(self.requests_in_to_out)
                     return self.requests_in_to_out(id, requests)
 
         except Exception as e:
@@ -170,7 +169,7 @@ class CommentQueries:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        SELECT id, requester_id, commenter, txt, created_at
+                        SELECT id, request_id, commenter, txt, created_at
                         FROM comments
                         ORDER BY created_at;
                         """
@@ -179,7 +178,7 @@ class CommentQueries:
                     return [
                         CommentOut(
                             id=record[0],
-                            requester_id=record[1],
+                            request_id=record[1],
                             commenter=record[2],
                             txt = record[3],
                             created_at = record[4]
@@ -197,11 +196,11 @@ class CommentQueries:
                     result = cur.execute(
                         """
                         SELECT id
-                             , requester_id
+                             , request_id
                              , commenter
                              , txt
                              , created_at
-                        FROM requests
+                        FROM comments
                         WHERE id = %s
                         """,
                         [comments_id]
@@ -220,44 +219,48 @@ class CommentQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        INSERT INTO requests
-                            (requester_id, commenter, txt)
+                        INSERT INTO comments
+                            (request_id, commenter, txt, created_at)
                         VALUES
-                            (%s, %s, %s)
+                            (%s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
-                            comments.requester,
+                            comments.request_id,
                             comments.commenter,
-                            comments.txt
+                            comments.txt,
+                            comments.created_at
                         ]
                     )
                     id = result.fetchone()[0]
                     return self.comments_in_to_out(id, comments)
-        except Exception:
+        except Exception as e:
+            print(e)
             return {"message": "Could not create new comment"}
 
-    def update(self, comments_id: int, comments: CommentIn) -> Union[CommentOut, Error]:
+    def update(self, comment_id: int, comment: CommentIn) -> Union[CommentOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
                         UPDATE comments
-                        SET txt = %s
+                        SET request_id = %s
+                        , commenter = %s
+                        , txt = %s
                         , created_at = %s
                         WHERE id = %s
                         """,
                         [
-                            comments.id,
-                            comments.request_id,
-                            comments.commenter,
-                            comments.txt,
-                            comments.created_at
+                            comment.request_id,
+                            comment.commenter,
+                            comment.txt,
+                            comment.created_at,
+                            comment_id
 
                         ]
                     )
-                    return self.comments_in_to_out(comments_id, comments)
+                    return self.comments_in_to_out(comment_id, comment)
         except Exception as e:
             print(e)
             return {"message": "Could not update that request"}
@@ -287,7 +290,7 @@ class CommentQueries:
     def record_to_comments_out(self, record):
         return CommentOut(
             id=record[0],
-            requester_id=record[1],
+            request_id=record[1],
             commenter=record[2],
             txt=record[3],
             created_at=record[4],
