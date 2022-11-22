@@ -61,3 +61,12 @@ def get_one_venue(
     if venue is None:
         response.status_code = 404
     return venue
+
+@router.get("api/venues/{state}/{city}/")
+def get_all_venues_city_state(
+    state: str,
+    city: str,
+    response: Response,
+    repo: VenueRepository = Depends(),
+):
+    return repo.get_all_venues_city_state(state, city)
