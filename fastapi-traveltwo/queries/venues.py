@@ -135,18 +135,25 @@ class VenueRepository:
                     db.execute(
                         """
                         UPDATE venues
-                        SET name = %s
-                          , from_date = %s
-                          , to_date = %s
-                          , thoughts = %s
+                        SET venue_name = %s
+                          , num_and_street = %s
+                          , city = %s
+                          , state = %s
+                          , zip = %s
+                          , category_id = %s
+                          , description_text = %s
+                          , added_by = %s
                         WHERE id = %s
                         """,
                         [
-                            venue.name,
-                            venue.from_date,
-                            venue.to_date,
-                            venue.thoughts,
-                            venue_id
+                            venue.venue_name,
+                            venue.num_and_street,
+                            venue.city,
+                            venue.state,
+                            venue.zip,
+                            venue.category_id,
+                            venue.description_text,
+                            venue.added_by,
                         ]
                     )
                     return self.venue_in_to_out(venue_id, venue)
@@ -212,9 +219,9 @@ class VenueRepository:
     #         except Exception:
     #             return {"message": "Create did not work"}
 
-    # def venue_in_to_out(self, id: int, venue: VenueIn):
-    #     old_data = venue.dict()
-    #     return VenueOut(id=id, **old_data)
+    def venue_in_to_out(self, id: int, venue: VenueIn):
+        old_data = venue.dict()
+        return VenueOut(id=id, **old_data)
 
     # def record_to_venue_out(self, record):
     #     return VenueOut(
