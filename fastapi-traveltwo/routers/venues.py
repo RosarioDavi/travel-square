@@ -1,20 +1,36 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, Request
 from typing import Optional
 from typing import Union
-from queries.venues import VenueIn, VenueRepository, VenueOut, Error
+from queries.venues import VenueIn, VenueRepository, VenueOut, Error, CategoryIn, CategoryOut, CategoryRepository
 
 
 router  = APIRouter()
 
-@router.post("/venues", response_model=Union[VenueOut, Error])
-def create_venues(
-    venue: VenueIn, 
-    repo: VenueRepository = Depends()
-):   
-    Response.status_code = 400
-    return repo.create(venue)
+@router.post("/api/categories/", response_model=CategoryOut)
+def create_category(
+    category: CategoryIn,
+    repo: CategoryRepository = Depends(),
+):
+    return repo.create(category)
 
-@router.get("/venues", response_model=Union[VenueOut, Error])
+@router.get("/api/categories/", response_model=list[CategoryOut])
+def get_all_categories(
+    repo: CategoryRepository = Depends()
+):
+    return repo.get_all_categories()
+
+
+@router.post("/venues", response_model=VenueOut)
+def create_venues(
+    venue: VenueIn,
+    request: Request,
+    response: Response,
+    repo: VenueRepository = Depends(),
+):
+    approved = False
+    return repo.create(venue, approved)
+
+@router.get("/venues", response_model=list[VenueOut])
 def get_all(
     repo: VenueRepository = Depends(),
 ):

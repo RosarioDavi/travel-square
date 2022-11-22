@@ -47,7 +47,6 @@ class AccountQueries:
                     """
                     SELECT id, username, full_name, email, hashed_password, avatar, is_admin
                     FROM accounts
-                    WHERE username LIKE
                     ORDER BY username;
                 """
                 )
@@ -129,7 +128,6 @@ class AccountQueries:
                     """,
                     [account.username, account.full_name, account.email, hashed_password, avatar, is_admin]
                 )
-
                 record = None
                 row = cur.fetchone()
                 if row is not None:

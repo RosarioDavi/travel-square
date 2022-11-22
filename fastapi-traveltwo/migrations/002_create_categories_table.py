@@ -10,6 +10,6 @@ steps = [
         # Drop table
         """
         DROP TABLE categories
-        """
+        """,
     ]
 ]
