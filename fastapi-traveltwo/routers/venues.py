@@ -30,7 +30,7 @@ def create_venues(
     approved = False
     return repo.create(venue, approved)
 
-@router.get("/venues", response_model=list[VenueOut])
+@router.get("/venues",)
 def get_all(
     repo: VenueRepository = Depends(),
 ):
