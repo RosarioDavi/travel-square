@@ -47,6 +47,7 @@ class AccountQueries:
                     """
                     SELECT id, username, full_name, email, hashed_password, avatar, is_admin
                     FROM accounts
+                    WHERE username LIKE
                     ORDER BY username;
                 """
                 )
@@ -57,6 +58,26 @@ class AccountQueries:
                         record[column.name] = row[i]
                     results.append(record)
                 return results
+
+    # def search_accounts(self, keyword: str) -> AccountsOut:
+    #     with pool.connection() as conn:
+    #         with conn.cursor() as cur:
+    #             cur.execute(
+    #                 """
+    #                 SELECT *
+    #                 FROM accounts
+    #                 WHERE username LIKE %s
+    #                 ORDER BY username;
+    #                 """,
+    #                 [keyword],
+    #             )
+    #             results = []
+    #             for row in cur.fetchall():
+    #                 record = {}
+    #                 for i, column in enumerate(cur.description):
+    #                     record[column.name] = row[i]
+    #                 results.append(record)
+    #             return results
 
     def get(self, id: int) -> AccountOut:
         with pool.connection() as conn:
@@ -100,7 +121,7 @@ class AccountQueries:
     def create_account(self, account: AccountIn, hashed_password: str, avatar: str, is_admin: bool) -> AccountOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
-                result = cur.execute(
+                cur.execute(
                     """
                     INSERT INTO accounts (username, full_name, email, hashed_password, avatar, is_admin)
                     VALUES (%s, %s, %s, %s, %s, %s)

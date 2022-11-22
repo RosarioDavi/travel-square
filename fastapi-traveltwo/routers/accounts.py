@@ -35,17 +35,26 @@ class HttpError(BaseModel):
     detail: str
 
 
-# not_authorized = HTTPException(
-#     status_code=status.HTTP_401_UNAUTHORIZED,
-#     detail="Invalid authentication credentials",
-#     headers={"WWW-Authenticate": "Bearer"},
-# )
+not_authorized = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="Invalid authentication credentials",
+    headers={"WWW-Authenticate": "Bearer"},
+)
 
 @router.get("/api/accounts/", response_model=AccountsOut)
 def get_all_accounts(repo: AccountQueries = Depends()):
     return {
         "accounts": repo.get_all_accounts()
     }
+
+# @router.get("/api/accounts/search/{keyword}", response_model=AccountsOut)
+# def get_accounts_keyword(
+#     keyword: str,
+#     repo: AccountQueries = Depends()
+# ):
+#     return {
+#         "accounts": repo.search_accounts(keyword)
+#     }
 
 @router.get("/api/accounts/users/{username}", response_model=AccountOut)
 def get_account_with_user(
