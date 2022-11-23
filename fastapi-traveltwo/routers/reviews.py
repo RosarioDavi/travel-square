@@ -1,10 +1,9 @@
-
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from queries.reviews import ReviewQueries
 from typing import List
 from queries.reviews import ReviewIn, ReviewOut
-from datetime import datetime
+from datetime import date
 
 
 router = APIRouter()
@@ -15,7 +14,7 @@ def create_review(
     review: ReviewIn,
     repo: ReviewQueries = Depends(),
 ):
-    created_at = datetime.now()
+    created_at = date.today()
     return repo.create_review(review, created_at)
 
 @router.get("/api/venues/{venue_id}/reviews/", response_model=List[ReviewOut])

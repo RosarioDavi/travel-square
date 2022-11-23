@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from datetime import date
-from typing import List, Optional
 from queries.pool import pool
 
 
@@ -23,7 +22,7 @@ class ReviewOut(BaseModel):
 
 
 class ReviewQueries:
-    def get_all_reviews_for_venue(self) -> List[ReviewOut]:
+    def get_all_reviews_for_venue(self) -> list[ReviewOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
