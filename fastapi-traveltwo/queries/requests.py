@@ -11,7 +11,6 @@ class Error(BaseModel):
 class RequestIn(BaseModel):
     requester: int
     txt: str
-    created_at: date
 
 
 class RequestOut(BaseModel):
@@ -40,8 +39,13 @@ class RequestQueries:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        SELECT id, requester, txt, created_at
-                        FROM requests
+                        SELECT r.id,
+                                a.username,
+                                r.txt,
+                                r.created_at
+                        FROM requests r
+                        INNER JOIN accounts a
+                            ON (r.requester = a.id)
                         ORDER BY created_at;
                         """
                     )
@@ -82,7 +86,7 @@ class RequestQueries:
             print(e)
             return {"message": "Could not get that Request"}
 
-    def create(self, requests: RequestIn) -> Union[RequestOut, Error]:
+    def create(self, requests: RequestIn, created_at) -> Union[RequestOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -92,12 +96,12 @@ class RequestQueries:
                             (requester, txt, created_at)
                         VALUES
                             (%s, %s, %s)
-                        RETURNING id;
+                        RETURNING id, requester, txt, created_at;
                         """,
                         [
                             requests.requester,
                             requests.txt,
-                            requests.created_at
+                            created_at
                         ]
                     )
                     id = result.fetchone()[0]
@@ -169,8 +173,12 @@ class CommentQueries:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        SELECT id, request_id, commenter, txt, created_at
-                        FROM comments
+                        SELECT c.id, r.id, a.username, c.txt, c.created_at
+                        FROM comments c
+                        INNER JOIN requests r
+                            ON (r.id = c.id)
+                        INNER JOIN accounts a
+                            ON (c.id = a.id)
                         ORDER BY created_at;
                         """
                     )
@@ -195,12 +203,16 @@ class CommentQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT id
-                             , request_id
-                             , commenter
-                             , txt
-                             , created_at
-                        FROM comments
+                        SELECT c.id
+                             , r.id
+                             , a.username
+                             , c.txt
+                             , c.created_at
+                        FROM comments c
+                        INNER JOIN requests r
+                            ON (r.id = c.id)
+                        INNER JOIN accounts a
+                            ON (c.id = a.id)
                         WHERE id = %s
                         """,
                         [comments_id]

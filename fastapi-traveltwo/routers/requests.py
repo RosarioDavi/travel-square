@@ -9,6 +9,7 @@ from queries.requests import (
     CommentOut,
     CommentQueries
 )
+from datetime import date
 
 
 
@@ -18,10 +19,11 @@ router = APIRouter()
 
 @router.post("/api/requests", response_model=Union[RequestOut, Error])
 def create_requests(
-    requests: RequestIn,
+    request: RequestIn,
     repo: RequestQueries = Depends(),
 ):
-    return repo.create(requests)
+    created_at = date.today()
+    return repo.create(request, created_at)
 
 
 @router.get("/requests", response_model=Union[List[RequestOut], Error])
