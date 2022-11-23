@@ -1,14 +1,14 @@
 from pydantic import BaseModel
 from datetime import date
-from typing import List
+from typing import List, Optional
 from queries.pool import pool
 
 
 class ReviewIn(BaseModel):
     venue_id: int
     review_description: str
-    rating: str
-    pictures: List[str]
+    rating: int
+    pictures: str
     added_by: str
 
 
@@ -16,8 +16,8 @@ class ReviewOut(BaseModel):
     id: int
     venue_id: int
     review_description: str
-    rating: str
-    pictures: List[str]
+    rating: int
+    pictures: str
     added_by: str
     created_at: date
 
@@ -69,7 +69,7 @@ class ReviewQueries:
             print(e)
             return {"message": "Could not get the review"}
 
-    def create_review(self, reviews: ReviewIn) -> ReviewOut:
+    def create_review(self, reviews: ReviewIn, created_at) -> ReviewOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -82,13 +82,12 @@ class ReviewQueries:
                         RETURNING id, venue_id, review_description, rating, pictures, added_by, created_at;
                         """,
                         [
-                            reviews.id,
                             reviews.venue_id,
                             reviews.review_description,
                             reviews.rating,
                             reviews.pictures,
                             reviews.added_by,
-                            reviews.created_at
+                            created_at
                         ]
                     )
                     record = None
