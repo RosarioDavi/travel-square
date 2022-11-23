@@ -1,23 +1,57 @@
 
-from fastapi import APIRouter
-from models import AccountOut, ReviewIn, ReviewList, ReviewOut, LoanIn, LoanOut
+from fastapi import APIRouter, Depends
+from pydantic import BaseModel
 from queries.reviews import ReviewQueries
+from typing import List
+from queries.reviews import ReviewIn, ReviewOut
+from datetime import date
 
 
 router = APIRouter()
 
 
-@router.post("/reviews")
-def create_review(review: ReviewIn):
-    print('review', review.name)
-    return review
+class ReviewIn(BaseModel):
+    venue_id: str
+    review_description: str
+    rating: str
+    pictures: List[str]
+    created_by: str
 
 
-# not_authorized = HTTPException(
-#     status_code=status.HTTP_401_UNAUTHORIZED,
-#     detail="Invalid authentication credentials",
-#     headers={"WWW-Authenticate": "Bearer"},
-# )
+class ReviewOut(ReviewIn):
+    id: int
+    review_description: str
+    rating: str
+    pictures: List[str]
+    added_by: str
+    created_at: date
+
+
+@router.post("/api/venues/{venue_id}/reviews", response_model=ReviewOut)
+def create_review(
+    reviews: ReviewIn,
+    repo: ReviewQueries = Depends(),
+):
+    return repo.create_review(reviews)
+
+@router.get("/api/venues/{venue_id}/reviews", response_model=List[ReviewOut])
+def get_all_reviews_for_venue(
+    repo: ReviewQueries = Depends(),
+):
+    return repo.get_all_reviews_for_venue()
+
+@router.get("/api/venues/{venue_id}/{review_id}", response_model=ReviewOut)
+def get_one_review_for_venue(
+    repo: ReviewQueries = Depends(),
+):
+    return repo.get_one_review_for_venue()
+
+@router.delete("/reviews/{review_id}", response_model=ReviewOut)
+def delete_review(
+    review_id: int,
+    repo: ReviewQueries = Depends(),
+) -> bool:
+    return repo.delete_review(review_id)
 
 
 # @router.post("/reviews", response_model=ReviewOut)
