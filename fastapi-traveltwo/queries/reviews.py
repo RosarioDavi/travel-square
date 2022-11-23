@@ -69,7 +69,7 @@ class ReviewQueries:
             print(e)
             return {"message": "Could not get the review"}
 
-    def create_review(self, reviews: ReviewIn, created_at) -> ReviewOut:
+    def create_review(self, review: ReviewIn, created_at) -> ReviewOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -82,11 +82,11 @@ class ReviewQueries:
                         RETURNING id, venue_id, review_description, rating, pictures, added_by, created_at;
                         """,
                         [
-                            reviews.venue_id,
-                            reviews.review_description,
-                            reviews.rating,
-                            reviews.pictures,
-                            reviews.added_by,
+                            review.venue_id,
+                            review.review_description,
+                            review.rating,
+                            review.pictures,
+                            review.added_by,
                             created_at
                         ]
                     )
