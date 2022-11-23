@@ -1,35 +1,34 @@
 from pydantic import BaseModel
 from datetime import date
-from typing import List
 from queries.pool import pool
 
 
 class ReviewIn(BaseModel):
     venue_id: int
     review_description: str
-    rating: str
-    pictures: List[str]
-    added_by: str
+    rating: int
+    picture: str
+    added_by: int
 
 
 class ReviewOut(BaseModel):
     id: int
     venue_id: int
     review_description: str
-    rating: str
-    pictures: List[str]
-    added_by: str
+    rating: int
+    picture: str
+    added_by: int
     created_at: date
 
 
 class ReviewQueries:
-    def get_all_reviews_for_venue(self) -> List[ReviewOut]:
+    def get_all_reviews_for_venue(self) -> list[ReviewOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        SELECT id, review_description, rating, pictures, added_by, created_at
+                        SELECT id, review_description, rating, picture, added_by, created_at
                         FROM reviews
                         ORDER BY created_at;
                         """
@@ -52,7 +51,7 @@ class ReviewQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT id, venue_id, review_description, rating, pictures, added_by, created_at
+                        SELECT id, venue_id, review_description, rating, picture, added_by, created_at
                         FROM reviews
                         WHERE venue_id = %s
                         """,
@@ -69,26 +68,25 @@ class ReviewQueries:
             print(e)
             return {"message": "Could not get the review"}
 
-    def create_review(self, reviews: ReviewIn) -> ReviewOut:
+    def create_review(self, review: ReviewIn, created_at) -> ReviewOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
                         INSERT INTO reviews
-                            (venue_id, review_description, rating, pictures, added_by, created_at)
+                            (venue_id, review_description, rating, picture, added_by, created_at)
                         VALUES
                             (%s, %s, %s, %s, %s, %s)
-                        RETURNING id, venue_id, review_description, rating, pictures, added_by, created_at;
+                        RETURNING id, venue_id, review_description, rating, picture, added_by, created_at;
                         """,
                         [
-                            reviews.id,
-                            reviews.venue_id,
-                            reviews.review_description,
-                            reviews.rating,
-                            reviews.pictures,
-                            reviews.added_by,
-                            reviews.created_at
+                            review.venue_id,
+                            review.review_description,
+                            review.rating,
+                            review.picture,
+                            review.added_by,
+                            created_at
                         ]
                     )
                     record = None
