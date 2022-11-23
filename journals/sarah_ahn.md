@@ -1,3 +1,15 @@
+11/22/22
+- still not feeling well
+- talked to Lena and gained a much better understanding what needs to be done
+- had previously renamed variables that I changed back to match the table
+- still ended the day with reviews not showing up on the FastAPI page. Will ask the team tomorrow for help with the bug
+
+11/21/22
+- feeling sick today so not able to work at 100%
+- spent the day trying to understand what code needs to go under queries and routers
+- watched a tutorial but still unsure
+- ended the day with reviews still not showing up on the FastAPI page
+
 11/18/22
 - the team discussed using Postgres instead of MongoDB due to MongoDB potentially being unable to handle the relationships between our models
 - we have divided the work to complete queries and routers files, and I've been assigned the reviews. I struggled for a while to get the port 8000 docker container to work, and it turns out that I had been using the wrong git command
