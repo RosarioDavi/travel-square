@@ -5,6 +5,7 @@ from queries.requests import (
     RequestIn,
     RequestQueries,
     RequestOut,
+    RequestOutWithUsername,
     CommentIn,
     CommentOut,
     CommentQueries
@@ -26,7 +27,7 @@ def create_requests(
     return repo.create(request, created_at)
 
 
-@router.get("/api/requests/", response_model=Union[list[RequestOut], Error])
+@router.get("/api/requests/", response_model=list[RequestOutWithUsername])
 def get_all(
     repo: RequestQueries = Depends(),
 ):

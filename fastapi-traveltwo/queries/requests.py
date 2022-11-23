@@ -19,6 +19,14 @@ class RequestOut(BaseModel):
     txt: str
     created_at: date
 
+
+class RequestOutWithUsername(BaseModel):
+    id: int
+    username: str
+    txt: str
+    created_at: date
+
+
 class CommentIn(BaseModel):
     request_id: int
     commenter: int
@@ -32,8 +40,9 @@ class CommentOut(BaseModel):
     txt: str
     created_at: date
 
+
 class RequestQueries:
-    def get_all(self) -> Union[list[RequestOut], Error]:
+    def get_all(self) -> list[RequestOutWithUsername]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
