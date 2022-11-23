@@ -118,45 +118,45 @@ class RequestQueries:
 
 
 
-    def update(self, requests_id: int, requests: RequestIn) -> Union[RequestOut, Error]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as cur:
-                    cur.execute(
-                        """
-                        UPDATE requests
-                        SET requester = %s
-                          , txt = %s
-                          , created_at = %s
-                        WHERE id = %s
-                        """,
-                        [
-                            requests.requester,
-                            requests.txt,
-                            requests.created_at,
-                            requests_id,
-                        ]
-                    )
-                    return self.requests_in_to_out(requests_id, requests)
-        except Exception as e:
-            print(e)
-            return {"message": "Could not update that request"}
+    # def update(self, requests_id: int, requests: RequestIn) -> Union[RequestOut, Error]:
+    #     try:
+    #         with pool.connection() as conn:
+    #             with conn.cursor() as cur:
+    #                 cur.execute(
+    #                     """
+    #                     UPDATE requests
+    #                     SET requester = %s
+    #                       , txt = %s
+    #                       , created_at = %s
+    #                     WHERE id = %s
+    #                     """,
+    #                     [
+    #                         requests.requester,
+    #                         requests.txt,
+    #                         requests.created_at,
+    #                         requests_id,
+    #                     ]
+    #                 )
+    #                 return self.requests_in_to_out(requests_id, requests)
+    #     except Exception as e:
+    #         print(e)
+    #         return {"message": "Could not update that request"}
 
-    def delete(self, requests_id: int) -> bool:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as cur:
-                    cur.execute(
-                        """
-                        DELETE FROM requests
-                        WHERE id = %s
-                        """,
-                        [requests_id]
-                    )
-                    return True
-        except Exception as e:
-            print(e)
-            return False
+    # def delete(self, requests_id: int) -> bool:
+    #     try:
+    #         with pool.connection() as conn:
+    #             with conn.cursor() as cur:
+    #                 cur.execute(
+    #                     """
+    #                     DELETE FROM requests
+    #                     WHERE id = %s
+    #                     """,
+    #                     [requests_id]
+    #                 )
+    #                 return True
+    #     except Exception as e:
+    #         print(e)
+    #         return False
 
     def requests_in_to_out(self, id: int, request: RequestIn):
             old_data = request.dict()

@@ -7,6 +7,7 @@ steps = [
             requester INTEGER REFERENCES accounts("id") ON DELETE CASCADE,
             txt TEXT NOT NULL,
             created_at DATE NOT NULL DEFAULT CURRENT_DATE
+        );
         """,
         # Drop table
         """
