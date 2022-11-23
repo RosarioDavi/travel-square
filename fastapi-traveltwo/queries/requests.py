@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
+from typing import Optional, Union
 from datetime import date
 from queries.pool import pool
 
@@ -33,7 +33,7 @@ class CommentOut(BaseModel):
     created_at: date
 
 class RequestQueries:
-    def get_all(self) -> Union[Error, List[RequestOut]]:
+    def get_all(self) -> Union[list[RequestOut], Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -172,7 +172,7 @@ class RequestQueries:
 
 
 class CommentQueries:
-    def get_all(self) -> Union[Error, List[CommentOut]]:
+    def get_all(self) -> Union[Error, list[CommentOut]]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
