@@ -45,29 +45,26 @@ class RequestQueries:
                                 r.created_at
                         FROM requests r
                         INNER JOIN accounts a
-                            ON (r.requester = a.id)
-                        ORDER BY created_at;
+                            ON (a.id = r.requester)
+                        ORDER BY r.created_at;
                         """
                     )
-
-                    return [
-                        RequestOut(
-                            id=record[0],
-                            requester=record[1],
-                            txt=record[2],
-                            created_at = record[3]
-                        )
-                        for record in cur
-                    ]
+                    results = []
+                    for row in cur.fetchall():
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                        results.append(record)
+                    return results
         except Exception as e:
             print(e)
-            return {"message": "Could not get all requests"}
+            return {"message": "Could not get all Requests"}
 
     def get_one(self, requests_id: int) -> Optional[RequestOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
-                    result = cur.execute(
+                    cur.execute(
                         """
                         SELECT id
                              , requester
@@ -78,10 +75,13 @@ class RequestQueries:
                         """,
                         [requests_id]
                     )
-                    record = result.fetchone()
-                    if record is None:
-                        return None
-                    return self.record_to_requests_out(record)
+                    record = None
+                    row = cur.fetchone()
+                    if row is not None:
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                    return record
         except Exception as e:
             print(e)
             return {"message": "Could not get that Request"}
@@ -104,8 +104,13 @@ class RequestQueries:
                             created_at
                         ]
                     )
-                    id = result.fetchone()[0]
-                    return self.requests_in_to_out(id, requests)
+                    record = None
+                    row = cur.fetchone()
+                    if row is not None:
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                    return record
 
         except Exception as e:
             print(e)
