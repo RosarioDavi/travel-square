@@ -8,8 +8,8 @@ class ReviewIn(BaseModel):
     venue_id: int
     review_description: str
     rating: int
-    pictures: str
-    added_by: str
+    picture: str
+    added_by: int
 
 
 class ReviewOut(BaseModel):
@@ -17,8 +17,8 @@ class ReviewOut(BaseModel):
     venue_id: int
     review_description: str
     rating: int
-    pictures: str
-    added_by: str
+    picture: str
+    added_by: int
     created_at: date
 
 
@@ -29,7 +29,7 @@ class ReviewQueries:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        SELECT id, review_description, rating, pictures, added_by, created_at
+                        SELECT id, review_description, rating, picture, added_by, created_at
                         FROM reviews
                         ORDER BY created_at;
                         """
@@ -52,7 +52,7 @@ class ReviewQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT id, venue_id, review_description, rating, pictures, added_by, created_at
+                        SELECT id, venue_id, review_description, rating, picture, added_by, created_at
                         FROM reviews
                         WHERE venue_id = %s
                         """,
@@ -76,16 +76,16 @@ class ReviewQueries:
                     cur.execute(
                         """
                         INSERT INTO reviews
-                            (venue_id, review_description, rating, pictures, added_by, created_at)
+                            (venue_id, review_description, rating, picture, added_by, created_at)
                         VALUES
                             (%s, %s, %s, %s, %s, %s)
-                        RETURNING id, venue_id, review_description, rating, pictures, added_by, created_at;
+                        RETURNING id, venue_id, review_description, rating, picture, added_by, created_at;
                         """,
                         [
                             review.venue_id,
                             review.review_description,
                             review.rating,
-                            review.pictures,
+                            review.picture,
                             review.added_by,
                             created_at
                         ]
