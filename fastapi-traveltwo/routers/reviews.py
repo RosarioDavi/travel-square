@@ -1,4 +1,3 @@
-
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from queries.reviews import ReviewQueries
@@ -10,43 +9,27 @@ from datetime import date
 router = APIRouter()
 
 
-class ReviewIn(BaseModel):
-    venue_id: str
-    review_description: str
-    rating: str
-    pictures: List[str]
-    created_by: str
-
-
-class ReviewOut(ReviewIn):
-    id: int
-    review_description: str
-    rating: str
-    pictures: List[str]
-    added_by: str
-    created_at: date
-
-
-@router.post("/api/venues/{venue_id}/reviews", response_model=ReviewOut)
+@router.post("/api/reviews/", response_model=ReviewOut)
 def create_review(
-    reviews: ReviewIn,
+    review: ReviewIn,
     repo: ReviewQueries = Depends(),
 ):
-    return repo.create_review(reviews)
+    created_at = date.today()
+    return repo.create_review(review, created_at)
 
-@router.get("/api/venues/{venue_id}/reviews", response_model=List[ReviewOut])
+@router.get("/api/venues/{venue_id}/reviews/", response_model=List[ReviewOut])
 def get_all_reviews_for_venue(
     repo: ReviewQueries = Depends(),
 ):
     return repo.get_all_reviews_for_venue()
 
-@router.get("/api/venues/{venue_id}/{review_id}", response_model=ReviewOut)
+@router.get("/api/venues/{venue_id}/{review_id}/", response_model=ReviewOut)
 def get_one_review_for_venue(
     repo: ReviewQueries = Depends(),
 ):
     return repo.get_one_review_for_venue()
 
-@router.delete("/reviews/{review_id}", response_model=ReviewOut)
+@router.delete("/api/venues/{venue_id}/{review_id}", response_model=ReviewOut)
 def delete_review(
     review_id: int,
     repo: ReviewQueries = Depends(),
