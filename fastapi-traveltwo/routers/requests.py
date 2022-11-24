@@ -8,7 +8,8 @@ from queries.requests import (
     RequestOutWithUsername,
     CommentIn,
     CommentOut,
-    CommentQueries
+    CommentQueries,
+    CommentOutWithUsername
 )
 from datetime import date
 
@@ -62,13 +63,14 @@ def get_one_request(
 
 @router.post("/api/comments/", response_model=Union[CommentOut, Error])
 def create_comments(
-    comments: CommentIn,
+    comment: CommentIn,
     repo: CommentQueries = Depends(),
 ):
-    return repo.create(comments)
+    created_at = date.today()
+    return repo.create(comment, created_at)
 
 
-@router.get("/api/requests/{request_id}/comments/", response_model=Union[list[CommentOut], Error])
+@router.get("/api/requests/{request_id}/comments/", response_model=Union[list[CommentOutWithUsername], Error])
 def get_all(
     repo: CommentQueries = Depends(),
 ):

@@ -31,12 +31,18 @@ class CommentIn(BaseModel):
     request_id: int
     commenter: int
     txt: str
-    created_at: date
 
 class CommentOut(BaseModel):
     id: int
     request_id: int
     commenter: int
+    txt: str
+    created_at: date
+
+class CommentOutWithUsername(BaseModel):
+    id: int
+    request_id: int
+    username: str
     txt: str
     created_at: date
 
@@ -99,7 +105,7 @@ class RequestQueries:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
-                    result = cur.execute(
+                    cur.execute(
                         """
                         INSERT INTO requests
                             (requester, txt, created_at)
@@ -181,7 +187,7 @@ class RequestQueries:
 
 
 class CommentQueries:
-    def get_all(self) -> Union[Error, list[CommentOut]]:
+    def get_all(self) -> Union[list[CommentOut],Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -193,23 +199,22 @@ class CommentQueries:
                             ON (r.id = c.id)
                         INNER JOIN accounts a
                             ON (c.id = a.id)
-                        ORDER BY created_at;
-                        """
+                        WHERE r.id = %s,
+                        ORDER BY r.created_at;
+                        """,
+                        [id]
                     )
 
-                    return [
-                        CommentOut(
-                            id=record[0],
-                            request_id=record[1],
-                            commenter=record[2],
-                            txt = record[3],
-                            created_at = record[4]
-                        )
-                        for record in cur
-                    ]
+                    results = []
+                    for row in cur.fetchall():
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                        results.append(record)
+                    return results
         except Exception as e:
             print(e)
-            return {"message": "Could not get all comments"}
+            return {"message": "Could not get all Comments"}
 
     def get_one(self, comments_id: int) -> Optional[CommentOut]:
         try:
@@ -239,30 +244,36 @@ class CommentQueries:
             print(e)
             return {"message": "Could not get that Comment"}
 
-    def create(self, comments: CommentIn) -> Union[CommentOut, Error]:
+    def create(self, comments: CommentIn, created_at) -> Union[CommentOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
-                    result = cur.execute(
+                    cur.execute(
                         """
                         INSERT INTO comments
                             (request_id, commenter, txt, created_at)
                         VALUES
                             (%s, %s, %s, %s)
-                        RETURNING id;
+                        RETURNING id, request_id, commenter, txt, created_at;
                         """,
                         [
                             comments.request_id,
                             comments.commenter,
                             comments.txt,
-                            comments.created_at
+                            created_at
                         ]
                     )
-                    id = result.fetchone()[0]
-                    return self.comments_in_to_out(id, comments)
+                    record = None
+                    row = cur.fetchone()
+                    if row is not None:
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                    return record
+
         except Exception as e:
             print(e)
-            return {"message": "Could not create new comment"}
+            return {"message": "Could not create new comments"}
 
     def update(self, comment_id: int, comment: CommentIn) -> Union[CommentOut, Error]:
         try:
