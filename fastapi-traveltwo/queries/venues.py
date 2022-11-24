@@ -161,7 +161,7 @@ class VenueRepository:
             print(e)
             return {"message": "Could not update that venue"}
 
-    def get_all_with_names(self):
+    def get_all(self):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -195,29 +195,6 @@ class VenueRepository:
                 except Exception as e:
                     return {"message": "Could not get all Venues"}
 
-    # def create(self, venue: VenueIn) -> Union[VenueOut, Error]:
-    #         try:
-    #             with pool.connection() as conn:
-    #                 with conn.cursor() as db:
-    #                     result = db.execute(
-    #                         """
-    #                         INSERT INTO Venues
-    #                             (name, from_date, to_date, thoughts)
-    #                         VALUES
-    #                             (%s, %s, %s, %s)
-    #                         RETURNING id;
-    #                         """,
-    #                         [
-    #                             venue.name,
-    #                             venue.from_date,
-    #                             venue.to_date,
-    #                             venue.thoughts
-    #                         ]
-    #                     )
-    #                     id = result.fetchone()[0]
-    #                     return self.Venue_in_to_out(id, venue)
-    #         except Exception:
-    #             return {"message": "Create did not work"}
 
     def venue_in_to_out(self, id: int, venue: VenueIn):
         old_data = venue.dict()
@@ -231,3 +208,26 @@ class VenueRepository:
     #         to_date=record[3],
     #         thoughts=record[4],
     #     )
+
+    def get_city_state(self):
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT  v.id,
+                                v.venue_name,
+                                v.city,
+                                v.state,
+                                v.zip,
+                        """
+                    )
+                    try:
+                        results = []
+                        for row in cur.fetchall():
+                            record = {}
+                            for i, column in enumerate(cur.description):
+                                record[column.name] = row[i]
+                            results.append(record)
+                        return results
+                    except Exception as e:
+                        return {"message": "Could not get venues in cities and states"}
