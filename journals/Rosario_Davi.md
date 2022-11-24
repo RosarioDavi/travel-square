@@ -1,3 +1,9 @@
+11/23/2022
+Today I worked on creating "get_city_state". I was able to code out the function, however had a question to ask the group but with the social hack hour I ran out of time. I plan to continue my work after the thanksginving break. Hoping to feel refreshed and ready to power through the next, last, few weeks.
+
+11/22/2022
+Today I did some paired programing with Muhammad. We worked on venues and cleaning up the code I had written. We got the get to work. I then went to work on update venue. I wasnt able to fully get it working so I taged Muhammad back in, however we could not figure it out. 
+
 11/21/2022
 Today I missed the standup with the group. There was a power outage in my area and I was not able to log on until a few hours after. The group filled me in on trying to get fastAPI up and running. I continued my work on the venues section and fixed out some bugs and added venue to the main.py file. I was able to work out the bugs within my code and in docker. I am able to see venues creat/delete/post and get in fastAPI localhost8000/docs.
 
