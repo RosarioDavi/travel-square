@@ -1,3 +1,8 @@
+11/23/22
+- after pushing my changes this morning, I realized that my reviews methods are showing up on FastAPI. I'm not exactly sure what caused the changed, but it may be due to updating main.py to include the reviews router after speaking to the team
+- after discussing with Muhammad, I added the placeholder for the get_all_reviews method so that we will be able to filter by city and state later in queries and routers folders
+- I feel that I am understanding queries and routers much better today than I did earlier this week
+
 11/22/22
 - still not feeling well
 - talked to Lena and gained a much better understanding what needs to be done
