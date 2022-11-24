@@ -9,6 +9,13 @@ from datetime import date
 router = APIRouter()
 
 
+@router.get("/api/reviews/", response_model=ReviewOut)
+def get_all_reviews(
+    repo: ReviewQueries = Depends(),
+):
+    return repo.get_all_reviews()
+
+
 @router.post("/api/reviews/", response_model=ReviewOut)
 def create_review(
     review: ReviewIn,
