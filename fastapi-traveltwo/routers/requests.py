@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, Response
-from typing import List, Optional, Union
+from typing import Optional, Union
 from queries.requests import (
     Error,
     RequestIn,
     RequestQueries,
     RequestOut,
+    RequestOutWithUsername,
     CommentIn,
     CommentOut,
     CommentQueries
@@ -17,7 +18,7 @@ router = APIRouter()
 
 
 
-@router.post("/api/requests", response_model=Union[RequestOut, Error])
+@router.post("/api/requests/", response_model=Union[RequestOut, Error])
 def create_requests(
     request: RequestIn,
     repo: RequestQueries = Depends(),
@@ -26,14 +27,14 @@ def create_requests(
     return repo.create(request, created_at)
 
 
-@router.get("/requests", response_model=Union[List[RequestOut], Error])
+@router.get("/api/requests/", response_model=list[RequestOutWithUsername])
 def get_all(
     repo: RequestQueries = Depends(),
 ):
     return repo.get_all()
 
 
-@router.put("/api/requests/{request_id}", response_model=Union[RequestOut, Error])
+@router.put("/api/requests/{request_id}/", response_model=Union[RequestOut, Error])
 def update_request(
     request_id: int,
     vacation: RequestIn,
@@ -42,7 +43,7 @@ def update_request(
     return repo.update(request_id, vacation)
 
 
-@router.delete("/api/requests/{request_id}", response_model=bool)
+@router.delete("/api/requests/{request_id}/", response_model=bool)
 def delete_request(
     request_id: int,
     repo: RequestQueries = Depends(),
@@ -50,7 +51,7 @@ def delete_request(
     return repo.delete(request_id)
 
 
-@router.get("/api/requests/{request_id}", response_model=Optional[RequestOut])
+@router.get("/api/requests/{request_id}/", response_model=Optional[RequestOut])
 def get_one_request(
     request_id: int,
     repo: RequestQueries = Depends(),
@@ -59,7 +60,7 @@ def get_one_request(
     return requests
 
 
-@router.post("/api/comments", response_model=Union[CommentOut, Error])
+@router.post("/api/comments/", response_model=Union[CommentOut, Error])
 def create_comments(
     comments: CommentIn,
     repo: CommentQueries = Depends(),
@@ -67,14 +68,14 @@ def create_comments(
     return repo.create(comments)
 
 
-@router.get("/api/requests/{request_id}/comments", response_model=Union[List[CommentOut], Error])
+@router.get("/api/requests/{request_id}/comments/", response_model=Union[list[CommentOut], Error])
 def get_all(
     repo: CommentQueries = Depends(),
 ):
     return repo.get_all()
 
 
-@router.put("/api/comments/{comment_id}", response_model=Union[CommentOut, Error])
+@router.put("/api/comments/{comment_id}/", response_model=Union[CommentOut, Error])
 def update_comment(
     comment_id: int,
     comment: CommentIn,
@@ -83,7 +84,7 @@ def update_comment(
     return repo.update(comment_id, comment)
 
 
-@router.delete("/api/comments/{comment_id}", response_model=bool)
+@router.delete("/api/comments/{comment_id}/", response_model=bool)
 def delete_comment(
     comment_id: int,
     repo: CommentQueries = Depends(),
@@ -91,7 +92,7 @@ def delete_comment(
     return repo.delete(comment_id)
 
 
-@router.get("/api/comments/{comment_id}", response_model=Optional[CommentOut])
+@router.get("/api/comments/{comment_id}/", response_model=Optional[CommentOut])
 def get_one_comment(
     comment_id: int,
     response: Response,

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
+from typing import Optional, Union
 from datetime import date
 from queries.pool import pool
 
@@ -19,6 +19,14 @@ class RequestOut(BaseModel):
     txt: str
     created_at: date
 
+
+class RequestOutWithUsername(BaseModel):
+    id: int
+    username: str
+    txt: str
+    created_at: date
+
+
 class CommentIn(BaseModel):
     request_id: int
     commenter: int
@@ -32,8 +40,9 @@ class CommentOut(BaseModel):
     txt: str
     created_at: date
 
+
 class RequestQueries:
-    def get_all(self) -> Union[Error, List[RequestOut]]:
+    def get_all(self) -> list[RequestOutWithUsername]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -45,29 +54,26 @@ class RequestQueries:
                                 r.created_at
                         FROM requests r
                         INNER JOIN accounts a
-                            ON (r.requester = a.id)
-                        ORDER BY created_at;
+                            ON (a.id = r.requester)
+                        ORDER BY r.created_at;
                         """
                     )
-
-                    return [
-                        RequestOut(
-                            id=record[0],
-                            requester=record[1],
-                            txt=record[2],
-                            created_at = record[3]
-                        )
-                        for record in cur
-                    ]
+                    results = []
+                    for row in cur.fetchall():
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                        results.append(record)
+                    return results
         except Exception as e:
             print(e)
-            return {"message": "Could not get all requests"}
+            return {"message": "Could not get all Requests"}
 
     def get_one(self, requests_id: int) -> Optional[RequestOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
-                    result = cur.execute(
+                    cur.execute(
                         """
                         SELECT id
                              , requester
@@ -78,10 +84,13 @@ class RequestQueries:
                         """,
                         [requests_id]
                     )
-                    record = result.fetchone()
-                    if record is None:
-                        return None
-                    return self.record_to_requests_out(record)
+                    record = None
+                    row = cur.fetchone()
+                    if row is not None:
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                    return record
         except Exception as e:
             print(e)
             return {"message": "Could not get that Request"}
@@ -104,8 +113,13 @@ class RequestQueries:
                             created_at
                         ]
                     )
-                    id = result.fetchone()[0]
-                    return self.requests_in_to_out(id, requests)
+                    record = None
+                    row = cur.fetchone()
+                    if row is not None:
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                    return record
 
         except Exception as e:
             print(e)
@@ -113,45 +127,45 @@ class RequestQueries:
 
 
 
-    def update(self, requests_id: int, requests: RequestIn) -> Union[RequestOut, Error]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as cur:
-                    cur.execute(
-                        """
-                        UPDATE requests
-                        SET requester = %s
-                          , txt = %s
-                          , created_at = %s
-                        WHERE id = %s
-                        """,
-                        [
-                            requests.requester,
-                            requests.txt,
-                            requests.created_at,
-                            requests_id,
-                        ]
-                    )
-                    return self.requests_in_to_out(requests_id, requests)
-        except Exception as e:
-            print(e)
-            return {"message": "Could not update that request"}
+    # def update(self, requests_id: int, requests: RequestIn) -> Union[RequestOut, Error]:
+    #     try:
+    #         with pool.connection() as conn:
+    #             with conn.cursor() as cur:
+    #                 cur.execute(
+    #                     """
+    #                     UPDATE requests
+    #                     SET requester = %s
+    #                       , txt = %s
+    #                       , created_at = %s
+    #                     WHERE id = %s
+    #                     """,
+    #                     [
+    #                         requests.requester,
+    #                         requests.txt,
+    #                         requests.created_at,
+    #                         requests_id,
+    #                     ]
+    #                 )
+    #                 return self.requests_in_to_out(requests_id, requests)
+    #     except Exception as e:
+    #         print(e)
+    #         return {"message": "Could not update that request"}
 
-    def delete(self, requests_id: int) -> bool:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as cur:
-                    cur.execute(
-                        """
-                        DELETE FROM requests
-                        WHERE id = %s
-                        """,
-                        [requests_id]
-                    )
-                    return True
-        except Exception as e:
-            print(e)
-            return False
+    # def delete(self, requests_id: int) -> bool:
+    #     try:
+    #         with pool.connection() as conn:
+    #             with conn.cursor() as cur:
+    #                 cur.execute(
+    #                     """
+    #                     DELETE FROM requests
+    #                     WHERE id = %s
+    #                     """,
+    #                     [requests_id]
+    #                 )
+    #                 return True
+    #     except Exception as e:
+    #         print(e)
+    #         return False
 
     def requests_in_to_out(self, id: int, request: RequestIn):
             old_data = request.dict()
@@ -167,7 +181,7 @@ class RequestQueries:
 
 
 class CommentQueries:
-    def get_all(self) -> Union[Error, List[CommentOut]]:
+    def get_all(self) -> Union[Error, list[CommentOut]]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
