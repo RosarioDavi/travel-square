@@ -1,3 +1,6 @@
+November 23, 2022
+Today I worked on adding the innerjoin for requests and comments. After adding the innerjoins I had some issue with creating and getting all of my requests to show up. I pair programmed with Muhammad to debug my issues and got both of the create and get all to work. I tried implementing the innerjoins for my comments as well. The create comment worked out fine. However, I am still struggling to have all my comments to show up because there is a comments id for each comment but the comment is correlated with a particular request with an id. My goal is to get all my comments to show up for the single request post by the id of which still needs to be worked on.
+
 November 22, 2022
 Today I worked on finishing up my comments queries and routers. After our stand up with the group, we mapped out all the endpoints and talked about it. This was helpful for me to see what correlations I needed to make. For instance, every comment goes on one request so I made sure to get add that to the api endpoints. I cleaned up my code for requests and tested to make sure that all of comments worked. For tomorrow, I will work on adding the Innerjoin of the tables of which I forgot to do for today.
 
