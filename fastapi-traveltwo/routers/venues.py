@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Response, Request
 from typing import Optional
 from typing import Union
-from queries.venues import VenueIn, VenueRepository, VenueOut, Error, CategoryIn, CategoryOut, CategoryRepository
+from queries.venues import VenueIn, VenueOut, VenueCompleteOut, VenueRepository, Error, CategoryIn, CategoryOut, CategoryRepository
 
 
 router  = APIRouter()
@@ -30,11 +30,11 @@ def create_venues(
     approved = False
     return repo.create(venue, approved)
 
-@router.get("/api/venues/",)
-def get_all(
+@router.get("/api/venues/", response_model=list[VenueCompleteOut])
+def get_all_complete(
     repo: VenueRepository = Depends(),
 ):
-    return repo.get_all_with_names()
+    return repo.get_all_complete()
 
 @router.put("/api/venues/{venue_id}", response_model=Union[VenueOut, Error])
 def update_venue(
@@ -57,7 +57,7 @@ def get_one_venue(
     response: Response,
     repo: VenueRepository = Depends(),
 ) -> VenueOut:
-    venue = repo.get_one(venue_id)
+    venue = repo.get_one_venue(venue_id)
     if venue is None:
         response.status_code = 404
     return venue

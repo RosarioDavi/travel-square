@@ -42,6 +42,25 @@ class VenueOut(BaseModel):
     approved: bool
 
 
+class VenueCompleteOut(BaseModel):
+    id: int
+    venue_name: str
+    num_and_street: str
+    city: str
+    state: str
+    zip: str
+    category_id: int
+    category_name: str
+    description_text: str
+    added_by_user_id: int
+    added_by_username: str
+    added_by_fullname: str
+    added_by_email: str
+    added_by_avatar: str | None
+    added_by_is_admin: bool
+    approved: bool
+
+
 class CategoryRepository:
     def create(self, category: CategoryIn) -> CategoryOut:
         with pool.connection() as conn:
@@ -143,6 +162,7 @@ class VenueRepository:
                           , category_id = %s
                           , description_text = %s
                           , added_by = %s
+                          , approved = %s
                         WHERE id = %s
                         """,
                         [
@@ -154,6 +174,8 @@ class VenueRepository:
                             venue.category_id,
                             venue.description_text,
                             venue.added_by,
+                            True,
+                            venue_id
                         ]
                     )
                     return self.venue_in_to_out(venue_id, venue)
@@ -161,7 +183,39 @@ class VenueRepository:
             print(e)
             return {"message": "Could not update that venue"}
 
-    def get_all(self):
+    def get_one_venue(self, venue_id: int) -> Optional[VenueOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT id,
+                            venue_name,
+                            num_and_street,
+                            city,
+                            state,
+                            zip,
+                            category_id,
+                            description_text,
+                            added_by,
+                            approved
+                        FROM venues
+                        WHERE id = %s
+                        """,
+                        [venue_id]
+                    )
+                    record = None
+                    row = db.fetchone()
+                    if row is not None:
+                        record = {}
+                        for i, column in enumerate(db.description):
+                            record[column.name] = row[i]
+                    return record
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that venue"}
+
+    def get_all_complete(self) -> list[VenueCompleteOut]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -172,9 +226,15 @@ class VenueRepository:
                             v.city,
                             v.state,
                             v.zip,
-                            c.category_name,
+                            c.id AS category_id,
+                            c.category_name AS category_name,
                             v.description_text,
-                            a.username AS added_by_user,
+                            a.id AS added_by_user_id,
+                            a.username AS added_by_username,
+                            a.full_name AS added_by_fullname,
+                            a.email AS added_by_email,
+                            a.avatar AS added_by_avatar,
+                            a.is_admin AS added_by_is_admin,
                             v.approved
                     FROM venues v
                     INNER JOIN categories c
@@ -198,7 +258,7 @@ class VenueRepository:
 
     def venue_in_to_out(self, id: int, venue: VenueIn):
         old_data = venue.dict()
-        return VenueOut(id=id, **old_data)
+        return VenueOut(id=id, **old_data, approved=True)
 
     # def record_to_venue_out(self, record):
     #     return VenueOut(
