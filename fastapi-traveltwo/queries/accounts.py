@@ -126,7 +126,14 @@ class AccountQueries:
                 cur.execute(
                     """
                     INSERT INTO accounts
-                        (username, full_name, email, hashed_password, avatar, is_admin)
+                        (
+                            username,
+                            full_name,
+                            email,
+                            hashed_password,
+                            avatar,
+                            is_admin
+                        )
                     VALUES (%s, %s, %s, %s, %s, %s)
                     RETURNING id,
                         username,
