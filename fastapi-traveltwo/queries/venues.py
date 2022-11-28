@@ -42,7 +42,27 @@ class VenueOut(BaseModel):
     approved: bool
 
 
+class VenueCompleteOut(BaseModel):
+    id: int
+    venue_name: str
+    num_and_street: str
+    city: str
+    state: str
+    zip: str
+    category_id: int
+    category_name: str
+    description_text: str
+    added_by_user_id: int
+    added_by_username: str
+    added_by_fullname: str
+    added_by_email: str
+    added_by_avatar: str | None
+    added_by_is_admin: bool
+    approved: bool
+
+
 class CategoryRepository:
+    # Admin
     def create(self, category: CategoryIn) -> CategoryOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -62,6 +82,7 @@ class CategoryRepository:
                         record[column.name] = row[i]
                 return record
 
+    # User
     def get_all_categories(self) -> list[CategoryOut]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -81,6 +102,7 @@ class CategoryRepository:
                 return results
 
 class VenueRepository:
+    # User
     def create(self, venue: VenueIn, approved: bool) -> VenueOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -112,6 +134,7 @@ class VenueRepository:
                         record[column.name] = row[i]
                 return record
 
+    # Admin
     def delete(self, venue_id: int) -> bool:
             try:
                 with pool.connection() as conn:
@@ -128,6 +151,7 @@ class VenueRepository:
                 print(e)
                 return False
 
+    # Admin
     def update(self, venue_id: int, venue: VenueIn) -> Union[VenueOut, Error]:
         try:
             with pool.connection() as conn:
@@ -143,6 +167,7 @@ class VenueRepository:
                           , category_id = %s
                           , description_text = %s
                           , added_by = %s
+                          , approved = %s
                         WHERE id = %s
                         """,
                         [
@@ -154,6 +179,8 @@ class VenueRepository:
                             venue.category_id,
                             venue.description_text,
                             venue.added_by,
+                            True,
+                            venue_id
                         ]
                     )
                     return self.venue_in_to_out(venue_id, venue)
@@ -161,26 +188,47 @@ class VenueRepository:
             print(e)
             return {"message": "Could not update that venue"}
 
-    def get_all(self):
+    # Admin and Maybe User
+    def get_one_venue(self, venue_id: int) -> Optional[VenueOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT id,
+                            venue_name,
+                            num_and_street,
+                            city,
+                            state,
+                            zip,
+                            category_id,
+                            description_text,
+                            added_by,
+                            approved
+                        FROM venues
+                        WHERE id = %s
+                        """,
+                        [venue_id]
+                    )
+                    record = None
+                    row = db.fetchone()
+                    if row is not None:
+                        record = {}
+                        for i, column in enumerate(db.description):
+                            record[column.name] = row[i]
+                    return record
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that venue"}
+
+    # Admin
+    def get_all(self) -> list[VenueOut]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT v.id,
-                            v.venue_name,
-                            v.num_and_street,
-                            v.city,
-                            v.state,
-                            v.zip,
-                            c.category_name,
-                            v.description_text,
-                            a.username AS added_by_user,
-                            v.approved
+                    SELECT *
                     FROM venues v
-                    INNER JOIN categories c
-                        ON (c.id = v.category_id)
-                    INNER JOIN accounts a
-                        ON (a.id = v.added_by)
                     ORDER BY venue_name
                     """
                 )
@@ -195,10 +243,53 @@ class VenueRepository:
                 except Exception as e:
                     return {"message": "Could not get all Venues"}
 
+    # User
+    def get_all_complete_approved(self, state: str, city: str) -> list[VenueCompleteOut]:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT v.id,
+                            v.venue_name,
+                            v.num_and_street,
+                            v.city,
+                            v.state,
+                            v.zip,
+                            c.id AS category_id,
+                            c.category_name AS category_name,
+                            v.description_text,
+                            a.id AS added_by_user_id,
+                            a.username AS added_by_username,
+                            a.full_name AS added_by_fullname,
+                            a.email AS added_by_email,
+                            a.avatar AS added_by_avatar,
+                            a.is_admin AS added_by_is_admin,
+                            v.approved
+                    FROM venues v
+                    INNER JOIN categories c
+                        ON (c.id = v.category_id)
+                    INNER JOIN accounts a
+                        ON (a.id = v.added_by)
+                    WHERE v.approved IS TRUE AND v.state = %s AND v.city = %s
+                    ORDER BY venue_name
+                    """,
+                    [state, city]
+                )
+                try:
+                    results = []
+                    for row in cur.fetchall():
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                        results.append(record)
+                    return results
+                except Exception as e:
+                    return {"message": "Could not get all Venues"}
 
+    # Helper for update
     def venue_in_to_out(self, id: int, venue: VenueIn):
         old_data = venue.dict()
-        return VenueOut(id=id, **old_data)
+        return VenueOut(id=id, **old_data, approved=True)
 
     # def record_to_venue_out(self, record):
     #     return VenueOut(
@@ -208,26 +299,3 @@ class VenueRepository:
     #         to_date=record[3],
     #         thoughts=record[4],
     #     )
-
-    def get_city_state(self):
-            with pool.connection() as conn:
-                with conn.cursor() as cur:
-                    cur.execute(
-                        """
-                        SELECT  v.id,
-                                v.venue_name,
-                                v.city,
-                                v.state,
-                                v.zip,
-                        """
-                    )
-                    try:
-                        results = []
-                        for row in cur.fetchall():
-                            record = {}
-                            for i, column in enumerate(cur.description):
-                                record[column.name] = row[i]
-                            results.append(record)
-                        return results
-                    except Exception as e:
-                        return {"message": "Could not get venues in cities and states"}
