@@ -16,11 +16,13 @@ from queries.accounts import (
     AccountIn,
     AccountOut,
     AccountsOut,
+    AccountOutWithoutPassword,
     AccountQueries,
     DuplicateAccountError
 )
 
 router = APIRouter()
+
 
 class AccountForm(BaseModel):
     username: str
@@ -41,20 +43,13 @@ not_authorized = HTTPException(
     headers={"WWW-Authenticate": "Bearer"},
 )
 
+
 @router.get("/api/accounts/", response_model=AccountsOut)
 def get_all_accounts(repo: AccountQueries = Depends()):
     return {
         "accounts": repo.get_all_accounts()
     }
 
-# @router.get("/api/accounts/search/{keyword}", response_model=AccountsOut)
-# def get_accounts_keyword(
-#     keyword: str,
-#     repo: AccountQueries = Depends()
-# ):
-#     return {
-#         "accounts": repo.search_accounts(keyword)
-#     }
 
 @router.get("/api/accounts/users/{username}", response_model=AccountOut)
 def get_account_with_user(
@@ -67,6 +62,7 @@ def get_account_with_user(
         response.status_code = 404
     return account
 
+
 @router.get("/api/accounts/{account_id}", response_model=AccountOut)
 def get_account(
     account_id: int,
@@ -78,6 +74,7 @@ def get_account(
     if account is None:
         response.status_code = 404
     return account
+
 
 @router.post("/api/accounts/", response_model=AccountToken | HttpError)
 async def create_account(
@@ -103,6 +100,7 @@ async def create_account(
     token = await authenticator.login(response, request, form, accounts)
     return AccountToken(account=account, **token.dict())
 
+
 @router.delete("/api/accounts/{account_id}", response_model=AccountOut)
 def delete_account(
     account_id: int,
@@ -125,6 +123,14 @@ async def get_token(
         }
 
 
+# @router.get("/api/accounts/search/{keyword}", response_model=AccountsOut)
+# def get_accounts_keyword(
+#     keyword: str,
+#     repo: AccountQueries = Depends()
+# ):
+#     return {
+#         "accounts": repo.search_accounts(keyword)
+#     }
 
 
 # @router.delete("/api/sessions/{account_id}", response_model=bool)
