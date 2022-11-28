@@ -187,22 +187,22 @@ class RequestQueries:
 
 
 class CommentQueries:
-    def get_all(self) -> Union[list[CommentOut],Error]:
+    def get_all(self, request_id: int) -> Union[list[CommentOutWithUsername],Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        SELECT c.id, r.id, a.username, c.txt, c.created_at
+                        SELECT c.id, r.id AS request_id, a.username AS username, c.txt AS txt, c.created_at AS created_at
                         FROM comments c
                         INNER JOIN requests r
-                            ON (r.id = c.id)
+                            ON (r.id = c.request_id)
                         INNER JOIN accounts a
-                            ON (c.id = a.id)
-                        WHERE r.id = %s,
+                            ON (c.commenter = a.id)
+                        WHERE r.id = %s
                         ORDER BY r.created_at;
                         """,
-                        [id]
+                        [request_id]
                     )
 
                     results = []
@@ -216,30 +216,33 @@ class CommentQueries:
             print(e)
             return {"message": "Could not get all Comments"}
 
-    def get_one(self, comments_id: int) -> Optional[CommentOut]:
+    def get_one(self, comments_id: int) -> Optional[CommentOutWithUsername]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
-                    result = cur.execute(
+                    cur.execute(
                         """
                         SELECT c.id
-                             , r.id
-                             , a.username
-                             , c.txt
-                             , c.created_at
+                             , r.id AS request_id
+                             , a.username AS username
+                             , c.txt AS txt
+                             , c.created_at AS created_at
                         FROM comments c
                         INNER JOIN requests r
-                            ON (r.id = c.id)
+                            ON (r.id = c.request_id)
                         INNER JOIN accounts a
-                            ON (c.id = a.id)
+                            ON (c.commenter = a.id)
                         WHERE id = %s
                         """,
                         [comments_id]
                     )
-                    record = result.fetchone()
-                    if record is None:
-                        return None
-                    return self.record_to_comments_out(record)
+                    record = None
+                    row = cur.fetchone()
+                    if row is not None:
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                    return record
         except Exception as e:
             print(e)
             return {"message": "Could not get that Comment"}

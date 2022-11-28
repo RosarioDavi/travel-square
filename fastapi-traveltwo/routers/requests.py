@@ -72,9 +72,10 @@ def create_comments(
 
 @router.get("/api/requests/{request_id}/comments/", response_model=Union[list[CommentOutWithUsername], Error])
 def get_all(
+    request_id: int,
     repo: CommentQueries = Depends(),
 ):
-    return repo.get_all()
+    return repo.get_all(request_id)
 
 
 @router.put("/api/comments/{comment_id}/", response_model=Union[CommentOut, Error])
@@ -94,13 +95,13 @@ def delete_comment(
     return repo.delete(comment_id)
 
 
-@router.get("/api/comments/{comment_id}/", response_model=Optional[CommentOut])
-def get_one_comment(
-    comment_id: int,
+@router.get("/api/comments/{comment_id}/", response_model=CommentOutWithUsername)
+def get_one(
+    comments_id: int,
     response: Response,
     repo: CommentQueries = Depends(),
-) -> CommentOut:
-    comments = repo.get_one(comment_id)
+) -> CommentOutWithUsername:
+    comments = repo.get_one(comments_id)
     if comments is None:
         response.status_code = 404
     return comments
