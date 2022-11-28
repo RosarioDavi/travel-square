@@ -62,6 +62,7 @@ class VenueCompleteOut(BaseModel):
 
 
 class CategoryRepository:
+    # Admin
     def create(self, category: CategoryIn) -> CategoryOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -81,6 +82,7 @@ class CategoryRepository:
                         record[column.name] = row[i]
                 return record
 
+    # User
     def get_all_categories(self) -> list[CategoryOut]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -100,6 +102,7 @@ class CategoryRepository:
                 return results
 
 class VenueRepository:
+    # User
     def create(self, venue: VenueIn, approved: bool) -> VenueOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -131,6 +134,7 @@ class VenueRepository:
                         record[column.name] = row[i]
                 return record
 
+    # Admin
     def delete(self, venue_id: int) -> bool:
             try:
                 with pool.connection() as conn:
@@ -147,6 +151,7 @@ class VenueRepository:
                 print(e)
                 return False
 
+    # Admin
     def update(self, venue_id: int, venue: VenueIn) -> Union[VenueOut, Error]:
         try:
             with pool.connection() as conn:
@@ -183,6 +188,7 @@ class VenueRepository:
             print(e)
             return {"message": "Could not update that venue"}
 
+    # Admin and Maybe User
     def get_one_venue(self, venue_id: int) -> Optional[VenueOut]:
         try:
             with pool.connection() as conn:
@@ -215,7 +221,30 @@ class VenueRepository:
             print(e)
             return {"message": "Could not get that venue"}
 
-    def get_all_complete(self) -> list[VenueCompleteOut]:
+    # Admin
+    def get_all(self) -> list[VenueOut]:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT *
+                    FROM venues v
+                    ORDER BY venue_name
+                    """
+                )
+                try:
+                    results = []
+                    for row in cur.fetchall():
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                        results.append(record)
+                    return results
+                except Exception as e:
+                    return {"message": "Could not get all Venues"}
+
+    # User
+    def get_all_complete_approved(self) -> list[VenueCompleteOut]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -241,6 +270,7 @@ class VenueRepository:
                         ON (c.id = v.category_id)
                     INNER JOIN accounts a
                         ON (a.id = v.added_by)
+                    WHERE v.approved IS TRUE
                     ORDER BY venue_name
                     """
                 )
@@ -255,7 +285,7 @@ class VenueRepository:
                 except Exception as e:
                     return {"message": "Could not get all Venues"}
 
-
+    # Helper for update
     def venue_in_to_out(self, id: int, venue: VenueIn):
         old_data = venue.dict()
         return VenueOut(id=id, **old_data, approved=True)
@@ -269,6 +299,7 @@ class VenueRepository:
     #         thoughts=record[4],
     #     )
 
+    # User
     def get_city_state(self):
             with pool.connection() as conn:
                 with conn.cursor() as cur:
