@@ -1,18 +1,20 @@
-function Construct(props) {
+import React from "react";
 
-    const pad2 = num => String(num).padStart(2, '0');
 
-    return (
-        <div className="App">
-            <header className="App-header">
-                <h1>Under construction</h1>
-                <h2>Coming on (or before)</h2>
-                <h2>{props.info.year}-{pad2(props.info.month)}-{pad2(props.info.day)}</h2>
-                <h2>by or <strong>WELL BEFORE</strong> {pad2(props.info.hour)}:{pad2(props.info.min)}</h2>
-                
-            </header>
+
+function MainPage() {
+  return (
+    <div className="">
+        <div className="px-4 py-5 my-5 text-center bg-success rounded-pill text-white">
+          <h1 className="display-5 fw-bold">Travel2</h1>
+          <div className="col-lg-6 mx-auto">
+            <p className="lead mb-4">
+              Time to travel
+            </p>
+          </div>
         </div>
-    )
+    </div>
+  );
 }
 
-export default Construct;
+export default MainPage;
