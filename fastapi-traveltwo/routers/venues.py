@@ -52,11 +52,13 @@ def get_all(
     return repo.get_all()
 
 # User
-@router.get("/api/venues/approved/", response_model=list[VenueCompleteOut])
+@router.get("/api/venues/{state}/{city}", response_model=list[VenueCompleteOut])
 def get_all_approved(
+    state: str,
+    city: str,
     repo: VenueRepository = Depends (),
 ):
-    return repo.get_all_complete_approved()
+    return repo.get_all_complete_approved(state, city)
 
 # Admin
 @router.put("/api/venues/{venue_id}", response_model=Union[VenueOut, Error])
@@ -74,13 +76,3 @@ def delete_venue(
     repo: VenueRepository = Depends(),
 ) -> bool:
     return repo.delete(venue_id)
-
-# User
-@router.get("api/venues/{state}/{city}/")
-def get_all_venues_city_state(
-    state: str,
-    city: str,
-    response: Response,
-    repo: VenueRepository = Depends(),
-):
-    return repo.get_all_venues_city_state(state, city)

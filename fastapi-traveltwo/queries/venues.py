@@ -244,7 +244,7 @@ class VenueRepository:
                     return {"message": "Could not get all Venues"}
 
     # User
-    def get_all_complete_approved(self) -> list[VenueCompleteOut]:
+    def get_all_complete_approved(self, state: str, city: str) -> list[VenueCompleteOut]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -270,9 +270,10 @@ class VenueRepository:
                         ON (c.id = v.category_id)
                     INNER JOIN accounts a
                         ON (a.id = v.added_by)
-                    WHERE v.approved IS TRUE
+                    WHERE v.approved IS TRUE AND v.state = %s AND v.city = %s
                     ORDER BY venue_name
-                    """
+                    """,
+                    [state, city]
                 )
                 try:
                     results = []
@@ -298,38 +299,3 @@ class VenueRepository:
     #         to_date=record[3],
     #         thoughts=record[4],
     #     )
-
-    # User
-    def get_city_state(self):
-            with pool.connection() as conn:
-                with conn.cursor() as cur:
-                    cur.execute(
-                        """
-                        SEt     v.id =%s
-                                v.venue_name = %s
-                                v.city,
-                                v.state,
-                                v.zip,
-                        WHERE id = %s
-                        """,
-                        [
-                            venue.id,
-                            venue.venue_name,
-                            venue.city,
-                            venue.state,
-                            venue.zip,
-                            venue.category_id,
-                            venue.description_text,
-                            venue.added_by,
-                        ]
-                    )
-                    try:
-                        results = []
-                        for row in cur.fetchall():
-                            record = {}
-                            for i, column in enumerate(cur.description):
-                                record[column.name] = row[i]
-                            results.append(record)
-                        return results
-                    except Exception as e:
-                        return {"message": "Could not get venues in cities and states"}
