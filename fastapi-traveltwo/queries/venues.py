@@ -209,17 +209,28 @@ class VenueRepository:
     #         thoughts=record[4],
     #     )
 
-    def get_city_state(self):
+    def get_city_state(self,venue):
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        SELECT  v.id,
-                                v.venue_name,
+                        SEt     v.id =%s
+                                v.venue_name = %s
                                 v.city,
                                 v.state,
                                 v.zip,
-                        """
+                        WHERE id = %s
+                        """,
+                        [
+                            venue.id,
+                            venue.venue_name,
+                            venue.city,
+                            venue.state,
+                            venue.zip,
+                            venue.category_id,
+                            venue.description_text,
+                            venue.added_by,
+                        ]
                     )
                     try:
                         results = []
