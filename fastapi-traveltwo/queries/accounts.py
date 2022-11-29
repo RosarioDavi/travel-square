@@ -26,7 +26,7 @@ class AccountOut(BaseModel):
     is_admin: bool
 
 
-class AccountOutWithoutPassword(BaseModel):
+class AccountWithoutPassword(BaseModel):
     id: int
     username: str
     full_name: str
@@ -35,12 +35,8 @@ class AccountOutWithoutPassword(BaseModel):
     is_admin: bool
 
 
-class AccountsOut(BaseModel):
-    accounts: list[AccountOut]
-
-
 class AccountQueries:
-    def get_all_accounts(self) -> AccountsOut:
+    def get_all_accounts(self) -> list[AccountWithoutPassword]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -49,7 +45,6 @@ class AccountQueries:
                         username,
                         full_name,
                         email,
-                        hashed_password,
                         avatar,
                         is_admin
                     FROM accounts
@@ -64,7 +59,7 @@ class AccountQueries:
                     results.append(record)
                 return results
 
-    def get(self, id: int) -> AccountOut:
+    def get_another_account(self, account_id: int) -> AccountWithoutPassword:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -73,13 +68,12 @@ class AccountQueries:
                         username,
                         full_name,
                         email,
-                        hashed_password,
                         avatar,
                         is_admin
                     FROM accounts
                     WHERE id = %s
                     """,
-                    [id],
+                    [account_id],
                 )
                 record = None
                 row = cur.fetchone()
