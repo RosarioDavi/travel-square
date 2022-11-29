@@ -42,16 +42,14 @@ not_authorized = HTTPException(
     headers={"WWW-Authenticate": "Bearer"},
 )
 
-
+# User finding a lot of users
 @router.get("/api/accounts/", response_model=list[AccountWithoutPassword])
 def get_all_accounts(repo: AccountQueries = Depends()):
-    return {
-        "accounts": repo.get_all_accounts()
-    }
+    return repo.get_all_accounts()
 
-
+# User finding another user
 @router.get("/api/accounts/users/{account_id}", response_model=AccountWithoutPassword)
-def get_account_username(
+def get_another_account(
     account_id: int,
     response: Response,
     repo: AccountQueries = Depends()
