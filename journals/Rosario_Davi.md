@@ -1,3 +1,10 @@
+
+11/29/2022
+This morning I woke up to a message from Lena, she figured out why there was no formating. I forgot to add the bootstraps. She added it for me, once I pulled and merged the front page had some color and formating. Through out the day I worked on the front end stuff. I was able to add a placeholder card with two buttons "create a review" and View all Reviews. These buttons do not have any functionality yet. I began trying to work on the create review js file, after I wrote some code I realized that Class based function will not work and I need to go back and watch the video on hooks and refactor some code. 
+
+11/28/2022
+Today we were able to complete the backend for Venues.py. All routers and queries are working. Muhammad and I sketched out what the explore front end will look like. I began to review CarCar and start to copy soem react into our new project. I was only able to get a white page with the world Travel2 on it, no formating was coming out and I was unsure why.
+
 11/23/2022
 Today I worked on creating "get_city_state". I was able to code out the function, however had a question to ask the group but with the social hack hour I ran out of time. I plan to continue my work after the thanksginving break. Hoping to feel refreshed and ready to power through the next, last, few weeks.
 
