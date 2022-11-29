@@ -1,3 +1,8 @@
+11/28/22
+- gained a better understanding of what needs to be done for the review inner joins; reviews will have an inner joins with accounts and venues through their ids
+- using trial and error to test out the reviews code in FastAPI
+- ended the day with the reviews code still not working
+
 11/23/22
 - after pushing my changes this morning, I realized that my reviews methods are showing up on FastAPI. I'm not exactly sure what caused the changed, but it may be due to updating main.py to include the reviews router after speaking to the team
 - after discussing with Muhammad, I added the placeholder for the get_all_reviews method so that we will be able to filter by city and state later in queries and routers folders
