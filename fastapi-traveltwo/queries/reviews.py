@@ -47,7 +47,7 @@ class ReviewQueries:
             return {"message": "Could not get the review"}
 
 
-    def get_all_reviews_for_venue(self) -> List[ReviewOut]:
+    def get_all_reviews_for_venue(self, venue_id: int) -> List[ReviewOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -55,18 +55,24 @@ class ReviewQueries:
                         """
                         SELECT rev.id,
                                 v.venue_id,
+                                v.num_and_street,
+                                v.city,
+                                v.state,
+                                v.zip,
                                 rev.review_description,
                                 rev.rating,
                                 rev.picture,
-                                a.id,
+                                a.id AS added_by,
                                 rev.created_at
                         FROM reviews rev
                         INNER JOIN venues v
                             ON (v.id = rev.venue_id)
                         INNER JOIN accounts a
                             ON (a.id = rev.added_by)
+                        WHERE v.venue_id = %s
                         ORDER BY rev.created_at;
-                        """
+                        """,
+                        [venue_id]
                     )
 
                     results = []
@@ -80,7 +86,7 @@ class ReviewQueries:
             print(e)
             return {"message": "Could not get all reviews"}
 
-    def get_one_review_for_venue(self, id: int) -> ReviewOut:
+    def get_one_review_for_venue(self, venue_id: int) -> ReviewOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
