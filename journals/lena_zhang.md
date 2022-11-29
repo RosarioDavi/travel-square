@@ -1,3 +1,6 @@
+November 28, 2022
+Today I worked on getting all of comments to show up. I pair programmed with Muhammad and he was able to help me debug on what the issues were. Afterwards I retested my request and comments endpoints to make sure it all works. Afterwards, I moved onto starting the react frontend. Rosario and I were getting started on the react and we split up the work with him creating the main page while I worked on the navbar using bootstrap. I plan on reviewing react Hooks and functional components before I start on my components tomorrow.
+
 November 23, 2022
 Today I worked on adding the innerjoin for requests and comments. After adding the innerjoins I had some issue with creating and getting all of my requests to show up. I pair programmed with Muhammad to debug my issues and got both of the create and get all to work. I tried implementing the innerjoins for my comments as well. The create comment worked out fine. However, I am still struggling to have all my comments to show up because there is a comments id for each comment but the comment is correlated with a particular request with an id. My goal is to get all my comments to show up for the single request post by the id of which still needs to be worked on.
 
