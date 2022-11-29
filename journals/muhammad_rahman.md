@@ -1,3 +1,6 @@
+11/28
+I spent the bulk of today pair programming with Rosario, Lena, and Sarah. I was able to help Rosario and Lena get their final touches of their endpoints done and they have started on the frontend. Currently, I'm reading up on Redux and thinking of how we can incorporate the global state to hold the authentication tokens and logged in user information. Once this is solved, I will then start locking down certain endpoint access to either all authenticated users or those who are admin. This should be the most difficult part of the project yet, but I'm eager to learn as I go.
+
 11/23
 Today, I did some pair programming with Sarah and Lena. They were having issues with their create and get_all functions. I was able to debug with them and show them how you need to create new Base Models with Pydantic in order to make the validation pass. Good way for me to reinforce my own skills and lead. I started reading up on Redux and how we will have to store the current user's token and information persistently. That information will help us to lock down posting ability to just authenticated users. Tomorrow, I will take a deep dive into all the routes and queries we have, so that I can quickly see what can be done in preparation for the frontend work. Better to have more endpoints ready than to come to the frontend and realize we're missing something.
 
