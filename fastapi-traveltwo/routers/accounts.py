@@ -15,8 +15,7 @@ from pydantic import BaseModel
 from queries.accounts import (
     AccountIn,
     AccountOut,
-    AccountsOut,
-    AccountOutWithoutPassword,
+    AccountWithoutPassword,
     AccountQueries,
     DuplicateAccountError
 )
@@ -44,25 +43,26 @@ not_authorized = HTTPException(
 )
 
 
-@router.get("/api/accounts/", response_model=AccountsOut)
+@router.get("/api/accounts/", response_model=list[AccountWithoutPassword])
 def get_all_accounts(repo: AccountQueries = Depends()):
     return {
         "accounts": repo.get_all_accounts()
     }
 
 
-@router.get("/api/accounts/users/{username}", response_model=AccountOut)
-def get_account_with_user(
-    username: str,
+@router.get("/api/accounts/users/{account_id}", response_model=AccountWithoutPassword)
+def get_account_username(
+    account_id: int,
     response: Response,
     repo: AccountQueries = Depends()
 ):
-    account = repo.get_one_account(username)
+    account = repo.get_another_account(account_id)
     if account is None:
         response.status_code = 404
     return account
 
 
+# Current logged in user
 @router.get("/api/accounts/{account_id}", response_model=AccountOut)
 def get_account(
     account_id: int,
