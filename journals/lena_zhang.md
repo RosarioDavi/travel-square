@@ -1,3 +1,6 @@
+November, 29 2022
+Today I reviewed my navbar with Rosario and showed him how to input the bootstrap stylesheet. I spent the rest of the day learning React hooks. I got started on my create a request component and will continue to work on it tomorrow. I did get a CORS issue and will try to fix it tomorrow.
+
 November 28, 2022
 Today I worked on getting all of comments to show up. I pair programmed with Muhammad and he was able to help me debug on what the issues were. Afterwards I retested my request and comments endpoints to make sure it all works. Afterwards, I moved onto starting the react frontend. Rosario and I were getting started on the react and we split up the work with him creating the main page while I worked on the navbar using bootstrap. I plan on reviewing react Hooks and functional components before I start on my components tomorrow.
 
