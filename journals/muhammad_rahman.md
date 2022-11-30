@@ -1,3 +1,6 @@
+11/29
+I spent the bulk of today watching tutorials on frontend authentication and other use cases of Redux. I ran a few changes in the Account queries, where I removed the hashed_password property by using a new BaseModel that's solely used by users to find other users. The AccountOut's purpose is now only to be used by an authenticated user to get their own information, which will be stored in the Redux state. I also need to take a look into how accounts will be fetched on the frontend for users to see other users. This may overwhelm a user's resources when there are a lot of accounts in our application.
+
 11/28
 I spent the bulk of today pair programming with Rosario, Lena, and Sarah. I was able to help Rosario and Lena get their final touches of their endpoints done and they have started on the frontend. Currently, I'm reading up on Redux and thinking of how we can incorporate the global state to hold the authentication tokens and logged in user information. Once this is solved, I will then start locking down certain endpoint access to either all authenticated users or those who are admin. This should be the most difficult part of the project yet, but I'm eager to learn as I go.
 
