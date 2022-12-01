@@ -1,3 +1,6 @@
+11/30
+I had a really bad headache after doing two online assessments. I still going through the Redux tutorials and  trying to absorb the information I need. I added a login required property to most of the create functionalities for venues, reviews, and requests. It's commented out until Redux fully works. I will have to figure out how to check if current user is an admin, which may be similar to how it was done in the library project example. Instead of checking roles, it will check if is_admin is true. We may have to force in admin accounts through via SQL, because there is currently no way to make an admin account.
+
 11/29
 I spent the bulk of today watching tutorials on frontend authentication and other use cases of Redux. I ran a few changes in the Account queries, where I removed the hashed_password property by using a new BaseModel that's solely used by users to find other users. The AccountOut's purpose is now only to be used by an authenticated user to get their own information, which will be stored in the Redux state. I also need to take a look into how accounts will be fetched on the frontend for users to see other users. This may overwhelm a user's resources when there are a lot of accounts in our application.
 

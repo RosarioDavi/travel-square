@@ -11,6 +11,7 @@ from queries.requests import (
     CommentQueries,
     CommentOutWithUsername
 )
+from authenticator import authenticator
 from datetime import date
 
 
@@ -23,6 +24,7 @@ router = APIRouter()
 def create_requests(
     request: RequestIn,
     repo: RequestQueries = Depends(),
+    # account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     created_at = date.today()
     return repo.create(request, created_at)

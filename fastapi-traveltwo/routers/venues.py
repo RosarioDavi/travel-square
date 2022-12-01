@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Response, Request
 from typing import Optional
 from typing import Union
 from queries.venues import VenueIn, VenueOut, VenueCompleteOut, VenueRepository, Error, CategoryIn, CategoryOut, CategoryRepository
-
+from authenticator import authenticator
 
 router  = APIRouter()
 
@@ -28,6 +28,7 @@ def create_venues(
     request: Request,
     response: Response,
     repo: VenueRepository = Depends(),
+    # account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     approved = False
     return repo.create(venue, approved)

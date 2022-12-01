@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Response, Request
-from pydantic import BaseModel
 from queries.reviews import ReviewQueries, ReviewIn, ReviewOut
+from authenticator import authenticator
 from datetime import date
 
 
@@ -21,6 +21,7 @@ def create_review(
     review: ReviewIn,
     request: Request,
     repo: ReviewQueries = Depends(),
+    # account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     created_at = date.today()
     return repo.create_review(review, created_at)
