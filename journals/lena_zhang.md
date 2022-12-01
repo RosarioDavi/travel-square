@@ -1,4 +1,10 @@
-November, 29 2022
+December 1, 2022
+Today I started working on the react page to show all of the requests. During our stand up I was able to gain a better understanding of how all components will work together. Muhammad will be working on the Redux for accounts which will be put in a store. For all my requests, there will be a user associated to who made the request of which I can get from the stored id's of the specific user. Later today, I encountered a complicated merge conflict issue that I was struggling to resolve due to my overly stashed files I had uncommitted. At the end, I still couldn't merge my commits to main and had to make a new branch off main to begin with.
+
+November 30, 2022
+Today I worked on fixing the CORS issue I had by adding the origin and CORS middleware in main.py. I started reviewing React Hooks and Redux to get an understanding of the difference and which one I should be using. For now, I started the create request page using React Hooks.
+
+November 29, 2022
 Today I reviewed my navbar with Rosario and showed him how to input the bootstrap stylesheet. I spent the rest of the day learning React hooks. I got started on my create a request component and will continue to work on it tomorrow. I did get a CORS issue and will try to fix it tomorrow.
 
 November 28, 2022
