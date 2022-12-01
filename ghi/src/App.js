@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
+import ExplorePage from "./ExplorePage";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./Nav";
 import CreateRequest from "./CreateRequest.js";
-import Homepage from "./Homepage.js";
+import HomePage from "./HomePage.js";
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -34,10 +34,10 @@ function App() {
     <BrowserRouter>
       <Navigation />
       <div>
-        <ErrorNotification error={error} />
-        <Construct info={launch_info} />
+        {/* <ErrorNotification error={error} />
+        <Construct info={launch_info} /> */}
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/" element={<HomePage />} />
         </Routes>
         <Routes>
           <Route path="requests/" element={<CreateRequest />} />

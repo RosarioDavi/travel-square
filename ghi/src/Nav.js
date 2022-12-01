@@ -20,9 +20,7 @@ function Navigation() {
               <NavLink to="/"> Home</NavLink>
             </li>
             <li>
-              <a href="#" title="explore">
-                Explore
-              </a>
+              <NavLink to="/explore"> Explore </NavLink>
             </li>
             <li>
               <NavLink to="/requests"> Request</NavLink>
