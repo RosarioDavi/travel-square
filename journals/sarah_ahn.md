@@ -1,3 +1,8 @@
+11/30/22
+- started working on the front-end of reviews. I don't remember much about React hooks from the previous exploration so I spent part of the day refreshing my memory. I put placeholder code for now in ReviewForm.js
+- wanted to get some more practice with React and CSS so I looked through some Codepen styling submissions for inspiration. Lena and Rosario started on the home page, so I commented out their code and used a Codepen template that I liked. The template uses flexbox, which I need to read more about after I get my reviews front-end working
+- also need to learn about modals tomorrow to incorporate that on the reviews page
+
 11/29/22
 - changed various parts of the reviews queries code and got different errors, which I'm working through to understand. Got a validation error and a type error
 - pairprogrammed with Muhammad and found that I had the wrong except block on the get_all_reviews query
