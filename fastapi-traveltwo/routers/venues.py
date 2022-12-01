@@ -59,7 +59,7 @@ def get_all_approved(
     city: str,
     repo: VenueRepository = Depends (),
 ):
-    return repo.get_all_complete_approved(state, city)
+    return repo.get_all_complete(state, city)
 
 # Admin
 @router.put("/api/venues/{venue_id}", response_model=Union[VenueOut, Error])
