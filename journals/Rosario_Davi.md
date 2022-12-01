@@ -1,4 +1,8 @@
+12/01/2022
+Today the team decided that I should work on getting the front end page going and work on the functionally after. After merging some changes I experienced a bug for about half the day. The bug was i could not access my explore page, it just kept bringing up the new home page. After the team took a look we were stummped and decided to ask for a seir. The fix to the problem was to make seperate compents for the homepage and the explore page. Once I made the changes I was able to get my explore page up. I was able to get 4 cards on the screen along with two buttons. Still need to work on the functionality.
 
+11/30/2022
+Today I realized the code I wrote for create a review was written in Class component. I realized I would need to create a hook for this to work. I did not do any code, I went back to The hooks explorations and reread that. Along with some other hook videos to get a good understanding. I plan on working on the functionally and using hooks to get write a review going.
 11/29/2022
 This morning I woke up to a message from Lena, she figured out why there was no formating. I forgot to add the bootstraps. She added it for me, once I pulled and merged the front page had some color and formating. Through out the day I worked on the front end stuff. I was able to add a placeholder card with two buttons "create a review" and View all Reviews. These buttons do not have any functionality yet. I began trying to work on the create review js file, after I wrote some code I realized that Class based function will not work and I need to go back and watch the video on hooks and refactor some code. 
 
