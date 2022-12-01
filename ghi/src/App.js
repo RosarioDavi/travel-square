@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import ExplorePage from "./ExplorePage";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./Nav";
 import HomePage from "./HomePage";
+import CreateRequest from "./Request/CreateRequest";
+import RequestList from "./Request/RequestList";
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -35,10 +37,16 @@ function App() {
       <div>
         <ErrorNotification error={error} />
         <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+        <Routes>
           <Route path="/explore" element={<ExplorePage />} />
         </Routes>
-           <Routes>
-          <Route path="/" element={<HomePage />} />
+        <Routes>
+          <Route path="/request" element={<RequestList />} />
+        </Routes>
+        <Routes>
+          <Route path="/request/new" element={<CreateRequest />} />
         </Routes>
       </div>
     </BrowserRouter>
