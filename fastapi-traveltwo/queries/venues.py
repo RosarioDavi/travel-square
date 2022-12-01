@@ -243,8 +243,8 @@ class VenueRepository:
                 except Exception as e:
                     return {"message": "Could not get all Venues"}
 
-    # User
-    def get_all_complete_approved(self, state: str, city: str) -> list[VenueCompleteOut]:
+    # User kept at false until redux done
+    def get_all_complete(self, state: str, city: str) -> list[VenueCompleteOut]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -270,7 +270,7 @@ class VenueRepository:
                         ON (c.id = v.category_id)
                     INNER JOIN accounts a
                         ON (a.id = v.added_by)
-                    WHERE v.approved IS TRUE AND v.state = %s AND v.city = %s
+                    WHERE v.state = %s AND v.city = %s
                     ORDER BY venue_name
                     """,
                     [state, city]

@@ -2,6 +2,9 @@ import React from "react";
 import TextExample from './Card';
 
 function ExplorePage() {
+import TextExample from './Card';
+
+function MainPage() {
   return (
     <div className="">
         <div className="px-4 py-5 my-5 text-center bg-success rounded-pill text-white">
