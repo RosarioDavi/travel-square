@@ -5,6 +5,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./Nav";
 import CreateRequest from "./CreateRequest.js";
+import Homepage from "./Homepage.js";
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -35,6 +36,9 @@ function App() {
       <div>
         <ErrorNotification error={error} />
         <Construct info={launch_info} />
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+        </Routes>
         <Routes>
           <Route path="requests/" element={<CreateRequest />} />
         </Routes>
