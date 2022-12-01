@@ -3,12 +3,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import requests, accounts, venues, reviews
 from authenticator import authenticator
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+<<<<<<< Updated upstream
 origins = [
     "http://localhost:3000",
 ]
+=======
+origins = ["*"]
+>3>>>>>> Stashed changes
 
 app.add_middleware(
     CORSMiddleware,

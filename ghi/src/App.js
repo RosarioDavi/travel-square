@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./Nav";
+import CreateRequest from "./CreateRequest.js";
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -34,6 +35,9 @@ function App() {
       <div>
         <ErrorNotification error={error} />
         <Construct info={launch_info} />
+        <Routes>
+          <Route path="requests/" element={<CreateRequest />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );
