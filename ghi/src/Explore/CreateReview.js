@@ -1,7 +1,19 @@
 import React from 'react';
 
-function WriteReview(props){
-    const [review, setReview] = useState('');
+class WriteReview extends React.Component{
+    constructor(props) 
+    {
+        super(props)
+        this.state = {
+            review_description 
+        };
+        this.handleReviewDescriptionChange=this.handleReviewDescriptionChange.bind(this);
+    }
+    
+    handleReviewDescription(event){
+        const value = event.target.value;
+        this.setState({review_description: value})
+    }
 
     render() {
     return (

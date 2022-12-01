@@ -1,6 +1,17 @@
+11/30/22
+- started working on the front-end of reviews. I don't remember much about React hooks from the previous exploration so I spent part of the day refreshing my memory. I put placeholder code for now in ReviewForm.js
+- wanted to get some more practice with React and CSS so I looked through some Codepen styling submissions for inspiration. Lena and Rosario started on the home page, so I commented out their code and used a Codepen template that I liked. The template uses flexbox, which I need to read more about after I get my reviews front-end working
+- also need to learn about modals tomorrow to incorporate that on the reviews page
+
+11/29/22
+- changed various parts of the reviews queries code and got different errors, which I'm working through to understand. Got a validation error and a type error
+- pairprogrammed with Muhammad and found that I had the wrong except block on the get_all_reviews query
+- also found that I added an unnecessary comma after the last SQL query column. I also needed additional arguments in the get_one_review_for_venue query
+- all of the review queries and routers are finally working in FastAPI, and I'm in disbelief. Hope it still works tomorrow
+
 11/28/22
-- gained a better understanding of what needs to be done for the review inner joins; reviews will have an inner joins with accounts and venues through their ids
-- using trial and error to test out the reviews code in FastAPI
+- gained a better understanding of what needs to be done for the review inner joins by pairprogramming with Muhammad; reviews will have an inner joins with accounts and venues through their ids
+- using trial and error to test out the reviews code in FastAPI. I added more fields in the ReviewOut model and SQL queries but I'm not sure where the bug is. I keep getting a validation error
 - ended the day with the reviews code still not working
 
 11/23/22
