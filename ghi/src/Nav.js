@@ -3,46 +3,43 @@ import { NavLink } from "react-router-dom";
 // import Container from "react-bootstrap/Container";
 // import Nav from "react-bootstrap/Nav";
 // import Navbar from "react-bootstrap/Navbar";
-import './Nav.css';
-
-
+import "./Nav.css";
 
 function Navigation() {
-
   return (
     <>
       <div className="container">
-
         <header>
-          <h2><a href="#"><i className="ion-plane"></i>travel<sup>2</sup></a></h2>
+          <h2>
+            <a href="#">
+              <i className="ion-plane"></i>travel<sup>2</sup>
+            </a>
+          </h2>
           <nav>
             <ul>
               <li>
-               <NavLink to="/"> HomePage</NavLink>
+                <NavLink to="/"> HomePage</NavLink>
               </li>
               <li>
-                  <NavLink to="/explore"> Explore</NavLink>
+                <NavLink to="/explore"> Explore</NavLink>
               </li>
               <li>
-                <a href="#" title="request">request</a>
+                <NavLink to="/request"> Request</NavLink>
               </li>
               <li>
-                <a className="btn" href="#" title="register | log in">register | log in</a>
+                <a className="btn" href="#" title="register | log in">
+                  register | log in
+                </a>
               </li>
             </ul>
           </nav>
         </header>
-
-
-
       </div>
     </>
   );
 }
 
 export default Navigation;
-
-
 
 /*
   function Navigation() {
