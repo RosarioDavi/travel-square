@@ -1,7 +1,7 @@
 import React from "react";
 import TextExample from './Card';
 
-function MainPage() {
+function ExplorePage() {
   return (
     <div className="">
         <div className="px-4 py-5 my-5 text-center bg-success rounded-pill text-white">
@@ -21,5 +21,5 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default ExplorePage;
 
