@@ -1,5 +1,4 @@
 import { createApi, CreateApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
-import { processResult } from "immer/dist/internal";
 import { authApi } from "./authApi";
 
 export const accountsApi = createApi ({
