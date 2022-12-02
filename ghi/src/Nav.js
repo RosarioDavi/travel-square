@@ -11,6 +11,7 @@ import { useGetTokenQuery } from './store/authApi'
 function Navigation() {
 
   const {data: tokenData} = useGetTokenQuery()
+
   if (!tokenData) {
     return (
       <>
@@ -43,17 +44,21 @@ function Navigation() {
       <>
       <div className="container">
         <header>
-          <h2><a href="#"><i className="ion-plane"></i>travel<sup>2</sup></a></h2>
+          <h2>
+            <a href="#">
+              <i className="ion-plane"></i>travel<sup>2</sup>
+            </a>
+          </h2>
           <nav>
             <ul>
               <li>
-               <NavLink to="/"> HomePage</NavLink>
+                <NavLink to="/"> HomePage</NavLink>
               </li>
               <li>
-                  <NavLink to="/explore"> Explore</NavLink>
+                <NavLink to="/explore"> Explore</NavLink>
               </li>
               <li>
-                <a href="#" title="request">request</a>
+                <NavLink to="/request"> Request</NavLink>
               </li>
               <li>
                 <LogoutModal/>
@@ -68,8 +73,6 @@ function Navigation() {
 }
 
 export default Navigation;
-
-
 
 /*
   function Navigation() {
