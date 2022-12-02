@@ -6,7 +6,8 @@ import { NavLink } from "react-router-dom";
 import './Nav.css';
 import { LoginModal } from "./Accounts/LoginModal";
 import { LogoutModal } from "./Accounts/LogoutModal";
-import { useGetTokenQuery } from './store/authApi'
+import { SignupModal } from "./Accounts/SignupModal";
+import { useGetTokenQuery } from './store/authApi';
 
 function Navigation() {
 
@@ -27,6 +28,9 @@ function Navigation() {
                 </li>
                 <li>
                   <a href="#" title="request"> request</a>
+                </li>
+                <li>
+                  <SignupModal/>
                 </li>
                 <li>
                   <LoginModal/>
