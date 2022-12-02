@@ -38,12 +38,24 @@ export const authApi = createApi({
             },
         }),
         signUp: builder.mutation({
-            query: data => ({
-                url: '/api/accounts/',
-                method: 'post',
-                body: data,
-                credentials: 'include'
-            }),
+            query: info => {
+                let formData = null;
+                if (info instanceof HTMLElement) {
+                    formData = new FormData(info);
+                } else {
+                    formData = new FormData();
+                    formData.append('username', info.username);
+                    formData.append('full_name', info.full_name);
+                    formData.append('email', info.email);
+                    formData.append('password', info.password);
+                }
+                return {
+                    url: '/api/accounts/',
+                    method: 'post',
+                    body: info,
+                    credentials: 'include'
+                }
+            },
             providesTags: ['Account'],
             invalidatesTags: result => {
                 return (result && ['Token']) || [];

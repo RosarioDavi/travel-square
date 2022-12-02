@@ -1,4 +1,4 @@
-import { createApi, CreateApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
 import { authApi } from "./authApi";
 
 export const accountsApi = createApi ({
@@ -14,6 +14,7 @@ export const accountsApi = createApi ({
             return headers;
         }
     }),
+    tagTypes: ['AccountsList'],
     endpoints: builder => ({
         getAccounts: builder.query({
             query: () => '/api/accounts/',
@@ -30,7 +31,7 @@ export const accountsApi = createApi ({
                 },
                 method: 'post',
             }),
-            invalidatesTags: ['UserList'],
+            invalidatesTags: ['AccountsList'],
         }),
     }),
 });

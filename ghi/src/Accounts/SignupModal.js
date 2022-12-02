@@ -3,7 +3,7 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal"
 import { useNavigate } from "react-router-dom";
 import { useLogInMutation, useGetTokenQuery } from "../store/authApi";
-import { useCreateAccountMutation } from "../store/accountsApi";
+import { useSignUpMutation } from "../store/authApi"
 
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder } = props;
@@ -32,7 +32,7 @@ export function SignupModal() {
     const handleShow = () => setShow(true);
     const navigate = useNavigate();
     const [login] = useLogInMutation();
-    const [signup, result] = useCreateAccountMutation();
+    const [signup, result] = useSignUpMutation();
     const [username, setUsername] = useState("");
     const [full_name, setFull_name] = useState("");
     const [email, setEmail] = useState("");
@@ -46,6 +46,7 @@ export function SignupModal() {
 
     useEffect(() => {
         if (result.isSuccess) {
+            login({ username, password })
             setError("");
             setUsername("");
             setFull_name("");
@@ -61,7 +62,7 @@ export function SignupModal() {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Login
+                Signup
             </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
