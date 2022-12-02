@@ -32,7 +32,7 @@ export const authApi = createApi({
                     credentials: 'include',
                 };
             },
-            providesTags: ['token'],
+            providesTags: ['Account'],
             invalidatesTags: result => {
                 return (result && ['Token']) || [];
             },
@@ -58,14 +58,8 @@ export const authApi = createApi({
             },
             providesTags: ['Account'],
             invalidatesTags: result => {
-                return (result && ['Token']) || [];
+                return (result && ['Account']) || [];
             },
-            // async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-            //     try {
-            //     await queryFulfilled;
-            //     dispatch(clearForm());
-            //     } catch (err) {}
-            // },
         }),
         logOut: builder.mutation({
             query: () => ({
@@ -80,7 +74,7 @@ export const authApi = createApi({
                 url: '/token',
                 credentials: 'include',
             }),
-            providesTags: ['Account'],
+            providesTags: ['Token'],
         }),
     }),
 });
