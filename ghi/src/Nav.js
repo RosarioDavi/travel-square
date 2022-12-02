@@ -41,7 +41,7 @@ function Navigation() {
         </div>
       </>
     );
-  } else {
+  } else if (tokenData) {
     return (
       <>
       <div className="container">

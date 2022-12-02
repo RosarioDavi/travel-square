@@ -20,23 +20,9 @@ export const accountsApi = createApi ({
             query: () => '/api/accounts/',
             providesTags: ['AccountsList'],
         }),
-        createAccount: builder.mutation({
-            query: data => ({
-                url: '/api/accounts/',
-                body: {
-                    username: data.username,
-                    full_name: data.full_name,
-                    email: data.email,
-                    password: data.password
-                },
-                method: 'post',
-            }),
-            invalidatesTags: ['AccountsList'],
-        }),
     }),
 });
 
 export const {
     useGetAccountsQuery,
-    useCreateAccountMutation,
 } = accountsApi;

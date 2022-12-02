@@ -55,7 +55,7 @@ export function LoginModal() {
   return (
     <>
     <Button variant="primary" onClick={handleShow}>
-        Login
+        login
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

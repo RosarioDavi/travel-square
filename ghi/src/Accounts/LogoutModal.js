@@ -31,7 +31,7 @@ export function LogoutModal() {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Logout
+                logout
             </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
