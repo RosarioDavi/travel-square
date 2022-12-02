@@ -45,6 +45,12 @@ def get_one_venue(
         response.status_code = 404
     return venue
 
+@router.get("/api/venues/unapproved/", response_model=list[VenueOut])
+def get_unapproved_venues(
+    repo: VenueRepository = Depends(),
+):
+    return repo.get_unapproved()
+
 # Admin
 @router.get("/api/venues/", response_model=list[VenueOut])
 def get_all(

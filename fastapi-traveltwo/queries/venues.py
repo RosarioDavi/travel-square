@@ -243,6 +243,29 @@ class VenueRepository:
                 except Exception as e:
                     return {"message": "Could not get all Venues"}
 
+    # Admin
+    def get_unapproved(self) -> list[VenueOut]:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT *
+                    FROM venues v
+                    WHERE v.approved = false
+                    ORDER BY venue_name
+                    """
+                )
+                try:
+                    results = []
+                    for row in cur.fetchall():
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                        results.append(record)
+                    return results
+                except Exception as e:
+                    return {"message": "Could not get all Venues"}
+
     # User kept at false until redux done
     def get_all_complete(self, state: str, city: str) -> list[VenueCompleteOut]:
         with pool.connection() as conn:
