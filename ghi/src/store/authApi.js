@@ -32,7 +32,7 @@ export const authApi = createApi({
                     credentials: 'include',
                 };
             },
-            providesTags: ['Account'],
+            providesTags: ['token'],
             invalidatesTags: result => {
                 return (result && ['Token']) || [];
             },
@@ -68,7 +68,7 @@ export const authApi = createApi({
                 url: '/token',
                 credentials: 'include',
             }),
-            providesTags: ['Token'],
+            providesTags: ['Account'],
         }),
     }),
 });

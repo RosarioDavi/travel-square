@@ -4,15 +4,44 @@ import { NavLink } from "react-router-dom";
 // import Nav from "react-bootstrap/Nav";
 // import Navbar from "react-bootstrap/Navbar";
 import './Nav.css';
-
-
+import { LoginModal } from "./LoginModal";
+import { LogoutModal } from "./LogoutModal";
+import { useGetTokenQuery } from './store/authApi'
 
 function Navigation() {
 
-  return (
-    <>
-      <div className="container">
+  const {data: tokenData} = useGetTokenQuery()
+  if (!tokenData) {
+    return (
+      <>
+        <div className="container">
 
+          <header>
+            <h2><a href="#"><i className="ion-plane"></i>travel<sup>2</sup></a></h2>
+            <nav>
+              <ul>
+                <li>
+                <NavLink to="/"> HomePage</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/explore"> Explore</NavLink>
+                </li>
+                <li>
+                  <a href="#" title="request">request</a>
+                </li>
+                <li>
+                  <LoginModal/>
+                </li>
+              </ul>
+            </nav>
+          </header>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+      <div className="container">
         <header>
           <h2><a href="#"><i className="ion-plane"></i>travel<sup>2</sup></a></h2>
           <nav>
@@ -27,17 +56,15 @@ function Navigation() {
                 <a href="#" title="request">request</a>
               </li>
               <li>
-                <a className="btn" href="#" title="register | log in">register | log in</a>
+                <LogoutModal/>
               </li>
             </ul>
           </nav>
         </header>
-
-
-
       </div>
-    </>
-  );
+      </>
+    );
+  }
 }
 
 export default Navigation;
