@@ -5,6 +5,7 @@ volumes:
     external: true
 services:
   postgres:
+    container_name: postgres
     build:
       context: ./relational-data
       dockerfile: ./Dockerfile.dev
@@ -17,6 +18,7 @@ services:
       - 15432:5432
 
   pg-admin:
+    container_name: pg-admin
     image: dpage/pgadmin4
     volumes:
       - pg-admin:/var/lib/pgadmin
@@ -28,6 +30,7 @@ services:
       PGADMIN_DISABLE_POSTFIX: 1
 
   travel-squared:
+    container_name: travel-squared
     build:
       context: ./fastapi-traveltwo
       dockerfile: ./Dockerfile.dev
@@ -41,6 +44,7 @@ services:
       SIGNING_KEY: 234kla0a1245b7587606efdcdf97db285d034d8loll01981a529f01531owdf245d3ab7de1fc6cfd297a28762440124da4a328217b8ce63aba077bf2172e8cedb
 
   ghi:
+    container_name: ghi
     image: node:lts-bullseye
     command: npm start
     working_dir: /app
