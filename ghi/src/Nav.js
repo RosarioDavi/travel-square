@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 // import Navbar from "react-bootstrap/Navbar";
 import './Nav.css';
 import { LoginModal } from "./Accounts/LoginModal";
-import { LogoutModal } from "./LogoutModal";
+import { LogoutModal } from "./Accounts/LogoutModal";
 import { useGetTokenQuery } from './store/authApi'
 
 function Navigation() {
@@ -16,19 +16,18 @@ function Navigation() {
     return (
       <>
         <div className="container">
-
           <header>
             <h2><a href="#"><i className="ion-plane"></i>travel<sup>2</sup></a></h2>
             <nav>
               <ul>
                 <li>
-                <NavLink to="/"> HomePage</NavLink>
+                  <NavLink to="/"> home</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/explore"> Explore</NavLink>
+                    <NavLink to="/explore"> explore</NavLink>
                 </li>
                 <li>
-                  <a href="#" title="request">request</a>
+                  <a href="#" title="request"> request</a>
                 </li>
                 <li>
                   <LoginModal/>
@@ -52,13 +51,13 @@ function Navigation() {
           <nav>
             <ul>
               <li>
-                <NavLink to="/"> HomePage</NavLink>
+                <NavLink to="/"> home</NavLink>
               </li>
               <li>
-                <NavLink to="/explore"> Explore</NavLink>
+                <NavLink to="/explore"> explore</NavLink>
               </li>
               <li>
-                <NavLink to="/request"> Request</NavLink>
+                <NavLink to="/request"> request</NavLink>
               </li>
               <li>
                 <LogoutModal/>
