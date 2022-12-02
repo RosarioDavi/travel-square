@@ -7,6 +7,7 @@ from fastapi import (
     APIRouter,
     Request,
 )
+from libgravatar import Gravatar, sanitize_email
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 
@@ -82,7 +83,9 @@ async def create_account(
     accounts: AccountQueries = Depends(),
 ):
     hashed_password = authenticator.hash_password(info.password)
-    avatar = ''
+    gravatar_email = sanitize_email(info.email)
+    g_holder = Gravatar(gravatar_email)
+    avatar = g_holder.get_image()
     is_admin = False
     try:
         account = accounts.create_account(
