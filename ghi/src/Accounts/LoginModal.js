@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
-import { useLogInMutation, useGetTokenQuery } from './store/authApi';
+import { useLogInMutation, useGetTokenQuery } from '../store/authApi';
 
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder } = props;
@@ -38,13 +38,13 @@ export function LoginModal() {
   async function handleSubmit(e) {
     e.preventDefault();
     login({ username, password });
-    setPassword("");
-    setUsername("");
   }
 
   useEffect(() => {
     if (result.isSuccess) {
       setError("");
+      setPassword("");
+      setUsername("");
       handleClose();
       navigate("/")
     } else if (result.isError) {
@@ -70,7 +70,7 @@ export function LoginModal() {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         type="text"
-                        placeholder="Enter username"
+                        placeholder="RileyCodes"
                     />
                     <BootstrapInputFields
                         id="password"
@@ -78,7 +78,7 @@ export function LoginModal() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         type="password"
-                        placeholder="Password"
+                        placeholder="**********"
                     />
                     <button type="submit" className="btn btn-outline-success">
                         Login

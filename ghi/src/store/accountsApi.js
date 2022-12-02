@@ -20,7 +20,7 @@ export const accountsApi = createApi ({
             query: () => '/api/accounts/',
             providesTags: ['AccountsList'],
         }),
-        createUser: builder.mutation({
+        createAccount: builder.mutation({
             query: data => ({
                 url: '/api/accounts/',
                 body: {
@@ -38,5 +38,5 @@ export const accountsApi = createApi ({
 
 export const {
     useGetAccountsQuery,
-    useCreateUserMutation,
+    useCreateAccountMutation,
 } = accountsApi;

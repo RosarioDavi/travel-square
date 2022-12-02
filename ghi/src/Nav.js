@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 // import Nav from "react-bootstrap/Nav";
 // import Navbar from "react-bootstrap/Navbar";
 import './Nav.css';
-import { LoginModal } from "./LoginModal";
+import { LoginModal } from "./Accounts/LoginModal";
 import { LogoutModal } from "./LogoutModal";
 import { useGetTokenQuery } from './store/authApi'
 

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
-import { useLogOutMutation } from './store/authApi';
+import { useLogOutMutation, useGetTokenQuery } from './store/authApi';
 
 export function LogoutModal() {
+    const { data: tokenData } = useGetTokenQuery()
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
