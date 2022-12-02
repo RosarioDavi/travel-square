@@ -11,7 +11,6 @@ import { useGetTokenQuery } from './store/authApi'
 function Navigation() {
 
   const {data: tokenData} = useGetTokenQuery()
-
   if (!tokenData) {
     return (
       <>

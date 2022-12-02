@@ -1,11 +1,11 @@
 import React from "react";
-        
+
  function HomePage() {
-  return (   
+  return (
         <div className="cover">
           <h1>discover what's out there.</h1>
           <form  className="flex-form">
-            <label for="from">
+            <label htmlFor="from">
               <i className="ion-location"></i>
             </label>
             <input type="search" placeholder="where do you want to go?" />
