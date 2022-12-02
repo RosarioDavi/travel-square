@@ -1,3 +1,9 @@
+12/01/22
+- after discussing with the team, I'll be responsible for the CSS for the home page. I'm excited to get better at CSS and gain a better understanding how to make website look nice
+- spent the day going over the React hooks exploration and reading documentation
+- still unsure on what my Review Form needs to look like, but I've started with the inputs I need
+- didn't get to modals today so I'll review them tomorrow
+
 11/30/22
 - started working on the front-end of reviews. I don't remember much about React hooks from the previous exploration so I spent part of the day refreshing my memory. I put placeholder code for now in ReviewForm.js
 - wanted to get some more practice with React and CSS so I looked through some Codepen styling submissions for inspiration. Lena and Rosario started on the home page, so I commented out their code and used a Codepen template that I liked. The template uses flexbox, which I need to read more about after I get my reviews front-end working
