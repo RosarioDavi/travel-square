@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLogInMutation, useGetTokenQuery } from './store/authApi';
 
 function BootstrapInputFields(props) {
@@ -33,6 +33,7 @@ export function LoginModal() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -45,6 +46,7 @@ export function LoginModal() {
     if (result.isSuccess) {
       setError("");
       handleClose();
+      navigate("/")
     } else if (result.isError) {
       setError(result.error.data.detail);
     }

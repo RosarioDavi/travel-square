@@ -20,7 +20,8 @@ export function LogoutModal() {
 
     useEffect(() => {
         if (result.isSuccess) {
-        navigate("/");
+            setError("");
+            navigate("/");
         } else if (result.isError) {
         setError(result.error.data.detail);
         }
