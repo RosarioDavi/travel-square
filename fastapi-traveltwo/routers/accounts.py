@@ -82,11 +82,16 @@ async def create_account(
     response: Response,
     accounts: AccountQueries = Depends(),
 ):
+
     hashed_password = authenticator.hash_password(info.password)
     gravatar_email = sanitize_email(info.email)
     g_holder = Gravatar(gravatar_email)
     avatar = g_holder.get_image()
+    # Hardcoded logic for username based admin:
     is_admin = False
+    admin_accounts = ['muhammad', 'lena', 'sarah', 'rosario']
+    if info.username in admin_accounts:
+        is_admin = True
     try:
         account = accounts.create_account(
             info,
@@ -107,13 +112,13 @@ async def create_account(
     return AccountToken(account=account, **token.dict())
 
 
-@router.delete("/api/accounts/{account_id}", response_model=AccountOut)
-def delete_account(
-    account_id: int,
-    repo: AccountQueries = Depends()
-):
-    repo.delete_account(account_id)
-    return True
+# @router.delete("/api/accounts/{account_id}", response_model=AccountOut)
+# def delete_account(
+#     account_id: int,
+#     repo: AccountQueries = Depends()
+# ):
+#     repo.delete_account(account_id)
+#     return True
 
 
 @router.get("/token", response_model=AccountToken | None)
