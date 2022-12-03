@@ -36,7 +36,6 @@ class ReviewOutComplete(BaseModel):
     added_by: int
     username: str
     full_name: str
-    email: str
     avatar: str
     is_admin: bool
 
@@ -65,7 +64,6 @@ class ReviewQueries:
                         a.id AS added_by,
                         a.username AS username,
                         a.full_name AS full_name,
-                        a.email AS email,
                         a.avatar AS avatar,
                         a.is_admin AS is_admin
                     FROM reviews rev
@@ -112,7 +110,6 @@ class ReviewQueries:
                         a.id AS added_by,
                         a.username AS username,
                         a.full_name AS full_name,
-                        a.email AS email,
                         a.avatar AS avatar,
                         a.is_admin AS is_admin
                     FROM reviews rev
@@ -161,7 +158,6 @@ class ReviewQueries:
                             a.id AS added_by,
                             a.username AS username,
                             a.full_name AS full_name,
-                            a.email AS email,
                             a.avatar AS avatar,
                             a.is_admin AS is_admin
                         FROM reviews rev

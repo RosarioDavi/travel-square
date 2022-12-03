@@ -16,7 +16,7 @@ from pydantic import BaseModel
 from queries.accounts import (
     AccountIn,
     AccountOut,
-    AccountWithoutPassword,
+    AccountOutConfidential,
     AccountQueries,
     DuplicateAccountError,
 )
@@ -45,33 +45,19 @@ not_authorized = HTTPException(
 
 
 # User finding a lot of users
-@router.get("/api/accounts/", response_model=list[AccountWithoutPassword])
+@router.get("/api/accounts/", response_model=list[AccountOutConfidential])
 def get_all_accounts(repo: AccountQueries = Depends()):
     return repo.get_all_accounts()
 
 
 # User finding another user
 @router.get(
-    "/api/accounts/users/{account_id}", response_model=AccountWithoutPassword
+    "/api/accounts/users/{account_id}", response_model=AccountOutConfidential
 )
 def get_another_account(
     account_id: int, response: Response, repo: AccountQueries = Depends()
 ):
     account = repo.get_another_account(account_id)
-    if account is None:
-        response.status_code = 404
-    return account
-
-
-# Current logged in user
-@router.get("/api/accounts/{account_id}", response_model=AccountOut)
-def get_account(
-    account_id: int,
-    response: Response,
-    repo: AccountQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    account = repo.get(account_id)
     if account is None:
         response.status_code = 404
     return account
@@ -107,6 +93,7 @@ async def create_account(
     return AccountToken(account=account, **token.dict())
 
 
+# Returns current user's info for Redux
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
@@ -118,6 +105,17 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
+
+
+@router.delete("/api/accounts/{account_id}")
+def delete_account(
+    account_id: int,
+    repo: AccountQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    if account_data['is_admin'] is True:
+        repo.delete_account(account_id)
+        return True
 
 
 # @router.get("/api/accounts/search/{keyword}", response_model=AccountsOut)
@@ -142,10 +140,15 @@ async def get_token(
 #     return True
 
 
-# @router.delete("/api/accounts/{account_id}", response_model=AccountOut)
-# def delete_account(
+# Current logged in user
+# @router.get("/api/accounts/{account_id}", response_model=AccountOut)
+# def get_account(
 #     account_id: int,
-#     repo: AccountQueries = Depends()
+#     response: Response,
+#     repo: AccountQueries = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
 # ):
-#     repo.delete_account(account_id)
-#     return True
+#     account = repo.get(account_id)
+#     if account is None:
+#         response.status_code = 404
+#     return account

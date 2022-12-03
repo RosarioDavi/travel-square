@@ -47,14 +47,6 @@ def update_request(
     return repo.update(request_id, vacation)
 
 
-@router.delete("/api/requests/{request_id}/", response_model=bool)
-def delete_request(
-    request_id: int,
-    repo: RequestQueries = Depends(),
-) -> bool:
-    return repo.delete(request_id)
-
-
 @router.get("/api/requests/{request_id}/", response_model=Optional[RequestOut])
 def get_one_request(
     request_id: int,
@@ -122,3 +114,11 @@ def get_all_comments_for_one_request(
 #     if comments is None:
 #         response.status_code = 404
 #     return comments
+
+
+# @router.delete("/api/requests/{request_id}/", response_model=bool)
+# def delete_request(
+#     request_id: int,
+#     repo: RequestQueries = Depends(),
+# ) -> bool:
+#     return repo.delete(request_id)

@@ -52,7 +52,6 @@ class VenueCompleteOut(BaseModel):
     added_by_user_id: int
     added_by_username: str
     added_by_fullname: str
-    added_by_email: str
     added_by_avatar: str | None
     added_by_is_admin: bool
     approved: bool
@@ -283,7 +282,7 @@ class VenueRepository:
                 except Exception:
                     return {"message": "Could not get all Venues"}
 
-    # User kept at all venues for now
+    # User kept at all, even unapproved, venues for now
     def get_all_complete(
         self, state: str, city: str
     ) -> list[VenueCompleteOut]:
@@ -303,7 +302,6 @@ class VenueRepository:
                             a.id AS added_by_user_id,
                             a.username AS added_by_username,
                             a.full_name AS added_by_fullname,
-                            a.email AS added_by_email,
                             a.avatar AS added_by_avatar,
                             a.is_admin AS added_by_is_admin,
                             v.approved

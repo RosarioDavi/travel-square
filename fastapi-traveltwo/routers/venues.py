@@ -101,7 +101,7 @@ def update_venue(
 
 
 # Admin to delete venues
-@router.delete("/api/venues/{venue_id}", response_model=bool)
+@router.delete("/api/venues/{venue_id}")
 def delete_venue(
     venue_id: int,
     repo: VenueRepository = Depends(),

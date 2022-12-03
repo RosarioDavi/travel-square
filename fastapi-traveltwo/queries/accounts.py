@@ -23,17 +23,16 @@ class AccountOut(BaseModel):
     is_admin: bool
 
 
-class AccountWithoutPassword(BaseModel):
+class AccountOutConfidential(BaseModel):
     id: int
     username: str
     full_name: str
-    email: str
     avatar: str | None
     is_admin: bool
 
 
 class AccountQueries:
-    def get_all_accounts(self) -> list[AccountWithoutPassword]:
+    def get_all_accounts(self) -> list[AccountOutConfidential]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -41,7 +40,6 @@ class AccountQueries:
                     SELECT id,
                         username,
                         full_name,
-                        email,
                         avatar,
                         is_admin
                     FROM accounts
@@ -56,7 +54,10 @@ class AccountQueries:
                     results.append(record)
                 return results
 
-    def get_another_account(self, account_id: int) -> AccountWithoutPassword:
+    def get_another_account(
+            self,
+            account_id: int
+        ) -> AccountOutConfidential:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -64,7 +65,6 @@ class AccountQueries:
                     SELECT id,
                         username,
                         full_name,
-                        email,
                         avatar,
                         is_admin
                     FROM accounts
@@ -80,6 +80,7 @@ class AccountQueries:
                         record[column.name] = row[i]
                 return record
 
+    # Used by authenticator
     def get_auth_account(self, username: str) -> AccountOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
