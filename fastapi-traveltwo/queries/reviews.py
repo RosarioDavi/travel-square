@@ -178,9 +178,10 @@ class ReviewQueries:
                             record[column.name] = row[i]
                         results.append(record)
                     return results
-                except Exception as e:
-                    print(e)
-                    return {"message": "Could not get all reviews"}
+                except Exception:
+                    return {
+                        "message": "Could not get all reviews"
+                    }
 
     def create_review(
         self, review: ReviewIn, added_by: int, created_at
@@ -224,9 +225,10 @@ class ReviewQueries:
                         for i, column in enumerate(cur.description):
                             record[column.name] = row[i]
                     return record
-        except Exception as e:
-            print(e)
-            return {"message": "Could not create a new review"}
+        except Exception:
+            return {
+                "message": "Could not create a new review"
+            }
 
     # def get_one_review_for_venue(
     #     self, venue_id: int, review_id: int
