@@ -56,7 +56,8 @@ class ReviewQueries:
                         v.city AS city,
                         v.state AS state,
                         v.zip AS zip,
-                        v.description_text AS description_text,
+                        v.description_text
+                            AS description_text,
                         rev.review_description,
                         rev.rating,
                         rev.picture,

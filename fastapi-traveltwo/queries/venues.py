@@ -325,7 +325,7 @@ class VenueRepository:
                             record[column.name] = row[i]
                         results.append(record)
                     return results
-                except Exception as e:
+                except Exception:
                     return {"message": "Could not get all Venues"}
 
     # Helper for update
