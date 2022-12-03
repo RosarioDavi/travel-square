@@ -60,16 +60,16 @@ def get_all_reviews_for_venue(
     return repo.get_all_reviews_for_venue(venue_id)
 
 
-@router.get(
-    "/api/venues/{venue_id}/{review_id}/",
-    response_model=ReviewOutComplete
-)
-def get_one_review_for_venue(
-    venue_id: int,
-    review_id: int,
-    repo: ReviewQueries = Depends(),
-):
-    return repo.get_one_review_for_venue(venue_id, review_id)
+# @router.get(
+#     "/api/venues/{venue_id}/{review_id}/",
+#     response_model=ReviewOutComplete
+# )
+# def get_one_review_for_venue(
+#     venue_id: int,
+#     review_id: int,
+#     repo: ReviewQueries = Depends(),
+# ):
+#     return repo.get_one_review_for_venue(venue_id, review_id)
 
 
 # @router.delete(

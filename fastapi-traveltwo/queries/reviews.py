@@ -110,7 +110,6 @@ class ReviewQueries:
                         a.id AS added_by,
                         a.username AS username,
                         a.full_name AS full_name,
-                        a.email AS email,
                         a.avatar AS avatar,
                         a.is_admin AS is_admin
                     FROM reviews rev
@@ -123,7 +122,6 @@ class ReviewQueries:
                     """,
                     [username],
                 )
-
                 try:
                     results = []
                     for row in cur.fetchall():
@@ -132,7 +130,7 @@ class ReviewQueries:
                             record[column.name] = row[i]
                         results.append(record)
                     return results
-                except Exception as e:
+                except Exception:
                     print(e)
                     return {"message": "Could not get all reviews for this username"}
 
@@ -183,51 +181,6 @@ class ReviewQueries:
                     print(e)
                     return {"message": "Could not get all reviews"}
 
-    def get_one_review_for_venue(
-        self, venue_id: int, review_id: int
-    ) -> ReviewOutComplete:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as cur:
-                    cur.execute(
-                        """
-                        SELECT rev.id,
-                            v.id AS venue_id,
-                            v.venue_name AS venue_name,
-                            v.num_and_street AS num_and_street,
-                            v.city AS city,
-                            v.state AS state,
-                            v.zip AS zip,
-                            v.description_text AS description_text,
-                            rev.review_description,
-                            rev.rating,
-                            rev.picture,
-                            rev.created_at,
-                            a.id AS added_by,
-                            a.username AS username,
-                            a.full_name AS full_name,
-                            a.avatar AS avatar,
-                            a.is_admin AS is_admin
-                        FROM reviews rev
-                        INNER JOIN venues v
-                            ON (v.id = rev.venue_id)
-                        INNER JOIN accounts a
-                            ON (a.id = rev.added_by)
-                        WHERE rev.venue_id = %s AND rev.id = %s
-                        ORDER BY rev.created_at;
-                        """,
-                        [venue_id, review_id],
-                    )
-                    record = None
-                    row = cur.fetchone()
-                    if row is not None:
-                        record = {}
-                        for i, column in enumerate(cur.description):
-                            record[column.name] = row[i]
-                    return record
-        except Exception:
-            return {"message": "Could not get the review"}
-
     def create_review(
         self, review: ReviewIn, added_by: int, created_at
     ) -> ReviewOut:
@@ -273,6 +226,51 @@ class ReviewQueries:
         except Exception as e:
             print(e)
             return {"message": "Could not create a new review"}
+
+    # def get_one_review_for_venue(
+    #     self, venue_id: int, review_id: int
+    # ) -> ReviewOutComplete:
+    #     try:
+    #         with pool.connection() as conn:
+    #             with conn.cursor() as cur:
+    #                 cur.execute(
+    #                     """
+    #                     SELECT rev.id,
+    #                         v.id AS venue_id,
+    #                         v.venue_name AS venue_name,
+    #                         v.num_and_street AS num_and_street,
+    #                         v.city AS city,
+    #                         v.state AS state,
+    #                         v.zip AS zip,
+    #                         v.description_text AS description_text,
+    #                         rev.review_description,
+    #                         rev.rating,
+    #                         rev.picture,
+    #                         rev.created_at,
+    #                         a.id AS added_by,
+    #                         a.username AS username,
+    #                         a.full_name AS full_name,
+    #                         a.avatar AS avatar,
+    #                         a.is_admin AS is_admin
+    #                     FROM reviews rev
+    #                     INNER JOIN venues v
+    #                         ON (v.id = rev.venue_id)
+    #                     INNER JOIN accounts a
+    #                         ON (a.id = rev.added_by)
+    #                     WHERE rev.venue_id = %s AND rev.id = %s
+    #                     ORDER BY rev.created_at;
+    #                     """,
+    #                     [venue_id, review_id],
+    #                 )
+    #                 record = None
+    #                 row = cur.fetchone()
+    #                 if row is not None:
+    #                     record = {}
+    #                     for i, column in enumerate(cur.description):
+    #                         record[column.name] = row[i]
+    #                 return record
+    #     except Exception:
+    #         return {"message": "Could not get the review"}
 
     # def delete_review(self, id: int) -> bool:
     #     try:
