@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends
 from typing import Optional, Union
 from queries.requests import (
     Error,
@@ -86,7 +86,10 @@ def get_all_comments_for_one_request(
     return repo.get_all(request_id)
 
 
-# @router.put("/api/comments/{comment_id}/", response_model=Union[CommentOut, Error])
+# @router.put(
+    # "/api/comments/{comment_id}/",
+    # response_model=Union[CommentOut, Error]
+# )
 # def update_comment(
 #     comment_id: int,
 #     comment: CommentIn,
@@ -95,7 +98,10 @@ def get_all_comments_for_one_request(
 #     return repo.update(comment_id, comment)
 
 
-# @router.delete("/api/comments/{comment_id}/", response_model=bool)
+# @router.delete(
+    # "/api/comments/{comment_id}/",
+    # response_model=bool
+# )
 # def delete_comment(
 #     comment_id: int,
 #     repo: CommentQueries = Depends(),
@@ -103,7 +109,10 @@ def get_all_comments_for_one_request(
 #     return repo.delete(comment_id)
 
 
-# @router.get("/api/comments/{comment_id}/", response_model=CommentOutWithUsername)
+# @router.get(
+    # "/api/comments/{comment_id}/",
+    # response_model=CommentOutWithUsername
+# )
 # def get_one(
 #     comments_id: int,
 #     response: Response,

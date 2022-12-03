@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
+from typing import Optional, Union
 from queries.pool import pool
 
 
@@ -109,10 +109,29 @@ class VenueRepository:
                 cur.execute(
                     """
                     INSERT INTO venues
-                        (venue_name, num_and_street, city, state, zip, category_id, description_text, added_by, approved)
+                        (
+                            venue_name,
+                            num_and_street,
+                            city,
+                            state,
+                            zip,
+                            category_id,
+                            description_text,
+                            added_by,
+                            approved
+                        )
                     VALUES
                         (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-                    RETURNING id, venue_name, num_and_street, city, state, zip, category_id, description_text, added_by, approved;
+                    RETURNING id,
+                            venue_name,
+                            num_and_street,
+                            city,
+                            state,
+                            zip,
+                            category_id,
+                            description_text,
+                            added_by,
+                            approved;
                     """,
                     [
                         venue.venue_name,
@@ -184,8 +203,7 @@ class VenueRepository:
                         ],
                     )
                     return self.venue_in_to_out(venue_id, venue)
-        except Exception as e:
-            print(e)
+        except Exception:
             return {"message": "Could not update that venue"}
 
     # Admin and Maybe User
@@ -217,8 +235,7 @@ class VenueRepository:
                         for i, column in enumerate(db.description):
                             record[column.name] = row[i]
                     return record
-        except Exception as e:
-            print(e)
+        except Exception:
             return {"message": "Could not get that venue"}
 
     # Admin
@@ -240,7 +257,7 @@ class VenueRepository:
                             record[column.name] = row[i]
                         results.append(record)
                     return results
-                except Exception as e:
+                except Exception:
                     return {"message": "Could not get all Venues"}
 
     # Admin
@@ -263,7 +280,7 @@ class VenueRepository:
                             record[column.name] = row[i]
                         results.append(record)
                     return results
-                except Exception as e:
+                except Exception:
                     return {"message": "Could not get all Venues"}
 
     # User kept at all venues for now

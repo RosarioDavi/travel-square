@@ -143,7 +143,7 @@ class ReviewQueries:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
-                    result = cur.execute(
+                    cur.execute(
                         """
                         SELECT rev.id,
                             v.id AS venue_id,
@@ -180,8 +180,7 @@ class ReviewQueries:
                         for i, column in enumerate(cur.description):
                             record[column.name] = row[i]
                     return record
-        except Exception as e:
-            print(e)
+        except Exception:
             return {"message": "Could not get the review"}
 
     def create_review(
@@ -202,7 +201,13 @@ class ReviewQueries:
                         )
                         VALUES
                             (%s, %s, %s, %s, %s, %s)
-                        RETURNING id, venue_id, review_description, rating, picture, added_by, created_at;
+                        RETURNING id,
+                                venue_id,
+                                review_description,
+                                rating,
+                                picture,
+                                added_by,
+                                created_at;
                         """,
                         [
                             review.venue_id,

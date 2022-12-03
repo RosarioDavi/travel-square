@@ -141,7 +141,11 @@ class RequestQueries:
             created_at=record[3],
         )
 
-    # def update(self, requests_id: int, requests: RequestIn) -> Union[RequestOut, Error]:
+    # def update(
+        # self,
+        # requests_id: int,
+        # requests: RequestIn
+    # ) -> Union[RequestOut, Error]:
     #     try:
     #         with pool.connection() as conn:
     #             with conn.cursor() as cur:
@@ -191,7 +195,11 @@ class CommentQueries:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        SELECT c.id, r.id AS request_id, a.username AS username, c.txt AS txt, c.created_at AS created_at
+                        SELECT c.id,
+                            r.id AS request_id,
+                            a.username AS username,
+                            c.txt AS txt,
+                            c.created_at AS created_at
                         FROM comments c
                         INNER JOIN requests r
                             ON (r.id = c.request_id)
@@ -260,7 +268,11 @@ class CommentQueries:
             created_at=record[4],
         )
 
-    # def update(self, comment_id: int, comment: CommentIn) -> Union[CommentOut, Error]:
+    # def update(
+        # self,
+        # comment_id: int,
+        # comment: CommentIn
+    # ) -> Union[CommentOut, Error]:
     #     try:
     #         with pool.connection() as conn:
     #             with conn.cursor() as cur:
