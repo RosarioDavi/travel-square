@@ -75,22 +75,24 @@ class RequestQueries:
             print(e)
             return {"message": "Could not get all Requests"}
 
-    def get_all_request_for_username(self, username:str)->
-        list[RequestOutWithUsername]:
+    def get_all_request_for_username(
+        self, username:str
+        )->list[RequestOutWithUsername]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        SELECT r.id,
-                                a.username,
-                                r.txt,
-                                r.created_at
+                        SELECT r.id AS id,
+                                a.username AS username,
+                                r.txt AS txt,
+                                r.created_at AS created_at
                         FROM requests r
                         INNER JOIN accounts a
                             ON (a.id = r.requester)
                         ORDER BY r.created_at;
-                        """
+                        """,
+                        [username],
                     )
                     results = []
                     for row in cur.fetchall():
@@ -101,7 +103,7 @@ class RequestQueries:
                     return results
         except Exception as e:
             print(e)
-            return {"message": "Could not get all Requests"}
+            return {"message": "Could not get all Requests for this username"}
 
     def get_one(self, requests_id: int) -> Optional[RequestOut]:
         try:
