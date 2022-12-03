@@ -9,7 +9,7 @@ from queries.requests import (
     CommentIn,
     CommentOut,
     CommentQueries,
-    CommentOutWithUsername
+    CommentOutWithUsername,
 )
 from authenticator import authenticator
 from datetime import date
@@ -24,7 +24,7 @@ def create_request(
     repo: RequestQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    requester = account_data['id']
+    requester = account_data["id"]
     created_at = date.today()
     return repo.create(request, requester, created_at)
 
@@ -37,9 +37,8 @@ def get_all(
 
 
 @router.put(
-        "/api/requests/{request_id}/",
-        response_model=Union[RequestOut, Error]
-    )
+    "/api/requests/{request_id}/", response_model=Union[RequestOut, Error]
+)
 def update_request(
     request_id: int,
     vacation: RequestIn,
@@ -56,10 +55,7 @@ def delete_request(
     return repo.delete(request_id)
 
 
-@router.get(
-        "/api/requests/{request_id}/",
-        response_model=Optional[RequestOut]
-    )
+@router.get("/api/requests/{request_id}/", response_model=Optional[RequestOut])
 def get_one_request(
     request_id: int,
     repo: RequestQueries = Depends(),
@@ -74,15 +70,15 @@ def create_comment(
     repo: CommentQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    commenter = account_data['id']
+    commenter = account_data["id"]
     created_at = date.today()
     return repo.create(comment, commenter, created_at)
 
 
 @router.get(
-        "/api/requests/{request_id}/comments/",
-        response_model=Union[list[CommentOutWithUsername], Error]
-    )
+    "/api/requests/{request_id}/comments/",
+    response_model=Union[list[CommentOutWithUsername], Error],
+)
 def get_all_comments_for_one_request(
     request_id: int,
     repo: CommentQueries = Depends(),

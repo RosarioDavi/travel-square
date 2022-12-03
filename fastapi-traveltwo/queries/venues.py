@@ -4,7 +4,7 @@ from queries.pool import pool
 
 
 class Error(BaseModel):
-    message:str
+    message: str
 
 
 class CategoryIn(BaseModel):
@@ -69,7 +69,7 @@ class CategoryRepository:
                     VALUES (%s)
                     RETURNING id, category_name
                     """,
-                    [category.category_name]
+                    [category.category_name],
                 )
                 record = None
                 row = cur.fetchone()
@@ -98,9 +98,12 @@ class CategoryRepository:
                     results.append(record)
                 return results
 
+
 class VenueRepository:
     # User
-    def create(self, venue: VenueIn, added_by: int, approved: bool) -> VenueOut:
+    def create(
+        self, venue: VenueIn, added_by: int, approved: bool
+    ) -> VenueOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -120,8 +123,8 @@ class VenueRepository:
                         venue.category_id,
                         venue.description_text,
                         added_by,
-                        approved
-                    ]
+                        approved,
+                    ],
                 )
                 record = None
                 row = cur.fetchone()
@@ -133,20 +136,20 @@ class VenueRepository:
 
     # Admin
     def delete(self, venue_id: int) -> bool:
-            try:
-                with pool.connection() as conn:
-                    with conn.cursor() as db:
-                        db.execute(
-                            """
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
                             DELETE FROM venues
                             WHERE id = %s
                             """,
-                            [venue_id]
-                        )
-                        return True
-            except Exception as e:
-                print(e)
-                return False
+                        [venue_id],
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
 
     # Admin
     def update(self, venue_id: int, venue: VenueIn) -> Union[VenueOut, Error]:
@@ -177,8 +180,8 @@ class VenueRepository:
                             venue.description_text,
                             venue.added_by,
                             True,
-                            venue_id
-                        ]
+                            venue_id,
+                        ],
                     )
                     return self.venue_in_to_out(venue_id, venue)
         except Exception as e:
@@ -205,7 +208,7 @@ class VenueRepository:
                         FROM venues
                         WHERE id = %s
                         """,
-                        [venue_id]
+                        [venue_id],
                     )
                     record = None
                     row = db.fetchone()
@@ -264,7 +267,9 @@ class VenueRepository:
                     return {"message": "Could not get all Venues"}
 
     # User kept at all venues for now
-    def get_all_complete(self, state: str, city: str) -> list[VenueCompleteOut]:
+    def get_all_complete(
+        self, state: str, city: str
+    ) -> list[VenueCompleteOut]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -293,7 +298,7 @@ class VenueRepository:
                     WHERE v.state = %s AND v.city = %s
                     ORDER BY venue_name
                     """,
-                    [state, city]
+                    [state, city],
                 )
                 try:
                     results = []

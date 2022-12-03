@@ -110,7 +110,7 @@ class AccountQueries:
         account: AccountIn,
         hashed_password: str,
         avatar: str,
-        is_admin: bool
+        is_admin: bool,
     ) -> AccountOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -140,8 +140,8 @@ class AccountQueries:
                         account.email,
                         hashed_password,
                         avatar,
-                        is_admin
-                        ]
+                        is_admin,
+                    ],
                 )
                 record = None
                 row = cur.fetchone()

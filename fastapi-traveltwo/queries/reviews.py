@@ -42,7 +42,9 @@ class ReviewOutComplete(BaseModel):
 
 
 class ReviewQueries:
-    def get_all_reviews(self, state: str, city: str) -> list[ReviewOutComplete]:
+    def get_all_reviews(
+        self, state: str, city: str
+    ) -> list[ReviewOutComplete]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -73,7 +75,7 @@ class ReviewQueries:
                     WHERE state = %s AND city = %s
                     ORDER BY rev.created_at;
                     """,
-                    [state, city]
+                    [state, city],
                 )
                 try:
                     results = []
@@ -87,7 +89,9 @@ class ReviewQueries:
                     print(e)
                     return {"message": "Could not get the review"}
 
-    def get_all_reviews_for_venue(self, venue_id: int) -> list[ReviewOutComplete]:
+    def get_all_reviews_for_venue(
+        self, venue_id: int
+    ) -> list[ReviewOutComplete]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -118,7 +122,7 @@ class ReviewQueries:
                     WHERE rev.venue_id = %s
                     ORDER BY rev.created_at;
                     """,
-                    [venue_id]
+                    [venue_id],
                 )
 
                 try:
@@ -133,7 +137,9 @@ class ReviewQueries:
                     print(e)
                     return {"message": "Could not get all reviews"}
 
-    def get_one_review_for_venue(self, venue_id: int, review_id: int) -> ReviewOutComplete:
+    def get_one_review_for_venue(
+        self, venue_id: int, review_id: int
+    ) -> ReviewOutComplete:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -165,7 +171,7 @@ class ReviewQueries:
                         WHERE rev.venue_id = %s AND rev.id = %s
                         ORDER BY rev.created_at;
                         """,
-                        [venue_id, review_id]
+                        [venue_id, review_id],
                     )
                     record = None
                     row = cur.fetchone()
@@ -178,7 +184,9 @@ class ReviewQueries:
             print(e)
             return {"message": "Could not get the review"}
 
-    def create_review(self, review: ReviewIn, added_by: int, created_at) -> ReviewOut:
+    def create_review(
+        self, review: ReviewIn, added_by: int, created_at
+    ) -> ReviewOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -202,8 +210,8 @@ class ReviewQueries:
                             review.rating,
                             review.picture,
                             added_by,
-                            created_at
-                        ]
+                            created_at,
+                        ],
                     )
                     record = None
                     row = cur.fetchone()

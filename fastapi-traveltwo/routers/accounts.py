@@ -18,7 +18,7 @@ from queries.accounts import (
     AccountOut,
     AccountWithoutPassword,
     AccountQueries,
-    DuplicateAccountError
+    DuplicateAccountError,
 )
 
 router = APIRouter()
@@ -51,11 +51,11 @@ def get_all_accounts(repo: AccountQueries = Depends()):
 
 
 # User finding another user
-@router.get("/api/accounts/users/{account_id}", response_model=AccountWithoutPassword)
+@router.get(
+    "/api/accounts/users/{account_id}", response_model=AccountWithoutPassword
+)
 def get_another_account(
-    account_id: int,
-    response: Response,
-    repo: AccountQueries = Depends()
+    account_id: int, response: Response, repo: AccountQueries = Depends()
 ):
     account = repo.get_another_account(account_id)
     if account is None:
@@ -90,25 +90,19 @@ async def create_account(
     avatar = g_holder.get_image()
     # Hardcoded logic for username based admin:
     is_admin = False
-    admin_accounts = ['muhammad', 'lena', 'sarah', 'rosario']
+    admin_accounts = ["muhammad", "lena", "sarah", "rosario"]
     if info.username in admin_accounts:
         is_admin = True
     try:
         account = accounts.create_account(
-            info,
-            hashed_password,
-            avatar,
-            is_admin
+            info, hashed_password, avatar, is_admin
         )
     except DuplicateAccountError as exc:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials",
         ) from exc
-    form = AccountForm(
-        username=info.username,
-        password=info.password
-        )
+    form = AccountForm(username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, accounts)
     return AccountToken(account=account, **token.dict())
 
@@ -116,7 +110,7 @@ async def create_account(
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
-    account: dict = Depends(authenticator.try_get_current_account_data)
+    account: dict = Depends(authenticator.try_get_current_account_data),
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
         return {

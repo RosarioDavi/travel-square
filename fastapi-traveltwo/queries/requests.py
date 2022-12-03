@@ -88,7 +88,7 @@ class RequestQueries:
                         FROM requests
                         WHERE id = %s
                         """,
-                        [requests_id]
+                        [requests_id],
                     )
                     record = None
                     row = cur.fetchone()
@@ -101,7 +101,9 @@ class RequestQueries:
             print(e)
             return {"message": "Could not get that Request"}
 
-    def create(self, requests: RequestIn, requester: int, created_at) -> Union[RequestOut, Error]:
+    def create(
+        self, requests: RequestIn, requester: int, created_at
+    ) -> Union[RequestOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -113,11 +115,7 @@ class RequestQueries:
                             (%s, %s, %s)
                         RETURNING id, requester, txt, created_at;
                         """,
-                        [
-                            requester,
-                            requests.txt,
-                            created_at
-                        ]
+                        [requester, requests.txt, created_at],
                     )
                     record = None
                     row = cur.fetchone()
@@ -132,8 +130,8 @@ class RequestQueries:
             return {"message": "Could not create new requests"}
 
     def requests_in_to_out(self, id: int, request: RequestIn):
-            old_data = request.dict()
-            return RequestOut(id=id, **old_data)
+        old_data = request.dict()
+        return RequestOut(id=id, **old_data)
 
     def record_to_requests_out(self, record):
         return RequestOut(
@@ -185,7 +183,9 @@ class RequestQueries:
 
 
 class CommentQueries:
-    def get_all(self, request_id: int) -> Union[list[CommentOutWithUsername],Error]:
+    def get_all(
+        self, request_id: int
+    ) -> Union[list[CommentOutWithUsername], Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -200,7 +200,7 @@ class CommentQueries:
                         WHERE r.id = %s
                         ORDER BY r.created_at;
                         """,
-                        [request_id]
+                        [request_id],
                     )
 
                     results = []
@@ -214,7 +214,9 @@ class CommentQueries:
             print(e)
             return {"message": "Could not get all Comments"}
 
-    def create(self, comments: CommentIn, commenter: id, created_at) -> Union[CommentOut, Error]:
+    def create(
+        self, comments: CommentIn, commenter: id, created_at
+    ) -> Union[CommentOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -230,8 +232,8 @@ class CommentQueries:
                             comments.request_id,
                             commenter,
                             comments.txt,
-                            created_at
-                        ]
+                            created_at,
+                        ],
                     )
                     record = None
                     row = cur.fetchone()
