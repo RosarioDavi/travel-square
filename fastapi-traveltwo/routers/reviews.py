@@ -39,6 +39,17 @@ def create_review(
 
 
 @router.get(
+    "/api/accounts/{username}/reviews/",
+    response_model=list[ReviewOutComplete]
+)
+def get_all_reviews_for_username(
+    username: str,
+    repo: ReviewQueries = Depends(),
+):
+    return repo.get_all_reviews_for_username(username)
+
+
+@router.get(
     "/api/venues/{venue_id}/reviews/",
     response_model=list[ReviewOutComplete]
 )
