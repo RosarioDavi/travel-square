@@ -75,6 +75,33 @@ class RequestQueries:
             print(e)
             return {"message": "Could not get all Requests"}
 
+    def get_all_request_for_username(self, username:str) -> list[RequestOutWithUsername]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT r.id,
+                                a.username,
+                                r.txt,
+                                r.created_at
+                        FROM requests r
+                        INNER JOIN accounts a
+                            ON (a.id = r.requester)
+                        ORDER BY r.created_at;
+                        """
+                    )
+                    results = []
+                    for row in cur.fetchall():
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                        results.append(record)
+                    return results
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get all Requests"}
+
     def get_one(self, requests_id: int) -> Optional[RequestOut]:
         try:
             with pool.connection() as conn:
