@@ -1,7 +1,5 @@
 import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/esm/Button';
-import Container from 'react-bootstrap/Container'
 import { useState, useEffect } from "react";
 import { useGetAccountsQuery } from "../store/accountsApi";
 
