@@ -13,7 +13,8 @@ router = APIRouter()
 
 
 @router.get(
-    "/api/reviews/{state}/{city}", response_model=list[ReviewOutComplete]
+    "/api/reviews/{state}/{city}",
+    response_model=list[ReviewOutComplete]
 )
 def get_all_reviews(
     state: str,
@@ -28,7 +29,9 @@ def create_review(
     review: ReviewIn,
     request: Request,
     repo: ReviewQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(
+            authenticator.get_current_account_data
+        ),
 ):
     added_by = account_data["id"]
     created_at = date.today()
@@ -36,7 +39,8 @@ def create_review(
 
 
 @router.get(
-    "/api/venues/{venue_id}/reviews/", response_model=list[ReviewOutComplete]
+    "/api/venues/{venue_id}/reviews/",
+    response_model=list[ReviewOutComplete]
 )
 def get_all_reviews_for_venue(
     venue_id: int,
@@ -46,7 +50,8 @@ def get_all_reviews_for_venue(
 
 
 @router.get(
-    "/api/venues/{venue_id}/{review_id}/", response_model=ReviewOutComplete
+    "/api/venues/{venue_id}/{review_id}/",
+    response_model=ReviewOutComplete
 )
 def get_one_review_for_venue(
     venue_id: int,
@@ -56,7 +61,10 @@ def get_one_review_for_venue(
     return repo.get_one_review_for_venue(venue_id, review_id)
 
 
-# @router.delete("/api/venues/{venue_id}/{review_id}", response_model=ReviewOut)
+# @router.delete(
+    # "/api/venues/{venue_id}/{review_id}",
+    # response_model=ReviewOut
+# )
 # def delete_review(
 #     review_id: int,
 #     repo: ReviewQueries = Depends(),
