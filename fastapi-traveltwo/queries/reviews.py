@@ -90,6 +90,54 @@ class ReviewQueries:
                     print(e)
                     return {"message": "Could not get the review"}
 
+    def get_all_reviews_for_username(
+        self, username: str
+    ) -> list[ReviewOutComplete]:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT rev.id,
+                        v.id AS venue_id,
+                        v.venue_name AS venue_name,
+                        v.num_and_street AS num_and_street,
+                        v.city AS city,
+                        v.state AS state,
+                        v.zip AS zip,
+                        v.description_text AS description_text,
+                        rev.review_description,
+                        rev.rating,
+                        rev.picture,
+                        rev.created_at,
+                        a.id AS added_by,
+                        a.username AS username,
+                        a.full_name AS full_name,
+                        a.email AS email,
+                        a.avatar AS avatar,
+                        a.is_admin AS is_admin
+                    FROM reviews rev
+                    INNER JOIN venues v
+                        ON (v.id = rev.venue_id)
+                    INNER JOIN accounts a
+                        ON (a.id = rev.added_by)
+                    WHERE a.username = %s
+                    ORDER BY rev.created_at;
+                    """,
+                    [username],
+                )
+
+                try:
+                    results = []
+                    for row in cur.fetchall():
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                        results.append(record)
+                    return results
+                except Exception as e:
+                    print(e)
+                    return {"message": "Could not get all reviews for this username"}
+
     def get_all_reviews_for_venue(
         self, venue_id: int
     ) -> list[ReviewOutComplete]:
