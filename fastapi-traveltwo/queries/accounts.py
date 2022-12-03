@@ -55,9 +55,9 @@ class AccountQueries:
                 return results
 
     def get_another_account(
-            self,
-            account_id: int
-        ) -> AccountOutConfidential:
+        self,
+        account_id: int
+    ) -> AccountOutConfidential:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(

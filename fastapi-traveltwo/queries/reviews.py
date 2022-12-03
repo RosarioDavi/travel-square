@@ -131,8 +131,9 @@ class ReviewQueries:
                         results.append(record)
                     return results
                 except Exception:
-                    print(e)
-                    return {"message": "Could not get all reviews for this username"}
+                    return {
+                        "message": "Could not get reviews for this username"
+                    }
 
     def get_all_reviews_for_venue(
         self, venue_id: int
