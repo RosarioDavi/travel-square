@@ -36,7 +36,10 @@ def get_all(
     return repo.get_all()
 
 
-@router.put("/api/requests/{request_id}/", response_model=Union[RequestOut, Error])
+@router.put(
+        "/api/requests/{request_id}/",
+        response_model=Union[RequestOut, Error]
+    )
 def update_request(
     request_id: int,
     vacation: RequestIn,
@@ -53,7 +56,10 @@ def delete_request(
     return repo.delete(request_id)
 
 
-@router.get("/api/requests/{request_id}/", response_model=Optional[RequestOut])
+@router.get(
+        "/api/requests/{request_id}/",
+        response_model=Optional[RequestOut]
+    )
 def get_one_request(
     request_id: int,
     repo: RequestQueries = Depends(),
@@ -73,7 +79,10 @@ def create_comment(
     return repo.create(comment, commenter, created_at)
 
 
-@router.get("/api/requests/{request_id}/comments/", response_model=Union[list[CommentOutWithUsername], Error])
+@router.get(
+        "/api/requests/{request_id}/comments/",
+        response_model=Union[list[CommentOutWithUsername], Error]
+    )
 def get_all_comments_for_one_request(
     request_id: int,
     repo: CommentQueries = Depends(),

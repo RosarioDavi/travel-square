@@ -1,10 +1,19 @@
 from fastapi import APIRouter, Depends, Response, Request
 from typing import Optional
 from typing import Union
-from queries.venues import VenueIn, VenueOut, VenueCompleteOut, VenueRepository, Error, CategoryIn, CategoryOut, CategoryRepository
+from queries.venues import (
+        VenueIn,
+        VenueOut,
+        VenueCompleteOut,
+        VenueRepository,
+        Error,
+        CategoryIn,
+        CategoryOut,
+        CategoryRepository
+    )
 from authenticator import authenticator
 
-router  = APIRouter()
+router = APIRouter()
 
 
 # Admin
@@ -14,7 +23,7 @@ def create_category(
     repo: CategoryRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    if account_data['is_admin'] == True:
+    if account_data['is_admin'] is True:
         return repo.create(category)
 
 
@@ -52,6 +61,7 @@ def get_one_venue(
         response.status_code = 404
     return venue
 
+
 # Admin to approve venues
 @router.get("/api/venues/unapproved/", response_model=list[VenueOut])
 def get_unapproved_venues(
@@ -69,11 +79,14 @@ def get_all(
 
 
 # User
-@router.get("/api/venues/{state}/{city}", response_model=list[VenueCompleteOut])
+@router.get(
+        "/api/venues/{state}/{city}",
+        response_model=list[VenueCompleteOut]
+    )
 def get_all_approved(
     state: str,
     city: str,
-    repo: VenueRepository = Depends (),
+    repo: VenueRepository = Depends(),
 ):
     return repo.get_all_complete(state, city)
 
@@ -86,7 +99,7 @@ def update_venue(
     repo: VenueRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, VenueOut]:
-    if account_data['is_admin'] == True:
+    if account_data['is_admin'] is True:
         return repo.update(venue_id, venue)
 
 
@@ -97,5 +110,5 @@ def delete_venue(
     repo: VenueRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
-    if account_data['is_admin'] == True:
+    if account_data['is_admin'] is True:
         return repo.delete(venue_id)
