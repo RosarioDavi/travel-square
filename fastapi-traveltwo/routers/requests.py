@@ -35,8 +35,9 @@ def get_all(
 ):
     return repo.get_all()
 
-@router.get("/api/accounts/{username}/requests/", response_model=list[RequestOutWithUsername])
-def get_all(
+@router.get("/api/accounts/{username}/requests/",
+    response_model=list[RequestOutWithUsername])
+def get_all_request_for_username(
     username: str,
     repo: RequestQueries = Depends(),
 ):
