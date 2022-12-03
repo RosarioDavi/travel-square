@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response, Request
-from queries.reviews import ReviewQueries, ReviewIn, ReviewOut
+from queries.reviews import ReviewQueries, ReviewIn, ReviewOut, ReviewOutComplete
 from authenticator import authenticator
 from datetime import date
 
@@ -7,7 +7,7 @@ from datetime import date
 router = APIRouter()
 
 
-@router.get("/api/reviews/{state}/{city}", response_model=list[ReviewOut])
+@router.get("/api/reviews/{state}/{city}", response_model=list[ReviewOutComplete])
 def get_all_reviews(
     state: str,
     city: str,
@@ -21,19 +21,22 @@ def create_review(
     review: ReviewIn,
     request: Request,
     repo: ReviewQueries = Depends(),
-    # account_data: dict = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
+    added_by = account_data['id']
     created_at = date.today()
-    return repo.create_review(review, created_at)
+    return repo.create_review(review, added_by, created_at)
 
-@router.get("/api/venues/{venue_id}/reviews/", response_model=list[ReviewOut])
+
+@router.get("/api/venues/{venue_id}/reviews/", response_model=list[ReviewOutComplete])
 def get_all_reviews_for_venue(
     venue_id: int,
     repo: ReviewQueries = Depends(),
 ):
     return repo.get_all_reviews_for_venue(venue_id)
 
-@router.get("/api/venues/{venue_id}/{review_id}/", response_model=ReviewOut)
+
+@router.get("/api/venues/{venue_id}/{review_id}/", response_model=ReviewOutComplete)
 def get_one_review_for_venue(
     venue_id: int,
     review_id: int,
@@ -45,5 +48,7 @@ def get_one_review_for_venue(
 # def delete_review(
 #     review_id: int,
 #     repo: ReviewQueries = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
 # ) -> bool:
-#     return repo.delete_review(review_id)
+#     if account_data['is_admin'] == True:
+#         return repo.delete_review(review_id)

@@ -1,6 +1,6 @@
 import React from "react";
-import { useGetTokenQuery } from "./store/authApi";
-import TextExample from './Card';
+import { useGetTokenQuery } from "../store/authApi";
+// import TextExample from './Card';
 
 function ExplorePage() {
   const {data: tokenData} = useGetTokenQuery()
@@ -16,7 +16,7 @@ function ExplorePage() {
           </div>
         </div>
         <div>
-          <TextExample />
+          {/* <TextExample /> */}
         </div>
 
     </div>

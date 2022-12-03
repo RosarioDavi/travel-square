@@ -43,10 +43,12 @@ not_authorized = HTTPException(
     headers={"WWW-Authenticate": "Bearer"},
 )
 
+
 # User finding a lot of users
 @router.get("/api/accounts/", response_model=list[AccountWithoutPassword])
 def get_all_accounts(repo: AccountQueries = Depends()):
     return repo.get_all_accounts()
+
 
 # User finding another user
 @router.get("/api/accounts/users/{account_id}", response_model=AccountWithoutPassword)
@@ -82,7 +84,6 @@ async def create_account(
     response: Response,
     accounts: AccountQueries = Depends(),
 ):
-
     hashed_password = authenticator.hash_password(info.password)
     gravatar_email = sanitize_email(info.email)
     g_holder = Gravatar(gravatar_email)
@@ -110,15 +111,6 @@ async def create_account(
         )
     token = await authenticator.login(response, request, form, accounts)
     return AccountToken(account=account, **token.dict())
-
-
-# @router.delete("/api/accounts/{account_id}", response_model=AccountOut)
-# def delete_account(
-#     account_id: int,
-#     repo: AccountQueries = Depends()
-# ):
-#     repo.delete_account(account_id)
-#     return True
 
 
 @router.get("/token", response_model=AccountToken | None)
@@ -153,4 +145,13 @@ async def get_token(
 #     if "admin" not in account["roles"]:
 #         raise not_authorized
 #     repo.delete_sessions(account_id)
+#     return True
+
+
+# @router.delete("/api/accounts/{account_id}", response_model=AccountOut)
+# def delete_account(
+#     account_id: int,
+#     repo: AccountQueries = Depends()
+# ):
+#     repo.delete_account(account_id)
 #     return True

@@ -1,9 +1,7 @@
-import os
 from pydantic import BaseModel
 from typing import List, Optional, Union
-from psycopg_pool import ConnectionPool
+from queries.pool import pool
 
-pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
 class Error(BaseModel):
     message:str
@@ -26,7 +24,6 @@ class VenueIn(BaseModel):
     zip: str
     category_id: int
     description_text: str
-    added_by: int
 
 
 class VenueOut(BaseModel):
@@ -103,7 +100,7 @@ class CategoryRepository:
 
 class VenueRepository:
     # User
-    def create(self, venue: VenueIn, approved: bool) -> VenueOut:
+    def create(self, venue: VenueIn, added_by: int, approved: bool) -> VenueOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -122,7 +119,7 @@ class VenueRepository:
                         venue.zip,
                         venue.category_id,
                         venue.description_text,
-                        venue.added_by,
+                        added_by,
                         approved
                     ]
                 )
@@ -266,7 +263,7 @@ class VenueRepository:
                 except Exception as e:
                     return {"message": "Could not get all Venues"}
 
-    # User kept at false until redux done
+    # User kept at all venues for now
     def get_all_complete(self, state: str, city: str) -> list[VenueCompleteOut]:
         with pool.connection() as conn:
             with conn.cursor() as cur:

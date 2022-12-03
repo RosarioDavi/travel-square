@@ -63,6 +63,9 @@ function Navigation() {
                 <NavLink to="/request"> request</NavLink>
               </li>
               <li>
+                <NavLink to="/admin"> admin</NavLink>
+              </li>
+              <li>
                 <LogoutModal/>
               </li>
             </ul>
