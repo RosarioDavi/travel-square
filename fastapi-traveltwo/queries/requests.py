@@ -77,7 +77,7 @@ class RequestQueries:
 
     def get_all_request_for_username(
         self, username: str
-    )-> list[RequestOutWithUsername]:
+    ) -> list[RequestOutWithUsername]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
