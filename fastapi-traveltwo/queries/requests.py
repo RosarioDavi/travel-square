@@ -76,8 +76,8 @@ class RequestQueries:
             return {"message": "Could not get all Requests"}
 
     def get_all_request_for_username(
-        self, username:str
-    )->list[RequestOutWithUsername]:
+        self, username: str
+    )-> list[RequestOutWithUsername]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
