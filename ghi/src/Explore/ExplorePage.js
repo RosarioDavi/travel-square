@@ -1,7 +1,6 @@
 import React from "react";
-import { useGetTokenQuery } from "../store/authApi";
-import TextExample from '../Card';
-import { Link } from 'react-router-dom';
+import { useGetTokenQuery } from "./store/authApi";
+import TextExample from './Card';
 
 function VenueColumn(props) {
   return (
@@ -84,15 +83,8 @@ class ExplorePage extends React.Component {
             </p>
           </div>
         </div>
-        <div className="container">
-          <h1>Venues</h1>
-          <div className="row">
-            {this.state.venueColumns.map((venueList, index) => {
-              return (
-                <venueColumn key={index} list={venueList} />
-              );
-            })}
-          </div>
+        <div>
+          <TextExample />
         </div>
       </>
     );

@@ -1,8 +1,5 @@
-import os
 from pydantic import BaseModel
-from psycopg_pool import ConnectionPool
-
-pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
+from queries.pool import pool
 
 
 class DuplicateAccountError(ValueError):
@@ -26,17 +23,16 @@ class AccountOut(BaseModel):
     is_admin: bool
 
 
-class AccountWithoutPassword(BaseModel):
+class AccountOutConfidential(BaseModel):
     id: int
     username: str
     full_name: str
-    email: str
     avatar: str | None
     is_admin: bool
 
 
 class AccountQueries:
-    def get_all_accounts(self) -> list[AccountWithoutPassword]:
+    def get_all_accounts(self) -> list[AccountOutConfidential]:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -44,7 +40,6 @@ class AccountQueries:
                     SELECT id,
                         username,
                         full_name,
-                        email,
                         avatar,
                         is_admin
                     FROM accounts
@@ -59,7 +54,10 @@ class AccountQueries:
                     results.append(record)
                 return results
 
-    def get_another_account(self, account_id: int) -> AccountWithoutPassword:
+    def get_another_account(
+        self,
+        account_id: int
+    ) -> AccountOutConfidential:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -67,7 +65,6 @@ class AccountQueries:
                     SELECT id,
                         username,
                         full_name,
-                        email,
                         avatar,
                         is_admin
                     FROM accounts
@@ -83,6 +80,7 @@ class AccountQueries:
                         record[column.name] = row[i]
                 return record
 
+    # Used by authenticator
     def get_auth_account(self, username: str) -> AccountOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -113,7 +111,7 @@ class AccountQueries:
         account: AccountIn,
         hashed_password: str,
         avatar: str,
-        is_admin: bool
+        is_admin: bool,
     ) -> AccountOut:
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -143,8 +141,8 @@ class AccountQueries:
                         account.email,
                         hashed_password,
                         avatar,
-                        is_admin
-                        ]
+                        is_admin,
+                    ],
                 )
                 record = None
                 row = cur.fetchone()

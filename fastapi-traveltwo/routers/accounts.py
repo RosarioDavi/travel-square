@@ -16,9 +16,9 @@ from pydantic import BaseModel
 from queries.accounts import (
     AccountIn,
     AccountOut,
-    AccountWithoutPassword,
+    AccountOutConfidential,
     AccountQueries,
-    DuplicateAccountError
+    DuplicateAccountError,
 )
 
 router = APIRouter()
@@ -43,33 +43,21 @@ not_authorized = HTTPException(
     headers={"WWW-Authenticate": "Bearer"},
 )
 
+
 # User finding a lot of users
-@router.get("/api/accounts/", response_model=list[AccountWithoutPassword])
+@router.get("/api/accounts/", response_model=list[AccountOutConfidential])
 def get_all_accounts(repo: AccountQueries = Depends()):
     return repo.get_all_accounts()
 
+
 # User finding another user
-@router.get("/api/accounts/users/{account_id}", response_model=AccountWithoutPassword)
+@router.get(
+    "/api/accounts/users/{account_id}", response_model=AccountOutConfidential
+)
 def get_another_account(
-    account_id: int,
-    response: Response,
-    repo: AccountQueries = Depends()
+    account_id: int, response: Response, repo: AccountQueries = Depends()
 ):
     account = repo.get_another_account(account_id)
-    if account is None:
-        response.status_code = 404
-    return account
-
-
-# Current logged in user
-@router.get("/api/accounts/{account_id}", response_model=AccountOut)
-def get_account(
-    account_id: int,
-    response: Response,
-    repo: AccountQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    account = repo.get(account_id)
     if account is None:
         response.status_code = 404
     return account
@@ -82,49 +70,34 @@ async def create_account(
     response: Response,
     accounts: AccountQueries = Depends(),
 ):
-
     hashed_password = authenticator.hash_password(info.password)
     gravatar_email = sanitize_email(info.email)
     g_holder = Gravatar(gravatar_email)
     avatar = g_holder.get_image()
     # Hardcoded logic for username based admin:
     is_admin = False
-    admin_accounts = ['muhammad', 'lena', 'sarah', 'rosario']
+    admin_accounts = ["muhammad", "lena", "sarah", "rosario"]
     if info.username in admin_accounts:
         is_admin = True
     try:
         account = accounts.create_account(
-            info,
-            hashed_password,
-            avatar,
-            is_admin
+            info, hashed_password, avatar, is_admin
         )
     except DuplicateAccountError as exc:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials",
         ) from exc
-    form = AccountForm(
-        username=info.username,
-        password=info.password
-        )
+    form = AccountForm(username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, accounts)
     return AccountToken(account=account, **token.dict())
 
 
-# @router.delete("/api/accounts/{account_id}", response_model=AccountOut)
-# def delete_account(
-#     account_id: int,
-#     repo: AccountQueries = Depends()
-# ):
-#     repo.delete_account(account_id)
-#     return True
-
-
+# Returns current user's info for Redux
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
-    account: dict = Depends(authenticator.try_get_current_account_data)
+    account: dict = Depends(authenticator.try_get_current_account_data),
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
         return {
@@ -132,6 +105,17 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
+
+
+@router.delete("/api/accounts/{account_id}")
+def delete_account(
+    account_id: int,
+    repo: AccountQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    if account_data['is_admin'] is True:
+        repo.delete_account(account_id)
+        return True
 
 
 # @router.get("/api/accounts/search/{keyword}", response_model=AccountsOut)
@@ -154,3 +138,17 @@ async def get_token(
 #         raise not_authorized
 #     repo.delete_sessions(account_id)
 #     return True
+
+
+# Current logged in user
+# @router.get("/api/accounts/{account_id}", response_model=AccountOut)
+# def get_account(
+#     account_id: int,
+#     response: Response,
+#     repo: AccountQueries = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+#     account = repo.get(account_id)
+#     if account is None:
+#         response.status_code = 404
+#     return account
