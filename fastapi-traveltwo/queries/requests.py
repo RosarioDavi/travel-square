@@ -22,6 +22,9 @@ class RequestOut(BaseModel):
 class RequestOutWithUsername(BaseModel):
     id: int
     username: str
+    user_id: int
+    full_name: str
+    is_admin: bool
     txt: str
     created_at: date
 
@@ -43,6 +46,9 @@ class CommentOutWithUsername(BaseModel):
     id: int
     request_id: int
     username: str
+    user_id: int
+    full_name: str
+    is_admin: bool
     txt: str
     created_at: date
 
@@ -85,6 +91,9 @@ class RequestQueries:
                         """
                         SELECT r.id AS id,
                                 a.username AS username,
+                                a.id AS user_id,
+                                a.full_name AS fullname,
+                                a.is_admin AS is_admin,
                                 r.txt AS txt,
                                 r.created_at AS created_at
                         FROM requests r
@@ -228,6 +237,9 @@ class CommentQueries:
                         SELECT c.id,
                             r.id AS request_id,
                             a.username AS username,
+                            a.id AS user_id,
+                            a.full_name AS fullname,
+                            a.is_admin AS is_admin,
                             c.txt AS txt,
                             c.created_at AS created_at
                         FROM comments c
