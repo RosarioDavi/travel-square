@@ -53,7 +53,7 @@ export function SignupModal() {
             setEmail("");
             setPassword("");
             handleClose();
-            navigate("/")
+            navigate("/");
         } else if (result.isError) {
             setError(result.error.data.detail)
         }
