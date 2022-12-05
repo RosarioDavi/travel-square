@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ExplorePage from "./ExplorePage";
+import ExplorePage from "./Explore/ExplorePage";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
