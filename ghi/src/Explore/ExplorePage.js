@@ -1,94 +1,77 @@
-import React from "react";
-import { useGetTokenQuery } from "./store/authApi";
-import TextExample from './Card';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/esm/Button';
+import { useState, useEffect } from "react";
+import { useGetAccountsQuery } from "../store/accountsApi";
 
-function VenueColumn(props) {
-  return (
-    <div className="col">
-      {props.list.map(data => {
-        const venue = data.venue.id;
-        return (
-          <div key={venue.id} className="card mb-3 shadow">
-            <div className="card-body">
-              <h5 className="card-title">{venue.name}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">
-                {venue.id}
-              </h6>
-              <p className="card-text">
-                {venue.description}
-              </p>
-            </div>
-            <div className="card-footer">
-              <Link href="#">Write A Review</Link>
-              <Link href="#">See All Reviews</Link>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+export function Explore() {
+    // const { data: tokenData} = useGetAccountsQuery();
+    const [venues, setVenues] = useState([]);
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
 
-class ExplorePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      venueColumns: [[], [], []],
-    };
-  }
+    useEffect(() => {
+        fetchData()
 
-  async componentDidMount() {
-    const url = 'http://localhost:8000/api/venues/';
-
-    try {
-      const response = await fetch(url);
-      if (response.ok) {
-
-        const data = await response.json();
-
-        // const responses = await Promise.all(requests);
+        }, []);
 
 
-        const venueColumns = [[], [], []];
-        let i = 0;
-        for (const venueResponse of response) {
-          if (venueResponse.ok) {
-            const details = await venueResponse.json();
-            venueColumns[i].push(details);
-            i = i + 1;
-            if (i > 2) {
-              i = 0;
-            }
-          } else {
-            console.error(venueResponse);
-          }
-        }
-
-        this.setState({venueColumns: venueColumns});
-      }
-    } catch (e) {
-      console.error(e);
+    const fetchData = async () => {
+            const VenuesUrl = `http://localhost:8000/api/venues/`
+            const response = await fetch(VenuesUrl);
+            const newData = await response.json();
+            setVenues(newData);
     }
-  }
 
-  render() {
+    // handleSubmit(e){
+    //   e.preventDefault();
+    //   city({city})
+    // }
+
+
+
     return (
-      <>
-        <div className="px-4 py-5 my-5 mt-0 text-center bg-info">
-          <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" />
-          <h1 className="display-5 fw-bold">Explore!</h1>
-          <div className="col-lg-6 mx-auto">
-            <p className="lead mb-4">
-              Oh the places you'll go!.
-            </p>
-          </div>
-        </div>
-        <div>
-          <TextExample />
-        </div>
-      </>
-    );
-  }
-}
+        <>
+        {/* <form onSubmit={handleSubmit}>
+          <input type="text" label="Enter City" value={city} id="city" onChange={(e) => setCity(e.target.value)}/>
+          <input type="text" label="Enter State" value={state} id="state" onChange={(e) => setState(e.target.value)}/>
+          <button type="submit" className="btn btn-outline-success">
+            Submit
+          </button>
 
-export default ExplorePage;
+
+        </form> */}
+        <div className='container' style={{mt:'5rem'}}>
+        <div className='d-flex justify-content-center'>
+            <div className='row'>
+                <div className='col'>
+                {venues.map(venue => {
+                    return (
+                        <Card style={{margin:'1rem'}} key={venue.id}>
+                            <Card.Body>
+                                <Card.Title className='d-flex justify-content-center'>{venue.venue_name}</Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted d-flex justify-content-center">Category: {venue.category_id}</Card.Subtitle>
+                                <Card.Text className='d-flex justify-content-center'>
+                                    {venue.num_and_street}, {venue.city}, {venue.state}, {venue.zip}
+                                </Card.Text>
+                                <Card.Text className='d-flex justify-content-center'>
+                                    {venue.description_text}
+                                </Card.Text>
+                                <Card.Text className='d-flex justify-content-center'>
+                                    by user: {venue.added_by}
+                                </Card.Text>
+                                <div className='d-flex justify-content-center'>
+                                <Button>Review</Button>
+                                <Button>Delete</Button>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                        )
+                    })}
+                </div>
+            </div>
+        </div>
+        </div>
+        </>
+    )
+}
+export default Explore
