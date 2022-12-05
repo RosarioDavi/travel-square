@@ -3,37 +3,40 @@ import { NavLink } from "react-router-dom";
 // import Container from "react-bootstrap/Container";
 // import Nav from "react-bootstrap/Nav";
 // import Navbar from "react-bootstrap/Navbar";
-import './Nav.css';
+import "./Nav.css";
 import { LoginModal } from "./Accounts/LoginModal";
 import { LogoutModal } from "./Accounts/LogoutModal";
 import { SignupModal } from "./Accounts/SignupModal";
-import { useGetTokenQuery } from './store/authApi';
+import { useGetTokenQuery } from "./store/authApi";
 
 function Navigation() {
-
-  const {data: tokenData} = useGetTokenQuery()
+  const { data: tokenData } = useGetTokenQuery();
   if (!tokenData) {
     return (
       <>
         <div className="container">
           <header>
-            <h2><a href="#"><i className="ion-plane"></i>travel<sup>2</sup></a></h2>
+            <h2>
+              <a href="#">
+                <i className="ion-plane"></i>travel<sup>2</sup>
+              </a>
+            </h2>
             <nav>
               <ul>
                 <li>
                   <NavLink to="/"> home</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/explore"> explore</NavLink>
+                  <NavLink to="/explore"> explore</NavLink>
                 </li>
                 <li>
-                  <a href="#" title="request"> request</a>
+                  <NavLink to="/request"> Request</NavLink>
                 </li>
                 <li>
-                  <SignupModal/>
+                  <SignupModal />
                 </li>
                 <li>
-                  <LoginModal/>
+                  <LoginModal />
                 </li>
               </ul>
             </nav>
@@ -44,34 +47,34 @@ function Navigation() {
   } else if (tokenData) {
     return (
       <>
-      <div className="container">
-        <header>
-          <h2>
-            <a href="#">
-              <i className="ion-plane"></i>travel<sup>2</sup>
-            </a>
-          </h2>
-          <nav>
-            <ul>
-              <li>
-                <NavLink to="/"> home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/explore"> explore</NavLink>
-              </li>
-              <li>
-                <NavLink to="/request"> request</NavLink>
-              </li>
-              <li>
-                <NavLink to="/admin"> admin</NavLink>
-              </li>
-              <li>
-                <LogoutModal/>
-              </li>
-            </ul>
-          </nav>
-        </header>
-      </div>
+        <div className="container">
+          <header>
+            <h2>
+              <a href="#">
+                <i className="ion-plane"></i>travel<sup>2</sup>
+              </a>
+            </h2>
+            <nav>
+              <ul>
+                <li>
+                  <NavLink to="/"> home</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/explore"> explore</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/request"> request</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/admin"> admin</NavLink>
+                </li>
+                <li>
+                  <LogoutModal />
+                </li>
+              </ul>
+            </nav>
+          </header>
+        </div>
       </>
     );
   }
