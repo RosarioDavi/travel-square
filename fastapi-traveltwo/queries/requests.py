@@ -22,6 +22,9 @@ class RequestOut(BaseModel):
 class RequestOutWithUsername(BaseModel):
     id: int
     username: str
+    user_id: int
+    full_name: str
+    is_admin: bool
     txt: str
     created_at: date
 
@@ -43,6 +46,9 @@ class CommentOutWithUsername(BaseModel):
     id: int
     request_id: int
     username: str
+    user_id: int
+    full_name: str
+    is_admin: bool
     txt: str
     created_at: date
 
@@ -74,6 +80,39 @@ class RequestQueries:
         except Exception as e:
             print(e)
             return {"message": "Could not get all Requests"}
+
+    def get_all_request_for_username(
+        self, username: str
+    ) -> list[RequestOutWithUsername]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT r.id AS id,
+                                a.username AS username,
+                                a.id AS user_id,
+                                a.full_name AS fullname,
+                                a.is_admin AS is_admin,
+                                r.txt AS txt,
+                                r.created_at AS created_at
+                        FROM requests r
+                        INNER JOIN accounts a
+                            ON (a.id = r.requester)
+                        ORDER BY r.created_at;
+                        """,
+                        [username],
+                    )
+                    results = []
+                    for row in cur.fetchall():
+                        record = {}
+                        for i, column in enumerate(cur.description):
+                            record[column.name] = row[i]
+                        results.append(record)
+                    return results
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get all Requests for this username"}
 
     def get_one(self, requests_id: int) -> Optional[RequestOut]:
         try:
@@ -198,6 +237,9 @@ class CommentQueries:
                         SELECT c.id,
                             r.id AS request_id,
                             a.username AS username,
+                            a.id AS user_id,
+                            a.full_name AS fullname,
+                            a.is_admin AS is_admin,
                             c.txt AS txt,
                             c.created_at AS created_at
                         FROM comments c
