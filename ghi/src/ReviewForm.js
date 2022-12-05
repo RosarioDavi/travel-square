@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
-import { useLogInMutation, useGetTokenQuery } from '../store/authApi';
+// import { useGetTokenQuery } from '../store/authApi';
 
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder } = props;
@@ -25,36 +25,36 @@ function BootstrapInputFields(props) {
 }
 
 export function CreateReviewModal() {
-  const { data: tokenData } = useGetTokenQuery();
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [createReview, result] = useLogInMutation();
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+//   const { data: tokenData } = useGetTokenQuery();
+//   const [show, setShow] = useState(false);
+//   const handleClose = () => setShow(false);
+//   const handleShow = () => setShow(true);
+//   const [createReview, result] = useLogInMutation();
+//   const [password, setPassword] = useState("");
+//   const [username, setUsername] = useState("");
+//   const [error, setError] = useState("");
+//   const navigate = useNavigate();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    createReview({ username, password });
-  }
+//   async function handleSubmit(e) {
+//     e.preventDefault();
+//     createReview({ username, password });
+//   }
 
-  useEffect(() => {
-    if (result.isSuccess) {
-      setError("");
-      setPassword("");
-      setUsername("");
-      handleClose();
-      navigate("/")
-    } else if (result.isError) {
-      setError(result.error.data.detail);
-    }
-  }, [result]);
+//   useEffect(() => {
+//     if (result.isSuccess) {
+//       setError("");
+//       setPassword("");
+//       setUsername("");
+//       handleClose();
+//       navigate("/")
+//     } else if (result.isError) {
+//       setError(result.error.data.detail);
+//     }
+//   }, [result]);
 
   return (
     <>
-    <Button variant="primary" onClick={handleShow}>
+    {/* <Button variant="primary" onClick={handleShow}>
         login
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -89,7 +89,9 @@ export function CreateReviewModal() {
           </div>
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
-      </Modal>
+      </Modal> */}
     </>
   );
 }
+
+export default CreateReviewModal;
