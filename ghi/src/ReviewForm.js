@@ -1,28 +1,28 @@
-import { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { useNavigate } from "react-router-dom";
+// import { useState, useEffect } from "react";
+// import Button from "react-bootstrap/Button";
+// import Modal from "react-bootstrap/Modal";
+// import { useNavigate } from "react-router-dom";
 // import { useGetTokenQuery } from '../store/authApi';
 
-function BootstrapInputFields(props) {
-  const { id, label, value, onChange, type, placeholder } = props;
-  return (
-    <div className="mb-3 ">
-      <label htmlFor={id} className="form-label">
-        {label}
-      </label>
-      <input
-        value={value}
-        onChange={onChange}
-        required
-        type={type}
-        className="form-control"
-        id={id}
-        placeholder={placeholder}
-      />
-    </div>
-  );
-}
+// function BootstrapInputFields(props) {
+//   const { id, label, value, onChange, type, placeholder } = props;
+//   return (
+//     <div className="mb-3 ">
+//       <label htmlFor={id} className="form-label">
+//         {label}
+//       </label>
+//       <input
+//         value={value}
+//         onChange={onChange}
+//         required
+//         type={type}
+//         className="form-control"
+//         id={id}
+//         placeholder={placeholder}
+//       />
+//     </div>
+//   );
+// }
 
 export function CreateReviewModal() {
 //   const { data: tokenData } = useGetTokenQuery();
