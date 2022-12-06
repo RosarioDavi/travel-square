@@ -21,6 +21,11 @@ function Navigation() {
                 <i className="ion-plane"></i>travel<sup>2</sup>
               </a>
             </h2>
+            <h2>
+              <a href="#">
+                travel<sup>2</sup>
+              </a>
+            </h2>
             <nav>
               <ul>
                 <li>
@@ -31,6 +36,13 @@ function Navigation() {
                 </li>
                 <li>
                   <NavLink to="/request"> Request</NavLink>
+                  <NavLink to="/review"> review</NavLink>
+                </li>
+                <li>
+                  <a href="#" title="request">
+                    {" "}
+                    request
+                  </a>
                 </li>
                 <li>
                   <SignupModal />
@@ -61,6 +73,37 @@ function Navigation() {
                 </li>
                 <li>
                   <NavLink to="/explore"> explore</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/request"> request</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/admin"> admin</NavLink>
+                </li>
+                <li>
+                  <LogoutModal />
+                </li>
+              </ul>
+            </nav>
+          </header>
+        </div>
+        <div className="container">
+          <header>
+            <h2>
+              <a href="#">
+                travel<sup>2</sup>
+              </a>
+            </h2>
+            <nav>
+              <ul>
+                <li>
+                  <NavLink to="/"> home</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/explore"> explore</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/review"> review</NavLink>
                 </li>
                 <li>
                   <NavLink to="/request"> request</NavLink>

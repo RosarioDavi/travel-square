@@ -16,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/review" element={<CreateReviewModal />} />
           <Route path="/admin" element={<UnapprovedVenues />} />
           <Route path="/request" element={<RequestAll />} />
           <Route path="/request/new" element={<CreateRequest />} />
