@@ -21,8 +21,8 @@ class RequestOut(BaseModel):
 
 class RequestOutWithUsername(BaseModel):
     id: int
-    username: str
     user_id: int
+    username: str
     full_name: str
     is_admin: bool
     txt: str
@@ -60,10 +60,13 @@ class RequestQueries:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                        SELECT r.id,
-                                a.username,
-                                r.txt,
-                                r.created_at
+                        SELECT r.id AS id,
+                                a.id AS user_id,
+                                a.username AS username,
+                                a.full_name AS full_name,
+                                a.is_admin AS is_admin,
+                                r.txt AS txt,
+                                r.created_at AS created_at
                         FROM requests r
                         INNER JOIN accounts a
                             ON (a.id = r.requester)
@@ -90,9 +93,9 @@ class RequestQueries:
                     cur.execute(
                         """
                         SELECT r.id AS id,
-                                a.username AS username,
                                 a.id AS user_id,
-                                a.full_name AS fullname,
+                                a.username AS username,
+                                a.full_name AS full_name,
                                 a.is_admin AS is_admin,
                                 r.txt AS txt,
                                 r.created_at AS created_at
@@ -101,7 +104,7 @@ class RequestQueries:
                             ON (a.id = r.requester)
                         ORDER BY r.created_at;
                         """,
-                        [username],
+                        [username]
                     )
                     results = []
                     for row in cur.fetchall():
@@ -208,21 +211,21 @@ class RequestQueries:
     #         print(e)
     #         return {"message": "Could not update that request"}
 
-    # def delete(self, requests_id: int) -> bool:
-    #     try:
-    #         with pool.connection() as conn:
-    #             with conn.cursor() as cur:
-    #                 cur.execute(
-    #                     """
-    #                     DELETE FROM requests
-    #                     WHERE id = %s
-    #                     """,
-    #                     [requests_id]
-    #                 )
-    #                 return True
-    #     except Exception as e:
-    #         print(e)
-    #         return False
+    def delete(self, requests_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        DELETE FROM requests
+                        WHERE id = %s
+                        """,
+                        [requests_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
 
 
 class CommentQueries:
@@ -238,7 +241,7 @@ class CommentQueries:
                             r.id AS request_id,
                             a.username AS username,
                             a.id AS user_id,
-                            a.full_name AS fullname,
+                            a.full_name AS full_name,
                             a.is_admin AS is_admin,
                             c.txt AS txt,
                             c.created_at AS created_at
