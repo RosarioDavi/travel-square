@@ -39,12 +39,6 @@ function Navigation() {
                   <NavLink to="/review"> review</NavLink>
                 </li>
                 <li>
-                  <a href="#" title="request">
-                    {" "}
-                    request
-                  </a>
-                </li>
-                <li>
                   <SignupModal />
                 </li>
                 <li>
@@ -87,7 +81,7 @@ function Navigation() {
             </nav>
           </header>
         </div>
-        <div className="container">
+        {/* <div className="container">
           <header>
             <h2>
               <a href="#">
@@ -117,7 +111,7 @@ function Navigation() {
               </ul>
             </nav>
           </header>
-        </div>
+        </div> */}
       </>
     );
   }
