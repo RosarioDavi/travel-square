@@ -17,9 +17,7 @@ function Navigation() {
         <div className="container">
           <header>
             <h2>
-              <a href="#">
-                travel<sup>2</sup>
-              </a>
+              <a href="#">travel<sup>2</sup></a>
             </h2>
             <nav>
               <ul>
