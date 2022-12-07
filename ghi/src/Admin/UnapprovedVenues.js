@@ -1,15 +1,14 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/esm/Button';
 import { useState, useEffect } from "react";
-import { useGetAccountsQuery } from "../store/accountsApi";
+import { useGetTokenQuery } from "../store/authApi";
 
 export function UnapprovedVenues() {
-    // const { data: tokenData} = useGetAccountsQuery();
+    const { data: tokenData} = useGetTokenQuery();
     const [venues, setVenues] = useState([]);
 
     useEffect(() => {
         fetchData()
-
         }, []);
 
     const fetchData = async () => {
@@ -41,7 +40,7 @@ export function UnapprovedVenues() {
                                     by user: {venue.added_by}
                                 </Card.Text>
                                 <div className='d-flex justify-content-center'>
-                                <Button></Button>
+                                <Button>Update</Button>
                                 <Button>Delete</Button>
                                 </div>
                             </Card.Body>
