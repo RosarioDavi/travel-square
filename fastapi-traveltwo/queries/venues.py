@@ -86,7 +86,7 @@ class CategoryRepository:
                     """
                     SELECT *
                     FROM categories
-                    ORDER BY category_name
+                    ORDER BY id
                     """
                 )
                 results = []
