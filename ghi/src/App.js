@@ -5,7 +5,8 @@ import Navigation from "./Nav";
 import HomePage from "./HomePage";
 import { UnapprovedVenues } from "./Admin/UnapprovedVenues";
 import CreateRequest from "./Request/CreateRequest";
-import RequestAll from "./Request/RequestList";
+
+import RequestList from "./Request/RequestList";
 
 function App() {
   return (
@@ -16,9 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/review" element={<CreateReviewModal />} />
+          {/* <Route path="/review" element={<CreateReviewModal />} /> */}
           <Route path="/admin" element={<UnapprovedVenues />} />
-          <Route path="/request" element={<RequestAll />} />
+          <Route path="/request" element={<RequestList />} />
           <Route path="/request/new" element={<CreateRequest />} />
         </Routes>
       </div>
