@@ -1,3 +1,8 @@
+12/06/22
+- working on the reviews modal. pretty frustrating that it still isn't working
+- have a feeling that I'll need to change the ReviewIn model so that it takes in the venue name on the form since users won't know what the corresponding venue_ids are
+- pushed code that should be mostly correct. still working through the bugs
+
 12/05/22
 - added get all reviews for username, and it's working in FastAPI
 - still unable to get reviews modal to show properly. Muhammad says that the best way to learn is to work through trial and error
