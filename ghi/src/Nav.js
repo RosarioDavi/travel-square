@@ -18,14 +18,7 @@ function Navigation() {
         <div className="container">
           <header>
             <h2>
-              <a href="#">
-                <i className="ion-plane"></i>travel<sup>2</sup>
-              </a>
-            </h2>
-            <h2>
-              <a href="#">
-                travel<sup>2</sup>
-              </a>
+              <a href="#">travel<sup>2</sup></a>
             </h2>
             <nav>
               <ul>
@@ -36,8 +29,10 @@ function Navigation() {
                   <NavLink to="/explore"> explore</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/request"> Request</NavLink>
                   <NavLink to="/review"> review</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/request"> request</NavLink>
                 </li>
                 <li>
                   <SignupModal />
@@ -57,9 +52,7 @@ function Navigation() {
         <div className="container">
           <header>
             <h2>
-              <a href="#">
-                <i className="ion-plane"></i>travel<sup>2</sup>
-              </a>
+              <a href="#">travel<sup>2</sup></a>
             </h2>
             <nav>
               <ul>
@@ -68,6 +61,9 @@ function Navigation() {
                 </li>
                 <li>
                   <NavLink to="/explore"> explore</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/review"> review</NavLink>
                 </li>
                 <li>
                   <NavLink to="/request"> request</NavLink>

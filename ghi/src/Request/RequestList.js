@@ -3,7 +3,7 @@ import Button from "react-bootstrap/esm/Button";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-export default function RequestAll() {
+export default function RequestList() {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
@@ -19,15 +19,17 @@ export default function RequestAll() {
 
   return (
     <>
-      <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <Link
-          to="/request/new"
-          className="btn btn-outline-primary btn-lg px-2 gap-1"
-        >
-          Create A New Request
+      <div
+        className="d-grid gap-2 d-sm-flex justify-content-sm-center"
+        style={{ marginTop: "50px" }}
+      >
+        <Link to="/request/new">
+          <Button className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            Create A New Request
+          </Button>
         </Link>
       </div>
-      <div className="container" style={{ mt: "5rem" }}>
+      <div className="container" style={{ mt: "5rem", overflow: "auto" }}>
         <div className="d-flex justify-content-center">
           <div className="row">
             <div className="col">
@@ -47,7 +49,7 @@ export default function RequestAll() {
                       </div>
                     </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">{request.date}</small>
+                      <small className="text-muted">{request.created_at}</small>
                     </Card.Footer>
                   </Card>
                 );

@@ -1,4 +1,7 @@
-December 3, 2022
+December 6, 2022
+After a long day of struggling to get my creating a request in the frontend to work with the invalid token error I finally managed to have POST working. I did a lot of trial and error with my code and had to do a lot of researching and re-reading of the explorations in learn on FastAPI authentication. I realized that I was missing the token in how I was trying to retrieve it and fixed it after a lot of console.log statements. I also had to go back to the fastAPI backend to make sure that everything lined up to exactly how a POST request should have. I was able to successfully see my newly made post show up in my list and also got the button to link from the list to creating a new request working too. I played around with the CSS a bit and realized that I wasn't able to scroll to the bottom of my list so I added a scroll to our CSS. During this process, I realized that all of our CSS is in the Nav.css of which needs to be broken up into their individual components.
+
+December 5, 2022
 Today was a pretty productive day for me. I got get all requests to show in the frontend. Currently using cards from bootstrap to show the request and the username that made it. Will try to see if I can get the time of the request created to show on the card footer tomorrow. I also linked a create a request button in the request page so that it can direct users to the create a new request page. So far, the link doesn't bring it to the page and I am still working on it. For the create a new request page, every time I attempt to create a new request, there is a 404 error stating that the token is invalid even though I am logged in. I plan on looking over this more in depth tomorrow to see if I can fix the issues.
 
 December 2, 2022

@@ -6,7 +6,9 @@ import HomePage from "./HomePage";
 import { UnapprovedVenues } from "./Admin/UnapprovedVenues";
 import { CategoriesList } from "./Admin/CategoriesList";
 import CreateRequest from "./Request/CreateRequest";
-import RequestAll from "./Request/RequestList";
+import RequestList from "./Request/RequestList";
+// import CreateReviewModal from "./ReviewForm";
+
 
 function App() {
   return (
@@ -18,10 +20,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<ExplorePage />} />
           {/* <Route path="/review" element={<CreateReviewModal />} /> */}
-          <Route path="/unapproved" element={<UnapprovedVenues />} />
-          <Route path="/categories" element={<CategoriesList />}/>
-          <Route path="/request" element={<RequestAll />} />
+          <Route path="/request" element={<RequestList />} />
           <Route path="/request/new" element={<CreateRequest />} />
+          <Route path="/unapproved" element={<UnapprovedVenues />} />
+          <Route path="/categories" element={<CategoriesList />} />
         </Routes>
       </div>
     </BrowserRouter>

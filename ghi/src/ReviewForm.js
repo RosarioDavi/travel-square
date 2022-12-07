@@ -1,84 +1,103 @@
-// import { useState, useEffect } from "react";
-// import Button from "react-bootstrap/Button";
-// import Modal from "react-bootstrap/Modal";
-// import { useNavigate } from "react-router-dom";
-// import { useGetTokenQuery } from '../store/authApi';
+import { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { useNavigate } from "react-router-dom";
+import { useGetTokenQuery } from '../store/authApi';
 
-// function BootstrapInputFields(props) {
-//   const { id, label, value, onChange, type, placeholder } = props;
-//   return (
-//     <div className="mb-3 ">
-//       <label htmlFor={id} className="form-label">
-//         {label}
-//       </label>
-//       <input
-//         value={value}
-//         onChange={onChange}
-//         required
-//         type={type}
-//         className="form-control"
-//         id={id}
-//         placeholder={placeholder}
-//       />
-//     </div>
-//   );
-// }
+function BootstrapInputFields(props) {
+  const { id, label, value, onChange, type, placeholder } = props;
+  return (
+    <div className="mb-3 ">
+      <label htmlFor={id} className="form-label">
+        {label}
+      </label>
+      <input
+        value={value}
+        onChange={onChange}
+        required
+        type={type}
+        className="form-control"
+        id={id}
+        placeholder={placeholder}
+      />
+    </div>
+  );
+}
 
-export function CreateReviewModal() {
-//   const { data: tokenData } = useGetTokenQuery();
-//   const [show, setShow] = useState(false);
-//   const handleClose = () => setShow(false);
-//   const handleShow = () => setShow(true);
-//   const [createReview, result] = useLogInMutation();
-//   const [password, setPassword] = useState("");
-//   const [username, setUsername] = useState("");
-//   const [error, setError] = useState("");
-//   const navigate = useNavigate();
+function CreateReviewModal() {
+  const { data: tokenData } = useGetTokenQuery();
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [venue_id, setVenueId] = useState("");
+  const [review_description, setReviewDescription] = useState("");
+  const [rating, setRating] = useState("");
+  const [picture, setPicture] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-//   async function handleSubmit(e) {
-//     e.preventDefault();
-//     createReview({ username, password });
-//   }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    createReview({ username, password });
+  }
 
-//   useEffect(() => {
-//     if (result.isSuccess) {
-//       setError("");
-//       setPassword("");
-//       setUsername("");
-//       handleClose();
-//       navigate("/")
-//     } else if (result.isError) {
-//       setError(result.error.data.detail);
-//     }
-//   }, [result]);
+  useEffect(() => {
+    if (result.isSuccess) {
+      setError("");
+      setVenueId("");
+      setReviewDescription("");
+      setRating("");
+      setPicture("");
+      handleClose();
+      navigate("/")
+    } else if (result.isError) {
+      setError(result.error.data.detail);
+    }
+  }, [result]);
 
   return (
     <>
-    {/* <Button variant="primary" onClick={handleShow}>
+    <Button variant="primary" onClick={handleShow}>
         login
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Welcome back!</Modal.Title>
+          <Modal.Title>create a review</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             <form onSubmit={handleSubmit}>
                     <BootstrapInputFields
-                        id="username"
-                        label="Enter Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        id="venue_id"
+                        label="Enter Venue Name"
+                        value={venue_id}
+                        onChange={(e) => setVenueId(e.target.value)}
                         type="text"
-                        placeholder="RileyCodes"
+                        placeholder="Enter Venue Name"
                     />
                     <BootstrapInputFields
-                        id="password"
-                        label="Enter Password"
+                        id="review_description"
+                        label="Enter Review"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        type="password"
-                        placeholder="**********"
+                        onChange={(e) => setReviewDescription(e.target.value)}
+                        type="text"
+                        placeholder="Review goes here"
+                    />
+                    <BootstrapInputFields
+                        id="rating"
+                        label="Enter Rating"
+                        value={password}
+                        onChange={(e) => setRating(e.target.value)}
+                        type="number"
+                        placeholder="5"
+                    />
+                    <BootstrapInputFields
+                        id="picture"
+                        label="Enter Picture URL"
+                        value={password}
+                        onChange={(e) => setPicture(e.target.value)}
+                        type="text"
+                        placeholder="Photo goes here"
                     />
                     <button type="submit" className="btn btn-outline-success">
                         Login
@@ -89,7 +108,7 @@ export function CreateReviewModal() {
           </div>
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
-      </Modal> */}
+      </Modal>
     </>
   );
 }
