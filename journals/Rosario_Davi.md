@@ -1,3 +1,6 @@
+12/07/2022
+Today I was unsuccessful with getting the filtering/searching working. I tried a video to get a search going by using a filterCards function and using event. I had no luck. I reached out to two other clasmates and we tried a few things. We changed it to become a function and a search button. When I type into the search it refreshes but goes blank. It does not filter correctly.
+
 12/06/2022
 Today we had the pratice test so starting the project was a bit delayed. I started working on the prokected after lunch arpiund 3 oclock, but also had a CS meeting which took some time. Most my time today was researching how to implement a searchbar into the explore page. I found a video on how to create a search bar. I will try and add the search bar to search for specific cards.
 
