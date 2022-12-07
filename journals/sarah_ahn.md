@@ -1,3 +1,18 @@
+12/06/22
+- working on the reviews modal. pretty frustrating that it still isn't working
+- have a feeling that I'll need to change the ReviewIn model so that it takes in the venue name on the form since users won't know what the corresponding venue_ids are
+- pushed code that should be mostly correct. still working through the bugs
+
+12/05/22
+- added get all reviews for username, and it's working in FastAPI
+- still unable to get reviews modal to show properly. Muhammad says that the best way to learn is to work through trial and error
+- pushed some placeholder code that doesn't affect other people's sections but will still help me to work with it in my local branch
+
+12/02/22
+- Muhammad suggested working with Rosario to get all reviews for venue to work with Rosario's venue modal component
+- been working in ReviewForm.js to figure out how to get the review modal working
+- completed a React tutorial which did not help me understand how to approach my specific problem
+
 12/01/22
 - after discussing with the team, I'll be responsible for the CSS for the home page. I'm excited to get better at CSS and gain a better understanding how to make website look nice
 - spent the day going over the React hooks exploration and reading documentation
