@@ -1,8 +1,10 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
+import { useGetTokenQuery } from "../store/authApi";
 
 function CreateRequest() {
+  const { data } = useGetTokenQuery();
   const [txt, setTxt] = useState("");
 
   const handleSubmit = async (event) => {
@@ -10,9 +12,12 @@ function CreateRequest() {
     const RequestUrl = "http://localhost:8000/api/requests/";
     const fetchConfig = {
       method: "POST",
-      body: JSON.stringify(txt),
+      body: JSON.stringify({
+        txt: txt,
+      }),
       headers: {
-        "Content-Type": "application.json",
+        Authorization: `Bearer ${data.access_token}`,
+        "Content-Type": "application/json",
       },
     };
 
