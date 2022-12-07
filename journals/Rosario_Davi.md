@@ -1,5 +1,11 @@
+12/06/2022
+Today we had the pratice test so starting the project was a bit delayed. I started working on the prokected after lunch arpiund 3 oclock, but also had a CS meeting which took some time. Most my time today was researching how to implement a searchbar into the explore page. I found a video on how to create a search bar. I will try and add the search bar to search for specific cards.
+
 12/05/2022
 Today I was still working on the code to bring up some cards on the venue page. I am trying yo get a search bar by city adn state and long with cards on the page. After watching a few videos, and using Muhammads code as example I still could not get it to work. I asked Muhammad for some help and he provided it. Still nothing was working. I decided to take out the searchbar feature for now just to try to get the cards up on the page. I was able to get the cards on the page only after realizing I did not have any data in my fast api. Some cards now appear on the Venue Page. Im hoping to get the search bar functional tomorrow. 
+
+12/02/2022
+Today I am still having trouble getting the cards to show up on the explore page. I asked some other class mates and reviewd some code from pervious projects such as fearless front end. However still having trouble getting the cards to populate. I found a video that I will be watching to try and make it work.
 
 12/01/2022
 Today the team decided that I should work on getting the front end page going and work on the functionally after. After merging some changes I experienced a bug for about half the day. The bug was i could not access my explore page, it just kept bringing up the new home page. After the team took a look we were stummped and decided to ask for a seir. The fix to the problem was to make seperate compents for the homepage and the explore page. Once I made the changes I was able to get my explore page up. I was able to get 4 cards on the screen along with two buttons. Still need to work on the functionality.
