@@ -2,21 +2,15 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/esm/Button';
 import { useState, useEffect } from "react";
 import { useGetTokenQuery } from "../store/authApi";
+import { useGetUnapprovedVenuesQuery } from '../store/adminApi';
 
 export function UnapprovedVenues() {
     const { data: tokenData} = useGetTokenQuery();
-    const [venues, setVenues] = useState([]);
+    const { data: venuesData, isLoading } = useGetUnapprovedVenuesQuery();
 
-    useEffect(() => {
-        fetchData()
-        }, []);
-
-    const fetchData = async () => {
-            const UnapprovedVenuesUrl = 'http://localhost:8000/api/venues/unapproved/'
-            const response = await fetch(UnapprovedVenuesUrl);
-            const newData = await response.json();
-            setVenues(newData);
-    }
+  if (isLoading) {
+    return <progress className="progress is-primary" max="100"></progress>;
+  }
 
     return (
         <>
@@ -24,7 +18,7 @@ export function UnapprovedVenues() {
         <div className='d-flex justify-content-center'>
             <div className='row'>
                 <div className='col'>
-                {venues.map(venue => {
+                {venuesData.map(venue => {
                     return (
                         <Card style={{margin:'1rem'}} key={venue.id}>
                             <Card.Body>

@@ -29,8 +29,12 @@ def create_category(
 
 # User
 @router.get("/api/categories/", response_model=list[CategoryOut])
-def get_all_categories(repo: CategoryRepository = Depends()):
-    return repo.get_all_categories()
+def get_all_categories(
+    repo: CategoryRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    if account_data["is_admin"] is True:
+        return repo.get_all_categories()
 
 
 # User
@@ -64,16 +68,20 @@ def get_one_venue(
 @router.get("/api/venues/unapproved/", response_model=list[VenueOut])
 def get_unapproved_venues(
     repo: VenueRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.get_unapproved()
+    if account_data["is_admin"] is True:
+        return repo.get_unapproved()
 
 
 # Admin
 @router.get("/api/venues/", response_model=list[VenueOut])
 def get_all(
     repo: VenueRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.get_all()
+    if account_data["is_admin"] is True:
+        return repo.get_all()
 
 
 # User
