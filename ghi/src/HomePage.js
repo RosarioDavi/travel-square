@@ -6,7 +6,7 @@ function HomePage() {
       <h1>discover what's out there.</h1>
       <form className="flex-form">
         <label htmlFor="from">
-          <i className="ion-location"></i>
+          {/* <i className="ion-location"></i> */}
         </label>
         <input type="search" placeholder="where do you want to go?" />
         <input type="submit" value="search" />
@@ -14,7 +14,7 @@ function HomePage() {
       <div id="madeby">
         <span>
           Photo by{" "}
-          <a href="https://unsplash.com/@benblenner" target="_blank">
+          <a href="https://unsplash.com/@benblenner">
             Ben Blennerhassett
           </a>
         </span>
