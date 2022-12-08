@@ -1,8 +1,11 @@
+12/07/2022
+Today I was unsuccessful with getting the filtering/searching working. I tried a video to get a search going by using a filterCards function and using event. I had no luck. I reached out to two other clasmates and we tried a few things. We changed it to become a function and a search button. When I type into the search it refreshes but goes blank. It does not filter correctly.
+
 12/06/2022
 Today we had the pratice test so starting the project was a bit delayed. I started working on the prokected after lunch arpiund 3 oclock, but also had a CS meeting which took some time. Most my time today was researching how to implement a searchbar into the explore page. I found a video on how to create a search bar. I will try and add the search bar to search for specific cards.
 
 12/05/2022
-Today I was still working on the code to bring up some cards on the venue page. I am trying yo get a search bar by city adn state and long with cards on the page. After watching a few videos, and using Muhammads code as example I still could not get it to work. I asked Muhammad for some help and he provided it. Still nothing was working. I decided to take out the searchbar feature for now just to try to get the cards up on the page. I was able to get the cards on the page only after realizing I did not have any data in my fast api. Some cards now appear on the Venue Page. Im hoping to get the search bar functional tomorrow. 
+Today I was still working on the code to bring up some cards on the venue page. I am trying to get a search bar by city adn state and long with cards on the page. After watching a few videos, and using Muhammads code as example I still could not get it to work. I asked Muhammad for some help and he provided it. Still nothing was working. I decided to take out the searchbar feature for now just to try to get the cards up on the page. I was able to get the cards on the page only after realizing I did not have any data in my fast api. Some cards now appear on the Venue Page. Im hoping to get the search bar functional tomorrow. 
 
 12/02/2022
 Today I am still having trouble getting the cards to show up on the explore page. I asked some other class mates and reviewd some code from pervious projects such as fearless front end. However still having trouble getting the cards to populate. I found a video that I will be watching to try and make it work.
@@ -12,6 +15,7 @@ Today the team decided that I should work on getting the front end page going an
 
 11/30/2022
 Today I realized the code I wrote for create a review was written in Class component. I realized I would need to create a hook for this to work. I did not do any code, I went back to The hooks explorations and reread that. Along with some other hook videos to get a good understanding. I plan on working on the functionally and using hooks to get write a review going.
+
 11/29/2022
 This morning I woke up to a message from Lena, she figured out why there was no formating. I forgot to add the bootstraps. She added it for me, once I pulled and merged the front page had some color and formating. Through out the day I worked on the front end stuff. I was able to add a placeholder card with two buttons "create a review" and View all Reviews. These buttons do not have any functionality yet. I began trying to work on the create review js file, after I wrote some code I realized that Class based function will not work and I need to go back and watch the video on hooks and refactor some code. 
 
