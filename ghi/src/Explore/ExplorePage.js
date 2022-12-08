@@ -57,7 +57,7 @@ export function Explore() {
     const handleSubmit = async event => {
         event.preventDefault()
         setVenues(filteredVenues)
-        console.log(city, filteredVenues)
+        const filter = city.filter
     }
 
     return (
