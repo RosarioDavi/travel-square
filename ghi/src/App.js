@@ -6,8 +6,8 @@ import HomePage from "./HomePage";
 import { UnapprovedVenues } from "./Admin/UnapprovedVenues";
 import CreateRequest from "./Request/CreateRequest";
 import RequestList from "./Request/RequestList";
+import ViewComment from "./Request/ViewComment";
 // import CreateReviewModal from "./ReviewForm";
-
 
 function App() {
   return (
