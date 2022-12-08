@@ -9,6 +9,7 @@ import { LogoutModal } from "./Accounts/LogoutModal";
 import { SignupModal } from "./Accounts/SignupModal";
 import { useGetTokenQuery } from "./store/authApi";
 
+
 function Navigation() {
   const { data: tokenData } = useGetTokenQuery();
   if (!tokenData) {
@@ -16,8 +17,7 @@ function Navigation() {
       <>
         <div className="container">
           <header>
-            <h2>
-              <a href="#">travel<sup>2</sup></a>
+            <h2>travel<sup>2</sup>
             </h2>
             <nav>
               <ul>
@@ -26,9 +26,6 @@ function Navigation() {
                 </li>
                 <li>
                   <NavLink to="/explore"> explore</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/review"> review</NavLink>
                 </li>
                 <li>
                   <NavLink to="/request"> request</NavLink>
@@ -50,8 +47,7 @@ function Navigation() {
       <>
         <div className="container">
           <header>
-            <h2>
-              <a href="#">travel<sup>2</sup></a>
+            <h2>travel<sup>2</sup>
             </h2>
             <nav>
               <ul>
@@ -62,13 +58,13 @@ function Navigation() {
                   <NavLink to="/explore"> explore</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/review"> review</NavLink>
-                </li>
-                <li>
                   <NavLink to="/request"> request</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/admin"> admin</NavLink>
+                  <NavLink to="/unapproved"> unapproved venues</NavLink>
+                </li>
+                <li>
+                  <NavLink to='/categories'> categories</NavLink>
                 </li>
                 <li>
                   <LogoutModal />
@@ -77,37 +73,6 @@ function Navigation() {
             </nav>
           </header>
         </div>
-        {/* <div className="container">
-          <header>
-            <h2>
-              <a href="#">
-                travel<sup>2</sup>
-              </a>
-            </h2>
-            <nav>
-              <ul>
-                <li>
-                  <NavLink to="/"> home</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/explore"> explore</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/review"> review</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/request"> request</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/admin"> admin</NavLink>
-                </li>
-                <li>
-                  <LogoutModal />
-                </li>
-              </ul>
-            </nav>
-          </header>
-        </div> */}
       </>
     );
   }
