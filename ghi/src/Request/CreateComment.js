@@ -81,7 +81,6 @@ export default function CreateComment(props) {
               >
                 Add!
               </button>
-              <div className="text-center mt-4" style={{ color: "red" }}></div>
             </form>
           </div>
         </Modal.Body>
