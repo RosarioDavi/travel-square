@@ -2,6 +2,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/esm/Button';
 import { useState, useEffect } from "react";
 import { useGetAccountsQuery } from "../store/accountsApi";
+import "./ExplorePage.css";
+
 
 export function Explore() {
     // const { data: tokenData} = useGetAccountsQuery();
@@ -40,7 +42,7 @@ export function Explore() {
     //   setCity(filteredVenues)
     };
 
-//     const handleOptionChange = event => 
+//     const handleOptionChange = event =>
 //   {
 //     const value = event.target.value.toLowerCase();
 //     setOptions(value)
@@ -73,12 +75,12 @@ export function Explore() {
         </form> */}
 
         <div className='container' style={{mt:'5rem'}}>
-        <div className='d-flex justify-content-center'>
+        <div className='d-flex justify-content-center textbox-padding'>
             <div className='row'>
                 <div className='col'>
                 {venues.map(venue => {
                     return (
-                          <Card style={{margin:'1rem'}} key={venue.id}>
+                          <Card style={{margin:'1rem'}} key={venue.id} className='card'>
                             <Card.Body>
                                 <Card.Title className='d-flex justify-content-center'>{venue.venue_name}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted d-flex justify-content-center">Category: {venue.category_id}</Card.Subtitle>
@@ -167,7 +169,7 @@ export default Explore
 
 //     };
 
-//     const handleOptionChange = event => 
+//     const handleOptionChange = event =>
 //   {
 //     const value = event.target.value.toLowerCase();
 //     setOptions(value)
