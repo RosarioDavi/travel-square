@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useGetTokenQuery } from "../store/authApi";
 import "./Request.css";
 
-
 function CreateRequest() {
   const { data } = useGetTokenQuery();
   const [txt, setTxt] = useState("");
@@ -29,8 +28,8 @@ function CreateRequest() {
     }
   };
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3 textbox-padding" id="request">
+    <Form onSubmit={handleSubmit} style={{ marginTop: "50px" }}>
+      <Form.Group className="mb-3" id="request">
         <Form.Label></Form.Label>
         <Form.Control
           value={txt}
