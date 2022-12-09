@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 import { useLogInMutation, useGetTokenQuery } from '../store/authApi';
+import "./Accounts.css";
 
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder } = props;
@@ -54,7 +55,7 @@ export function LoginModal() {
 
   return (
     <>
-    <Button variant="primary" onClick={handleShow}>
+    <Button className="login-btn-primary" onClick={handleShow}>
         login
       </Button>
       <Modal show={show} onHide={handleClose}>
