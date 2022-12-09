@@ -321,7 +321,7 @@ class VenueRepository:
                         ON (c.id = v.category_id)
                     INNER JOIN accounts a
                         ON (a.id = v.added_by)
-                    WHERE v.state = %s AND v.city = %s
+                    WHERE v.state = %s AND v.city = %s AND v.approved = True
                     ORDER BY venue_name
                     """,
                     [state, city],

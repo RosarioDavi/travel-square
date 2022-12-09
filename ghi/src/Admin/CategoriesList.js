@@ -1,8 +1,9 @@
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/esm/Button';
-import { useState, useEffect } from "react";
 import { useGetTokenQuery } from '../store/authApi';
 import { useGetCategoriesQuery } from '../store/adminApi';
+import { AddCategoryModal } from './AddCategoryModal';
+
 
 export function CategoriesList() {
     const { data: tokenData} = useGetTokenQuery();
@@ -13,11 +14,13 @@ export function CategoriesList() {
   }
 
     return (
+        <>
         <div className='container' style={{mt:'5rem'}}>
             <div className='d-flex justify-content-center'>
                 <div className='row'>
                     <div className='col'>
-                        <Button>Add a Category</Button>
+                        <h3>There are currently {categoriesData.length} categories available.</h3>
+                        <AddCategoryModal />
                         <Table striped bordered variant='dark'>
                             <thead>
                                 <tr>
@@ -40,5 +43,6 @@ export function CategoriesList() {
                 </div>
             </div>
         </div>
+        </>
     )
 }

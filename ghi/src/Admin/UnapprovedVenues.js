@@ -1,9 +1,8 @@
-import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/esm/Button';
-import { useState, useEffect } from "react";
 import { useGetTokenQuery } from "../store/authApi";
 import { useGetUnapprovedVenuesQuery } from '../store/adminApi';
+import { UpdateVenueModal } from './UpdateVenueModal';
+import { DeleteVenueModal } from './DeleteVenueModal';
 
 export function UnapprovedVenues() {
     const { data: tokenData} = useGetTokenQuery();
@@ -19,29 +18,7 @@ export function UnapprovedVenues() {
         <div className='d-flex justify-content-center'>
             <div className='row'>
                 <div className='col'>
-                {/* {venuesData.map(venue => {
-                    return (
-                        <Card style={{margin:'1rem'}} key={venue.id}>
-                            <Card.Body>
-                                <Card.Title className='d-flex justify-content-center'>{venue.venue_name}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted d-flex justify-content-center">Category: {venue.category_id}</Card.Subtitle>
-                                <Card.Text className='d-flex justify-content-center'>
-                                    {venue.num_and_street}, {venue.city}, {venue.state}, {venue.zip}
-                                </Card.Text>
-                                <Card.Text className='d-flex justify-content-center'>
-                                    {venue.description_text}
-                                </Card.Text>
-                                <Card.Text className='d-flex justify-content-center'>
-                                    by user: {venue.added_by}
-                                </Card.Text>
-                                <div className='d-flex justify-content-center'>
-                                <Button>Update</Button>
-                                <Button>Delete</Button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                        )
-                    })} */}
+                    <h3>Venues left to approve: {venuesData.length}.</h3>
                     <Table striped bordered variant='dark'>
                             <thead>
                                 <tr>
@@ -59,7 +36,7 @@ export function UnapprovedVenues() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {venuesData.map(venue => {
+                                {venuesData.map((venue) => {
                                     return (
                                         <tr key={venue.id}>
                                             <td>{venue.id}</td>
@@ -72,14 +49,10 @@ export function UnapprovedVenues() {
                                             <td>{venue.description_text}</td>
                                             <td>{venue.added_by}</td>
                                             <td>
-                                                <button>
-                                                    Review
-                                                </button>
+                                                <UpdateVenueModal venue={venue} />
                                             </td>
                                             <td>
-                                                <button>
-                                                    Delete
-                                                </button>
+                                                <DeleteVenueModal venue={venue} />
                                             </td>
                                         </tr>
                                     )

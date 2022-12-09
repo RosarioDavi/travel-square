@@ -17,21 +17,14 @@ export const adminApi = createApi ({
     tagTypes: ['CategoriesList', 'UnapprovedVenuesList'],
     endpoints: (builder) => ({
         createCategory: builder.mutation({
-            query: info => {
-                let formData = null;
-                if (info instanceof HTMLElement) {
-                    formData = new FormData(info);
-                } else {
-                    formData = new FormData();
-                    formData.append('category_name', info.category_name);
-                }
-                return {
-                    url: '/api/categories/',
-                    method: 'post',
-                    body: formData,
-                    credentials: 'include',
-                };
-            },
+            query: (info) => ({
+                url: '/api/categories/',
+                body: {
+                    category_name: info.category_name
+                },
+                credentials: 'include',
+                method: 'post'
+            }),
             invalidatesTags: (result) => {
                 return (result && ["CategoriesList"]) || [];
             },
@@ -60,7 +53,8 @@ export const adminApi = createApi ({
                     state: info.state,
                     zip: info.zip,
                     category_id: info.category_id,
-                    description_text: info.description_text
+                    description_text: info.description_text,
+                    added_by: info.added_by
                 },
                 credentials: 'include',
                 method: 'put',
@@ -70,9 +64,9 @@ export const adminApi = createApi ({
             },
         }),
         deleteVenue: builder.mutation({
-            query: (venue_id) => {
+            query: (info) => {
                 return {
-                    url: `/api/venues/${venue_id}`,
+                    url: `/api/venues/${info.venue_id}`,
                     method: 'delete',
                     credentials: 'include',
                 };
