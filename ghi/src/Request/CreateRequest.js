@@ -2,6 +2,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import { useGetTokenQuery } from "../store/authApi";
+import "./Request.css";
 
 function CreateRequest() {
   const { data } = useGetTokenQuery();
@@ -27,7 +28,7 @@ function CreateRequest() {
     }
   };
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} style={{ marginTop: "50px" }}>
       <Form.Group className="mb-3" id="request">
         <Form.Label></Form.Label>
         <Form.Control
@@ -39,7 +40,7 @@ function CreateRequest() {
           required
         />
       </Form.Group>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn-hue">
         Submit
       </button>
     </Form>

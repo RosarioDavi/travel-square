@@ -2,16 +2,20 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import CreateComment from "./CreateComment";
 
 export default function ViewComment(props) {
   const [comments, setComments] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [newCommentSubmit, setNewCommentSubmit] = useState(false);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [newCommentSubmit]);
+
+  const request = props.request.id;
 
   const fetchData = async () => {
     const data = props.request.id;
@@ -43,9 +47,10 @@ export default function ViewComment(props) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
+          <CreateComment
+            request={request}
+            setNewCommentSubmit={setNewCommentSubmit}
+          />
         </Modal.Footer>
       </Modal>
     </>
