@@ -10,8 +10,10 @@ import { SignupModal } from "./Accounts/SignupModal";
 import { useGetTokenQuery } from "./store/authApi";
 
 
+
 function Navigation() {
   const { data: tokenData } = useGetTokenQuery();
+  console.log(tokenData)
   if (!tokenData) {
     return (
       <>

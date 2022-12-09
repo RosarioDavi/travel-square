@@ -79,10 +79,8 @@ def get_unapproved_venues(
 @router.get("/api/venues/", response_model=list[VenueOut])
 def get_all(
     repo: VenueRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    if account_data["is_admin"] is True:
-        return repo.get_all()
+    return repo.get_all()
 
 
 # User
