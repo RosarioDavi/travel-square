@@ -181,7 +181,11 @@ class VenueRepository:
             return False
 
     # Admin
-    def update(self, venue_id: int, venue: VenueInUpdate) -> Union[VenueOut, Error]:
+    def update(
+        self,
+        venue_id: int,
+        venue: VenueInUpdate
+    ) -> Union[VenueOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
