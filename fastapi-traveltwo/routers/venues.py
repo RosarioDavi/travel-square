@@ -4,6 +4,7 @@ from typing import Union
 from queries.venues import (
     VenueIn,
     VenueOut,
+    VenueInUpdate,
     VenueCompleteOut,
     VenueRepository,
     Error,
@@ -100,7 +101,7 @@ def get_all_approved(
 @router.put("/api/venues/{venue_id}", response_model=Union[VenueOut, Error])
 def update_venue(
     venue_id: int,
-    venue: VenueIn,
+    venue: VenueInUpdate,
     repo: VenueRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, VenueOut]:
