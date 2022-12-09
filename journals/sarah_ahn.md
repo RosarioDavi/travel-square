@@ -1,3 +1,8 @@
+12/07/22
+- after discussing with the team, changing ReviewIn isn't necessary due to the fact that it will take in the venue_id through the venues modal instead of having a separate reviews URL path
+- working through bugs to get the reviews front-end to show up
+- still unable to get reviews working
+
 12/06/22
 - working on the reviews modal. pretty frustrating that it still isn't working
 - have a feeling that I'll need to change the ReviewIn model so that it takes in the venue name on the form since users won't know what the corresponding venue_ids are
