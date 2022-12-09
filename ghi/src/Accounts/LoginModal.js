@@ -84,8 +84,6 @@ export function LoginModal() {
                     <button type="submit" className="btn btn-outline-success">
                         Login
                     </button>
-                    <div className="text-center mt-4" style={{ color: "red" }}>
-                    </div>
             </form>
           </div>
         </Modal.Body>
