@@ -55,7 +55,7 @@ export function LoginModal() {
 
   return (
     <>
-    <Button className="login-btn-primary" onClick={handleShow}>
+    <Button className="btn-hue" onClick={handleShow}>
         login
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -84,8 +84,6 @@ export function LoginModal() {
                     <button type="submit" className="btn btn-outline-success">
                         Login
                     </button>
-                    <div className="text-center mt-4" style={{ color: "red" }}>
-                    </div>
             </form>
           </div>
         </Modal.Body>
