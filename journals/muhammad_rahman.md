@@ -1,3 +1,9 @@
+12/8
+I still have the 3 modals left for admin. Once that's done, I'm going to try and consolidate them under one admin component. Currently, the Navbar has a categories component and an unapproved venues component. I'll look at what does done in the trucks demo to see how I can split them in one component. I LOVE Redux. Now that the fetch logic is complete, all I have left for this is building the modals with putting in the forms. I'm still a little hazy on passing in props, but Lena had hers working so I may ask her. Once that's done, I'll move on to implementing the city, state searches on the explore and local reviews pages.
+
+12/7
+Spent today converting all the fetch logic in the admin components into Redux functions. I can't lie: using Redux is fun. The fact that I can quickly set up the headers just once and not have to worry about additional lines of code that could break really helps. Storing all the logic inside a store definitely helps with pinpointing issues and the isLoading tag that comes with query usage is cool as heck. I'm probably going to use all of what I learned into building out the remaining searches with city and state. Apparently, that's been haunting Rosario, who consulted a bunch of other cohort mates to tackle it. Sounds like a fun challenge if you ask me!
+
 12/6
 Pretty much done with the actual functionality of listing categories and unapproved venues. Currently working on the modals. Honestly, it looks atrocious but CSS really is difficult for me. I'm happy that the actual React work is functioning properly. I'm also thinking that it would be nice if we could convert the fetches for reviews and venues using the location into Redux functions. The idea is that, the Redux stores the user submitted city and state. Then it grabs the reviews and venues associated. Every time the user submits a new location, then the two GET requests are handled again.
 

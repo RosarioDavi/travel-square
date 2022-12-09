@@ -1,10 +1,12 @@
-import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
-import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
 import { useState, useEffect } from "react";
+import ViewComment from "./ViewComment";
+import { CreateRequest } from "./CreateRequest";
 
 export default function RequestList() {
   const [requests, setRequests] = useState([]);
+  const cssClass = "d-grid gap-2 d-sm-flex justify-content-sm-center";
 
   useEffect(() => {
     fetchData();
@@ -20,42 +22,41 @@ export default function RequestList() {
   return (
     <>
       <div
-        className="d-grid gap-2 d-sm-flex justify-content-sm-center"
-        style={{ marginTop: "50px" }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "50px",
+        }}
       >
-        <Link to="/request/new">
-          <Button className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            Create A New Request
-          </Button>
-        </Link>
+      <CreateRequest />
       </div>
-      <div className="container" style={{ mt: "5rem", overflow: "auto" }}>
-        <div className="d-flex justify-content-center">
-          <div className="row">
-            <div className="col">
-              {requests.map((request) => {
-                return (
-                  <Card style={{ margin: "1rem" }} key={request.id}>
-                    <Card.Body>
-                      <Card.Title className="d-flex justify-content-center">
-                        {request.txt}
-                      </Card.Title>
-                      <Card.Text className="d-flex justify-content-center">
-                        Made by: {request.username}
-                      </Card.Text>
-                      <div className="d-flex justify-content-center">
-                        <Button>Make a Comment</Button>
-                        {/* <Button>Delete</Button> */}
-                      </div>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">{request.created_at}</small>
-                    </Card.Footer>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
+      <div
+        style={{
+          marginTop: "50px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "row",
+        }}
+      >
+        <div>
+          {requests.map((request) => {
+            return (
+              <Card
+                key={request.id}
+                style={{ marginBottom: "50px", width: "500px" }}
+              >
+                <Card.Header as="h5">
+                  Request by: {request.username} @ {request.created_at}
+                </Card.Header>
+                <Card.Body>
+                  <Card.Title>Looking for: {request.txt}</Card.Title>
+                  <ViewComment request={request} />
+                </Card.Body>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </>

@@ -14,7 +14,7 @@ export const authApi = createApi({
         }
     }),
     tagTypes: ['Account', 'Token'],
-    endpoints: builder => ({
+    endpoints: (builder) => ({
         logIn: builder.mutation({
             query: info => {
                 let formData = null;
@@ -33,7 +33,7 @@ export const authApi = createApi({
                 };
             },
             providesTags: ['Account'],
-            invalidatesTags: result => {
+            invalidatesTags: (result) => {
                 return (result && ['Token']) || [];
             },
         }),
@@ -57,7 +57,7 @@ export const authApi = createApi({
                 }
             },
             providesTags: ['Account'],
-            invalidatesTags: result => {
+            invalidatesTags: (result) => {
                 return (result && ['Account']) || [];
             },
         }),
@@ -83,5 +83,5 @@ export const {
     useLogInMutation,
     useSignUpMutation,
     useLogOutMutation,
-    useGetTokenQuery,
+    useGetTokenQuery
 } = authApi;

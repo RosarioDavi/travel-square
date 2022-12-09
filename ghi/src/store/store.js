@@ -1,18 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { authApi } from './authApi';
-import { accountsApi } from './accountsApi';
+import { adminApi } from './adminApi';
 
 export const store = configureStore({
     reducer: {
         [authApi.reducerPath]: authApi.reducer,
-        [accountsApi.reducerPath]: accountsApi.reducer,
+        [adminApi.reducerPath]: adminApi.reducer
     },
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware()
         .concat(authApi.middleware)
-        // .concat(accountsApi.middleware),
-
+        .concat(adminApi.middleware),
 });
 
-setupListeners(store.dispatch)
+setupListeners(store.dispatch);

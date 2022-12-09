@@ -4,6 +4,7 @@ from typing import Union
 from queries.venues import (
     VenueIn,
     VenueOut,
+    VenueInUpdate,
     VenueCompleteOut,
     VenueRepository,
     Error,
@@ -29,8 +30,12 @@ def create_category(
 
 # User
 @router.get("/api/categories/", response_model=list[CategoryOut])
-def get_all_categories(repo: CategoryRepository = Depends()):
-    return repo.get_all_categories()
+def get_all_categories(
+    repo: CategoryRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    if account_data["is_admin"] is True:
+        return repo.get_all_categories()
 
 
 # User
@@ -64,8 +69,10 @@ def get_one_venue(
 @router.get("/api/venues/unapproved/", response_model=list[VenueOut])
 def get_unapproved_venues(
     repo: VenueRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.get_unapproved()
+    if account_data["is_admin"] is True:
+        return repo.get_unapproved()
 
 
 # Admin
@@ -92,7 +99,7 @@ def get_all_approved(
 @router.put("/api/venues/{venue_id}", response_model=Union[VenueOut, Error])
 def update_venue(
     venue_id: int,
-    venue: VenueIn,
+    venue: VenueInUpdate,
     repo: VenueRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, VenueOut]:

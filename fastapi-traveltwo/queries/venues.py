@@ -26,6 +26,17 @@ class VenueIn(BaseModel):
     description_text: str
 
 
+class VenueInUpdate(BaseModel):
+    venue_name: str
+    num_and_street: str
+    city: str
+    state: str
+    zip: str
+    category_id: int
+    description_text: str
+    added_by: int
+
+
 class VenueOut(BaseModel):
     id: int
     venue_name: str
@@ -170,7 +181,11 @@ class VenueRepository:
             return False
 
     # Admin
-    def update(self, venue_id: int, venue: VenueIn) -> Union[VenueOut, Error]:
+    def update(
+        self,
+        venue_id: int,
+        venue: VenueInUpdate
+    ) -> Union[VenueOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -310,7 +325,7 @@ class VenueRepository:
                         ON (c.id = v.category_id)
                     INNER JOIN accounts a
                         ON (a.id = v.added_by)
-                    WHERE v.state = %s AND v.city = %s
+                    WHERE v.state = %s AND v.city = %s AND v.approved = True
                     ORDER BY venue_name
                     """,
                     [state, city],

@@ -2,6 +2,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/esm/Button';
 import { useState, useEffect } from "react";
 import { useGetAccountsQuery } from "../store/accountsApi";
+import "./Explore.css";
+
 
 export function Explore() {
     // const { data: tokenData} = useGetAccountsQuery();
@@ -40,7 +42,7 @@ export function Explore() {
     //   setCity(filteredVenues)
     };
 
-//     const handleOptionChange = event => 
+//     const handleOptionChange = event =>
 //   {
 //     const value = event.target.value.toLowerCase();
 //     setOptions(value)
@@ -73,12 +75,25 @@ export function Explore() {
         </form> */}
 
         <div className='container' style={{mt:'5rem'}}>
-        <div className='d-flex justify-content-center'>
+          <div>
+              {/* {options.map(option => {
+                return (
+                <nav>
+                <input className= "search-box" placeholder='Search by' onChange={e=>handleOptionChange(e.target.value)}/>
+                </nav>
+                )
+              })} */}
+              <input className= "search-box" name="city" defaultValue={city} placeholder='Search by City' onChange={e=>({handleOnCityChange})} />
+              <input className= "search-box" placeholder='Search by State' onInput={(filterCards)} />
+              <input className= "search-box" placeholder='Search by Category' onInput={(filterCards)} />
+              <button className="btn btn-primary">Search</button>
+          </div>
+        <div className='d-flex justify-content-center textbox-padding'>
             <div className='row'>
                 <div className='col'>
                 {venues.map(venue => {
                     return (
-                          <Card style={{margin:'1rem'}} key={venue.id}>
+                          <Card style={{margin:'1rem'}} key={venue.id} className='card'>
                             <Card.Body>
                                 <Card.Title className='d-flex justify-content-center'>{venue.venue_name}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted d-flex justify-content-center">Category: {venue.category_id}</Card.Subtitle>
@@ -101,19 +116,6 @@ export function Explore() {
                     })}
                 </div>
           <form onSubmit={handleSubmit} id="searchCity">
-          <div>
-              {/* {options.map(option => {
-                return (
-                <nav>
-                <input className= "search-box" placeholder='Search by' onChange={e=>handleOptionChange(e.target.value)}/>
-                </nav>
-                )
-              })} */}
-              <input className= "search-box" name="city" defaultValue={city} placeholder='Search by City' onChange={e=>({handleOnCityChange})} />
-              <input className= "search-box" placeholder='Search by State' onInput={(filterCards)} />
-              <input className= "search-box" placeholder='Search by Category' onInput={(filterCards)} />
-              <button className="btn btn-primary">Search</button>
-          </div>
           </form>
             </div>
         </div>
@@ -167,7 +169,7 @@ export default Explore
 
 //     };
 
-//     const handleOptionChange = event => 
+//     const handleOptionChange = event =>
 //   {
 //     const value = event.target.value.toLowerCase();
 //     setOptions(value)

@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 import { useLogInMutation, useGetTokenQuery } from '../store/authApi';
+import "./Accounts.css";
 
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder } = props;
@@ -54,7 +55,7 @@ export function LoginModal() {
 
   return (
     <>
-    <Button variant="primary" onClick={handleShow}>
+    <Button className="btn-hue" onClick={handleShow}>
         login
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -83,8 +84,6 @@ export function LoginModal() {
                     <button type="submit" className="btn btn-outline-success">
                         Login
                     </button>
-                    <div className="text-center mt-4" style={{ color: "red" }}>
-                    </div>
             </form>
           </div>
         </Modal.Body>
