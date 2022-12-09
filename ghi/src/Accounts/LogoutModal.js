@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
-import { useLogOutMutation, useGetTokenQuery } from '../store/authApi'
+import { useLogOutMutation, useGetTokenQuery } from '../store/authApi';
+import "./Accounts.css";
 
 export function LogoutModal() {
     const { data: tokenData } = useGetTokenQuery()
@@ -30,7 +31,7 @@ export function LogoutModal() {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button className="login-btn-primary" onClick={handleShow}>
                 logout
             </Button>
             <Modal show={show} onHide={handleClose}>
