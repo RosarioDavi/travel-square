@@ -75,6 +75,19 @@ export function Explore() {
         </form> */}
 
         <div className='container' style={{mt:'5rem'}}>
+          <div>
+              {/* {options.map(option => {
+                return (
+                <nav>
+                <input className= "search-box" placeholder='Search by' onChange={e=>handleOptionChange(e.target.value)}/>
+                </nav>
+                )
+              })} */}
+              <input className= "search-box" name="city" defaultValue={city} placeholder='Search by City' onChange={e=>({handleOnCityChange})} />
+              <input className= "search-box" placeholder='Search by State' onInput={(filterCards)} />
+              <input className= "search-box" placeholder='Search by Category' onInput={(filterCards)} />
+              <button className="btn btn-primary">Search</button>
+          </div>
         <div className='d-flex justify-content-center textbox-padding'>
             <div className='row'>
                 <div className='col'>
@@ -103,19 +116,6 @@ export function Explore() {
                     })}
                 </div>
           <form onSubmit={handleSubmit} id="searchCity">
-          <div>
-              {/* {options.map(option => {
-                return (
-                <nav>
-                <input className= "search-box" placeholder='Search by' onChange={e=>handleOptionChange(e.target.value)}/>
-                </nav>
-                )
-              })} */}
-              <input className= "search-box" name="city" defaultValue={city} placeholder='Search by City' onChange={e=>({handleOnCityChange})} />
-              <input className= "search-box" placeholder='Search by State' onInput={(filterCards)} />
-              <input className= "search-box" placeholder='Search by Category' onInput={(filterCards)} />
-              <button className="btn btn-primary">Search</button>
-          </div>
           </form>
             </div>
         </div>
