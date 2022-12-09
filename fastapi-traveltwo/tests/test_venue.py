@@ -2,15 +2,18 @@ import json
 from fastapi.testclient import TestClient
 from main import app
 from queries.venues import VenueRepository
-
+from authenticator import authenticator
 
 client = TestClient(app)
+
+def getaccountdatamock():
+    return {'id':1, 'username':'rosario'}
 
 class VenuesQueriesMock:
     def get_all(self):
         return []
     
-    def create_venues(self, venue):
+    def create(self, venue, added_by, approved):
         response = {
             
                 'id': 1,
@@ -22,7 +25,7 @@ class VenuesQueriesMock:
                 'category_id': 1,
                 'description_text': "Pizza",
                 'added_by': 1,
-                'approved': "false",
+                'approved': False,
             
         }
         response.update(venue)
@@ -41,6 +44,7 @@ def test_list_venues():
 
 def test_create_venues():
     app.dependency_overrides[VenueRepository] = VenuesQueriesMock
+    app.dependency_overrides[authenticator.get_current_account_data] = getaccountdatamock
     venue = {
         'venue_name': 'underground pizza',
         'num_and_street': '123 street',
@@ -53,6 +57,6 @@ def test_create_venues():
 
     response = client.post("/api/venues/", json.dumps(venue))
 
-    assert response.status_code == 401
-    # assert response.json()['venue_name'] == "underground pizza"
-    # assert response.json()['id'] == 1
+    assert response.status_code == 200
+    assert response.json()['venue_name'] == "underground pizza"
+    assert response.json()['id'] == 1
