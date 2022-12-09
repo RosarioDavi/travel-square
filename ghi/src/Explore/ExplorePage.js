@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/esm/Button';
 import { useState, useEffect } from "react";
 import { useGetAccountsQuery } from "../store/accountsApi";
-import "./ExplorePage.css";
+import "./Explore.css";
 
 
 export function Explore() {
