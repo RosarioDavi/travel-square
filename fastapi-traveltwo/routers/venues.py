@@ -32,10 +32,8 @@ def create_category(
 @router.get("/api/categories/", response_model=list[CategoryOut])
 def get_all_categories(
     repo: CategoryRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    if account_data["is_admin"] is True:
-        return repo.get_all_categories()
+    return repo.get_all_categories()
 
 
 # User

@@ -9,12 +9,14 @@ import { LogoutModal } from "./Accounts/LogoutModal";
 import { SignupModal } from "./Accounts/SignupModal";
 import { useGetTokenQuery } from "./store/authApi";
 
-
-
 function Navigation() {
-  const { data: tokenData } = useGetTokenQuery();
-  console.log(tokenData)
-  if (!tokenData) {
+  const { data: tokenData, isLoading } = useGetTokenQuery();
+
+  if (isLoading) {
+    return <progress className="progress is-primary" max="100"></progress>;
+  }
+
+  if (tokenData && tokenData.account.is_admin === false) {
     return (
       <>
         <div className="container">
@@ -33,10 +35,7 @@ function Navigation() {
                   <NavLink to="/request"> request</NavLink>
                 </li>
                 <li>
-                  <SignupModal />
-                </li>
-                <li>
-                  <LoginModal />
+                  <LogoutModal />
                 </li>
               </ul>
             </nav>
@@ -44,7 +43,7 @@ function Navigation() {
         </div>
       </>
     );
-  } else if (tokenData) {
+  } else if (tokenData && tokenData.account.is_admin === true) {
     return (
       <>
         <div className="container">
@@ -70,6 +69,36 @@ function Navigation() {
                 </li>
                 <li>
                   <LogoutModal />
+                </li>
+              </ul>
+            </nav>
+          </header>
+        </div>
+      </>
+    );
+  } else if (!tokenData) {
+    return (
+      <>
+        <div className="container">
+          <header>
+            <h2>travel<sup>2</sup>
+            </h2>
+            <nav>
+              <ul>
+                <li>
+                  <NavLink to="/"> home</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/explore"> explore</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/request"> request</NavLink>
+                </li>
+                <li>
+                  <SignupModal />
+                </li>
+                <li>
+                  <LoginModal />
                 </li>
               </ul>
             </nav>

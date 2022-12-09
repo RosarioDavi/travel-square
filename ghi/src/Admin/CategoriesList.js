@@ -1,5 +1,4 @@
 import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/esm/Button';
 import { useGetTokenQuery } from '../store/authApi';
 import { useGetCategoriesQuery } from '../store/adminApi';
 import { AddCategoryModal } from './AddCategoryModal';
