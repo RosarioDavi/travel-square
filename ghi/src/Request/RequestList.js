@@ -8,6 +8,7 @@ import ViewComment from "./ViewComment";
 
 export default function RequestList() {
   const [requests, setRequests] = useState([]);
+  const cssClass = "d-grid gap-2 d-sm-flex justify-content-sm-center";
 
   useEffect(() => {
     fetchData();
@@ -48,29 +49,48 @@ export default function RequestList() {
         })}
       </div> */}
       <div
-        className="d-grid gap-2 d-sm-flex justify-content-sm-center"
-        style={{ marginTop: "50px" }}
-      ></div>
-      <Link to="/request/new">
-        <Button className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          Create A New Request
-        </Button>
-      </Link>
-      <Card>
-        {requests.map((request) => {
-          return (
-            <>
-              <Card.Header as="h5">
-                Request by: {request.username} @ {request.created_at}
-              </Card.Header>
-              <Card.Body>
-                <Card.Title>Looking for: {request.txt}</Card.Title>
-                <ViewComment request={request} />
-              </Card.Body>
-            </>
-          );
-        })}
-      </Card>
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "50px",
+          // flexDirection: "row",
+        }}
+      >
+        <Link to="/request/new">
+          <Button className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            Create A New Request
+          </Button>
+        </Link>
+      </div>
+      <div
+        style={{
+          marginTop: "50px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "row",
+        }}
+      >
+        <div>
+          {requests.map((request) => {
+            return (
+              <Card
+                key={request.id}
+                style={{ marginBottom: "50px", width: "500px" }}
+              >
+                <Card.Header as="h5">
+                  Request by: {request.username} @ {request.created_at}
+                </Card.Header>
+                <Card.Body>
+                  <Card.Title>Looking for: {request.txt}</Card.Title>
+                  <ViewComment request={request} />
+                </Card.Body>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
     </>
   );
 }

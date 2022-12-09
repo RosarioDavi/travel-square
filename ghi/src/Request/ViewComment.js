@@ -32,7 +32,7 @@ export default function ViewComment(props) {
         </Modal.Header>
         {comments.map((comment) => {
           return (
-            <Modal.Body>
+            <Modal.Body key={comment.id}>
               {comment.username} {""}
               {comment.created_at} : {""}
               {comment.txt}
