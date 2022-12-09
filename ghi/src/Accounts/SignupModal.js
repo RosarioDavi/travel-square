@@ -62,7 +62,7 @@ export function SignupModal() {
 
     return (
         <>
-            <Button className="login-btn-primary" onClick={handleShow}>
+            <Button className="btn-hue" onClick={handleShow}>
                 sign up
             </Button>
             <Modal show={show} onHide={handleClose}>

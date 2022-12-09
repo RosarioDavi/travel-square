@@ -31,7 +31,7 @@ export function LogoutModal() {
 
     return (
         <>
-            <Button className="login-btn-primary" onClick={handleShow}>
+            <Button className="btn-hue" onClick={handleShow}>
                 logout
             </Button>
             <Modal show={show} onHide={handleClose}>
