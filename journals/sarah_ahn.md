@@ -1,3 +1,8 @@
+12/08/22
+- let the team know that I haven't been progressing on the reviews front-end, so I've agreed to take over CSS while the rest of the team work on wrapping up the front-end
+- consulted Dalonte and Riley on how to approach fixing our website design, and I feel that I have a good grasp of what needs to be done
+- working on getting the CSS styling down for the ExplorePage modals first so that I can apply them to the other components later. The text boxes are located at the top of the page, so I'll bring them down lower along with the cards.
+
 12/07/22
 - after discussing with the team, changing ReviewIn isn't necessary due to the fact that it will take in the venue_id through the venues modal instead of having a separate reviews URL path
 - working through bugs to get the reviews front-end to show up
