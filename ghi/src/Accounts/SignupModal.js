@@ -67,7 +67,7 @@ export function SignupModal() {
             </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title>Create Your Account</Modal.Title>
+                    <Modal.Title>Create Your Account</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <div>
@@ -107,8 +107,6 @@ export function SignupModal() {
                         <button type="submit" className="btn btn-outline-success">
                             Create
                         </button>
-                        <div className="text-center mt-4" style={{ color: "red" }}>
-                        </div>
                     </form>
                 </div>
                 </Modal.Body>

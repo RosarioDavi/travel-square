@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
@@ -16,13 +16,13 @@ export function LogoutModal() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        handleClose();
         logout();
     }
 
     useEffect(() => {
         if (result.isSuccess) {
             setError("");
+            handleClose();
             navigate("/");
         } else if (result.isError) {
         setError(result.error.data.detail);

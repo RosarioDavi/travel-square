@@ -1,8 +1,8 @@
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ViewComment from "./ViewComment";
+import { CreateRequest } from "./CreateRequest";
 
 export default function RequestList() {
   const [requests, setRequests] = useState([]);
@@ -29,11 +29,7 @@ export default function RequestList() {
           marginTop: "50px",
         }}
       >
-        <Link to="/request/new">
-          <Button className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            Create A New Request
-          </Button>
-        </Link>
+      <CreateRequest />
       </div>
       <div
         style={{
