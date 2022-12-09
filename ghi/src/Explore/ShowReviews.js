@@ -36,7 +36,7 @@ export default function ShowReview(props) {
             <Modal.Body key={review.id}>
               {review.username} {""}
               {review.created_at} : {""}
-              {review.txt}
+              {review.review_description}
             </Modal.Body>
           );
         })}
