@@ -1,3 +1,6 @@
+12/08/2022
+After failing at getting the search feature to work. Explore page has everything displaying but broken functionality. I spoke with my team and Muhammad agreed to take a look and take care of that function. We agreed for me to start my unit test. I started by adding a test folder and test venue file along with adding pytest to requirments.txt. I began to watch and follow the unit test lecture and began to write the test and hope to finish the test tomorrow.
+
 12/07/2022
 Today I was unsuccessful with getting the filtering/searching working. I tried a video to get a search going by using a filterCards function and using event. I had no luck. I reached out to two other clasmates and we tried a few things. We changed it to become a function and a search button. When I type into the search it refreshes but goes blank. It does not filter correctly.
 
