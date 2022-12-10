@@ -13,6 +13,7 @@ export default function ViewComment(props) {
 
   useEffect(() => {
     fetchData();
+    setNewCommentSubmit(false);
   }, [newCommentSubmit]);
 
   const request = props.request.id;
