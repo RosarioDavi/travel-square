@@ -2,3 +2,16 @@
     background-color: #d73851 !important;
     border-color: #d73851 !important;
 }
+
+.login-modal {
+    border: 0px !important;
+}
+
+.logout-modal {
+    border: 0px !important;
+}
+
+
+.signup-modal {
+    border: 0px !important;
+}
