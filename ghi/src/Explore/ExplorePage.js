@@ -70,6 +70,7 @@ export function Explore() {
         </form> */}
 
       <div className="container textbox-padding">
+        <form onSubmit={handleSubmit} id="searchCity"></form>
         <div className="d-flex justify-content-center">
           {/* {options.map(option => {
                 return (
@@ -97,9 +98,9 @@ export function Explore() {
           />
           <button className="btn-hue">Search</button>
         </div>
-        <div className="d-flex justify-content-center textbox-padding">
-          <div className="row">
-            <div className="col">
+        <div className="d-flex justify-content-center textbox-padding card-grid">
+          {/* <div className="row">
+            <div className="col"> */}
               {venues.map((venue) => {
                 return (
                   <Card
@@ -132,9 +133,8 @@ export function Explore() {
                   </Card>
                 );
               })}
-            </div>
-            <form onSubmit={handleSubmit} id="searchCity"></form>
-          </div>
+            {/* </div> */}
+          {/* </div> */}
         </div>
       </div>
     </>
