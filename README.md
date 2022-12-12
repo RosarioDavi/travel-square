@@ -15,7 +15,7 @@ Rosario Davi
 
 ## Intended market
 
-Travel^2 is a social traveling based application that is aimed to connect travelers and help expand their itinerary with suggestions on places they have never thought about exploring before. Our website contains an explore page where users can follow other users and be notified of their most recent post or reviews of a particular location. There is also a trending aspect that allows users to view locations that are popular and have a lot of reviews over a short period of time. In addition, users can utilize the search bar to narrow down recommendations by city and state of the location they intend on visiting. Furthermore, users can also make post in regards to asking for recommendations and have other users reply in the form of comments.
+Travel^2 is a social traveling based application that is aimed to connect travelers and help expand their itinerary with suggestions on places they have never thought about exploring before. Our website contains an explore page where users can follow other users and be notified of their most recent venue post or reviews of a particular location. There is also a trending aspect that allows users to view locations that are currently trending and have a lot of reviews over a short period of time. Users can utilize the search bar to narrow down recommendations by city and state of the location they intend on visiting. In addition, users can also make post in regards to asking for recommendations and have other users reply in the form of comments.
 
 ## Built With
 
@@ -31,10 +31,10 @@ MySQL
 
 Main Page/Home: Page is intended for users to search locations by state and city.
 Navigation bar: For users to sign up, login, and logout. In addition to navigating to other pages such as the explore, trending, and request page.
-Explore: Venue cards with the ability to check out reviews for the venue and creating a venue if logged in. Order of top post is filtered by the most recent post of users who they follow.
+Explore: Venue cards with the ability to check out reviews for the venue and creating a review if logged in. Order of top post is filtered by the most recent post of users who they follow.
 Trending: Venue cards with reviews. Order of top post is filtered by popularity.
 Request: Making a request for recommendations with the access to viewing and making comments if user is logged in.
-Unapproved venues: Admins will be able to approve or deny newly created venues before they show up for the first time.
+Unapproved venues: Admins will be able to approve or deny newly created venues before they show up for the first time based on accuracy and appropriateness.
 Categories: Only admins are able to generate new categories for venues.
 
 ## Stretch Goals Functionality
