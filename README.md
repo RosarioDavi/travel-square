@@ -1,74 +1,71 @@
 # Module3 Project Gamma
 
 # Group Name
-  Travel^2
+
+Travel^2
 
 # Group Members
-  Muhammad Rahman
-  Lena Zhang
-  Sarah Ahn
-  Rosario Davi
-## Design 
+
+Muhammad Rahman
+Lena Zhang
+Sarah Ahn
+Rosario Davi
+
+## Design
 
 ## Intended market
-  Travel^2 is intended to give the user a plateform to connect with travelers and explore differnt places they may not have thought of exploring. Our webstie is intended for a user to create a follwers list beable to check our explore page and see where there followers have been and what there followers have had to say about a particular place. With in our explore page a user can narrow down the searches with the search bar, that way they can see a particular city and state they are exploring. 
+
+Travel^2 is a social traveling based application that is aimed to connect travelers and help expand their itinerary with suggestions on places they have never thought about exploring before. Our website contains an explore page where users can follow other users and be notified of their most recent post or reviews of a particular location. There is also a trending aspect that allows users to view locations that are popular and have a lot of reviews over a short period of time. In addition, users can utilize the search bar to narrow down recommendations by city and state of the location they intend on visiting. Furthermore, users can also make post in regards to asking for recommendations and have other users reply in the form of comments.
 
 ## Built With
-  React, React.js
-  Bootstraps
-  Fast API
-  Redux
-  Python
-  JavaScirpt
 
+React
+Bootstraps
+Fast API
+Redux
+Python
+JavaScript
+MySQL
 
 ## Functionality
-  Main-page: Page is used for signing into your account and begin exploring by using the top nav bar. On the nav bar you will find The  login buttons, sign up feature, the explore tab, request, and review tabs.
-  On the explore page you will be able to see some cards of venues. These can be filtered and narrowed down. 
-  If user is an admin, they will be able to approve venues that other users have created in order to keep the information correct.
 
+Main Page/Home: Page is intended for users to search locations by state and city.
+Navigation bar: For users to sign up, login, and logout. In addition to navigating to other pages such as the explore, trending, and request page.
+Explore: Venue cards with the ability to check out reviews for the venue and creating a venue if logged in. Order of top post is filtered by the most recent post of users who they follow.
+Trending: Venue cards with reviews. Order of top post is filtered by popularity.
+Request: Making a request for recommendations with the access to viewing and making comments if user is logged in.
+Unapproved venues: Admins will be able to approve or deny newly created venues before they show up for the first time.
+Categories: Only admins are able to generate new categories for venues.
 
+## Stretch Goals Functionality
 
+Photo uploads, following follow system (have the tables setup so I know how that system would work with redux), add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue)
 
-  ##  Stretch Goals Functionality
-  Photo uploads, following follow system (have the tables setup so I know how that system would work with redux), add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue)
+## Start up
 
-  ## Start up
-  To start this project, First start by cloning and forking the project from https://gitlab.com/travel-two/module3-project-gamma. 
+To start this project, First start by cloning and forking the project from https://gitlab.com/travel-two/module3-project-gamma.
 
-  You can open the project in VS to see the code. 
+You can open the project in VScode to see the code.
 
-  To review the running project. 
+To review the running project.
 
-  Start by opening docker and your terminal. 
+Start by opening docker and your terminal.
 
-  Run these commands in this order. 
+Run these commands in this order.
 
-  Docker volume create postgres-data
-  Docker volume create pg-admin
-  
-  For PC run Docker compose build 
-  For Mac run DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose build
+Docker volume create postgres-data
+Docker volume create pg-admin
 
-  Lastely run docker compose up. 
+For PC run Docker compose build
+For Mac run DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose build
 
-  All containers should be running now. 
+Lastly, run docker compose up.
 
-  Once containers are up and running.
+All containers should be running now.
 
-  Vist localhost3000 to view the website. 
+Once containers are up and running.
 
-
-
-
-
-
-
-
-
-
-
-
+Visit localhost:3000 to view the website.
 
 ## Getting started
 
@@ -79,16 +76,16 @@ tasks for this week.
 
 ## Install Extensions
 
-* Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-* Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+- Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
+- Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
 
 ## Deliverables
 
-* [ ] Wire-frame diagrams
-* [ ] API documentation
-* [ ] Project is deployed to Render.com/GitLab-pages
-* [ ] GitLab issue board is setup and in use
-* [ ] Journals
+- [ ] Wire-frame diagrams
+- [ ] API documentation
+- [ ] Project is deployed to Render.com/GitLab-pages
+- [ ] GitLab issue board is setup and in use
+- [ ] Journals
 
 ## Project layout
 
@@ -141,17 +138,17 @@ The following project files have been created as a minimal
 starting point. Please follow the guidance for each one for
 a most successful project.
 
-* `docker-compose.yaml`: there isn't much in here, just a
+- `docker-compose.yaml`: there isn't much in here, just a
   **really** simple UI and FastAPI service. Add services
   (like a database) to this file as you did with previous
   projects in module #2.
-* `.gitlab-ci.yml`: This is your "ci/cd" file where you will
+- `.gitlab-ci.yml`: This is your "ci/cd" file where you will
   configure automated unit tests, code quality checks, and
   the building and deployment of your production system.
   Currently, all it does is deploy an "under construction"
   page to your production UI on GitLab and a sample backend
   to Render.com. We will learn much more about this file.
-* `.gitignore`: This is a file that prevents unwanted files
+- `.gitignore`: This is a file that prevents unwanted files
   from getting added to your repository, files like
   `pyc` files, `__pycache__`, etc. We've set it up so that
   it has a good default configuration for Python projects.
@@ -163,15 +160,15 @@ deployment, but it just consists of these steps:
 
 ### Setup GitLab repo/project
 
-* make sure this project is in a group. If it isn't, stop
+- make sure this project is in a group. If it isn't, stop
   now and move it to a GitLab group
-* remove the fork relationship: In GitLab go to:
-  
+- remove the fork relationship: In GitLab go to:
+
   Settings -> General -> Advanced -> Remove fork relationship
 
-* add these GitLab CI/CD variables:
-  * PUBLIC_URL : this is your gitlab pages URL
-  * SAMPLE_SERVICE_API_HOST: enter "blank" for now
+- add these GitLab CI/CD variables:
+  - PUBLIC_URL : this is your gitlab pages URL
+  - SAMPLE_SERVICE_API_HOST: enter "blank" for now
 
 #### Your GitLab pages URL
 
@@ -188,20 +185,20 @@ https://GROUP_NAME.gitlab.io/PROJECT_NAME
 
 ### Create render.com account and application
 
-* create account on render.com
-* one person create a group and invite all other members
-* create a new "Web Service"
-  * authenticate with GitLab and choose your project
-  * Enter fields:
-    * Name: name of your service
-    * Root Directory: the directory of your service in your git repo.
+- create account on render.com
+- one person create a group and invite all other members
+- create a new "Web Service"
+  - authenticate with GitLab and choose your project
+  - Enter fields:
+    - Name: name of your service
+    - Root Directory: the directory of your service in your git repo.
       For this example use "sample_service".
-    * Environment: Docker
-    * Plan Type: Free
-  * click the "Create Web Service" button to create it
-  * the build will succeed and it will look like the server is running,
+    - Environment: Docker
+    - Plan Type: Free
+  - click the "Create Web Service" button to create it
+  - the build will succeed and it will look like the server is running,
     most likely, in 6-10 minutes, it will fail.
-  * click "Manual Deploy" -> "Deploy latest commit" and the service
+  - click "Manual Deploy" -> "Deploy latest commit" and the service
     should deploy successfully.
 
 ### Update GitLab CI/CD variables
