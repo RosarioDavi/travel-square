@@ -14,7 +14,7 @@ export function UnapprovedVenues() {
 
     return (
         <>
-        <div className='container' style={{mt:'5rem'}}>
+        <div className='container padding' style={{mt:'5rem'}}>
         <div className='d-flex justify-content-center'>
             <div className='row'>
                 <div className='col'>
@@ -66,3 +66,5 @@ export function UnapprovedVenues() {
         </>
     )
 }
+
+export default UnapprovedVenues;

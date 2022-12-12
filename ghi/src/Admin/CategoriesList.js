@@ -2,6 +2,7 @@ import Table from 'react-bootstrap/Table'
 import { useGetTokenQuery } from '../store/authApi';
 import { useGetCategoriesQuery } from '../store/adminApi';
 import { AddCategoryModal } from './AddCategoryModal';
+import "./Admin.css"
 
 
 export function CategoriesList() {
@@ -14,7 +15,7 @@ export function CategoriesList() {
 
     return (
         <>
-        <div className='container' style={{mt:'5rem'}}>
+        <div className='container padding' style={{mt:'5rem'}}>
             <div className='d-flex justify-content-center'>
                 <div className='row'>
                     <div className='col'>
@@ -45,3 +46,5 @@ export function CategoriesList() {
         </>
     )
 }
+
+export default CategoriesList;
