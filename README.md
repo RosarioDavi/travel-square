@@ -25,7 +25,15 @@
 ## Functionality
   Main-page: Page is used for signing into your account and begin exploring by using the top nav bar. On the nav bar you will find The  login buttons, sign up feature, the explore tab, request, and review tabs.
   On the explore page you will be able to see some cards of venues. These can be filtered and narrowed down. 
+
+
+
+  ##  Stretch Goals Functionality
+  Photo uploads, following follow system (have the tables setup so I know how that system would work with redux), add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue)
+
+  ## Start up
   
+
 
 
 
