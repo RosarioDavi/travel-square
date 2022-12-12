@@ -69,8 +69,8 @@ export function Explore() {
 
         </form> */}
 
-      <div className="container" style={{ mt: "5rem" }}>
-        <div>
+      <div className="container textbox-padding">
+        <div className="d-flex justify-content-center">
           {/* {options.map(option => {
                 return (
                 <nav>
@@ -95,7 +95,7 @@ export function Explore() {
             placeholder="Search by Category"
             onInput={filterCards}
           />
-          <button className="btn btn-primary">Search</button>
+          <button className="btn-hue">Search</button>
         </div>
         <div className="d-flex justify-content-center textbox-padding">
           <div className="row">
@@ -126,7 +126,7 @@ export function Explore() {
                       </Card.Text>
                       <div className="d-flex justify-content-center">
                         <ShowReview venue={venue} />
-                        <Button>Create Review</Button>
+                        <Button className="btn-hue">Create Review</Button>
                       </div>
                     </Card.Body>
                   </Card>

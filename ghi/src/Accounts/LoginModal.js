@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useLogInMutation, useGetTokenQuery } from '../store/authApi';
 import "./Accounts.css";
 
+
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder } = props;
   return (
-    <div className="mb-3 ">
+    <div className="mb-3">
       <label htmlFor={id} className="form-label">
         {label}
       </label>
@@ -58,8 +59,8 @@ export function LoginModal() {
     <Button className="btn-hue" onClick={handleShow}>
         login
       </Button>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header className="modal-header" closeButton>
           <Modal.Title>Welcome back!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -87,7 +88,7 @@ export function LoginModal() {
             </form>
           </div>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
+        <Modal.Footer className="modal-footer"></Modal.Footer>
       </Modal>
     </>
   );

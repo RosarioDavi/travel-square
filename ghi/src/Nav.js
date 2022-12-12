@@ -68,6 +68,9 @@ function Navigation() {
                   <NavLink to='/categories'> categories</NavLink>
                 </li>
                 <li>
+                  <NavLink to='/dashboard'> dashboard</NavLink>
+                </li>
+                <li>
                   <LogoutModal />
                 </li>
               </ul>
