@@ -37,66 +37,62 @@ export function Explore() {
     <>
       <div className="container textbox-padding">
         <form onSubmit={handleSubmit} id="searchCity">
-        <div className="d-flex justify-content-center">
-          <input
-            className="search-box"
-            name="city"
-            defaultValue={city}
-            placeholder="Search by City"
-            onChange={(e) => setCity(e.target.value)}
-            type="text"
-          />
-          <input
-            className="search-box"
-            name="state"
-            defaultValue={state}
-            placeholder="Search by State"
-            onChange={(e) => setState(e.target.value)}
-            maxLength="2"
-            type="text"
-            onInput={stateUppercase}
-          />
-          <button className="btn-hue">Search</button>
-        </div>
-        </form>
-        <div className="d-flex justify-content-center textbox-padding card-grid">
-          <div className="row">
-            <div className="col">
-              {venues.map((venue) => {
-                return (
-                  <Card
-                    style={{ margin: "1rem" }}
-                    key={venue.id}
-                    className="card"
-                  >
-                    <Card.Body>
-                      <Card.Title className="d-flex justify-content-center">
-                        {venue.venue_name}
-                      </Card.Title>
-                      <Card.Subtitle className="mb-2 text-muted d-flex justify-content-center">
-                        {venue.category_name}
-                      </Card.Subtitle>
-                      <Card.Text className="d-flex justify-content-center">
-                        {venue.num_and_street}, {venue.city}, {venue.state},{" "}
-                        {venue.zip}
-                      </Card.Text>
-                      <Card.Text className="d-flex justify-content-center">
-                        {venue.description_text}
-                      </Card.Text>
-                      <Card.Text className="d-flex justify-content-center">
-                        by user: {venue.added_by_username}
-                      </Card.Text>
-                      <div className="d-flex justify-content-center">
-                        <ShowReview venue={venue} />
-                        {/* <Button className="btn-hue">Create Review</Button> */}
-                      </div>
-                    </Card.Body>
-                  </Card>
-                );
-              })}
-            </div>
+          <div className="d-flex justify-content-center">
+            <input
+              className="search-box"
+              name="city"
+              defaultValue={city}
+              placeholder="Search by City"
+              onChange={(e) => setCity(e.target.value)}
+              type="text"
+            />
+            <input
+              className="search-box"
+              name="state"
+              defaultValue={state}
+              placeholder="Search by State"
+              onChange={(e) => setState(e.target.value)}
+              maxLength="2"
+              type="text"
+              onInput={stateUppercase}
+            />
+            <button className="btn-hue">Search</button>
           </div>
-        </div>
+        </form>
+      </div>
+        <div className="justify-content-center textbox-padding card-grid">
+          {venues.map((venue) => {
+            return (
+              <Card
+                style={{ margin: "1rem" }}
+                key={venue.id}
+                className="card"
+              >
+                <Card.Body>
+                  <Card.Title className="d-flex justify-content-center">
+                    {venue.venue_name}
+                  </Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted d-flex justify-content-center">
+                    {venue.category_name}
+                  </Card.Subtitle>
+                  <Card.Text className="d-flex justify-content-center">
+                    {venue.num_and_street}, {venue.city}, {venue.state},{" "}
+                    {venue.zip}
+                  </Card.Text>
+                  <Card.Text className="d-flex justify-content-center">
+                    {venue.description_text}
+                  </Card.Text>
+                  <Card.Text className="d-flex justify-content-center">
+                    by user: {venue.added_by_username}
+                  </Card.Text>
+                  <div className="d-flex justify-content-center">
+                    <ShowReview venue={venue} />
+                    {/* <Button className="btn-hue">Create Review</Button> */}
+                  </div>
+                </Card.Body>
+              </Card>
+            );
+          })}
       </div>
     </>
   );
