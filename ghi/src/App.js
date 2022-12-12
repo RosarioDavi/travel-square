@@ -5,6 +5,7 @@ import Navigation from "./Nav";
 import HomePage from "./HomePage";
 import { UnapprovedVenues } from "./Admin/UnapprovedVenues";
 import { CategoriesList } from "./Admin/CategoriesList";
+import { LocalReviews } from "./Explore/LocalReviews"
 import RequestList from "./Request/RequestList";
 import AdminDash from "./Admin/AdminDash";
 import { useGetTokenQuery } from './store/authApi'
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/explore" element={<ExplorePage />} />
+            <Route path="/trending" element={<LocalReviews />} />
             <Route path="/request" element={<RequestList />} />
             <Route path="/unapproved" element={<UnapprovedVenues />} />
             <Route path="/categories" element={<CategoriesList />} />
@@ -44,6 +46,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/explore" element={<ExplorePage />} />
+            <Route path="/trending" element={<LocalReviews />} />
             <Route path="/request" element={<RequestList />} />
           </Routes>
         </div>

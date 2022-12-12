@@ -32,6 +32,9 @@ function Navigation() {
                   <NavLink to="/explore"> explore</NavLink>
                 </li>
                 <li>
+                  <NavLink to="/trending"> trending</NavLink>
+                </li>
+                <li>
                   <NavLink to="/request"> request</NavLink>
                 </li>
                 <li>
@@ -57,6 +60,9 @@ function Navigation() {
                 </li>
                 <li>
                   <NavLink to="/explore"> explore</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/trending"> trending</NavLink>
                 </li>
                 <li>
                   <NavLink to="/request"> request</NavLink>
@@ -93,6 +99,9 @@ function Navigation() {
                 </li>
                 <li>
                   <NavLink to="/explore"> explore</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/trending"> trending</NavLink>
                 </li>
                 <li>
                   <NavLink to="/request"> request</NavLink>
