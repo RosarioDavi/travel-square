@@ -4,7 +4,7 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 
 function BootstrapInputFields(props) {
-  const { id, label, value, onChange, type, placeholder } = props;
+  const { id, label, value, onChange, type, placeholder, maxLength, onInput } = props;
   return (
     <div className="mb-3 ">
       <label htmlFor={id} className="form-label">
@@ -18,7 +18,128 @@ function BootstrapInputFields(props) {
         className="form-control"
         id={id}
         placeholder={placeholder}
+        maxLength={maxLength}
+        onInput={onInput}
       />
     </div>
   );
+}
+
+  const stateUppercase = e => {
+    e.target.value = ("" + e.target.value).toUpperCase();
+  };
+
+export function CreateVenue() {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const { data } = useGetTokenQuery();
+    const [ venue_name, setVenue_name] = useState("");
+    const [ num_and_street, setNum_and_street] = useState("");
+    const [ city, setCity] = useState("");
+    const [ state, setState] = useState("");
+    const [ category_id, setCategory_id] = useState("");
+    const [ categories, setCategories] = useState([]);
+    const [ description_text, setDescription_text] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const VenueUrl = "http://localhost:8000/api/venues/";
+        const fetchConfig = {
+            method: "POST",
+            body: JSON.stringify({
+                venue_name: venue_name,
+                num_and_street: num_and_street,
+                city: city,
+                state: state,
+                category_id: category_id,
+                description_text: description_text
+            }),
+            headers: {
+                Authorization: `Bearer ${data.access_token}`,
+                "Content-Type": "application/json",
+            },
+        };
+
+        const response = await fetch(VenueUrl, fetchConfig);
+        if (response.ok) {
+            setVenue_name("");
+            setNum_and_street("");
+            setCity("");
+            setState("");
+            setCategory_id("");
+            setDescription_text("");
+            handleClose();
+        }
+    }
+
+    return (
+        <>
+            <Button className="btn-primary" onClick={handleShow}>
+                Submit New Venue
+            </Button>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>Add a Venue!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <BootstrapInputFields
+                            id="venue_name"
+                            label="Enter Name"
+                            value={venue_name}
+                            onChange={(e) => setVenue_name(e.target.value)}
+                            type="text"
+                        />
+                        <BootstrapInputFields
+                            id="num_and_street"
+                            label="Enter Street"
+                            value={num_and_street}
+                            onChange={(e) => setNum_and_street(e.target.value)}
+                            type="text"
+                        />
+                        <BootstrapInputFields
+                            id="city"
+                            label="Enter City"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            type="text"
+                        />
+                        <BootstrapInputFields
+                            id="state"
+                            label="Enter State"
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
+                            type="text"
+                            maxLength="2"
+                            onInput={stateUppercase}
+                        />
+                        <BootstrapInputFields
+                            id="category_id"
+                            label="Enter Category"
+                            value={category_id}
+                            onChange={(e) => setCategory_id(e.target.value)}
+                            type="text"
+                        />
+                        <BootstrapInputFields
+                            id="description_text"
+                            label="How was it?"
+                            value={description_text}
+                            onChange={(e) => setDescription_text(e.target.value)}
+                            type="text"
+                        />
+                        <button
+                            type="submit"
+                            className="btn btn-outline-success"
+                        >
+                            Submit
+                        </button>
+                    </form>
+                </div>
+                </Modal.Body>
+                <Modal.Footer></Modal.Footer>
+            </Modal>
+        </>
+    )
 }
