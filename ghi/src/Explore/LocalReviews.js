@@ -1,6 +1,5 @@
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/esm/Button";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export function LocalReviews() {
     const [reviews, setReviews] = useState([]);

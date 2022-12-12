@@ -126,29 +126,3 @@ def delete_account(
 #     return {
 #         "accounts": repo.search_accounts(keyword)
 #     }
-
-
-# @router.delete("/api/sessions/{account_id}", response_model=bool)
-# async def delete_session(
-#     account_id: str,
-#     account: dict = Depends(authenticator.get_current_account_data),
-#     repo: SessionQueries = Depends(),
-# ) -> bool:
-#     if "admin" not in account["roles"]:
-#         raise not_authorized
-#     repo.delete_sessions(account_id)
-#     return True
-
-
-# Current logged in user
-# @router.get("/api/accounts/{account_id}", response_model=AccountOut)
-# def get_account(
-#     account_id: int,
-#     response: Response,
-#     repo: AccountQueries = Depends(),
-#     account_data: dict = Depends(authenticator.get_current_account_data),
-# ):
-#     account = repo.get(account_id)
-#     if account is None:
-#         response.status_code = 404
-#     return account
