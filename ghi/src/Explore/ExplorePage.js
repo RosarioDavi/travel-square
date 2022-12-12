@@ -69,8 +69,8 @@ export function Explore() {
 
         </form> */}
 
-      <div className="container textbox-padding justify-content-center text-muted">
-        <div>
+      <div className="container textbox-padding">
+        <div className="d-flex justify-content-center">
           {/* {options.map(option => {
                 return (
                 <nav>
