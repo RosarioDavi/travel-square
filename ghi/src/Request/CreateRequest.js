@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useGetTokenQuery } from "../store/authApi";
 
 export function CreateRequest() {
