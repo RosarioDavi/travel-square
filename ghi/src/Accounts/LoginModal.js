@@ -60,7 +60,7 @@ export function LoginModal() {
         login
       </Button>
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header className="login-modal" closeButton>
+        <Modal.Header className="modal-header" closeButton>
           <Modal.Title>Welcome back!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -88,7 +88,7 @@ export function LoginModal() {
             </form>
           </div>
         </Modal.Body>
-        <Modal.Footer className="login-modal"></Modal.Footer>
+        <Modal.Footer className="modal-footer"></Modal.Footer>
       </Modal>
     </>
   );

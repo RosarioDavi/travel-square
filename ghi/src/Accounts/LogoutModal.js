@@ -35,7 +35,7 @@ export function LogoutModal() {
                 logout
             </Button>
             <Modal show={show} onHide={handleClose} centered>
-                <Modal.Header className="logout-modal" closeButton>
+                <Modal.Header className="modal-header" closeButton>
                     <Modal.Title>Ready to logout?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -49,7 +49,7 @@ export function LogoutModal() {
                         </div>
                     </div>
                 </Modal.Body>
-                <Modal.Footer className="logout-modal"></Modal.Footer>
+                <Modal.Footer className="modal-footer"></Modal.Footer>
             </Modal>
         </>
     )
