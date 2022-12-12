@@ -1,5 +1,42 @@
 # Module3 Project Gamma
 
+# Group Name
+  Travel^2
+
+# Group Members
+  Muhammad Rahman
+  Lena Zhang
+  Sarah Ahn
+  Rosario Davi
+## Design 
+
+## Intended market
+  Travel^2 is intended to give the user a plateform to connect with travelers and explore differnt places they may not have thought of exploring. Our webstie is intended for a user to create a follwers list beable to check our explore page and see where there followers have been and what there followers have had to say about a particular place. With in our explore page a user can narrow down the searches with the search bar, that way they can see a particular city and state they are exploring. 
+
+## Built With
+  React, React.js
+  Bootstraps
+  Fast API
+  Redux
+  Python
+  JavaScirpt
+
+
+## Functionality
+  Main-page: Page is used for signing into your account and begin exploring by using the top nav bar. On the nav bar you will find The  login buttons, sign up feature, the explore tab, request, and review tabs.
+  On the explore page you will be able to see some cards of venues. These can be filtered and narrowed down. 
+  
+
+
+
+
+
+
+
+
+
+
+
 ## Getting started
 
 You have a project repository, now what? The next section
