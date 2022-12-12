@@ -1,49 +1,111 @@
-import React from 'react';
+import React from "react";
+import { useState } from "react";
+import { useGetTokenQuery } from "../store/authApi";
+import Button from "react-bootstrap/esm/Button";
+import Modal from "react-bootstrap/Modal";
 
-class WriteReview extends React.Component{
-    constructor(props) 
-    {
-        super(props)
-        this.state = {
-            review_description 
-        };
-        this.handleReviewDescriptionChange=this.handleReviewDescriptionChange.bind(this);
+function BootstrapInputFields(props) {
+  const { id, label, value, onChange, type, placeholder } = props;
+  return (
+    <div className="mb-3 ">
+      <label htmlFor={id} className="form-label">
+        {label}
+      </label>
+      <input
+        value={value}
+        onChange={onChange}
+        required
+        type={type}
+        className="form-control"
+        id={id}
+        placeholder={placeholder}
+      />
+    </div>
+  );
+}
+
+export default function CreateReview(props) {
+  const { data } = useGetTokenQuery();
+  const [review_description, setReview_description] = useState("");
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const newCommentSubmitFn = props.setNewCommentSubmit;
+  const [rating, setRating] = useState("");
+  const [picture, setPicture] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const ReviewUrl = `http://localhost:8000/api/reviews`;
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify({
+        review_description: review_description,
+        rating: rating,
+        picture: picture,
+        venue_id: props.venue,
+      }),
+      headers: {
+        Authorization: `Bearer ${data.access_token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const response = await fetch(ReviewUrl, fetchConfig);
+    if (response.ok) {
+      newCommentSubmitFn(true);
+      setShow(false);
+      setReview_description("");
     }
-    
-    handleReviewDescription(event){
-        const value = event.target.value;
-        this.setState({review_description: value})
-    }
-
-    render() {
-    return (
-        <div className="row">
-        <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
-            <form onSubmit={this.handleSubmitChange} id="create-service-form">
-
-
-              <div className="form-floating mb-3">
-                <input onChange={this.handleReviewDescription} value={this.state.review_description} placeholder="Review Description" required type="text" name="review_description" id="review_description" className="form-control" />
-                <label htmlFor="review_description">Review Description</label>
-              </div>
-
-              <button className="btn btn-primary">Create</button>
+  };
+  return (
+    <>
+      <Button className="login-btn-primary" onClick={handleShow}>
+        Make A Review
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add A Review!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            <form onSubmit={handleSubmit}>
+              <BootstrapInputFields
+                id="review_description"
+                label="Write your comment!"
+                value={review_description}
+                onChange={(e) => setReview_description(e.target.value)}
+                type="text"
+                placeholder="suggest a place!"
+              />
+              <BootstrapInputFields
+                id="rating"
+                label="Rate this place!"
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+                type="text"
+                placeholder="rate this place!"
+              />
+              <BootstrapInputFields
+                id="picture"
+                label="Add a picture!"
+                value={picture}
+                onChange={(e) => setPicture(e.target.value)}
+                type="text"
+                placeholder="Add a picture!"
+              />
+              <button
+                type="submit"
+                className="btn btn-outline-success"
+                onClick={handleSubmit}
+              >
+                Add!
+              </button>
             </form>
           </div>
-        </div>
-      </div>
-    );
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
+      </Modal>
+    </>
+  );
 }
-
-}
-
-export default WriteReview
-
-
-
-
-
-
-
-
