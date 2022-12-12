@@ -34,7 +34,7 @@ export function CreateRequest() {
 
   return (
     <>
-      <div className="btn-padding">
+      <div className="btn-padding" style={{ marginTop: "70px" }}>
         <Button className="btn-hue" onClick={handleShow}>
           Create a New Request
         </Button>
