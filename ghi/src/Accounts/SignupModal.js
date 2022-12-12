@@ -66,7 +66,7 @@ export function SignupModal() {
                 sign up
             </Button>
             <Modal show={show} onHide={handleClose} centered>
-                <Modal.Header className="signup-modal" closeButton>
+                <Modal.Header className="modal-header" closeButton>
                     <Modal.Title>Create Your Account</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -110,7 +110,7 @@ export function SignupModal() {
                     </form>
                 </div>
                 </Modal.Body>
-                <Modal.Footer className="signup-modal"></Modal.Footer>
+                <Modal.Footer className="modal-footer"></Modal.Footer>
             </Modal>
         </>
     )

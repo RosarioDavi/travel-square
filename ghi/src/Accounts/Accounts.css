@@ -3,15 +3,10 @@
     border-color: #d73851 !important;
 }
 
-.login-modal {
-    border: 0px !important;
+.modal-header {
+    border: 0px;
 }
 
-.logout-modal {
-    border: 0px !important;
-}
-
-
-.signup-modal {
-    border: 0px !important;
+.modal-footer {
+    border: 0px;
 }
