@@ -6,7 +6,6 @@ import { CreateRequest } from "./CreateRequest";
 
 export default function RequestList() {
   const [requests, setRequests] = useState([]);
-  const cssClass = "d-grid gap-2 d-sm-flex justify-content-sm-center";
 
   useEffect(() => {
     fetchData();
@@ -29,7 +28,7 @@ export default function RequestList() {
           marginTop: "50px",
         }}
       >
-      <CreateRequest />
+        <CreateRequest />
       </div>
       <div
         style={{

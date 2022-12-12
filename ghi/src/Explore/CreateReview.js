@@ -27,12 +27,12 @@ function BootstrapInputFields(props) {
 export default function CreateReview(props) {
   const { data } = useGetTokenQuery();
   const [review_description, setReview_description] = useState("");
+  const [rating, setRating] = useState("");
+  const [picture, setPicture] = useState("");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const newCommentSubmitFn = props.setNewCommentSubmit;
-  const [rating, setRating] = useState("");
-  const [picture, setPicture] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
