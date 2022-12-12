@@ -98,7 +98,7 @@ export function Explore() {
           />
           <button className="btn-hue">Search</button>
         </div>
-        <div className="d-flex justify-content-center textbox-padding card-grid">
+        <div className="justify-content-center textbox-padding card-grid">
           {/* <div className="row">
             <div className="col"> */}
               {venues.map((venue) => {
