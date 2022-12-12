@@ -32,6 +32,9 @@ function Navigation() {
                   <NavLink to="/explore"> explore</NavLink>
                 </li>
                 <li>
+                  <NavLink to="/trending"> trending</NavLink>
+                </li>
+                <li>
                   <NavLink to="/request"> request</NavLink>
                 </li>
                 <li>
@@ -59,6 +62,9 @@ function Navigation() {
                   <NavLink to="/explore"> explore</NavLink>
                 </li>
                 <li>
+                  <NavLink to="/trending"> trending</NavLink>
+                </li>
+                <li>
                   <NavLink to="/request"> request</NavLink>
                 </li>
                 <li>
@@ -66,6 +72,9 @@ function Navigation() {
                 </li>
                 <li>
                   <NavLink to='/categories'> categories</NavLink>
+                </li>
+                <li>
+                  <NavLink to='/dashboard'> dashboard</NavLink>
                 </li>
                 <li>
                   <LogoutModal />
@@ -90,6 +99,9 @@ function Navigation() {
                 </li>
                 <li>
                   <NavLink to="/explore"> explore</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/trending"> trending</NavLink>
                 </li>
                 <li>
                   <NavLink to="/request"> request</NavLink>

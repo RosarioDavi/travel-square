@@ -34,22 +34,22 @@ export function LogoutModal() {
             <Button className="btn-hue" onClick={handleShow}>
                 logout
             </Button>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+            <Modal show={show} onHide={handleClose} centered>
+                <Modal.Header className="modal-header" closeButton>
                     <Modal.Title>Ready to logout?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="container">
                         <div className="columns is-centered">
                         <div className="column is-one-third">
-                            <button className="btn btn-primary" onClick={handleSubmit}>
+                            <button className="btn-hue" onClick={handleSubmit}>
                                 Logout
                             </button>
                         </div>
                         </div>
                     </div>
                 </Modal.Body>
-                <Modal.Footer></Modal.Footer>
+                <Modal.Footer className="modal-footer"></Modal.Footer>
             </Modal>
         </>
     )

@@ -50,7 +50,7 @@ export function AddCategoryModal() {
 
     return (
       <>
-      <Button variant='primary' onClick={handleShow}>
+      <Button className="btn-hue" onClick={handleShow}>
         Create a Category
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -77,3 +77,5 @@ export function AddCategoryModal() {
       </>
     )
 }
+
+export default AddCategoryModal;

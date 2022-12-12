@@ -148,3 +148,5 @@ export function UpdateVenueModal(props) {
         </>
     )
 }
+
+export default UpdateVenueModal;

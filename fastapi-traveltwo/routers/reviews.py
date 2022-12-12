@@ -5,6 +5,7 @@ from queries.reviews import (
     ReviewOut,
     ReviewOutComplete,
 )
+import string
 from authenticator import authenticator
 from datetime import date
 
@@ -21,6 +22,7 @@ def get_all_reviews(
     city: str,
     repo: ReviewQueries = Depends(),
 ):
+    city = string.capwords(city)
     return repo.get_all_reviews(state, city)
 
 

@@ -9,7 +9,9 @@ export default function HomePage() {
       <form className="flex-form">
         <label htmlFor="from">
         </label>
-        <input type="search" placeholder="where do you want to go?" />
+        <input type="search" placeholder="City" />
+        |
+        <input type="search" placeholder="State" />
         <input type="submit" value="search" />
       </form>
       {/* <div id="madeby">

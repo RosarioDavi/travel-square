@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, Response, Request
 from typing import Optional
 from typing import Union
+import string
 from queries.venues import (
     VenueIn,
     VenueOut,
@@ -90,6 +91,7 @@ def get_all_approved(
     city: str,
     repo: VenueRepository = Depends(),
 ):
+    city = string.capwords(city)
     return repo.get_all_complete(state, city)
 
 

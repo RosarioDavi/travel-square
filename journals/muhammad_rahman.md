@@ -1,3 +1,6 @@
+12/9
+The admin functions are complete. I converted Lena's create request into a modal. I will now focus on finishing the search functions and writing the test for accounts. Honestly, I'm just focusing on functionality more so than how the page looks. I still feel annoyed about CSS and how everything looks to the eye. I do want to try to get photo uploads up and running right after.
+
 12/8
 I still have the 3 modals left for admin. Once that's done, I'm going to try and consolidate them under one admin component. Currently, the Navbar has a categories component and an unapproved venues component. I'll look at what does done in the trucks demo to see how I can split them in one component. I LOVE Redux. Now that the fetch logic is complete, all I have left for this is building the modals with putting in the forms. I'm still a little hazy on passing in props, but Lena had hers working so I may ask her. Once that's done, I'll move on to implementing the city, state searches on the explore and local reviews pages.
 

@@ -2,18 +2,21 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import CreateReview from "./CreateReview";
 
 export default function ShowReview(props) {
   const [reviews, setReviews] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [newCommentSubmit, setNewCommentSubmit] = useState(false);
 
   useEffect(() => {
     fetchData();
-  }, []);
+    setNewCommentSubmit(false);
+  }, [newCommentSubmit]);
 
-  // const venue = props.venue.id;
+  const venue = props.venue.id;
 
   const fetchData = async () => {
     const data = props.venue.id;
@@ -24,7 +27,7 @@ export default function ShowReview(props) {
   };
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className="btn-hue me-3" onClick={handleShow}>
         Reviews!
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -41,7 +44,11 @@ export default function ShowReview(props) {
           );
         })}
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <CreateReview
+            venue={venue}
+            setNewCommentSubmit={setNewCommentSubmit}
+          />
+          <Button className="btn-hue" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>
