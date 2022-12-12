@@ -2,36 +2,30 @@ import json
 from fastapi.testclient import TestClient
 from main import app
 from queries.requests import RequestQueries
-# from authenticator import authenticator
+from authenticator import authenticator
 
 client = TestClient(app)
 
-# def getaccountdatamock():
-#     return {'id':1, 'username':'rosario'}
+def getaccountdatamock():
+    return {'id':1, 'username':'lena'}
 
 class RequestQueriesMock:
     def get_all(self):
         return []
 
-    # def create(self, venue, added_by, approved):
-    #     response = {
+    def create(self, request, requester, created_at):
+        response = {
 
-    #             'id': 1,
-    #             'venue_name': 'underground pizza',
-    #             'num_and_street': '123 street',
-    #             'city': 'New York',
-    #             'state': 'NY',
-    #             'zip': "1234",
-    #             'category_id': 1,
-    #             'description_text': "Pizza",
-    #             'added_by': 1,
-    #             'approved': False,
+                "id": 1,
+                "requester": 1,
+                "txt": "string",
+                "created_at": "2022-12-12"
 
-    #     }
-    #     response.update(venue)
-    #     return response
+        }
+        response.update(request)
+        return response
 
-def test_list_venues():
+def test_list_request():
 
    app.dependency_overrides[RequestQueries] = RequestQueriesMock
 
@@ -42,21 +36,15 @@ def test_list_venues():
 
    app.dependency_overrides = {}
 
-# def test_create_venues():
-#     app.dependency_overrides[RequestQueries] = RequestQueriesMock
-#     app.dependency_overrides[authenticator.get_current_account_data] = getaccountdatamock
-#     venue = {
-#         'venue_name': 'underground pizza',
-#         'num_and_street': '123 street',
-#         'city': 'New York',
-#         'state': 'NY',
-#         'zip': "1234",
-#         'category_id': "1",
-#         'description_text': "pizza",
-#     }
+def test_create_request():
+    app.dependency_overrides[RequestQueries] = RequestQueriesMock
+    app.dependency_overrides[authenticator.get_current_account_data] = getaccountdatamock
+    request = {
+        "txt": "need recommendations"
+    }
 
-#     response = client.post("/api/venues/", json.dumps(venue))
+    response = client.post("/api/requests/", json.dumps(request))
 
-#     assert response.status_code == 200
-#     assert response.json()['venue_name'] == "underground pizza"
-#     assert response.json()['id'] == 1
+    assert response.status_code == 200
+    assert response.json()['txt'] == "need recommendations"
+    assert response.json()['id'] == 1
