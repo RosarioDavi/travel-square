@@ -24,7 +24,7 @@ export default function ShowReview(props) {
   };
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className="btn-hue me-3" onClick={handleShow}>
         Reviews!
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -41,7 +41,7 @@ export default function ShowReview(props) {
           );
         })}
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button className="btn-hue" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>
