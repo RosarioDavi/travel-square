@@ -51,3 +51,5 @@ export function DeleteVenueModal(props) {
         </>
     )
 }
+
+export default DeleteVenueModal;

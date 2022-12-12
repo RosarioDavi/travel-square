@@ -35,7 +35,8 @@ export function CreateRequest() {
 
   return (
     <>
-    <Button variant='primary' onClick={handleShow}>
+    <div className="btn-padding">
+    <Button className="btn-hue" onClick={handleShow}>
       Create a New Request
     </Button>
     <Modal show={show} onHide={handleClose}>
@@ -63,6 +64,7 @@ export function CreateRequest() {
           </div>
       </Modal.Body>
     </Modal>
+    </div>
     </>
   )
 }
