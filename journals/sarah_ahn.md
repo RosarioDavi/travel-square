@@ -1,3 +1,7 @@
+12/11/22
+- worked on CSS for accounts, admin, explore, and request files. I couldn't figure out how to remove the modal header and footer lines for quite some time. After tinkering with the files countless times, I finally got it to work and pushed the changes. I also got stuck on trying to center the explore search boxes. I tried so many things and then finally realized that I had turned the search box and cards into a grid by putting the CSS class name in the parent div tag. Putting the class name in only the search box div tag made this work finally.
+- put all the components of the admin dashboard into the AdminDash file but the page isn't loading at all. The bug is still allowing the website to run so I pushed the changes for now.
+
 12/08/22
 - let the team know that I haven't been progressing on the reviews front-end, so I've agreed to take over CSS while the rest of the team work on wrapping up the front-end
 - consulted Dalonte and Riley on how to approach fixing our website design, and I feel that I have a good grasp of what needs to be done
