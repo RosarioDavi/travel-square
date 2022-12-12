@@ -7,10 +7,10 @@ import { CreateVenue } from "./CreateVenue";
 
 export function Explore() {
   const [venues, setVenues] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const filteredVenues = "";
 
   const stateUppercase = (e) => {
     e.target.value = ("" + e.target.value).toUpperCase();
@@ -26,11 +26,31 @@ export function Explore() {
     const responseVenues = await fetch(VenuesUrl);
     const venueData = await responseVenues.json();
     setVenues(venueData);
-    const CategoriesUrl = "http://localhost:8000/api/categories/";
-    const responseCategories = await fetch(CategoriesUrl);
-    const categoriesData = await responseCategories.json();
-    setCategory(categoriesData);
-  };
+  }
+
+  useEffect(() => {
+    async function getCategories() {
+      const CategoriesUrl = "http://localhost:8000/api/categories/";
+      const responseCategories = await fetch(CategoriesUrl);
+      const categoriesData = await responseCategories.json();
+      setCategories(categoriesData);
+    }
+    function filterVenues(category) {
+      if (!category) {
+        setVenues(venues);
+      } else {
+        let filteredVenues = [];
+        for (const venue of venues) {
+          if (venue.category_name === category) {
+            filteredVenues.push(venue);
+          }
+        }
+        setVenues(filterVenues);
+      }
+    }
+    getCategories();
+    filterVenues();
+  }, [venues, setVenues])
 
   return (
     <>
@@ -58,6 +78,20 @@ export function Explore() {
             <button className="btn-hue">Search</button>
           </div>
         </form>
+
+        <div className="mb-3">
+          <label htmlFor="category" className="form-label">Choose a Category</label>
+          <select required className="form-select" type="number" name="category" id="category" aria-label="Choose a Category" onChange={(e) => setCategory(e.target.value)}>
+            <option value="">All Categories</option>
+            {categories.map(category => (
+                <option key={category.id} value={category.category_name}>
+                    {category.category_name}
+                </option>
+            ))}
+          </select>
+          </div>
+
+
       </div>
       <CreateVenue />
       <div className="justify-content-center textbox-padding card-grid">
