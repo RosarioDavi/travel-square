@@ -3,6 +3,7 @@ import Button from "react-bootstrap/esm/Button";
 import { useState, useEffect } from "react";
 import "./Explore.css";
 import ShowReview from "./ShowReviews";
+import { CreateVenue } from "./CreateVenue";
 
 export function Explore() {
   const [venues, setVenues] = useState([]);
@@ -58,6 +59,7 @@ export function Explore() {
           </div>
         </form>
       </div>
+        <CreateVenue />
         <div className="justify-content-center textbox-padding card-grid">
           {venues.map((venue) => {
             return (
