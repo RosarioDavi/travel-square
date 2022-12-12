@@ -32,7 +32,30 @@
   Photo uploads, following follow system (have the tables setup so I know how that system would work with redux), add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue)
 
   ## Start up
+  To start this project, First start by cloning and forking the project from https://gitlab.com/travel-two/module3-project-gamma. 
+
+  You can open the project in VS to see the code. 
+
+  To review the running project. 
+
+  Start by opening docker and your terminal. 
+
+  Run these commands in this order. 
+
+  Docker volume create postgres-data
+  Docker volume create pg-admin
   
+  For PC run Docker compose build 
+  For Mac run DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose build
+
+  Lastely run docker compose up. 
+
+  All containers should be running now. 
+
+  Once containers are up and running.
+
+  Vist localhost3000 to view the website. 
+
 
 
 
