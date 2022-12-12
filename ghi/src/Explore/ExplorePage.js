@@ -26,15 +26,7 @@ export function Explore() {
     const responseVenues = await fetch(VenuesUrl);
     const venueData = await responseVenues.json();
     setVenues(venueData);
-<<<<<<< HEAD
   }
-=======
-    const CategoriesUrl = "http://localhost:8000/api/categories/";
-    const responseCategories = await fetch(CategoriesUrl);
-    const categoriesData = await responseCategories.json();
-    setCategory(categoriesData);
-  };
->>>>>>> eead5ed7a7129cd5de91cc33f6c2b50097d1f068
 
   useEffect(() => {
     async function getCategories() {
