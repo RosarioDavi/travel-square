@@ -1,3 +1,6 @@
+12/09/2022
+Today I created two test. One to test out the venues get all and one to test out create venues. I was able to get my test passing for get venues after figuring a bug on my own. My bug was that I was using the wrong function name in my mock. For my test create venue, my test were failing due to not have auth. I had to reach out to some classmates and was able to get my test passing. After I was able to get my test to pass I went to help Lena out with her testing.
+
 12/08/2022
 After failing at getting the search feature to work. Explore page has everything displaying but broken functionality. I spoke with my team and Muhammad agreed to take a look and take care of that function. We agreed for me to start my unit test. I started by adding a test folder and test venue file along with adding pytest to requirments.txt. I began to watch and follow the unit test lecture and began to write the test and hope to finish the test tomorrow.
 

@@ -1,5 +1,75 @@
 # Module3 Project Gamma
 
+# Group Name
+  Travel^2
+
+# Group Members
+  Muhammad Rahman
+  Lena Zhang
+  Sarah Ahn
+  Rosario Davi
+## Design 
+
+## Intended market
+  Travel^2 is intended to give the user a plateform to connect with travelers and explore differnt places they may not have thought of exploring. Our webstie is intended for a user to create a follwers list beable to check our explore page and see where there followers have been and what there followers have had to say about a particular place. With in our explore page a user can narrow down the searches with the search bar, that way they can see a particular city and state they are exploring. 
+
+## Built With
+  React, React.js
+  Bootstraps
+  Fast API
+  Redux
+  Python
+  JavaScirpt
+
+
+## Functionality
+  Main-page: Page is used for signing into your account and begin exploring by using the top nav bar. On the nav bar you will find The  login buttons, sign up feature, the explore tab, request, and review tabs.
+  On the explore page you will be able to see some cards of venues. These can be filtered and narrowed down. 
+  If user is an admin, they will be able to approve venues that other users have created in order to keep the information correct.
+
+
+
+
+  ##  Stretch Goals Functionality
+  Photo uploads, following follow system (have the tables setup so I know how that system would work with redux), add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue)
+
+  ## Start up
+  To start this project, First start by cloning and forking the project from https://gitlab.com/travel-two/module3-project-gamma. 
+
+  You can open the project in VS to see the code. 
+
+  To review the running project. 
+
+  Start by opening docker and your terminal. 
+
+  Run these commands in this order. 
+
+  Docker volume create postgres-data
+  Docker volume create pg-admin
+  
+  For PC run Docker compose build 
+  For Mac run DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose build
+
+  Lastely run docker compose up. 
+
+  All containers should be running now. 
+
+  Once containers are up and running.
+
+  Vist localhost3000 to view the website. 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Getting started
 
 You have a project repository, now what? The next section
