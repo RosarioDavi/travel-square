@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGetTokenQuery } from "../store/authApi";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
@@ -34,17 +34,30 @@ export function CreateVenue() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const { data } = useGetTokenQuery();
-    const [ venue_name, setVenue_name] = useState("");
+    const [ venue_name, setVenue_name ] = useState("");
     const [ num_and_street, setNum_and_street] = useState("");
-    const [ city, setCity] = useState("");
-    const [ state, setState] = useState("");
-    const [ category_id, setCategory_id] = useState("");
-    const [ categories, setCategories] = useState([]);
-    const [ description_text, setDescription_text] = useState("");
+    const [ city, setCity ] = useState("");
+    const [ state, setState ] = useState("");
+    const [ zip, setZip ] = useState("");
+    const [ category_id, setCategory_id ] = useState("");
+    const [ categories, setCategories ] = useState([]);
+    const [ description_text, setDescription_text ] = useState("");
+
+    useEffect(() => {
+        async function getCategories() {
+            const CategoriesUrl = `${process.env.REACT_APP_TRAVELSQUARED}/api/categories/`;
+            const responseCategories = await fetch(CategoriesUrl);
+            if (responseCategories.ok) {
+                const data = await responseCategories.json()
+                setCategories(data)
+            }
+        }
+        getCategories();
+    }, [setCategories])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const VenueUrl = "http://localhost:8000/api/venues/";
+        const VenueUrl = `${process.env.REACT_APP_TRAVELSQUARED}/api/venues/`;
         const fetchConfig = {
             method: "POST",
             body: JSON.stringify({
@@ -52,6 +65,7 @@ export function CreateVenue() {
                 num_and_street: num_and_street,
                 city: city,
                 state: state,
+                zip: zip,
                 category_id: category_id,
                 description_text: description_text
             }),
@@ -67,6 +81,7 @@ export function CreateVenue() {
             setNum_and_street("");
             setCity("");
             setState("");
+            setZip("");
             setCategory_id("");
             setDescription_text("");
             handleClose();
@@ -116,20 +131,40 @@ export function CreateVenue() {
                             onInput={stateUppercase}
                         />
                         <BootstrapInputFields
+                            id="zip"
+                            label="Enter 5-digit Zip Code"
+                            value={zip}
+                            onChange={(e) => setZip(e.target.value)}
+                            type="text"
+                            maxLength="5"
+                        />
+                        {/* <BootstrapInputFields
                             id="category_id"
                             label="Enter Category"
                             value={category_id}
                             onChange={(e) => setCategory_id(e.target.value)}
                             type="text"
-                        />
+                        /> */}
+                        <div className="mb-3">
+                            <label htmlFor="category_id" className="form-label">Choose a Category</label>
+                            <select required className="form-select" type="number" name="category_id" id="category_id" aria-label="Choose a Category" onChange={(e) => setCategory_id(e.target.value)}>
+                                <option value="">Available Categories</option>
+                                {categories.map(category => (
+                                    <option key={category.id} value={category.id}>
+                                        {category.category_name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                         <BootstrapInputFields
                             id="description_text"
-                            label="How was it?"
+                            label="What is it like?"
                             value={description_text}
                             onChange={(e) => setDescription_text(e.target.value)}
                             type="text"
                         />
                         <button
+                            disabled={categories.length === 0}
                             type="submit"
                             className="btn btn-outline-success"
                         >
