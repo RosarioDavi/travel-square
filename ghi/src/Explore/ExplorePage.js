@@ -126,7 +126,7 @@ export function Explore() {
                       </Card.Text>
                       <div className="d-flex justify-content-center">
                         <ShowReview venue={venue} />
-                        <Button className="btn-hue">Create Review</Button>
+                        {/* <Button className="btn-hue">Create Review</Button> */}
                       </div>
                     </Card.Body>
                   </Card>
