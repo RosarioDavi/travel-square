@@ -25,6 +25,8 @@
 ## Functionality
   Main-page: Page is used for signing into your account and begin exploring by using the top nav bar. On the nav bar you will find The  login buttons, sign up feature, the explore tab, request, and review tabs.
   On the explore page you will be able to see some cards of venues. These can be filtered and narrowed down. 
+  If user is an admin, they will be able to approve venues that other users have created in order to keep the information correct.
+
 
 
 
