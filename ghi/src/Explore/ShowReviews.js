@@ -40,6 +40,7 @@ export default function ShowReview(props) {
               {review.username} {""}
               {review.created_at} : {""}
               {review.review_description}
+              <div>Rating of place: {review.rating} / 5</div>
             </Modal.Body>
           );
         })}

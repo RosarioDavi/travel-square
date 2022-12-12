@@ -12,7 +12,7 @@ export function Explore() {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
 
-  const stateUppercase = e => {
+  const stateUppercase = (e) => {
     e.target.value = ("" + e.target.value).toUpperCase();
   };
 
@@ -26,7 +26,15 @@ export function Explore() {
     const responseVenues = await fetch(VenuesUrl);
     const venueData = await responseVenues.json();
     setVenues(venueData);
+<<<<<<< HEAD
   }
+=======
+    const CategoriesUrl = "http://localhost:8000/api/categories/";
+    const responseCategories = await fetch(CategoriesUrl);
+    const categoriesData = await responseCategories.json();
+    setCategory(categoriesData);
+  };
+>>>>>>> eead5ed7a7129cd5de91cc33f6c2b50097d1f068
 
   useEffect(() => {
     async function getCategories() {
@@ -93,40 +101,35 @@ export function Explore() {
 
 
       </div>
-        <CreateVenue />
-        <div className="justify-content-center textbox-padding card-grid">
-          {venues.map((venue) => {
-            return (
-              <Card
-                style={{ margin: "1rem" }}
-                key={venue.id}
-                className="card"
-              >
-                <Card.Body>
-                  <Card.Title className="d-flex justify-content-center">
-                    {venue.venue_name}
-                  </Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted d-flex justify-content-center">
-                    {venue.category_name}
-                  </Card.Subtitle>
-                  <Card.Text className="d-flex justify-content-center">
-                    {venue.num_and_street}, {venue.city}, {venue.state},{" "}
-                    {venue.zip}
-                  </Card.Text>
-                  <Card.Text className="d-flex justify-content-center">
-                    {venue.description_text}
-                  </Card.Text>
-                  <Card.Text className="d-flex justify-content-center">
-                    by user: {venue.added_by_username}
-                  </Card.Text>
-                  <div className="d-flex justify-content-center">
-                    <ShowReview venue={venue} />
-                    {/* <Button className="btn-hue">Create Review</Button> */}
-                  </div>
-                </Card.Body>
-              </Card>
-            );
-          })}
+      <CreateVenue />
+      <div className="justify-content-center textbox-padding card-grid">
+        {venues.map((venue) => {
+          return (
+            <Card style={{ margin: "1rem" }} key={venue.id} className="card">
+              <Card.Body>
+                <Card.Title className="d-flex justify-content-center">
+                  {venue.venue_name}
+                </Card.Title>
+                <Card.Subtitle className="mb-2 text-muted d-flex justify-content-center">
+                  {venue.category_name}
+                </Card.Subtitle>
+                <Card.Text className="d-flex justify-content-center">
+                  {venue.num_and_street}, {venue.city}, {venue.state},{" "}
+                  {venue.zip}
+                </Card.Text>
+                <Card.Text className="d-flex justify-content-center">
+                  {venue.description_text}
+                </Card.Text>
+                <Card.Text className="d-flex justify-content-center">
+                  by user: {venue.added_by_username}
+                </Card.Text>
+                <div className="d-flex justify-content-center">
+                  <ShowReview venue={venue} />
+                </div>
+              </Card.Body>
+            </Card>
+          );
+        })}
       </div>
     </>
   );

@@ -1,3 +1,6 @@
+12/10/2022
+Today I worked on cerating the readme. I filled in our group name, group memebers, explained what our purpose of the website is and explained how to build up the containers and start the project. After lunch I saw Lena needed help with fixing a bug in her test. We hopped into a room to work out the bug and got all her test running. 
+
 12/09/2022
 Today I created two test. One to test out the venues get all and one to test out create venues. I was able to get my test passing for get venues after figuring a bug on my own. My bug was that I was using the wrong function name in my mock. For my test create venue, my test were failing due to not have auth. I had to reach out to some classmates and was able to get my test passing. After I was able to get my test to pass I went to help Lena out with her testing.
 

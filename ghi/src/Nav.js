@@ -21,21 +21,22 @@ function Navigation() {
       <>
         <div className="container">
           <header>
-            <h2>travel<sup>2</sup>
+            <h2>
+              travel<sup>2</sup>
             </h2>
             <nav>
               <ul>
                 <li>
-                  <NavLink to="/"> home</NavLink>
+                  <NavLink to="/"> Home</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/explore"> explore</NavLink>
+                  <NavLink to="/explore"> Explore</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/trending"> trending</NavLink>
+                  <NavLink to="/trending"> Trending</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/request"> request</NavLink>
+                  <NavLink to="/request"> Request</NavLink>
                 </li>
                 <li>
                   <LogoutModal />
@@ -51,30 +52,31 @@ function Navigation() {
       <>
         <div className="container">
           <header>
-            <h2>travel<sup>2</sup>
+            <h2>
+              travel<sup>2</sup>
             </h2>
             <nav>
               <ul>
                 <li>
-                  <NavLink to="/"> home</NavLink>
+                  <NavLink to="/"> Home</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/explore"> explore</NavLink>
+                  <NavLink to="/explore"> Explore</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/trending"> trending</NavLink>
+                  <NavLink to="/trending"> Trending</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/request"> request</NavLink>
+                  <NavLink to="/request"> Request</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/unapproved"> unapproved venues</NavLink>
+                  <NavLink to="/unapproved"> Unapproved Venues</NavLink>
                 </li>
                 <li>
-                  <NavLink to='/categories'> categories</NavLink>
+                  <NavLink to="/categories"> Categories</NavLink>
                 </li>
                 <li>
-                  <NavLink to='/dashboard'> dashboard</NavLink>
+                  <NavLink to="/dashboard"> Dashboard</NavLink>
                 </li>
                 <li>
                   <LogoutModal />
@@ -90,7 +92,8 @@ function Navigation() {
       <>
         <div className="container">
           <header>
-            <h2>travel<sup>2</sup>
+            <h2>
+              travel<sup>2</sup>
             </h2>
             <nav>
               <ul>
