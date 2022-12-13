@@ -37,6 +37,8 @@ Request: Making a request for recommendations with the access to viewing and mak
 Unapproved venues: Admins will be able to approve or deny newly created venues before they show up for the first time based on accuracy and appropriateness.
 Categories: Only admins are able to generate new categories for venues.
 
+To make an admin account and approve submitted venues, when signing up, make the username "admin".
+
 ## Stretch Goals Functionality
 
 Photo uploads, following follow system (have the tables setup so I know how that system would work with redux), add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue). Currently, the dashboard link in the admin view is blank, so we hope to consolidate unapproved venues and categories pages into that one dashboard page. The home page currently is not functional. We plan to convert the explore and trending GET requests into Redux functions so that inputting the city and state into the page page would redirect to the explore page with the submitted information being used for the first GET request.

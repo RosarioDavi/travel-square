@@ -76,7 +76,7 @@ async def create_account(
     avatar = g_holder.get_image()
     # Hardcoded logic for username based admin:
     is_admin = False
-    admin_accounts = ["muhammad", "lena", "sarah", "rosario"]
+    admin_accounts = ["muhammad", "lena", "sarah", "rosario", 'admin']
     if info.username in admin_accounts:
         is_admin = True
     try:
