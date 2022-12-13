@@ -4,7 +4,6 @@ import { useGetCategoriesQuery } from '../store/adminApi';
 import { AddCategoryModal } from './AddCategoryModal';
 import "./Admin.css"
 
-
 export function CategoriesList() {
     const { data: tokenData} = useGetTokenQuery();
     const { data: categoriesData, isLoading } = useGetCategoriesQuery();

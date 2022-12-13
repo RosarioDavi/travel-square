@@ -25,6 +25,7 @@ export default function ShowReview(props) {
     const newData = await response.json();
     setReviews(newData);
   };
+
   return (
     <>
       <Button className="btn-hue me-3" onClick={handleShow}>

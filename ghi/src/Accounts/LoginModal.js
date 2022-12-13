@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useLogInMutation, useGetTokenQuery } from '../store/authApi';
 import "./Accounts.css";
 
-
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder } = props;
   return (

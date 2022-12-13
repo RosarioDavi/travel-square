@@ -143,13 +143,6 @@ export function CreateVenue() {
                                 type="text"
                                 maxLength="5"
                             />
-                            {/* <BootstrapInputFields
-                                id="category_id"
-                                label="Enter Category"
-                                value={category_id}
-                                onChange={(e) => setCategory_id(e.target.value)}
-                                type="text"
-                            /> */}
                             <div className="mb-3">
                                 <label htmlFor="category_id" className="form-label">Choose a Category</label>
                                 <select required className="form-select" type="number" name="category_id" id="category_id" aria-label="Choose a Category" onChange={(e) => setCategory_id(e.target.value)}>

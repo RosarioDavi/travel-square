@@ -28,30 +28,6 @@ export function Explore() {
     setVenues(venueData);
   }
 
-  // useEffect(() => {
-  //   async function getCategories() {
-  //     const CategoriesUrl = "http://localhost:8000/api/categories/";
-  //     const responseCategories = await fetch(CategoriesUrl);
-  //     const categoriesData = await responseCategories.json();
-  //     setCategories(categoriesData);
-  //   }
-  //   function filterVenues(category) {
-  //     if (!category) {
-  //       setVenues(venues);
-  //     } else {
-  //       let filteredVenues = [];
-  //       for (const venue of venues) {
-  //         if (venue.category_name === category) {
-  //           filteredVenues.push(venue);
-  //         }
-  //       }
-  //       setVenues(filterVenues);
-  //     }
-  //   }
-  //   getCategories();
-  //   filterVenues();
-  // }, [venues, setVenues])
-
   return (
     <>
       <div className="container textbox-padding">
@@ -78,18 +54,6 @@ export function Explore() {
             <button className="btn-hue">Search</button>
           </div>
         </form>
-
-        {/* <div className="mb-3">
-          <label htmlFor="category" className="form-label">Choose a Category</label>
-          <select required className="form-select" type="number" name="category" id="category" aria-label="Choose a Category" onChange={(e) => setCategory(e.target.value)}>
-            <option value="">All Categories</option>
-            {categories.map(category => (
-                <option key={category.id} value={category.category_name}>
-                    {category.category_name}
-                </option>
-            ))}
-          </select>
-          </div> */}
 
       </div>
       <CreateVenue />
