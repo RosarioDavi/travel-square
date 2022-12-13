@@ -10,8 +10,6 @@ import RequestList from "./Request/RequestList";
 import AdminDash from "./Admin/AdminDash";
 import { useGetTokenQuery } from './store/authApi'
 
-// import CreateReviewModal from "./ReviewForm";
-
 function App() {
   const { data: tokenData, isLoading} = useGetTokenQuery();
 
@@ -23,7 +21,6 @@ function App() {
     return (
       <BrowserRouter>
         <div>
-          {/* <ErrorNotification error={error} /> */}
           <Navigation />
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -37,11 +34,11 @@ function App() {
         </div>
       </BrowserRouter>
     );
+
   } else {
     return (
       <BrowserRouter>
         <div>
-          {/* <ErrorNotification error={error} /> */}
           <Navigation />
           <Routes>
             <Route path="/" element={<HomePage />} />

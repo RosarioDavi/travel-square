@@ -1,7 +1,6 @@
 import React from "react";
 import "./Nav.css";
 
-
 export default function HomePage() {
   return (
     <div className="cover">

@@ -85,5 +85,4 @@ export function LocalReviews() {
         </div>
         </>
     )
-
 }
