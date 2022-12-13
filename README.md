@@ -67,6 +67,10 @@ Once containers are up and running.
 
 Visit localhost:3000 to view the website.
 
+To run test. 
+
+run python -m pytest in travel-squared container.
+
 ## Getting started
 
 You have a project repository, now what? The next section
