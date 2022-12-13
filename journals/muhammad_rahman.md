@@ -1,3 +1,6 @@
+12/12
+I finished the trending and explore pages. I really want to convert the GET requests that those pages use, or at least the explore page, into Redux so that a user can submit a city and state into the home search bar and get all the venues for that location. I did struggle with the filtering venues feature that takes a category and filters all the venues that were grabbed by their location. I may have to get the route to also take in a category to handle it easily, but the tradeoff is that users may have to go category by category to find a venue. There must be a simpler way to filter locally. Additionally, I hid the POST functionalities on the frontend based on whether an access token is present. There's a lot left to add, but the core functionalities are complete.
+
 12/9
 The admin functions are complete. I converted Lena's create request into a modal. I will now focus on finishing the search functions and writing the test for accounts. Honestly, I'm just focusing on functionality more so than how the page looks. I still feel annoyed about CSS and how everything looks to the eye. I do want to try to get photo uploads up and running right after.
 
