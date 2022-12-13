@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
-import { useLogInMutation, useGetTokenQuery } from '../store/authApi';
+import { useLogInMutation } from '../store/authApi';
 import "./Accounts.css";
 
 function BootstrapInputFields(props) {
@@ -26,7 +26,7 @@ function BootstrapInputFields(props) {
 }
 
 export function LoginModal() {
-  const { data: tokenData } = useGetTokenQuery();
+  // const { data: tokenData } = useGetTokenQuery();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

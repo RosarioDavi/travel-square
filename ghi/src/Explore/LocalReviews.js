@@ -67,7 +67,7 @@ export function LocalReviews() {
                                         on {review.created_at}
                                     </Card.Subtitle>
                                     <Card.Text className="d-flex justify-content-center">
-                                        {review.description_text}
+                                        {review.review_description}
                                     </Card.Text>
                                     <Card.Text className="d-flex justify-content-center">
                                         I rate it {review.rating}/5!

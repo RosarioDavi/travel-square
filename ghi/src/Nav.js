@@ -68,9 +68,9 @@ function Navigation() {
                 <li>
                   <NavLink to="/categories"> Categories</NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink to="/dashboard"> Dashboard</NavLink>
-                </li>
+                </li> */}
                 <li>
                   <LogoutModal />
                 </li>

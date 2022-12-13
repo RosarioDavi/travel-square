@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/esm/Button";
-import { useState, useEffect } from "react";
+// import Button from "react-bootstrap/esm/Button";
+import { useState } from "react";
 import "./Explore.css";
 import ShowReview from "./ShowReviews";
 import { CreateVenue } from "./CreateVenue";

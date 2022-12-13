@@ -6,20 +6,22 @@ from authenticator import authenticator
 
 client = TestClient(app)
 
-def getaccountdatamock():
-    return {'id':1, 'username':'muhammad'}
-
 class AccountQueriesMock:
     def get_all_accounts(self):
         return []
 
-def test_list_request():
+    def create_account(self, user, hashed_password):
+        response = {}
+        response.update(user)
+        return response
 
-   app.dependency_overrides[AccountQueries] = AccountQueriesMock
 
-   response = client.get('/api/accounts/')
+def test_list_users():
+    app.dependency_overrides[AccountQueries] = AccountQueriesMock
 
-   assert response.status_code == 200
-   assert response.json() == []
+    response = client.get("/api/users/")
 
-   app.dependency_overrides = {}
+    assert response.status_code == 200
+    assert response.json() == {[]}
+
+    app.dependency_overrides = {}

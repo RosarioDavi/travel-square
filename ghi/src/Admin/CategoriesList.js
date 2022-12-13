@@ -1,11 +1,9 @@
 import Table from 'react-bootstrap/Table'
-import { useGetTokenQuery } from '../store/authApi';
 import { useGetCategoriesQuery } from '../store/adminApi';
 import { AddCategoryModal } from './AddCategoryModal';
 import "./Admin.css"
 
 export function CategoriesList() {
-    const { data: tokenData} = useGetTokenQuery();
     const { data: categoriesData, isLoading } = useGetCategoriesQuery();
 
   if (isLoading) {
