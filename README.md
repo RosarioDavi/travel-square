@@ -25,7 +25,7 @@ Fast API
 Redux
 Python
 JavaScript
-MySQL
+SQL
 
 ## Functionality
 
