@@ -25,7 +25,7 @@ function BootstrapInputFields(props) {
 }
 
 export default function CreateComment(props) {
-  const { data } = useGetTokenQuery();
+  const { data: tokenData, isLoading } = useGetTokenQuery();
   const [txt, setTxt] = useState("");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -42,7 +42,7 @@ export default function CreateComment(props) {
         request_id: props.request,
       }),
       headers: {
-        Authorization: `Bearer ${data.access_token}`,
+        Authorization: `Bearer ${tokenData.access_token}`,
         "Content-Type": "application/json",
       },
     };
@@ -54,38 +54,46 @@ export default function CreateComment(props) {
       setTxt("");
     }
   };
-  return (
-    <>
-      <Button className="login-btn-primary" onClick={handleShow}>
-        Make A Comment
-      </Button>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add your Comment!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            <form onSubmit={handleSubmit}>
-              <BootstrapInputFields
-                id="txt"
-                label="Write your comment!"
-                value={txt}
-                onChange={(e) => setTxt(e.target.value)}
-                type="text"
-                placeholder="suggest a place!"
-              />
-              <button
-                type="submit"
-                className="btn btn-outline-success"
-                onClick={handleSubmit}
-              >
-                Add!
-              </button>
-            </form>
-          </div>
-        </Modal.Body>
-        <Modal.Footer></Modal.Footer>
-      </Modal>
-    </>
-  );
+
+
+  if (isLoading) {
+      return <progress className="progress is-primary" max="100"></progress>;
+  }
+
+  if (tokenData && tokenData.access_token) {
+    return (
+      <>
+        <Button className="login-btn-primary" onClick={handleShow}>
+          Make A Comment
+        </Button>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add your Comment!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div>
+              <form onSubmit={handleSubmit}>
+                <BootstrapInputFields
+                  id="txt"
+                  label="Write your comment!"
+                  value={txt}
+                  onChange={(e) => setTxt(e.target.value)}
+                  type="text"
+                  placeholder="suggest a place!"
+                />
+                <button
+                  type="submit"
+                  className="btn btn-outline-success"
+                  onClick={handleSubmit}
+                >
+                  Add!
+                </button>
+              </form>
+            </div>
+          </Modal.Body>
+          <Modal.Footer></Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
 }

@@ -63,7 +63,19 @@ export function LocalReviews() {
                                     <Card.Title>
                                         {review.username}'s experience at {review.venue_name}!
                                     </Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted d-flex justify-content-center">
+                                        on {review.created_at}
+                                    </Card.Subtitle>
+                                    <Card.Text className="d-flex justify-content-center">
+                                        {review.description_text}
+                                    </Card.Text>
+                                    <Card.Text className="d-flex justify-content-center">
+                                        I rate it {review.rating}/5!
+                                    </Card.Text>
                                 </Card.Body>
+                                <Card.Footer className="text-muted">
+                                    {review.venue_name} is located at {review.num_and_street}, {review.city}, {review.state} {review.zip}
+                                </Card.Footer>
                             </Card>
                         );
                     })}

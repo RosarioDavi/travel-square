@@ -20,16 +20,16 @@ Travel^2 is a social traveling based application that is aimed to connect travel
 ## Built With
 
 React
-Bootstraps
-Fast API
 Redux
+Bootstrap
+Fast API
 Python
 JavaScript
-MySQL
+PostgreSQL
 
 ## Functionality
 
-Main Page/Home: Page is intended for users to search locations by state and city.
+Main Page/Home (Currently not functional until explore and trending functions are converted to Redux): Page is intended for users to search locations by state and city by redirecting to explore after submission.
 Navigation bar: For users to sign up, login, and logout. In addition to navigating to other pages such as the explore, trending, and request page.
 Explore: Venue cards with the ability to check out reviews for the venue and creating a review if logged in.
 Trending: A page that populates all the most recent reviews made for a venue
@@ -39,37 +39,46 @@ Categories: Only admins are able to generate new categories for venues.
 
 ## Stretch Goals Functionality
 
-Photo uploads, following follow system (have the tables setup so I know how that system would work with redux), add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue)
+Photo uploads, following follow system (have the tables setup so I know how that system would work with redux), add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue). Currently, the dashboard link in the admin view is blank, so we hope to consolidate unapproved venues and categories pages into that one dashboard page. The home page currently is not functional. We plan to convert the explore and trending GET requests into Redux functions so that inputting the city and state into the page page would redirect to the explore page with the submitted information being used for the first GET request.
+
+## Testing
+
+fastapi-traveltwo\tests\test_account.py - Muhammad Rahman
+fastapi-traveltwo\tests\test_request.py - Lena Zhang
+fastapi-traveltwo\tests\test_review.py - Sarah Ahn
+fastapi-traveltwo\tests\test_venue.py - Rosario Davi
 
 ## Start up
 
-To start this project, First start by cloning and forking the project from https://gitlab.com/travel-two/module3-project-gamma.
+To grab the project:
+
+Fork and clone the repository from https://gitlab.com/travel-two/module3-project-gamma.
 
 You can open the project in VScode to see the code.
 
-To review the running project.
+To review the running project:
 
 Start by opening docker and your terminal.
 
-Run these commands in this order.
+Run these commands in this order:
 
-Docker volume create postgres-data
-Docker volume create pg-admin
+docker volume create postgres-data
+docker volume create pg-admin
 
-For PC run Docker compose build
+For PC run docker-compose build
 For Mac run DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose build
 
-Lastly, run docker compose up.
+Lastly, run docker-compose up.
 
 All containers should be running now.
 
-Once containers are up and running.
+Once containers are up and running, visit localhost:3000 to view the website.
 
-Visit localhost:3000 to view the website.
+To run tests:
 
-To run test. 
+Run the command:
 
-run python -m pytest in travel-squared container.
+python -m pytest inside the travel-squared container.
 
 ## Getting started
 

@@ -25,7 +25,7 @@ function BootstrapInputFields(props) {
 }
 
 export default function CreateReview(props) {
-  const { data } = useGetTokenQuery();
+  const { data: tokenData, isLoading } = useGetTokenQuery();
   const [review_description, setReview_description] = useState("");
   const [rating, setRating] = useState("");
   const [picture, setPicture] = useState("");
@@ -46,7 +46,7 @@ export default function CreateReview(props) {
         venue_id: props.venue,
       }),
       headers: {
-        Authorization: `Bearer ${data.access_token}`,
+        Authorization: `Bearer ${tokenData.access_token}`,
         "Content-Type": "application/json",
       },
     };
@@ -58,54 +58,61 @@ export default function CreateReview(props) {
       setReview_description("");
     }
   };
-  return (
-    <>
-      <Button className="login-btn-primary" onClick={handleShow}>
-        Make A Review
-      </Button>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add A Review!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            <form onSubmit={handleSubmit}>
-              <BootstrapInputFields
-                id="review_description"
-                label="Write your comment!"
-                value={review_description}
-                onChange={(e) => setReview_description(e.target.value)}
-                type="text"
-                placeholder="suggest a place!"
-              />
-              <BootstrapInputFields
-                id="rating"
-                label="Rate this place!"
-                value={rating}
-                onChange={(e) => setRating(e.target.value)}
-                type="text"
-                placeholder="rate this place!"
-              />
-              <BootstrapInputFields
-                id="picture"
-                label="Add a picture!"
-                value={picture}
-                onChange={(e) => setPicture(e.target.value)}
-                type="text"
-                placeholder="Add a picture!"
-              />
-              <button
-                type="submit"
-                className="btn btn-outline-success"
-                onClick={handleSubmit}
-              >
-                Add!
-              </button>
-            </form>
-          </div>
-        </Modal.Body>
-        <Modal.Footer></Modal.Footer>
-      </Modal>
-    </>
-  );
+
+  if (isLoading) {
+    return <progress className="progress is-primary" max="100"></progress>;
+  }
+
+  if (tokenData && tokenData.access_token) {
+    return (
+      <>
+        <Button className="login-btn-primary" onClick={handleShow}>
+          Make A Review
+        </Button>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add A Review!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div>
+              <form onSubmit={handleSubmit}>
+                <BootstrapInputFields
+                  id="review_description"
+                  label="Write your comment!"
+                  value={review_description}
+                  onChange={(e) => setReview_description(e.target.value)}
+                  type="text"
+                  placeholder="suggest a place!"
+                />
+                <BootstrapInputFields
+                  id="rating"
+                  label="Rate this place!"
+                  value={rating}
+                  onChange={(e) => setRating(e.target.value)}
+                  type="text"
+                  placeholder="rate this place!"
+                />
+                <BootstrapInputFields
+                  id="picture"
+                  label="Add a picture!"
+                  value={picture}
+                  onChange={(e) => setPicture(e.target.value)}
+                  type="text"
+                  placeholder="Add a picture!"
+                />
+                <button
+                  type="submit"
+                  className="btn btn-outline-success"
+                  onClick={handleSubmit}
+                >
+                  Add!
+                </button>
+              </form>
+            </div>
+          </Modal.Body>
+          <Modal.Footer></Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
 }

@@ -33,7 +33,7 @@ export function CreateVenue() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const { data } = useGetTokenQuery();
+    const { data: tokenData, isLoading } = useGetTokenQuery();
     const [ venue_name, setVenue_name ] = useState("");
     const [ num_and_street, setNum_and_street] = useState("");
     const [ city, setCity ] = useState("");
@@ -70,7 +70,7 @@ export function CreateVenue() {
                 description_text: description_text
             }),
             headers: {
-                Authorization: `Bearer ${data.access_token}`,
+                Authorization: `Bearer ${tokenData.access_token}`,
                 "Content-Type": "application/json",
             },
         };
@@ -88,93 +88,99 @@ export function CreateVenue() {
         }
     }
 
-    return (
-        <>
-            <Button className="btn-primary" onClick={handleShow}>
-                Submit New Venue
-            </Button>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                <Modal.Title>Add a Venue!</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                <div>
-                    <form onSubmit={handleSubmit}>
-                        <BootstrapInputFields
-                            id="venue_name"
-                            label="Enter Name"
-                            value={venue_name}
-                            onChange={(e) => setVenue_name(e.target.value)}
-                            type="text"
-                        />
-                        <BootstrapInputFields
-                            id="num_and_street"
-                            label="Enter Street"
-                            value={num_and_street}
-                            onChange={(e) => setNum_and_street(e.target.value)}
-                            type="text"
-                        />
-                        <BootstrapInputFields
-                            id="city"
-                            label="Enter City"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                            type="text"
-                        />
-                        <BootstrapInputFields
-                            id="state"
-                            label="Enter State"
-                            value={state}
-                            onChange={(e) => setState(e.target.value)}
-                            type="text"
-                            maxLength="2"
-                            onInput={stateUppercase}
-                        />
-                        <BootstrapInputFields
-                            id="zip"
-                            label="Enter 5-digit Zip Code"
-                            value={zip}
-                            onChange={(e) => setZip(e.target.value)}
-                            type="text"
-                            maxLength="5"
-                        />
-                        {/* <BootstrapInputFields
-                            id="category_id"
-                            label="Enter Category"
-                            value={category_id}
-                            onChange={(e) => setCategory_id(e.target.value)}
-                            type="text"
-                        /> */}
-                        <div className="mb-3">
-                            <label htmlFor="category_id" className="form-label">Choose a Category</label>
-                            <select required className="form-select" type="number" name="category_id" id="category_id" aria-label="Choose a Category" onChange={(e) => setCategory_id(e.target.value)}>
-                                <option value="">Available Categories</option>
-                                {categories.map(category => (
-                                    <option key={category.id} value={category.id}>
-                                        {category.category_name}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <BootstrapInputFields
-                            id="description_text"
-                            label="What is it like?"
-                            value={description_text}
-                            onChange={(e) => setDescription_text(e.target.value)}
-                            type="text"
-                        />
-                        <button
-                            disabled={categories.length === 0}
-                            type="submit"
-                            className="btn btn-outline-success"
-                        >
-                            Submit
-                        </button>
-                    </form>
-                </div>
-                </Modal.Body>
-                <Modal.Footer></Modal.Footer>
-            </Modal>
-        </>
-    )
+    if (isLoading) {
+        return <progress className="progress is-primary" max="100"></progress>;
+    }
+
+    if (tokenData && tokenData.access_token) {
+        return (
+            <>
+                <Button className="btn-primary" onClick={handleShow}>
+                    Submit New Venue
+                </Button>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Add a Venue!</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <div>
+                        <form onSubmit={handleSubmit}>
+                            <BootstrapInputFields
+                                id="venue_name"
+                                label="Enter Name"
+                                value={venue_name}
+                                onChange={(e) => setVenue_name(e.target.value)}
+                                type="text"
+                            />
+                            <BootstrapInputFields
+                                id="num_and_street"
+                                label="Enter Street"
+                                value={num_and_street}
+                                onChange={(e) => setNum_and_street(e.target.value)}
+                                type="text"
+                            />
+                            <BootstrapInputFields
+                                id="city"
+                                label="Enter City"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                                type="text"
+                            />
+                            <BootstrapInputFields
+                                id="state"
+                                label="Enter State"
+                                value={state}
+                                onChange={(e) => setState(e.target.value)}
+                                type="text"
+                                maxLength="2"
+                                onInput={stateUppercase}
+                            />
+                            <BootstrapInputFields
+                                id="zip"
+                                label="Enter 5-digit Zip Code"
+                                value={zip}
+                                onChange={(e) => setZip(e.target.value)}
+                                type="text"
+                                maxLength="5"
+                            />
+                            {/* <BootstrapInputFields
+                                id="category_id"
+                                label="Enter Category"
+                                value={category_id}
+                                onChange={(e) => setCategory_id(e.target.value)}
+                                type="text"
+                            /> */}
+                            <div className="mb-3">
+                                <label htmlFor="category_id" className="form-label">Choose a Category</label>
+                                <select required className="form-select" type="number" name="category_id" id="category_id" aria-label="Choose a Category" onChange={(e) => setCategory_id(e.target.value)}>
+                                    <option value="">Available Categories</option>
+                                    {categories.map(category => (
+                                        <option key={category.id} value={category.id}>
+                                            {category.category_name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <BootstrapInputFields
+                                id="description_text"
+                                label="What is it like?"
+                                value={description_text}
+                                onChange={(e) => setDescription_text(e.target.value)}
+                                type="text"
+                            />
+                            <button
+                                disabled={categories.length === 0}
+                                type="submit"
+                                className="btn btn-outline-success"
+                            >
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                    </Modal.Body>
+                    <Modal.Footer></Modal.Footer>
+                </Modal>
+            </>
+        )
+    }
 }

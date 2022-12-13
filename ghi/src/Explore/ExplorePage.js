@@ -7,8 +7,8 @@ import { CreateVenue } from "./CreateVenue";
 
 export function Explore() {
   const [venues, setVenues] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState("");
+  // const [categories, setCategories] = useState([]);
+  // const [category, setCategory] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
 
@@ -28,29 +28,29 @@ export function Explore() {
     setVenues(venueData);
   }
 
-  useEffect(() => {
-    async function getCategories() {
-      const CategoriesUrl = "http://localhost:8000/api/categories/";
-      const responseCategories = await fetch(CategoriesUrl);
-      const categoriesData = await responseCategories.json();
-      setCategories(categoriesData);
-    }
-    function filterVenues(category) {
-      if (!category) {
-        setVenues(venues);
-      } else {
-        let filteredVenues = [];
-        for (const venue of venues) {
-          if (venue.category_name === category) {
-            filteredVenues.push(venue);
-          }
-        }
-        setVenues(filterVenues);
-      }
-    }
-    getCategories();
-    filterVenues();
-  }, [venues, setVenues])
+  // useEffect(() => {
+  //   async function getCategories() {
+  //     const CategoriesUrl = "http://localhost:8000/api/categories/";
+  //     const responseCategories = await fetch(CategoriesUrl);
+  //     const categoriesData = await responseCategories.json();
+  //     setCategories(categoriesData);
+  //   }
+  //   function filterVenues(category) {
+  //     if (!category) {
+  //       setVenues(venues);
+  //     } else {
+  //       let filteredVenues = [];
+  //       for (const venue of venues) {
+  //         if (venue.category_name === category) {
+  //           filteredVenues.push(venue);
+  //         }
+  //       }
+  //       setVenues(filterVenues);
+  //     }
+  //   }
+  //   getCategories();
+  //   filterVenues();
+  // }, [venues, setVenues])
 
   return (
     <>
@@ -79,7 +79,7 @@ export function Explore() {
           </div>
         </form>
 
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label htmlFor="category" className="form-label">Choose a Category</label>
           <select required className="form-select" type="number" name="category" id="category" aria-label="Choose a Category" onChange={(e) => setCategory(e.target.value)}>
             <option value="">All Categories</option>
@@ -89,8 +89,7 @@ export function Explore() {
                 </option>
             ))}
           </select>
-          </div>
-
+          </div> */}
 
       </div>
       <CreateVenue />
