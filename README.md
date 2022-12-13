@@ -15,7 +15,7 @@ Rosario Davi
 
 ## Intended market
 
-Travel^2 is a social traveling based application that is aimed to connect travelers and help expand their itinerary with suggestions on places they have never thought about exploring before. Our website contains an explore page where users can follow other users and be notified of their most recent venue post or reviews of a particular location. There is also a trending aspect that allows users to view locations that are currently trending and have a lot of reviews over a short period of time. Users can utilize the search bar to narrow down recommendations by city and state of the location they intend on visiting. In addition, users can also make post in regards to asking for recommendations and have other users reply in the form of comments.
+Travel^2 is a social traveling based application that is aimed to connect travelers and help expand their itinerary with suggestions on places they have never thought about exploring before. Our website contains an explore page where users can follow other users and be notified of their most recent venue post along with a trending page for reviews on a venue. Users can utilize the search bar to narrow down recommendations by city and state of the location they intend on visiting. In addition, users can also make post in regards to asking for recommendations and have other users reply in the form of comments.
 
 ## Built With
 
@@ -31,8 +31,8 @@ MySQL
 
 Main Page/Home: Page is intended for users to search locations by state and city.
 Navigation bar: For users to sign up, login, and logout. In addition to navigating to other pages such as the explore, trending, and request page.
-Explore: Venue cards with the ability to check out reviews for the venue and creating a review if logged in. Order of top post is filtered by the most recent post of users who they follow.
-Trending: Venue cards with reviews. Order of top post is filtered by popularity.
+Explore: Venue cards with the ability to check out reviews for the venue and creating a review if logged in.
+Trending: A page that populates all the most recent reviews made for a venue
 Request: Making a request for recommendations with the access to viewing and making comments if user is logged in.
 Unapproved venues: Admins will be able to approve or deny newly created venues before they show up for the first time based on accuracy and appropriateness.
 Categories: Only admins are able to generate new categories for venues.
@@ -66,6 +66,10 @@ All containers should be running now.
 Once containers are up and running.
 
 Visit localhost:3000 to view the website.
+
+To run test. 
+
+run python -m pytest in travel-squared container.
 
 ## Getting started
 
