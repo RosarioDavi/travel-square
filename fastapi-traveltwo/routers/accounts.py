@@ -118,11 +118,11 @@ def delete_account(
         return True
 
 
-# @router.get("/api/accounts/search/{keyword}", response_model=AccountsOut)
-# def get_accounts_keyword(
-#     keyword: str,
-#     repo: AccountQueries = Depends()
-# ):
-#     return {
-#         "accounts": repo.search_accounts(keyword)
-#     }
+@router.get("/api/accounts/search/{keyword}")
+def get_accounts_keyword(
+    keyword: str,
+    repo: AccountQueries = Depends()
+):
+    return {
+        "accounts": repo.search_accounts(keyword)
+    }

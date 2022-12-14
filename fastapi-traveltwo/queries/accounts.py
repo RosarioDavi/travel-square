@@ -194,22 +194,27 @@ class AccountQueries:
     #                     record[column.name] = row[i]
     #             return record
 
-    # def search_accounts(self, keyword: str) -> AccountsOut:
-    #     with pool.connection() as conn:
-    #         with conn.cursor() as cur:
-    #             cur.execute(
-    #                 """
-    #                 SELECT *
-    #                 FROM accounts
-    #                 WHERE username LIKE %s
-    #                 ORDER BY username;
-    #                 """,
-    #                 [keyword],
-    #             )
-    #             results = []
-    #             for row in cur.fetchall():
-    #                 record = {}
-    #                 for i, column in enumerate(cur.description):
-    #                     record[column.name] = row[i]
-    #                 results.append(record)
-    #             return results
+    def search_accounts(self, keyword: str):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT id,
+                        username,
+                        full_name,
+                        avatar,
+                        is_admin
+                    FROM accounts
+                    ORDER BY username;
+                    """
+                )
+                results = []
+                # Take the results and filter with the keyword here instead of inside the DB query (hotfix)
+                for row in cur.fetchall():
+                    record = {}
+                    for i, column in enumerate(cur.description):
+                        record[column.name] = row[i]
+                    searched = record["username"].lower()
+                    if searched.startswith(keyword.lower()):
+                        results.append(record)
+                return results
