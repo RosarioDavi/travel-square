@@ -17,6 +17,7 @@ from queries.accounts import (
     AccountIn,
     AccountOut,
     AccountOutConfidential,
+    AccountsOutConfidential,
     AccountQueries,
     DuplicateAccountError,
 )
@@ -45,10 +46,11 @@ not_authorized = HTTPException(
 
 
 # User finding a lot of users
-@router.get("/api/accounts/", response_model=list[AccountOutConfidential])
+@router.get("/api/accounts/", response_model=AccountsOutConfidential)
 def get_all_accounts(repo: AccountQueries = Depends()):
-    return repo.get_all_accounts()
-
+    return {
+        "accounts": repo.get_all_accounts()
+    }
 
 # User finding another user
 @router.get(
@@ -118,7 +120,7 @@ def delete_account(
         return True
 
 
-@router.get("/api/accounts/search/{keyword}")
+@router.get("/api/accounts/search/{keyword}", response_model=AccountsOutConfidential)
 def get_accounts_keyword(
     keyword: str,
     repo: AccountQueries = Depends()

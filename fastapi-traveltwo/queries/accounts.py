@@ -31,8 +31,12 @@ class AccountOutConfidential(BaseModel):
     is_admin: bool
 
 
+class AccountsOutConfidential(BaseModel):
+    accounts: list[AccountOutConfidential]
+
+
 class AccountQueries:
-    def get_all_accounts(self) -> list[AccountOutConfidential]:
+    def get_all_accounts(self):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -57,7 +61,7 @@ class AccountQueries:
     def get_another_account(
         self,
         account_id: int
-    ) -> AccountOutConfidential:
+    ):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -81,7 +85,7 @@ class AccountQueries:
                 return record
 
     # Used by authenticator
-    def get_auth_account(self, username: str) -> AccountOut:
+    def get_auth_account(self, username: str):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
