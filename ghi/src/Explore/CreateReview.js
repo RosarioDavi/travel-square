@@ -3,16 +3,17 @@ import { useState } from "react";
 import { useGetTokenQuery } from "../store/authApi";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
-import { Widget } from "@uploadcare/react-widget"
+import { Widget } from "@uploadcare/react-widget";
 
+const PUBLIC_KEY = process.env.UPLOADCARE_PUBLIC_KEY;
 
-const PUBLIC_KEY = process.env.UPLOADCARE_PUBLIC_KEY
-
-{/* <style>
+{
+  /* <style>
 .uploadcare--widget__button.uploadcare--widget__button_type_open {
   background-color: #fc1468;
 }
-</style> */}
+</style> */
+}
 
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder, maxLength } = props;
@@ -77,8 +78,12 @@ export default function CreateReview(props) {
   if (tokenData && tokenData.access_token) {
     return (
       <>
-        <Button className="login-btn-primary" onClick={handleShow}>
-          Make A Review
+        <Button
+          className="login-btn-primary"
+          onClick={handleShow}
+          style={{ backgroundColor: "#D73851" }}
+        >
+          Add A Review
         </Button>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -105,16 +110,16 @@ export default function CreateReview(props) {
                   maxLength="1"
                 />
                 <p>
-                  <label htmlFor='picture'>(Optional) Add a picture:</label>{' '}
+                  <label htmlFor="picture">(Optional) Add a picture:</label>{" "}
                   <Widget
-                    publicKey='1d024a42122d99b772bc'
-                    id='picture'
-                    name='picture'
+                    publicKey="1d024a42122d99b772bc"
+                    id="picture"
+                    name="picture"
                     value={picture}
                     tabs="file camera url facebook gdrive gphotos dropbox onedrive"
                     clearable
-                    previewStep='true'
-                    onChange={file => setPicture(file.cdnUrl)}
+                    previewStep="true"
+                    onChange={(file) => setPicture(file.cdnUrl)}
                   />
                 </p>
                 <button
