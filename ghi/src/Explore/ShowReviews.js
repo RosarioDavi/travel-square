@@ -49,7 +49,7 @@ export default function ShowReview(props) {
               }}
               key={review.id}
             >
-              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Img variant="top" src={review.picture} />
               <Card.Body>
                 <Card.Title>Lena rated {review.rating} / 5!</Card.Title>
                 <Card.Text>{review.review_description}</Card.Text>
