@@ -3,6 +3,16 @@ import { useState } from "react";
 import { useGetTokenQuery } from "../store/authApi";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
+import { Widget } from "@uploadcare/react-widget"
+
+
+const PUBLIC_KEY = process.env.UPLOADCARE_PUBLIC_KEY
+
+{/* <style>
+.uploadcare--widget__button.uploadcare--widget__button_type_open {
+  background-color: #fc1468;
+}
+</style> */}
 
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder, maxLength } = props;
@@ -94,14 +104,19 @@ export default function CreateReview(props) {
                   placeholder="rate this place!"
                   maxLength="1"
                 />
-                <BootstrapInputFields
-                  id="picture"
-                  label="Add a picture!"
-                  value={picture}
-                  onChange={(e) => setPicture(e.target.value)}
-                  type="text"
-                  placeholder="Add a picture!"
-                />
+                <p>
+                  <label htmlFor='picture'>(Optional) Add a picture:</label>{' '}
+                  <Widget
+                    publicKey='1d024a42122d99b772bc'
+                    id='picture'
+                    name='picture'
+                    value={picture}
+                    tabs="file camera url facebook gdrive gphotos dropbox onedrive"
+                    clearable
+                    previewStep='true'
+                    onChange={file => setPicture(file.cdnUrl)}
+                  />
+                </p>
                 <button
                   type="submit"
                   className="btn btn-outline-success"

@@ -58,3 +58,4 @@ services:
       HOST: "0.0.0.0"
       REACT_APP_TRAVELSQUARED: http://localhost:8000
       REACT_APP_THIRD_PARTY_SERVICE: http://third-party.com
+      UPLOADCARE_PUBLIC_KEY: '1d024a42122d99b772bc'

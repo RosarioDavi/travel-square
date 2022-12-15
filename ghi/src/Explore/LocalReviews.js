@@ -31,6 +31,7 @@ export function LocalReviews() {
             className="search-box"
             name="city"
             defaultValue={city}
+            required
             placeholder="Search by City"
             onChange={(e) => setCity(e.target.value)}
             type="text"
@@ -39,6 +40,7 @@ export function LocalReviews() {
             className="search-box"
             name="state"
             defaultValue={state}
+            required
             placeholder="Search by State"
             onChange={(e) => setState(e.target.value)}
             maxLength="2"
