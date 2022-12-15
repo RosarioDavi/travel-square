@@ -5,7 +5,7 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 
 function BootstrapInputFields(props) {
-  const { id, label, value, onChange, type, placeholder } = props;
+  const { id, label, value, onChange, type, placeholder, maxLength } = props;
   return (
     <div className="mb-3 ">
       <label htmlFor={id} className="form-label">
@@ -19,6 +19,7 @@ function BootstrapInputFields(props) {
         className="form-control"
         id={id}
         placeholder={placeholder}
+        maxLength={maxLength}
       />
     </div>
   );
@@ -78,11 +79,11 @@ export default function CreateReview(props) {
               <form onSubmit={handleSubmit}>
                 <BootstrapInputFields
                   id="review_description"
-                  label="Write your comment!"
+                  label="Write your review!"
                   value={review_description}
                   onChange={(e) => setReview_description(e.target.value)}
                   type="text"
-                  placeholder="suggest a place!"
+                  placeholder="The vibes were immaculate!"
                 />
                 <BootstrapInputFields
                   id="rating"
@@ -91,6 +92,7 @@ export default function CreateReview(props) {
                   onChange={(e) => setRating(e.target.value)}
                   type="text"
                   placeholder="rate this place!"
+                  maxLength="1"
                 />
                 <BootstrapInputFields
                   id="picture"
