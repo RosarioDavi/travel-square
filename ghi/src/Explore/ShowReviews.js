@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import CreateReview from "./CreateReview";
 
@@ -37,12 +38,25 @@ export default function ShowReview(props) {
         </Modal.Header>
         {reviews.map((review) => {
           return (
-            <Modal.Body key={review.id}>
-              {review.username} {""}
-              {review.created_at} : {""}
-              {review.review_description}
-              <div>Rating of place: {review.rating} / 5</div>
-            </Modal.Body>
+            <Card
+              style={{
+                // width: "28rem",
+                justifyContent: "center",
+                alignItems: "center",
+                marginBottom: "20px",
+                marginLeft: "15px",
+                marginRight: "15px",
+              }}
+              key={review.id}
+            >
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Title>Lena rated {review.rating} / 5!</Card.Title>
+                <Card.Text>{review.review_description}</Card.Text>
+                {/* <Button variant="primary">Go somewhere</Button> */}
+              </Card.Body>
+              <Card.Footer>Reviewed {review.created_at}</Card.Footer>
+            </Card>
           );
         })}
         <Modal.Footer>
