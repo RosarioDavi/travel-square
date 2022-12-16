@@ -7,14 +7,6 @@ import { Widget } from "@uploadcare/react-widget";
 
 const PUBLIC_KEY = process.env.UPLOADCARE_PUBLIC_KEY;
 
-{
-  /* <style>
-.uploadcare--widget__button.uploadcare--widget__button_type_open {
-  background-color: #fc1468;
-}
-</style> */
-}
-
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder, maxLength } = props;
   return (

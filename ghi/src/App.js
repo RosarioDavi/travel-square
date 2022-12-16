@@ -2,7 +2,6 @@ import ExplorePage from "./Explore/ExplorePage";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./Nav";
-import HomePage from "./HomePage";
 import { UnapprovedVenues } from "./Admin/UnapprovedVenues";
 import { CategoriesList } from "./Admin/CategoriesList";
 import { LocalReviews } from "./Explore/LocalReviews"
@@ -23,8 +22,7 @@ function App() {
         <div>
           <Navigation />
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/explore" element={<ExplorePage />} />
+            <Route path="/" element={<ExplorePage />} />
             <Route path="/trending" element={<LocalReviews />} />
             <Route path="/request" element={<RequestList />} />
             <Route path="/unapproved" element={<UnapprovedVenues />} />
@@ -41,8 +39,7 @@ function App() {
         <div>
           <Navigation />
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/explore" element={<ExplorePage />} />
+            <Route path="/" element={<ExplorePage />} />
             <Route path="/trending" element={<LocalReviews />} />
             <Route path="/request" element={<RequestList />} />
           </Routes>

@@ -30,12 +30,12 @@ export function LocalReviews() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginTop: "370px",
+            marginTop: "250px",
             font: "sans-serif",
             fontSize: "50px",
           }}
         >
-          See what's trending...
+          See what's trending.
         </h1>
       </div>
       <div>
@@ -53,7 +53,7 @@ export function LocalReviews() {
               name="city"
               defaultValue={city}
               required
-              placeholder="Search by City"
+              placeholder="City"
               onChange={(e) => setCity(e.target.value)}
               type="text"
             />
@@ -62,7 +62,7 @@ export function LocalReviews() {
               name="state"
               defaultValue={state}
               required
-              placeholder="Search by State"
+              placeholder="State"
               onChange={(e) => setState(e.target.value)}
               maxLength="2"
               type="text"

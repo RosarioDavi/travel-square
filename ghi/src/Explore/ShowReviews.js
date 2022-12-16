@@ -54,7 +54,6 @@ export default function ShowReview(props) {
                   {review.username} rated {review.rating} / 5!
                 </Card.Title>
                 <Card.Text>{review.review_description}</Card.Text>
-                {/* <Button variant="primary">Go somewhere</Button> */}
               </Card.Body>
               <Card.Footer>Reviewed {review.created_at}</Card.Footer>
             </Card>

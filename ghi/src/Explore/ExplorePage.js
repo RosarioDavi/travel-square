@@ -36,7 +36,7 @@ export function Explore() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginTop: "390px",
+            marginTop: "250px",
             font: "sans-serif",
             fontSize: "55px",
           }}
@@ -66,7 +66,7 @@ export function Explore() {
               name="city"
               defaultValue={city}
               required
-              placeholder="Search by City"
+              placeholder="City"
               onChange={(e) => setCity(e.target.value)}
               type="text"
             />
@@ -75,7 +75,7 @@ export function Explore() {
               name="state"
               defaultValue={state}
               required
-              placeholder="Search by State"
+              placeholder="State"
               onChange={(e) => setState(e.target.value)}
               maxLength="2"
               type="text"
@@ -115,7 +115,7 @@ export function Explore() {
                   {venue.description_text}
                 </Card.Text>
                 <Card.Text className="d-flex justify-content-center">
-                  by user: {venue.added_by_username}
+                  Submitted by: {venue.added_by_username}
                 </Card.Text>
                 <div className="d-flex justify-content-center">
                   <ShowReview venue={venue} />
