@@ -56,7 +56,7 @@ export function CreateRequest() {
                       value={txt}
                       onChange={(e) => setTxt(e.target.value)}
                       as="textarea"
-                      placeholder="request a location"
+                      placeholder="Request a location"
                       rows={3}
                       required
                     />
