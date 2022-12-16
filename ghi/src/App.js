@@ -6,7 +6,6 @@ import { UnapprovedVenues } from "./Admin/UnapprovedVenues";
 import { CategoriesList } from "./Admin/CategoriesList";
 import { LocalReviews } from "./Explore/LocalReviews"
 import RequestList from "./Request/RequestList";
-import AdminDash from "./Admin/AdminDash";
 import { useGetTokenQuery } from './store/authApi'
 
 function App() {
@@ -27,7 +26,6 @@ function App() {
             <Route path="/request" element={<RequestList />} />
             <Route path="/unapproved" element={<UnapprovedVenues />} />
             <Route path="/categories" element={<CategoriesList />} />
-            <Route path="/dashboard" element={<AdminDash />} />
           </Routes>
         </div>
       </BrowserRouter>
