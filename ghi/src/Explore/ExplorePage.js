@@ -26,12 +26,40 @@ export function Explore() {
     const responseVenues = await fetch(VenuesUrl);
     const venueData = await responseVenues.json();
     setVenues(venueData);
-  }
+  };
 
   return (
     <>
-      <div className="container textbox-padding">
-        <form onSubmit={handleSubmit} id="searchCity">
+      <div>
+        <h1
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "390px",
+            font: "sans-serif",
+            fontSize: "55px",
+          }}
+        >
+          Discover what's out there.
+        </h1>
+      </div>
+      <div
+        style={{
+          marginTop: "30px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <form
+          style={{
+            font: "sans-serif",
+            fontSize: "26px",
+          }}
+          onSubmit={handleSubmit}
+          id="searchCity"
+        >
           <div className="d-flex justify-content-center">
             <input
               className="search-box"
@@ -53,10 +81,19 @@ export function Explore() {
               type="text"
               onInput={stateUppercase}
             />
-            <button className="btn-hue">Search</button>
+            <button
+              style={{
+                font: "sans-serif",
+                fontSize: "26px",
+                backgroundColor: "#D73851",
+                padding: "0px 30px",
+                color: "white",
+              }}
+            >
+              Search
+            </button>
           </div>
         </form>
-
       </div>
       <CreateVenue />
       <div className="justify-content-center textbox-padding card-grid">

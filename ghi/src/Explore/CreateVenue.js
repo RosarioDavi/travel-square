@@ -104,11 +104,7 @@ export function CreateVenue() {
             marginTop: "50px",
           }}
         >
-          <Button
-            className="btn-primary"
-            onClick={handleShow}
-            style={{ backgroundColor: "#D73851" }}
-          >
+          <Button className="btn-hue" onClick={handleShow}>
             Submit New Venue
           </Button>
         </div>

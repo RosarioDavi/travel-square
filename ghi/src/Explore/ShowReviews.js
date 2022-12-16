@@ -40,7 +40,6 @@ export default function ShowReview(props) {
           return (
             <Card
               style={{
-                // width: "28rem",
                 justifyContent: "center",
                 alignItems: "center",
                 marginBottom: "20px",
@@ -51,7 +50,9 @@ export default function ShowReview(props) {
             >
               <Card.Img variant="top" src={review.picture} />
               <Card.Body>
-                <Card.Title>Lena rated {review.rating} / 5!</Card.Title>
+                <Card.Title>
+                  {review.username} rated {review.rating} / 5!
+                </Card.Title>
                 <Card.Text>{review.review_description}</Card.Text>
                 {/* <Button variant="primary">Go somewhere</Button> */}
               </Card.Body>

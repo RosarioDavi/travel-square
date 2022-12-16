@@ -24,8 +24,29 @@ export function LocalReviews() {
 
   return (
     <>
-      <div className="container textbox-padding">
-        <form onSubmit={handleSubmit}>
+      <div>
+        <h1
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "370px",
+            font: "sans-serif",
+            fontSize: "50px",
+          }}
+        >
+          See what's trending...
+        </h1>
+      </div>
+      <div>
+        <form
+          style={{
+            font: "sans-serif",
+            fontSize: "26px",
+            marginTop: "50px",
+          }}
+          onSubmit={handleSubmit}
+        >
           <div className="d-flex justify-content-center">
             <input
               className="search-box"
