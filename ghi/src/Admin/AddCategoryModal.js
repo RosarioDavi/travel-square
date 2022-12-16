@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
-import Modal from "react-bootstrap/Modal"
-import { useGetTokenQuery } from "../store/authApi"
-import { useCreateCategoryMutation } from "../store/adminApi"
+import Modal from "react-bootstrap/Modal";
+import { useGetTokenQuery } from "../store/authApi";
+import { useCreateCategoryMutation } from "../store/adminApi";
 
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder } = props;
@@ -25,57 +25,57 @@ function BootstrapInputFields(props) {
 }
 
 export function AddCategoryModal() {
-    const { data: tokenData } = useGetTokenQuery();
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    const [createCategory, result] = useCreateCategoryMutation();
-    const [category_name, setCategory_name] = useState("");
-    const [error, setError] = useState("");
+  const { data: tokenData } = useGetTokenQuery();
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [createCategory, result] = useCreateCategoryMutation();
+  const [category_name, setCategory_name] = useState("");
+  const [error, setError] = useState("");
 
-    async function handleSubmit(e) {
-        e.preventDefault()
-        createCategory({category_name})
+  async function handleSubmit(e) {
+    e.preventDefault();
+    createCategory({ category_name });
+  }
+
+  useEffect(() => {
+    if (result.isSuccess) {
+      setError("");
+      setCategory_name("");
+      handleClose();
+    } else if (result.isError) {
+      setError(result.error.data.detail);
     }
+  }, [result]);
 
-    useEffect(() => {
-        if (result.isSuccess) {
-          setError("")
-          setCategory_name("")
-          handleClose();
-        } else if (result.isError) {
-          setError(result.error.data.detail)
-        }
-    }, [result]);
-
-    return (
-      <>
+  return (
+    <>
       <Button className="btn-hue" onClick={handleShow}>
         Create a Category
       </Button>
       <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Create a Category</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div>
-                    <form onSubmit={handleSubmit}>
-                        <BootstrapInputFields
-                            id="category_name"
-                            label="Enter Category Name"
-                            value={category_name}
-                            onChange={(e) => setCategory_name(e.target.value)}
-                            type="text"
-                        />
-                        <button type="submit" className="btn btn-outline-success">
-                            Create
-                        </button>
-                    </form>
-                </div>
-            </Modal.Body>
-        </Modal>
-      </>
-    )
+        <Modal.Header closeButton>
+          <Modal.Title>Create a Category</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            <form onSubmit={handleSubmit}>
+              <BootstrapInputFields
+                id="category_name"
+                label="Enter Category Name"
+                value={category_name}
+                onChange={(e) => setCategory_name(e.target.value)}
+                type="text"
+              />
+              <button type="submit" className="btn btn-outline-success">
+                Create
+              </button>
+            </form>
+          </div>
+        </Modal.Body>
+      </Modal>
+    </>
+  );
 }
 
 export default AddCategoryModal;

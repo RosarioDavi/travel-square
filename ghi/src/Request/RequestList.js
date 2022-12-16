@@ -20,12 +20,25 @@ export default function RequestList() {
 
   return (
     <>
+      <div>
+        <h1
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "250px",
+            font: "sans-serif",
+            fontSize: "55px",
+          }}
+        >
+          Traveling soon? Ask for some Recommendations!
+        </h1>
+      </div>
       <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginTop: "50px",
         }}
       >
         <CreateRequest />

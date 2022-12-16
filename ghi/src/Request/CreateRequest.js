@@ -39,7 +39,7 @@ export function CreateRequest() {
   if (tokenData && tokenData.access_token) {
     return (
       <>
-        <div className="btn-padding" style={{ marginTop: "70px" }}>
+        <div className="btn-padding" style={{ marginTop: "30px" }}>
           <Button className="btn-hue" onClick={handleShow}>
             Create a New Request
           </Button>

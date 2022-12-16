@@ -32,7 +32,7 @@ export function LocalReviews() {
             alignItems: "center",
             marginTop: "250px",
             font: "sans-serif",
-            fontSize: "50px",
+            fontSize: "55px",
           }}
         >
           See what's trending.
@@ -43,7 +43,7 @@ export function LocalReviews() {
           style={{
             font: "sans-serif",
             fontSize: "26px",
-            marginTop: "50px",
+            marginTop: "26px",
           }}
           onSubmit={handleSubmit}
         >
