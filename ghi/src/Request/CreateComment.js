@@ -62,23 +62,23 @@ export default function CreateComment(props) {
   if (tokenData && tokenData.access_token) {
     return (
       <>
-        <Button className="login-btn-primary" onClick={handleShow}>
-          Make A Comment
+        <Button className="btn-hue" onClick={handleShow}>
+          Make a Comment
         </Button>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Add your Comment!</Modal.Title>
+            <Modal.Title>Add your comment</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div>
               <form onSubmit={handleSubmit}>
                 <BootstrapInputFields
                   id="txt"
-                  label="Write your comment!"
+                  label="Write your comment"
                   value={txt}
                   onChange={(e) => setTxt(e.target.value)}
                   type="text"
-                  placeholder="suggest a place!"
+                  placeholder="Suggest a place"
                 />
                 <button
                   type="submit"

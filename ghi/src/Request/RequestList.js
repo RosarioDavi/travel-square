@@ -31,7 +31,7 @@ export default function RequestList() {
             fontSize: "55px",
           }}
         >
-          Traveling soon? Ask for some Recommendations!
+          Traveling soon? Ask for some recommendations!
         </h1>
       </div>
       <div
