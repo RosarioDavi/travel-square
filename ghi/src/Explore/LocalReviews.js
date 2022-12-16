@@ -35,7 +35,7 @@ export function LocalReviews() {
             fontSize: "55px",
           }}
         >
-          See what's trending.
+          See what reviews are trending.
         </h1>
       </div>
       <div>
@@ -73,8 +73,8 @@ export function LocalReviews() {
         </form>
 
         <div className="d-flex justify-content-center textbox-padding">
-          <div className="row">
-            <div className="col">
+          {/* <div className="row">
+            <div className="col"> */}
               {reviews.map((review) => {
                 return (
                   <Card
@@ -108,8 +108,8 @@ export function LocalReviews() {
                   </Card>
                 );
               })}
-            </div>
-          </div>
+            {/* </div>
+          </div> */}
         </div>
       </div>
     </>

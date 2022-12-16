@@ -17,7 +17,7 @@ function Navigation() {
       <>
         <div className="container">
           <header>
-            <h2>travel<sup>2</sup></h2>
+            <h2>Travel<sup>2</sup></h2>
             <nav>
               <ul>
                 <li>
@@ -44,7 +44,7 @@ function Navigation() {
       <>
         <div className="container">
           <header>
-            <h2>travel<sup>2</sup></h2>
+            <h2>Travel<sup>2</sup></h2>
             <nav>
               <ul>
                 <li>
@@ -80,7 +80,7 @@ function Navigation() {
       <>
         <div className="container">
           <header>
-            <h2>travel<sup>2</sup></h2>
+            <h2>Travel<sup>2</sup></h2>
             <nav>
               <ul>
                 <li>

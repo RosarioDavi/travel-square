@@ -30,7 +30,7 @@ export default function ShowReview(props) {
   return (
     <>
       <Button className="btn-hue me-3" onClick={handleShow}>
-        Reviews!
+        See Reviews
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

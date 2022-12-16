@@ -56,7 +56,7 @@ export function LoginModal() {
   return (
     <>
     <Button className="btn-hue" onClick={handleShow}>
-        login
+        Login
       </Button>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header className="modal-header" closeButton>

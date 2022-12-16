@@ -41,7 +41,7 @@ export function Explore() {
             fontSize: "55px",
           }}
         >
-          Discover what's out there.
+          Discover places out there.
         </h1>
       </div>
       <div

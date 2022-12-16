@@ -32,18 +32,18 @@ export function LogoutModal() {
     return (
         <>
             <Button className="btn-hue" onClick={handleShow}>
-                logout
+                Log Out
             </Button>
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header className="modal-header" closeButton>
-                    <Modal.Title>Ready to logout?</Modal.Title>
+                    <Modal.Title>Ready to log out?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="container">
                         <div className="columns is-centered">
                         <div className="column is-one-third">
                             <button className="btn-hue" onClick={handleSubmit}>
-                                Logout
+                                Log Out
                             </button>
                         </div>
                         </div>
