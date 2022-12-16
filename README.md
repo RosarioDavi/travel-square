@@ -22,26 +22,29 @@ Travel^2 is a social traveling based application that is aimed to connect travel
 React
 Redux
 Bootstrap
-Fast API
+FastAPI
+PostgreSQL
 Python
 JavaScript
-PostgreSQL
 
 ## Functionality
 
-Main Page/Home (Currently not functional until explore and trending functions are converted to Redux): Page is intended for users to search locations by state and city by redirecting to explore after submission.
 Navigation bar: For users to sign up, login, and logout. In addition to navigating to other pages such as the explore, trending, and request page.
 Explore: Venue cards with the ability to check out reviews for the venue and creating a review if logged in.
 Trending: A page that populates all the most recent reviews made for a venue
-Request: Making a request for recommendations with the access to viewing and making comments if user is logged in.
+Request: Users can request for places to try in a new city and give each other suggestions if logged in. Viewing requests and comments does not require an account.
 Unapproved venues: Admins will be able to approve or deny newly created venues before they show up for the first time based on accuracy and appropriateness.
 Categories: Only admins are able to generate new categories for venues.
 
-To make an admin account and approve submitted venues, when signing up, make the username "admin".
+To make an admin account to approve submitted venues, when signing up, make the username "admin".
 
 ## Stretch Goals Functionality
 
-Photo uploads, following follow system (have the tables setup so I know how that system would work with redux), add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue). Currently, the dashboard link in the admin view is blank, so we hope to consolidate unapproved venues and categories pages into that one dashboard page. The home page currently is not functional. We plan to convert the explore and trending GET requests into Redux functions so that inputting the city and state into the page page would redirect to the explore page with the submitted information being used for the first GET request. JWTDown for FastAPI uses third-party cookies to work, which Safari blocks by default. This means it won't work on iPhone as well, unless the user goes to their settings and manually changes the setting.
+Follower/following system.
+Add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue).
+Websocket support for messaging between users.
+Dashboard panel that consolidates unapproved venues and categories pages into one component.
+Transition away from JWTDown for FastAPI, which uses third-party cookies to work. Safari blocks this by default. This means it won't work on iPhone as well, unless the user goes to their settings and manually changes the setting.
 
 ## Testing
 
@@ -74,78 +77,12 @@ Lastly, run docker-compose up.
 
 All containers should be running now.
 
-Once containers are up and running, visit localhost:3000 to view the website.
+Once containers are up and running, visit localhost:3000 to view the website. You can also checkout FastAPI's endpoints at localhost:8000/docs.
 
-To run tests:
-
-Run the command:
+To run tests, enter the travel-squared container or directory and use the command:
 
 python -m pytest inside the travel-squared container.
 
-## Getting started
-
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
-
-## Install Extensions
-
-- Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-- Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
-
-## Deliverables
-
-- [ ] Wire-frame diagrams
-- [ ] API documentation
-- [ ] Project is deployed to Render.com/GitLab-pages
-- [ ] GitLab issue board is setup and in use
-- [ ] Journals
-
-## Project layout
-
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
-
-### Directories
-
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
-
-The other directories, `ghi` and `sample_service`, are
-sample services, that you can start building off of or use
-as a reference point.
-
-Inside of `ghi` is a minimal React app that has an "under
-construction" page. It is setup similarly to all of the
-other React projects that you have worked on.
-
-Inside of `sample_service` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
-
-Also in `sample_service` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
-
-The sample Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
 
 ### Other files
 
@@ -174,12 +111,6 @@ There will be further guidance on completing the initial
 deployment, but it just consists of these steps:
 
 ### Setup GitLab repo/project
-
-- make sure this project is in a group. If it isn't, stop
-  now and move it to a GitLab group
-- remove the fork relationship: In GitLab go to:
-
-  Settings -> General -> Advanced -> Remove fork relationship
 
 - add these GitLab CI/CD variables:
   - PUBLIC_URL : this is your gitlab pages URL
@@ -218,12 +149,8 @@ https://GROUP_NAME.gitlab.io/PROJECT_NAME
 
 ### Update GitLab CI/CD variables
 
-Copy the service URL for your new render.com service and then paste
-that into the value for the SAMPLE_SERVICE_API_HOST CI/CD variable
-in GitLab.
+Copy the service URL for your new render.com service and then paste that into the value for the SAMPLE_SERVICE_API_HOST CI/CD variable in GitLab.
 
 ### Deploy it
 
-Merge a change into main to kick off the initial deploy. Once the build pipeline
-finishes you should be able to see an "under construction" page on your GitLab
-pages site.
+Merge a change into main to kick off the initial deploy. Once the build pipeline finishes you should be able to see an "under construction" page on your GitLab pages site.
