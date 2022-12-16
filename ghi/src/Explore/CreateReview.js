@@ -71,22 +71,21 @@ export default function CreateReview(props) {
     return (
       <>
         <Button
-          className="login-btn-primary"
+          className="btn-hue"
           onClick={handleShow}
-          style={{ backgroundColor: "#D73851" }}
         >
-          Add A Review
+          Add a Review
         </Button>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Add A Review!</Modal.Title>
+            <Modal.Title>Add a Review</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div>
               <form onSubmit={handleSubmit}>
                 <BootstrapInputFields
                   id="review_description"
-                  label="Write your review!"
+                  label="Write your review"
                   value={review_description}
                   onChange={(e) => setReview_description(e.target.value)}
                   type="text"
@@ -94,15 +93,15 @@ export default function CreateReview(props) {
                 />
                 <BootstrapInputFields
                   id="rating"
-                  label="Rate this place!"
+                  label="Rate this place"
                   value={rating}
                   onChange={(e) => setRating(e.target.value)}
                   type="text"
-                  placeholder="rate this place!"
+                  placeholder="between 1 and 5"
                   maxLength="1"
                 />
                 <p>
-                  <label htmlFor="picture">(Optional) Add a picture:</label>{" "}
+                  <label htmlFor="picture">(Optional) Add a picture: </label>{" "}
                   <Widget
                     publicKey="1d024a42122d99b772bc"
                     id="picture"
@@ -119,7 +118,7 @@ export default function CreateReview(props) {
                   className="btn btn-outline-success"
                   onClick={handleSubmit}
                 >
-                  Add!
+                  Add
                 </button>
               </form>
             </div>

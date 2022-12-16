@@ -110,7 +110,7 @@ export function CreateVenue() {
         </div>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Add a Venue!</Modal.Title>
+            <Modal.Title>Add a Venue</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div>

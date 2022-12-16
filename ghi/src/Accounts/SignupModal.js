@@ -63,7 +63,7 @@ export function SignupModal() {
     return (
         <>
             <Button className="btn-hue" onClick={handleShow}>
-                sign up
+                Sign Up
             </Button>
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header className="modal-header" closeButton>
