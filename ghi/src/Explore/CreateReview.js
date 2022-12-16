@@ -5,7 +5,15 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import { Widget } from "@uploadcare/react-widget";
 
-const PUBLIC_KEY = process.env.UPLOADCARE_PUBLIC_KEY;
+function maxFileSize(size) {
+  return function(fileInfo) {
+    if (fileInfo.size !== null && fileInfo.size > size) {
+      throw new Error("fileMaximumSize");
+    }
+  };
+}
+
+const validators = [maxFileSize(5 * 1024 * 1024)]
 
 function BootstrapInputFields(props) {
   const { id, label, value, onChange, type, placeholder, maxLength } = props;
@@ -37,6 +45,7 @@ export default function CreateReview(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const newCommentSubmitFn = props.setNewCommentSubmit;
+  const PUBLIC_KEY = process.env.REACT_APP_UPLOADCARE_PUBLIC_KEY;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -104,7 +113,8 @@ export default function CreateReview(props) {
                 <p>
                   <label htmlFor="picture">(Optional) Add a picture:</label>{" "}
                   <Widget
-                    publicKey="1d024a42122d99b772bc"
+                    publicKey={PUBLIC_KEY}
+                    validators={validators}
                     id="picture"
                     name="picture"
                     value={picture}
