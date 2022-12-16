@@ -1,10 +1,10 @@
-import json
 from fastapi.testclient import TestClient
 from main import app
 from queries.accounts import AccountQueries
-from authenticator import authenticator
+
 
 client = TestClient(app)
+
 
 class AccountQueriesMock:
     def get_all_accounts(self):

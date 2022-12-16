@@ -52,6 +52,7 @@ def get_all_accounts(repo: AccountQueries = Depends()):
         "accounts": repo.get_all_accounts()
     }
 
+
 # User finding another user
 @router.get(
     "/api/accounts/users/{account_id}", response_model=AccountOutConfidential
@@ -78,7 +79,7 @@ async def create_account(
     avatar = g_holder.get_image()
     # Hardcoded logic for username based admin:
     is_admin = False
-    admin_accounts = ["muhammad", "lena", "sarah", "rosario", 'admin']
+    admin_accounts = ["muhammad", "lena", "sarah", "rosario", "admin"]
     if info.username in admin_accounts:
         is_admin = True
     try:
@@ -120,7 +121,10 @@ def delete_account(
         return True
 
 
-@router.get("/api/accounts/search/{keyword}", response_model=AccountsOutConfidential)
+@router.get(
+    "/api/accounts/search/{keyword}",
+    response_model=AccountsOutConfidential
+)
 def get_accounts_keyword(
     keyword: str,
     repo: AccountQueries = Depends()
