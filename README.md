@@ -6,13 +6,13 @@ Travel^2
 
 # Group Members
 
-### Muhammad Rahman
+## Muhammad Rahman
 
-### Lena Zhang
+## Lena Zhang
 
-### Sarah Ahn
+## Sarah Ahn
 
-### Rosario Davi
+## Rosario Davi
 
 ## Design
 
