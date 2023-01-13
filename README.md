@@ -20,20 +20,31 @@ Travel^2 is a social traveling based application that is aimed to connect travel
 ## Built With
 
 React
+
 Redux
+
 Bootstrap
+
 FastAPI
+
 PostgreSQL
+
 Python
+
 JavaScript
 
 ## Functionality
 
 Navigation bar: For users to sign up, login, and logout. In addition to navigating to other pages such as the explore, trending, and request page.
+
 Explore: Venue cards with the ability to check out reviews for the venue and creating a review if logged in.
+
 Trending: A page that populates all the most recent reviews made for a venue
+
 Request: Users can request for places to try in a new city and give each other suggestions if logged in. Viewing requests and comments does not require an account.
+
 Unapproved venues: Admins will be able to approve or deny newly created venues before they show up for the first time based on accuracy and appropriateness.
+
 Categories: Only admins are able to generate new categories for venues.
 
 To make an admin account to approve submitted venues, when signing up, make the username "admin".
