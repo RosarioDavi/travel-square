@@ -2,17 +2,17 @@
 
 # Group Name
 
-Travel^2
+Travel²
 
 # Group Members
 
-## Muhammad Rahman
+Muhammad Rahman
 
-## Lena Zhang
+Lena Zhang
 
-## Sarah Ahn
+Sarah Ahn
 
-## Rosario Davi
+Rosario Davi
 
 ## Design
 
