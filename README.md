@@ -38,13 +38,56 @@ Categories: Only admins are able to generate new categories for venues.
 
 To make an admin account to approve submitted venues, when signing up, make the username "admin".
 
-## Stretch Goals Functionality
+## Visuals
 
-Follower/following system.
-Add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue).
-Websocket support for messaging between users.
-Dashboard panel that consolidates unapproved venues and categories pages into one component.
-Transition away from JWTDown for FastAPI, which uses third-party cookies to work. Safari blocks this by default. This means it won't work on iPhone as well, unless the user goes to their settings and manually changes the setting.
+### Landing Page
+
+![Landing Page](images/LandingPage.jpg)
+
+
+### Searching Venues
+
+![Searching Venues](images/SearchingVenues.jpg)
+
+### Viewing Reviews
+
+![Viewing Reviews](images/ViewReviews.jpg)
+
+### View Trending, Recent Reviews
+
+![View Trending Places](images/TrendingReviews.jpg)
+
+### Signup
+
+![Signup](images/Signup.jpg)
+
+### Login
+
+![Login](images/Login.jpg)
+
+### Submitting Venue
+
+![Submitting Venue](images/SubmittingVenue.jpg)
+
+### Submitting Requests
+
+![Submitting Requests](images/SubmittingRequests.jpg)
+
+### Viewing Comments
+
+![Viewing Comments](images/ViewingComments.jpg)
+
+### Admin Landing Page
+
+![Admin Landing Page](images/AdminLandingView.jpg)
+
+### Adding Categories
+
+![Adding Category](images/AddingCategory.jpg)
+
+### Approving Venues
+
+![Approving Venues](images/ApprovingVenue.jpg)
 
 ## Testing
 
@@ -83,6 +126,13 @@ To run tests, enter the travel-squared container or directory and use the comman
 
 python -m pytest inside the travel-squared container.
 
+## Stretch Goals Functionality
+
+Follower/following system.
+Add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue).
+Websocket support for messaging between users.
+Dashboard panel that consolidates unapproved venues and categories pages into one component.
+Transition away from JWTDown for FastAPI, which uses third-party cookies to work. Safari blocks this by default. This means it won't work on iPhone as well, unless the user goes to their settings and manually changes the setting.
 
 ### Other files
 
