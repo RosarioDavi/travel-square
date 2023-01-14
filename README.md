@@ -67,6 +67,10 @@ To make an admin account to approve submitted venues, when signing up, make the 
 
 ![Viewing Reviews](images/ViewReviews.jpg)
 
+### Creating Reviews
+
+![Creating Reviews](images/CreateReview.jpg)
+
 ### View Trending, Recent Reviews
 
 ![View Trending Places](images/TrendingReviews.jpg)
