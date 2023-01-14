@@ -19,7 +19,6 @@ from queries.accounts import (
     AccountOutConfidential,
     AccountsOutConfidential,
     AccountQueries,
-    DuplicateAccountError,
 )
 
 router = APIRouter()

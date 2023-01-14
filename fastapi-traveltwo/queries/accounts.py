@@ -213,7 +213,8 @@ class AccountQueries:
                     """
                 )
                 results = []
-                # Take the results and filter with the keyword here instead of inside the DB query (hotfix)
+                # Take the results and filter with the keyword
+                # here instead of inside the DB query (hotfix)
                 for row in cur.fetchall():
                     record = {}
                     for i, column in enumerate(cur.description):
