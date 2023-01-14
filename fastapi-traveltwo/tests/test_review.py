@@ -1,8 +1,7 @@
-import json
 from fastapi.testclient import TestClient
 from main import app
 from queries.reviews import ReviewQueries
-from authenticator import authenticator
+
 
 client = TestClient(app)
 
