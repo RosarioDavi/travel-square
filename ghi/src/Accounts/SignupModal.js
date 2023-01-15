@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal"
+import ErrorNotification from "../ErrorNotification";
 import { useNavigate } from "react-router-dom";
 import { useLogInMutation, useGetTokenQuery } from "../store/authApi";
 import { useSignUpMutation } from "../store/authApi";
@@ -58,7 +59,7 @@ export function SignupModal() {
         } else if (result.isError) {
             setError(result.error.data.detail)
         }
-    }, [result]);
+    }, [result, login, navigate, password, username]);
 
     return (
         <>
@@ -71,6 +72,7 @@ export function SignupModal() {
                 </Modal.Header>
                 <Modal.Body>
                 <div>
+                    <ErrorNotification props={error}/>
                     <form onSubmit={handleSubmit}>
                         <BootstrapInputFields
                             id="username"

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import ErrorNotification from "../ErrorNotification";
 import { useNavigate } from "react-router-dom";
-import { useLogOutMutation, useGetTokenQuery } from '../store/authApi';
+import { useLogOutMutation} from '../store/authApi';
 import "./Accounts.css";
 
 export function LogoutModal() {
-    const { data: tokenData } = useGetTokenQuery()
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -27,7 +27,7 @@ export function LogoutModal() {
         } else if (result.isError) {
         setError(result.error.data.detail);
         }
-    }, [result]);
+    }, [result, navigate]);
 
     return (
         <>
@@ -39,6 +39,7 @@ export function LogoutModal() {
                     <Modal.Title>Ready to log out?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <ErrorNotification props={error}/>
                     <div className="container">
                         <div className="columns is-centered">
                         <div className="column is-one-third">

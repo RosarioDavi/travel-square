@@ -51,7 +51,6 @@ export function CreateRequest() {
               <div>
                 <Form onSubmit={handleSubmit} style={{ marginTop: "5px" }}>
                   <Form.Group className="mb-3" id="request">
-                    <Form.Label></Form.Label>
                     <Form.Control
                       value={txt}
                       onChange={(e) => setTxt(e.target.value)}

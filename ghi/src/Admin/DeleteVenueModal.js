@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import ErrorNotification from "../ErrorNotification";
 import { useDeleteVenueMutation } from "../store/adminApi";
 
 export function DeleteVenueModal(props) {
@@ -36,6 +37,7 @@ export function DeleteVenueModal(props) {
                     <Modal.Title>Delete {name} from venues?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <ErrorNotification props={error}/>
                     <div className="container">
                         <div className="columns is-centered">
                         <div className="column is-one-third">

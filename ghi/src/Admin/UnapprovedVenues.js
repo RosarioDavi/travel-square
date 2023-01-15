@@ -1,11 +1,9 @@
 import Table from 'react-bootstrap/Table';
-import { useGetTokenQuery } from "../store/authApi";
 import { useGetUnapprovedVenuesQuery } from '../store/adminApi';
 import { UpdateVenueModal } from './UpdateVenueModal';
 import { DeleteVenueModal } from './DeleteVenueModal';
 
 export function UnapprovedVenues() {
-    const { data: tokenData} = useGetTokenQuery();
     const { data: venuesData, isLoading } = useGetUnapprovedVenuesQuery();
 
   if (isLoading) {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
-import { useGetTokenQuery } from "../store/authApi";
+import ErrorNotification from "../ErrorNotification";
 import { useCreateCategoryMutation } from "../store/adminApi";
 
 function BootstrapInputFields(props) {
@@ -25,7 +25,6 @@ function BootstrapInputFields(props) {
 }
 
 export function AddCategoryModal() {
-  const { data: tokenData } = useGetTokenQuery();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -59,6 +58,7 @@ export function AddCategoryModal() {
         </Modal.Header>
         <Modal.Body>
           <div>
+            <ErrorNotification props={error}/>
             <form onSubmit={handleSubmit}>
               <BootstrapInputFields
                 id="category_name"

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal"
+import ErrorNotification from "../ErrorNotification";
 import { useUpdateVenueMutation } from "../store/adminApi";
 
 function BootstrapInputFields(props) {
@@ -88,6 +89,7 @@ export function UpdateVenueModal(props) {
             </Modal.Header>
             <Modal.Body>
                 <div>
+                    <ErrorNotification props={error}/>
                     <form onSubmit={handleSubmit}>
                         <BootstrapInputFields
                             id="venue_name"

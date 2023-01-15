@@ -5,13 +5,14 @@ import { CreateRequest } from "./CreateRequest";
 
 export default function RequestList() {
   const [requests, setRequests] = useState([]);
+  const baseUrl = process.env.REACT_APP_TRAVELSQUARED;
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const requestUrl = "http://localhost:8000/api/requests/";
+    const requestUrl = `${baseUrl}/api/requests/`;
     const response = await fetch(requestUrl);
     const newData = await response.json();
     setRequests(newData);

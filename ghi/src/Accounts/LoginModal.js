@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import ErrorNotification from "../ErrorNotification";
 import { useNavigate } from "react-router-dom";
 import { useLogInMutation } from '../store/authApi';
 import "./Accounts.css";
@@ -26,7 +27,6 @@ function BootstrapInputFields(props) {
 }
 
 export function LoginModal() {
-  // const { data: tokenData } = useGetTokenQuery();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -50,8 +50,9 @@ export function LoginModal() {
       navigate("/")
     } else if (result.isError) {
       setError(result.error.data.detail);
+      console.log(error)
     }
-  }, [result]);
+  }, [result, navigate, error]);
 
   return (
     <>
@@ -63,6 +64,7 @@ export function LoginModal() {
           <Modal.Title>Welcome back!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <ErrorNotification props={error}/>
           <div>
             <form onSubmit={handleSubmit}>
                     <BootstrapInputFields

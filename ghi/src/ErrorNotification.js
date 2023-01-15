@@ -1,13 +1,11 @@
-function ErrorNotification(props) {
+export default function ErrorNotification(props) {
     if (!props.error) {
         return null;
     }
 
     return (
-        <div className="notification is-danger">
+        <div className="alert alert-danger" role="alert">
             {props.error}
         </div>
     );
 }
-
-export default ErrorNotification;
