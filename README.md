@@ -2,7 +2,7 @@
 
 Deployed site: https://travel-two.gitlab.io/travel-two
 
-Free plan makes requests, especially authentication, slow.
+Note: Authentication system uses a cookies-reliant library called JWTDown-FastAPI, which makes iOS devices not support authentication by default unless user changes their settings.Free plan makes requests, especially authentication, slow.
 
 ## Group Members
 
