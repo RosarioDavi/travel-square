@@ -44,7 +44,7 @@ build-front-end-job:
     # You need to substitute in your real values for
     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
     PUBLIC_URL: https://travel-two.gitlab.io/travel-two
-    REACT_APP_SAMPLE_SERVICE_API_HOST: https://travel-two.onrender.com
+    REACT_APP_TRAVELSQUARED: https://travel-two.onrender.com
   script:
     - cd ghi
     - npm install
