@@ -5,6 +5,7 @@ export function LocalReviews() {
   const [reviews, setReviews] = useState([]);
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const baseUrl = process.env.REACT_APP_TRAVELSQUARED;
 
   const stateUppercase = (e) => {
     e.target.value = ("" + e.target.value).toUpperCase();
@@ -16,7 +17,7 @@ export function LocalReviews() {
   };
 
   const fetchData = async () => {
-    const ReviewsUrl = `http://localhost:8000/api/reviews/${state}/${city}`;
+    const ReviewsUrl = `${baseUrl}/api/reviews/${state}/${city}`;
     const responseReviews = await fetch(ReviewsUrl);
     const reviewData = await responseReviews.json();
     setReviews(reviewData);

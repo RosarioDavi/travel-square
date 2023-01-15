@@ -43,10 +43,11 @@ export function CreateVenue() {
   const [category_id, setCategory_id] = useState("");
   const [categories, setCategories] = useState([]);
   const [description_text, setDescription_text] = useState("");
+  const baseUrl = process.env.REACT_APP_TRAVELSQUARED;
 
   useEffect(() => {
     async function getCategories() {
-      const CategoriesUrl = `${process.env.REACT_APP_TRAVELSQUARED}/api/categories/`;
+      const CategoriesUrl = `${baseUrl}/api/categories/`;
       const responseCategories = await fetch(CategoriesUrl);
       if (responseCategories.ok) {
         const data = await responseCategories.json();

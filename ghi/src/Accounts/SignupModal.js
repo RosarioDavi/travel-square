@@ -3,7 +3,7 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal"
 import ErrorNotification from "../ErrorNotification";
 import { useNavigate } from "react-router-dom";
-import { useLogInMutation, useGetTokenQuery } from "../store/authApi";
+import { useLogInMutation } from "../store/authApi";
 import { useSignUpMutation } from "../store/authApi";
 import "./Accounts.css";
 
@@ -28,7 +28,6 @@ function BootstrapInputFields(props) {
 }
 
 export function SignupModal() {
-    const { data: tokenData } = useGetTokenQuery();
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

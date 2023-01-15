@@ -11,6 +11,7 @@ export default function ShowReview(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [newCommentSubmit, setNewCommentSubmit] = useState(false);
+  const baseUrl = process.env.REACT_APP_TRAVELSQUARED;
 
   useEffect(() => {
     fetchData();
@@ -21,7 +22,7 @@ export default function ShowReview(props) {
 
   const fetchData = async () => {
     const data = props.venue.id;
-    const commentUrl = `http://localhost:8000/api/venues/${data}/reviews/`;
+    const commentUrl = `${baseUrl}}/api/venues/${data}/reviews/`;
     const response = await fetch(commentUrl);
     const newData = await response.json();
     setReviews(newData);

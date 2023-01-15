@@ -31,10 +31,11 @@ export default function CreateComment(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const newCommentSubmitFn = props.setNewCommentSubmit;
+  const baseUrl = process.env.REACT_APP_TRAVELSQUARED;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const CommentUrl = `http://localhost:8000/api/comments`;
+    const CommentUrl = `${baseUrl}/api/comments`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify({

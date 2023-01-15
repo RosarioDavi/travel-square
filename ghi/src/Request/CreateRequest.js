@@ -10,10 +10,12 @@ export function CreateRequest() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [txt, setTxt] = useState("");
+  const baseUrl = process.env.REACT_APP_TRAVELSQUARED;
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const RequestUrl = "http://localhost:8000/api/requests/";
+    const RequestUrl = `${baseUrl}/api/requests/`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify({

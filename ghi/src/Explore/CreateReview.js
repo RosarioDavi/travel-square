@@ -46,10 +46,11 @@ export default function CreateReview(props) {
   const handleShow = () => setShow(true);
   const newCommentSubmitFn = props.setNewCommentSubmit;
   const PUBLIC_KEY = process.env.REACT_APP_UPLOADCARE_PUBLIC_KEY;
+  const baseUrl = process.env.REACT_APP_TRAVELSQUARED;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const ReviewUrl = `http://localhost:8000/api/reviews`;
+    const ReviewUrl = `${baseUrl}/api/reviews`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify({

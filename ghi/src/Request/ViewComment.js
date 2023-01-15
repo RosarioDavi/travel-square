@@ -10,6 +10,7 @@ export default function ViewComment(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [newCommentSubmit, setNewCommentSubmit] = useState(false);
+  const baseUrl = process.env.REACT_APP_TRAVELSQUARED;
 
   useEffect(() => {
     fetchData();
@@ -20,7 +21,7 @@ export default function ViewComment(props) {
 
   const fetchData = async () => {
     const data = props.request.id;
-    const commentUrl = `http://localhost:8000/api/requests/${data}/comments/`;
+    const commentUrl = `${baseUrl}/api/requests/${data}/comments/`;
     const response = await fetch(commentUrl);
     const newData = await response.json();
     setComments(newData);

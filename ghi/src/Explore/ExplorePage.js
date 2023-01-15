@@ -11,6 +11,7 @@ export function Explore() {
   // const [category, setCategory] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const baseUrl = process.env.REACT_APP_TRAVELSQUARED;
 
   const stateUppercase = (e) => {
     e.target.value = ("" + e.target.value).toUpperCase();
@@ -22,7 +23,7 @@ export function Explore() {
   };
 
   const fetchData = async () => {
-    const VenuesUrl = `http://localhost:8000/api/venues/${state}/${city}`;
+    const VenuesUrl = `${baseUrl}/api/venues/${state}/${city}`;
     const responseVenues = await fetch(VenuesUrl);
     const venueData = await responseVenues.json();
     setVenues(venueData);
