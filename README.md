@@ -4,14 +4,16 @@ Deployed site: https://travel-two.gitlab.io/travel-two
 
 Note: Authentication system uses a cookies-reliant library called JWTDown-FastAPI, which makes iOS devices not support authentication by default unless user changes their settings.Free plan makes requests, especially authentication, slow.
 
+Want to try the admin view?
+
+username: admin\
+password: travelsquared
+
 ## Group Members
 
-Muhammad Rahman
-
-Lena Zhang
-
-Sarah Ahn
-
+Muhammad Rahman\
+Lena Zhang\
+Sarah Ahn\
 Rosario Davi
 
 ## Design
@@ -22,18 +24,12 @@ Travel^2 is a social traveling based application that is aimed to connect travel
 
 ## Built With
 
-React
-
-Redux
-
-Bootstrap
-
-FastAPI
-
-PostgreSQL
-
-Python
-
+React\
+Redux\
+Bootstrap\
+FastAPI\
+PostgreSQL\
+Python\
 JavaScript
 
 ## Functionality
@@ -109,10 +105,10 @@ To make an admin account to approve submitted venues, when signing up, make the 
 
 ## Testing
 
-fastapi-traveltwo\tests\test_account.py - Muhammad Rahman
-fastapi-traveltwo\tests\test_request.py - Lena Zhang
-fastapi-traveltwo\tests\test_review.py - Sarah Ahn
-fastapi-traveltwo\tests\test_venue.py - Rosario Davi
+fastapi-traveltwo\tests\test_account.py - Muhammad Rahman\
+fastapi-traveltwo\tests\test_request.py - Lena Zhang\
+fastapi-traveltwo\tests\test_review.py - Sarah Ahn\
+fastapi-traveltwo\tests\test_venue.py - Rosario Davi\
 
 ## Start up
 
