@@ -1,8 +1,8 @@
 volumes:
   postgres-data:
     external: true
-  pg-admin:
-    external: true
+  # pg-admin:
+  #   external: true
 services:
   postgres:
     container_name: postgres
@@ -17,17 +17,17 @@ services:
     ports:
       - 15432:5432
 
-  pg-admin:
-    container_name: pg-admin
-    image: dpage/pgadmin4
-    volumes:
-      - pg-admin:/var/lib/pgadmin
-    ports:
-      - 8082:80
-    environment:
-      PGADMIN_DEFAULT_EMAIL: travelsquared@example.com
-      PGADMIN_DEFAULT_PASSWORD: TS2022RDBMS
-      PGADMIN_DISABLE_POSTFIX: 1
+  # pg-admin:
+  #   container_name: pg-admin
+  #   image: dpage/pgadmin4
+  #   volumes:
+  #     - pg-admin:/var/lib/pgadmin
+  #   ports:
+  #     - 8082:80
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: travelsquared@example.com
+  #     PGADMIN_DEFAULT_PASSWORD: TS2022RDBMS
+  #     PGADMIN_DISABLE_POSTFIX: 1
 
   travel-squared:
     container_name: travel-squared
