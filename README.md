@@ -1,10 +1,10 @@
-# Module3 Project Gamma
+# Travel²
 
-# Group Name
+Deployed site: https://travel-two.gitlab.io/travel-two
 
-Travel²
+Free plan makes requests, especially authentication, slow.
 
-# Group Members
+## Group Members
 
 Muhammad Rahman
 
