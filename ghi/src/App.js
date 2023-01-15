@@ -10,6 +10,8 @@ import { useGetTokenQuery } from './store/authApi'
 
 function App() {
   const { data: tokenData, isLoading} = useGetTokenQuery();
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, '');
 
   if (isLoading) {
     return <progress className="progress is-primary" max="100"></progress>;
@@ -17,7 +19,7 @@ function App() {
 
   if (tokenData && tokenData.account.is_admin === true) {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <div>
           <Navigation />
           <Routes>
@@ -33,7 +35,7 @@ function App() {
 
   } else {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <div>
           <Navigation />
           <Routes>
