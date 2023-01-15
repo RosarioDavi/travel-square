@@ -55,7 +55,7 @@ export function CreateVenue() {
       }
     }
     getCategories();
-  }, [setCategories]);
+  }, [setCategories, baseUrl]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

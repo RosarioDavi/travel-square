@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import requests, accounts, venues, reviews
@@ -7,6 +8,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
+    os.environ.get("CORS_HOST", None)
 ]
 
 app.add_middleware(

@@ -16,13 +16,14 @@ export default function ShowReview(props) {
   useEffect(() => {
     fetchData();
     setNewCommentSubmit(false);
+    // eslint-disable-next-line
   }, [newCommentSubmit]);
 
   const venue = props.venue.id;
 
   const fetchData = async () => {
     const data = props.venue.id;
-    const commentUrl = `${baseUrl}}/api/venues/${data}/reviews/`;
+    const commentUrl = `${baseUrl}/api/venues/${data}/reviews/`;
     const response = await fetch(commentUrl);
     const newData = await response.json();
     setReviews(newData);

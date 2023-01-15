@@ -15,6 +15,7 @@ export default function ViewComment(props) {
   useEffect(() => {
     fetchData();
     setNewCommentSubmit(false);
+    // eslint-disable-next-line
   }, [newCommentSubmit]);
 
   const request = props.request.id;
