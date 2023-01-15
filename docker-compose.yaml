@@ -39,14 +39,16 @@ services:
     volumes:
       - ./fastapi-traveltwo:/app
     environment:
+      SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgres://travel_two_database_ewht_user:HZYVxpR9mZrkiPuEADKXkMojr7tHrV1z@dpg-cf1luk02i3mnjclf7fv0-a.oregon-postgres.render.com/travel_two_database_ewht
       WAIT_HOSTS: postgres:5432
-      SIGNING_KEY: ${SIGNING_KEY}
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
 
   ghi:
     container_name: ghi
     image: node:lts-bullseye
-    command: npm start
+    command: /bin/bash run.sh
     working_dir: /app
     volumes:
       - ./ghi:/app
