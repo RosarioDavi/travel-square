@@ -43,7 +43,7 @@ build-front-end-job:
     # CI/CD variables, that value will override the value here.
     # You need to substitute in your real values for
     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
-    PUBLIC_URL: https://travel-two.gitlab.io/travel-two/
+    PUBLIC_URL: https://travel-two.gitlab.io/travel-two
     REACT_APP_SAMPLE_SERVICE_API_HOST: https://travel-two.onrender.com
   script:
     - cd ghi
