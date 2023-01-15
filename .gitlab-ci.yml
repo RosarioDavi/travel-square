@@ -3,6 +3,12 @@ stages:
   - build
   - deploy
 
+services:
+  - postgres:14-bullseye
+
+variables:
+  DATABASE_URL: postgres://travel_two_database_ewht_user:HZYVxpR9mZrkiPuEADKXkMojr7tHrV1z@dpg-cf1luk02i3mnjclf7fv0-a.oregon-postgres.render.com/travel_two_database_ewht
+
 # Run flake8 to check for code quality
 lint-test-job:
   image: python:3-bullseye
