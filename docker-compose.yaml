@@ -48,7 +48,7 @@ services:
   ghi:
     container_name: ghi
     image: node:lts-bullseye
-    command: npm start
+    command: /bin/bash run.sh
     working_dir: /app
     volumes:
       - ./ghi:/app
