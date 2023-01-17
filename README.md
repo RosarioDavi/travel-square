@@ -2,7 +2,7 @@
 
 Deployed site: https://travel-two.gitlab.io/travel-two
 
-Note: Authentication system uses a cookies-reliant library called JWTDown-FastAPI, which makes iOS devices not support authentication by default unless user changes their settings.Free plan makes requests, especially authentication, slow.
+Note: Authentication system uses a cookies-reliant library called JWTDown-FastAPI, which makes iOS devices not support authentication by default unless user changes their settings. The homepage requires requires querying for token data. With a free plan on Render.com, requests, especially authentication, are very slow. Thus the home page may take a couple of seconds before loading for the first time.
 
 Want to try the admin view?
 
@@ -54,6 +54,13 @@ To make an admin account to approve submitted venues, when signing up, make the 
 
 ![Landing Page](images/LandingPage.jpg)
 
+### Signup
+
+![Signup](images/Signup.jpg)
+
+### Login
+
+![Login](images/Login.jpg)
 
 ### Searching Venues
 
@@ -70,14 +77,6 @@ To make an admin account to approve submitted venues, when signing up, make the 
 ### View Trending, Recent Reviews
 
 ![View Trending Places](images/TrendingReviews.jpg)
-
-### Signup
-
-![Signup](images/Signup.jpg)
-
-### Login
-
-![Login](images/Login.jpg)
 
 ### Submitting Venue
 
