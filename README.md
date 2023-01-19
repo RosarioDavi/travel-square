@@ -2,7 +2,7 @@
 
 Deployed site: https://travel-two.gitlab.io/travel-two
 
-Note: Authentication system uses a cookies-reliant library called JWTDown-FastAPI, which makes iOS devices not support authentication by default unless user changes their settings. The homepage requires requires querying for token data. With a free plan on Render.com, requests, especially authentication, are very slow. Thus the home page may take a couple of seconds before loading for the first time.
+Note: Authentication system uses a library called JWTDown-FastAPI, which uses cross-site tracking. This is disabled by default on iOS Safari settings. The homepage requires requires querying for token data. With a free plan on Render.com, requests, especially authentication, are very slow. Thus the home page may take a couple of seconds before loading for the first time.
 
 Want to try the admin view?
 
@@ -20,7 +20,7 @@ Rosario Davi
 
 ## Intended market
 
-Travel^2 is a social traveling based application that is aimed to connect travelers and help expand their itinerary with suggestions on places they have never thought about exploring before. Our website contains an explore page where users can follow other users and be notified of their most recent venue post along with a trending page for reviews on a venue. Users can utilize the search bar to narrow down recommendations by city and state of the location they intend on visiting. In addition, users can also make post in regards to asking for recommendations and have other users reply in the form of comments.
+Travel² is a social traveling based application that is aimed to connect travelers and help expand their itinerary with suggestions on places they have never thought about exploring before. Our website contains an explore page where users can follow other users and be notified of their most recent venue post along with a trending page for reviews on a venue. Users can utilize the search bar to narrow down recommendations by city and state of the location they intend on visiting. In addition, users can also make post in regards to asking for recommendations and have other users reply in the form of comments.
 
 ## Built With
 
@@ -141,11 +141,11 @@ python -m pytest inside the travel-squared container.
 
 ## Stretch Goals Functionality
 
-Follower/following system.
-Add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue).
-Websocket support for messaging between users.
-Dashboard panel that consolidates unapproved venues and categories pages into one component.
-Transition away from JWTDown for FastAPI, which uses third-party cookies to work. Safari blocks this by default. This means it won't work on iPhone as well, unless the user goes to their settings and manually changes the setting.
+Follower/following system.\
+Add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue).\
+Websocket support for messaging between users.\
+Dashboard panel that consolidates unapproved venues and categories pages into one component.\
+Transition away from JWTDown for FastAPI, which relies on cross-site tracking. Safari blocks this by default. This means authentication won't work on iPhone, unless the user manually changes the setting.\
 
 ### Other files
 
