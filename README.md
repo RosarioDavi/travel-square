@@ -107,13 +107,13 @@ To make an admin account to approve submitted venues, when signing up, make the 
 fastapi-traveltwo\tests\test_account.py - Muhammad Rahman\
 fastapi-traveltwo\tests\test_request.py - Lena Zhang\
 fastapi-traveltwo\tests\test_review.py - Sarah Ahn\
-fastapi-traveltwo\tests\test_venue.py - Rosario Davi\
+fastapi-traveltwo\tests\test_venue.py - Rosario Davi
 
 ## Start up
 
 To grab the project:
 
-Fork and clone the repository from https://gitlab.com/travel-two/module3-project-gamma.
+Fork and clone the repository from https://gitlab.com/travel-two/travel-two.
 
 You can open the project in VScode to see the code.
 
@@ -145,7 +145,7 @@ Follower/following system.\
 Add photos to go along with each category so venue cards show a different picture for its given category (since we don’t have photos being submitted with a create venue).\
 Websocket support for messaging between users.\
 Dashboard panel that consolidates unapproved venues and categories pages into one component.\
-Transition away from JWTDown for FastAPI, which relies on cross-site tracking. Safari blocks this by default. This means authentication won't work on iPhone, unless the user manually changes the setting.\
+Transition away from JWTDown for FastAPI, which relies on cross-site tracking. Safari blocks this by default. This means authentication won't work on iPhone, unless the user manually changes the setting.
 
 ### Other files
 
